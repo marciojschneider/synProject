@@ -22,14 +22,14 @@
   <div class="menu-inner-shadow"></div>
 
   <ul class="menu-inner py-1">
-    {{ dd($data->test) }}
-    @foreach ($menuData[0]->menu as $menu)
+    {{-- {{ dd($dataMenu) }} --}}
+    @foreach ($dataMenu as $key => $menu)
       {{-- adding active and open class if child is active --}}
 
       {{-- menu headers --}}
-      @if (isset($menu->menuHeader))
+      @if (isset($menu['menu']['header']))
         <li class="menu-header small text-uppercase">
-          <span class="menu-header-text">{{ __($menu->menuHeader) }}</span>
+          <span class="menu-header-text">{{ __($menu['menu']['header']) }}</span>
         </li>
       @else
         {{-- active menu method --}}
@@ -37,17 +37,20 @@
           $activeClass = null;
           $currentRouteName = Route::currentRouteName();
 
-          if ($currentRouteName === $menu->slug) {
+          if ($currentRouteName === $menu['menu']['slug']) {
               $activeClass = 'active';
-          } elseif (isset($menu->submenu)) {
-              if (gettype($menu->slug) === 'array') {
-                  foreach ($menu->slug as $slug) {
+          } elseif (isset($menu['menu']['submenu'])) {
+              if (gettype($menu['menu']['slug']) === 'array') {
+                  foreach ($menu['menu']['slug'] as $slug) {
                       if (str_contains($currentRouteName, $slug) and strpos($currentRouteName, $slug) === 0) {
                           $activeClass = 'active open';
                       }
                   }
               } else {
-                  if (str_contains($currentRouteName, $menu->slug) and strpos($currentRouteName, $menu->slug) === 0) {
+                  if (
+                      str_contains($currentRouteName, $menu['menu']['slug']) and
+                      strpos($currentRouteName, $menu['menu']['slug']) === 0
+                  ) {
                       $activeClass = 'active open';
                   }
               }
@@ -56,21 +59,21 @@
 
         {{-- main menu --}}
         <li class="menu-item {{ $activeClass }}">
-          <a href="{{ isset($menu->url) ? url($menu->url) : 'javascript:void(0);' }}"
-            class="{{ isset($menu->submenu) ? 'menu-link menu-toggle' : 'menu-link' }}"
-            @if (isset($menu->target) and !empty($menu->target)) target="_blank" @endif>
-            @isset($menu->icon)
-              <i class="{{ $menu->icon }}"></i>
+          <a href="{{ isset($menu['menu']['url']) ? url($menu['menu']['url']) : 'javascript:void(0);' }}"
+            class="{{ isset($menu['menu']['submenu']) ? 'menu-link menu-toggle' : 'menu-link' }}"
+            @if (isset($menu['menu']['target']) and !empty($menu['menu']['target'])) target="_blank" @endif>
+            @isset($menu['menu']['icon'])
+              <i class="{{ $menu['menu']['icon'] }}"></i>
             @endisset
-            <div class="text-truncate">{{ isset($menu->name) ? __($menu->name) : '' }}</div>
-            @isset($menu->badge)
-              <div class="badge bg-{{ $menu->badge[0] }} rounded-pill ms-auto">{{ $menu->badge[1] }}</div>
-            @endisset
+            <div>{{ isset($menu['menu']['name']) ? __($menu['menu']['name']) : '' }}</div>
+            {{-- @isset($menu['menu']->badge)
+                <div class="badge bg-{{ $menu['menu']->badge[0] }} rounded-pill ms-auto">{{ $menu['menu']->badge[1] }}</div>
+            @endisset --}}
           </a>
 
           {{-- submenu --}}
-          @isset($menu->submenu)
-            @include('layouts.sections.menu.submenu', ['menu' => $menu->submenu])
+          @isset($menu['menu']['submenu'])
+            @include('layouts.sections.menu.submenu', ['menu' => $menu['menu']['submenu']])
           @endisset
         </li>
       @endif
