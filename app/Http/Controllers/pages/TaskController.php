@@ -42,6 +42,8 @@ class TaskController extends Controller {
           $data['tasks'][$kTask]['nSituation'] = 'Inativo';
           break;
       }
+
+      $data['tasks'][$kTask]['details'] = TaskDetail::where('task_id', $vTask->id)->where('commit_reference')->orderBy('created_at', 'DESC')->get();
     }
 
     return view('content.pages.task.index', $data);
@@ -80,7 +82,7 @@ class TaskController extends Controller {
           break;
       }
 
-      $data['tasks'][$kTask]['details'] = TaskDetail::where('task_id', $vTask->id)->where('commit_reference', '!=', null)->orderBy('created_at', 'ASC')->get();
+      $data['tasks'][$kTask]['details'] = TaskDetail::where('task_id', $vTask->id)->where('commit_reference', '!=', null)->orderBy('created_at', 'DESC')->get();
     }
 
     return view('content.pages.task.roadmap', $data);
