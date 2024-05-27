@@ -23,4 +23,5 @@ Route::get('/clients', [ClientController::class, 'index'])->name('sys-client');
 Route::get('/modules', [ModuleController::class, 'index'])->name('sys-module');
 
 // Suporte
-Route::get('/tasks', [TaskController::class, 'index'])->name('task-main');
+Route::get('/tasks', [TaskController::class, 'index'])->name('sup-task');
+Route::get('/roadmap', [TaskController::class, 'roadmap'])->name('sup-roadmap');
