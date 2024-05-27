@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\pages\TaskController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\pages\HomePage;
@@ -20,3 +21,6 @@ Route::get('/users', [UserController::class, 'index'])->name('sys-user');
 Route::get('/profiles', [ProfileController::class, 'index'])->name('sys-profile');
 Route::get('/clients', [ClientController::class, 'index'])->name('sys-client');
 Route::get('/modules', [ModuleController::class, 'index'])->name('sys-module');
+
+// Suporte
+Route::get('/tasks', [TaskController::class, 'index'])->name('task-main');
