@@ -7,5 +7,5 @@
 @section('title', 'Clientes')
 
 @section('content')
-  <h4>Clientes</h4>
+  <h4 class="pt-3 mb-0">Clientes</h4>
 @endsection
