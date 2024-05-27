@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class UserController extends Controller {
-  public function list() {
-    return view('content.pages.pages-page2');
+  public function index() {
+    return view('content.pages.user.index');
   }
 }
