@@ -11,7 +11,7 @@
     Tarefas
   </h4>
 
-  <!-- Add Collumn -->
+  <!-- Add -->
   <div class="d-flex flex-wrap justify-content-between align-items-center">
     <div class="d-flex flex-column justify-content-center">
       <h4 class="mb-1 mt-3">Adicionar uma tarefa</h4>
@@ -23,6 +23,54 @@
               class="d-none d-sm-inline-block">Nova</span>
           </span>
         </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card g-3 mt-2">
+    <div class="card-body row g-3">
+      <div class="col-lg-12">
+        <div class="accordion stick-top accordion-bordered" id="courseContent">
+          {{-- Inicio do item --}}
+          @foreach ($tasks as $task)
+            <div class="accordion-item shadow-none border mb-0">
+              <div class="accordion-header" id="headingOne">
+                <button type="button" class="bg-lighter rounded-0 accordion-button collapsed" data-bs-toggle="collapse"
+                  data-bs-target="#chapter{{ $task->id }}" aria-expanded="false"
+                  aria-controls="chapter{{ $task->id }}">
+                  <span class="d-flex flex-column">
+                    <span class="h5 mb-1">{{ $task->title }}
+                      <div class="badge bg-{{ $task->cSituation }} rounded-pill ms-auto" bis_skin_checked="1">
+                        {{ $task->nSituation }} </div>
+                    </span>
+                    <span class="fw-normal">
+                      Inicio: {{ date('d/m/Y', strtotime($task->initial_dt)) }} |
+                      Expectativa: {{ date('d/m/Y', strtotime($task->expected_dt)) }}
+                    </span>
+                  </span>
+                </button>
+              </div>
+              @foreach ($task->details as $detail)
+                <div id="chapter{{ $task->id }}" class="accordion-collapse collapse" data-bs-parent="#courseContent">
+                  <div class="accordion-body py-3 border-top">
+                    <div class="d-flex align-items-center">
+                      {{-- <input class="form-check-input" type="checkbox" id="defaultCheck1" checked="" /> --}}
+                      <label for="defaultCheck1" class="form-check-label">
+                        <span class="mb-0 h6">Titulo: {{ $detail->description }}</span>
+                        <span class="text-muted d-block">Commit: {{ $detail->commit_reference }}</span>
+                        <span class="text-muted d-block">Inicio:
+                          {{ date('d/m/Y H:i:s', strtotime($detail->initial_dt)) }}
+                          | Fim:
+                          {{ date('d/m/Y H:i:s', strtotime($detail->ending_dt)) }}</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              @endforeach
+            </div>
+          @endforeach
+          {{-- Fim do item --}}
+        </div>
       </div>
     </div>
   </div>
