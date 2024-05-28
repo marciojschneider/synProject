@@ -7,7 +7,7 @@
 @section('title', 'Tarefas')
 
 @section('vendor-style')
-  @vite('resources/assets/vendor/libs/plyr/plyr.scss')
+  @vite(['resources/assets/vendor/libs/animate-css/animate.scss', 'resources/assets/vendor/libs/sweetalert2/sweetalert2.scss', 'resources/assets/vendor/libs/plyr/plyr.scss'])
 @endsection
 
 @section('page-style')
@@ -15,11 +15,11 @@
 @endsection
 
 @section('vendor-script')
-  @vite('resources/assets/vendor/libs/plyr/plyr.js')
+  @vite(['resources/assets/vendor/libs/sweetalert2/sweetalert2.js', 'resources/assets/vendor/libs/plyr/plyr.js'])
 @endsection
 
 @section('page-script')
-  @vite('resources/assets/js/app-academy-course-details.js')
+  @vite(['resources/assets/js/extended-ui-sweetalert2.js', 'resources/assets/js/app-academy-course-details.js'])
 @endsection
 
 @section('content')
@@ -63,8 +63,8 @@
                   <div class="accordion-body py-3 border-top">
                     <div class="d-flex">
                       {{-- <input class="form-check-input" type="checkbox" id="defaultCheck1" checked="" /> --}}
-                      <label for="defaultCheck1" class="form-check-label col-sm-6">
-                        <span class="mb-0 h6">Titulo: {{ $detail->description }}</span>
+                      <label for="defaultCheck1" class="form-check-label col-sm-10">
+                        <span class="mb-0 h6">Descrição: {{ $detail->description }}</span>
                         <span class="text-muted d-block">Commit: {{ $detail->commit_reference }}</span>
                         <span class="text-muted d-block">Inicio:
                           {{ date('d/m/Y H:i:s', strtotime($detail->initial_dt)) }}
@@ -72,16 +72,19 @@
                           {{ date('d/m/Y H:i:s', strtotime($detail->ending_dt)) }}</span>
                       </label>
                       {{-- Botões de ação --}}
-                      <form method="POST" class="d-flex flex-row-reverse col-sm-6"
-                        action="{{ route('sup-roadmap-delete', $detail->id) }}">
+                      <form method="POST" action="{{ route('sup-roadmap-delete', $detail->id) }}"
+                        id="formDelete{{ $detail->id }}" display="none">
                         @csrf
-                        <button type="submit" class="btn btn-outline-danger m-1"> <i class="bx bx-trash me-1"></i>
-                        </button>
+                      </form>
+                      <div class="d-flex flex-row-reverse col-sm-2">
+                        <a class="btn btn-outline-danger m-1" onclick="removeModal({{ $detail->id }})"> <i
+                            class="bx bx-trash me-1"></i>
+                        </a>
                         <a class="btn btn-outline-warning m-1" onclick="updateModal({{ $detail }})"
                           data-bs-toggle="offcanvas" data-bs-target="#offcanvasUpdateRoadmap"> <i
                             class="bx bx-edit-alt me-1"></i>
                         </a>
-                      </form>
+                      </div>
                     </div>
                   </div>
                 @endforeach
@@ -93,6 +96,7 @@
       </div>
     </div>
   </div>
+
   <!-- Offcanvas to add new roadmap -->
   <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasAddRoadmap" aria-labelledby="offcanvasAddRoadmapLabel">
     <div class="offcanvas-header">
@@ -123,16 +127,16 @@
         <div class="mb-3">
           <label for="add-roadmap-dt-solicitation" class="col-form-label">Solicitação</label>
           <div class="col-md-12">
-            <input class="form-control" type="datetime-local"
-              value="{{ date('Y-m-d H:i', strtotime(now('America/Sao_Paulo'))) }}" id="add-roadmap-dt-solicitation"
+            <input class="form-control" type="datetime-local" step="1"
+              value="{{ date('Y-m-d H:i:s', strtotime(now('America/Sao_Paulo'))) }}" id="add-roadmap-dt-solicitation"
               name="roadmapDtSolicitation" />
           </div>
         </div>
         <div class="mb-3">
           <label for="add-roadmap-dt-final" class="col-form-label">Finalização</label>
           <div class="col-md-12">
-            <input class="form-control" type="datetime-local"
-              value="{{ date('Y-m-d H:i', strtotime(now('America/Sao_Paulo'))) }}" id="add-roadmap-dt-final"
+            <input class="form-control" type="datetime-local" step="1"
+              value="{{ date('Y-m-d H:i:s', strtotime(now('America/Sao_Paulo'))) }}" id="add-roadmap-dt-final"
               name="roadmapDtFinal" />
           </div>
         </div>
@@ -174,16 +178,16 @@
         <div class="mb-3">
           <label for="update-roadmap-dt-solicitation" class="col-form-label">Solicitação</label>
           <div class="col-md-12">
-            <input class="form-control" type="datetime-local"
-              value="{{ date('Y-m-d H:i', strtotime(now('America/Sao_Paulo'))) }}" id="update-roadmap-dt-solicitation"
-              name="roadmapDtSolicitation" />
+            <input class="form-control" type="datetime-local" step="1"
+              value="{{ date('Y-m-d H:i:s', strtotime(now('America/Sao_Paulo'))) }}"
+              id="update-roadmap-dt-solicitation" name="roadmapDtSolicitation" />
           </div>
         </div>
         <div class="mb-3">
           <label for="update-roadmap-dt-final" class="col-form-label">Finalização</label>
           <div class="col-md-12">
-            <input class="form-control" type="datetime-local"
-              value="{{ date('Y-m-d H:i', strtotime(now('America/Sao_Paulo'))) }}" id="update-roadmap-dt-final"
+            <input class="form-control" type="datetime-local" step="1"
+              value="{{ date('Y-m-d H:i:s', strtotime(now('America/Sao_Paulo'))) }}" id="update-roadmap-dt-final"
               name="roadmapDtFinal" />
           </div>
         </div>
@@ -203,10 +207,43 @@
     $('#update-roadmap-commit').val(data.commit_reference)
     $('#update-roadmap-description').val(data.description)
 
-    var initialFormated = data.initial_dt.substring(0, data.initial_dt.length - 3)
-    $('#update-roadmap-dt-solicitation').val(initialFormated)
+    // var initialFormated = data.initial_dt.substring(0, data.initial_dt.length - 3)
+    $('#update-roadmap-dt-solicitation').val(data.initial_dt)
 
-    var finalFormated = data.ending_dt.substring(0, data.ending_dt.length - 3)
-    $('#update-roadmap-dt-final').val(finalFormated)
+    // var finalFormated = data.ending_dt.substring(0, data.ending_dt.length - 3)
+    $('#update-roadmap-dt-final').val(data.ending_dt)
+  }
+
+  function removeModal(id) {
+    Swal.fire({
+      title: 'Você tem certeza?',
+      text: "Essa ação não será revertida!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sim, deletar isso!',
+      cancelButtonText: 'Cancelar',
+      customClass: {
+        confirmButton: 'btn btn-primary me-3',
+        cancelButton: 'btn btn-label-secondary'
+      },
+      buttonsStyling: false
+    }).then(function(result) {
+      if (result.value) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Deletado!',
+          text: 'O registro foi removido do sistema.',
+          customClass: {
+            confirmButton: 'btn btn-success'
+          }
+        }).then(function(result) {
+          sendDelete(id)
+        });
+      }
+    });
+  }
+
+  function sendDelete(id) {
+    document.getElementById('formDelete' + id).submit();
   }
 </script>
