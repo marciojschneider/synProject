@@ -43,7 +43,7 @@ class TaskController extends Controller {
           break;
       }
 
-      $data['tasks'][$kTask]['details'] = TaskDetail::where('task_id', $vTask->id)->where('commit_reference')->orderBy('created_at', 'DESC')->get();
+      $data['tasks'][$kTask]['details'] = TaskDetail::where('task_id', $vTask->id)->where('type', 2)->orderBy('created_at', 'DESC')->get();
     }
 
     return view('content.pages.task.index', $data);
@@ -82,7 +82,7 @@ class TaskController extends Controller {
           break;
       }
 
-      $data['tasks'][$kTask]['details'] = TaskDetail::where('task_id', $vTask->id)->where('commit_reference', '!=', null)->orderBy('created_at', 'DESC')->get();
+      $data['tasks'][$kTask]['details'] = TaskDetail::where('task_id', $vTask->id)->where('type', 1)->orderBy('created_at', 'DESC')->get();
     }
 
     return view('content.pages.task.roadmap', $data);
