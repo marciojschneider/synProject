@@ -89,20 +89,21 @@
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body mx-0 flex-grow-0">
-      <form class="add-new-report pt-0" id="addNewRoadmapForm" onsubmit="return false">
+      <form class="add-new-report pt-0" id="addNewRoadmapForm" method="POST" action="{{ route('sup-roadmap') }}">
+        @csrf
         <div class="mb-3">
-          <label class="form-label" for="task">Tarefa</label>
-          <select id="task" class="select2 form-select">
+          <label class="form-label" for="add-roadmap-task">Tarefa</label>
+          <select id="add-roadmap-task" name="roadmapTask" class="select2 form-select">
             <option value="">Selecione uma tarefa</option>
             <option value="1">Estrutura básica</option>
             <option value="2">CRUD Tarefas - Base</option>
           </select>
         </div>
-        <div class="mb-3">
+        {{-- <div class="mb-3">
           <label class="form-label" for="add-roadmap-title">Título</label>
           <input type="text" class="form-control" id="add-roadmap-title" placeholder="Título" name="roadmapTitle"
             aria-label="title" />
-        </div>
+        </div> --}}
         <div class="mb-3">
           <label class="form-label" for="add-roadmap-commit">Commit</label>
           <input type="text" class="form-control" id="add-roadmap-commit" placeholder="Commit" name="roadmapCommit"
@@ -117,14 +118,14 @@
           <label for="add-roadmap-dt-solicitation" class="col-form-label">Solicitação</label>
           <div class="col-md-12">
             <input class="form-control" type="datetime-local" value="{{ now('America/Sao_Paulo') }}"
-              id="add-roadmap-dt-solicitation" />
+              id="add-roadmap-dt-solicitation" name="roadmapDtSolicitation" />
           </div>
         </div>
         <div class="mb-3">
           <label for="add-roadmap-dt-final" class="col-form-label">Finalização</label>
           <div class="col-md-12">
             <input class="form-control" type="datetime-local" value="{{ now('America/Sao_Paulo') }}"
-              id="add-roadmap-dt-final" />
+              id="add-roadmap-dt-final" name="roadmapDtFinal" />
           </div>
         </div>
         <button type="submit" class="btn btn-primary me-sm-3 me-1 data-submit">Enviar</button>

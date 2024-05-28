@@ -87,4 +87,19 @@ class TaskController extends Controller {
 
     return view('content.pages.task.roadmap', $data);
   }
+
+  public function roadmapAction(Request $request) {
+    $data = $request->only(['roadmapTask', 'roadmapCommit', 'roadmapDescription', 'roadmapDtSolicitation', 'roadmapDtFinal']);
+
+    $taskDetail = new TaskDetail();
+    $taskDetail->task_id = $data['roadmapTask'];
+    $taskDetail->commit_reference = $data['roadmapCommit'];
+    $taskDetail->description = $data['roadmapDescription'];
+    $taskDetail->task_type = 1;
+    $taskDetail->initial_dt = $data['roadmapDtSolicitation'];
+    $taskDetail->ending_dt = $data['roadmapDtFinal'];
+    $taskDetail->save();
+
+    return redirect()->route('sup-roadmap');
+  }
 }

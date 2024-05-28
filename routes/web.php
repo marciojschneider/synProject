@@ -14,7 +14,6 @@ use App\Http\Controllers\pages\ModuleController;
 
 // Main Page Route
 Route::get('/', [HomePage::class, 'index'])->name('homepage');
-Route::get('/page-2', [Page2::class, 'index'])->name('pages-page-2');
 
 // Sistema
 Route::get('/users', [UserController::class, 'index'])->name('sys-user');
@@ -24,4 +23,7 @@ Route::get('/modules', [ModuleController::class, 'index'])->name('sys-module');
 
 // Suporte
 Route::get('/tasks', [TaskController::class, 'index'])->name('sup-task');
+Route::post('/tasks', [TaskController::class, 'indexAction']);
+
 Route::get('/roadmap', [TaskController::class, 'roadmap'])->name('sup-roadmap');
+Route::post('/roadmap', [TaskController::class, 'roadmapAction']);
