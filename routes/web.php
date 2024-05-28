@@ -27,3 +27,6 @@ Route::post('/tasks', [TaskController::class, 'indexAction']);
 
 Route::get('/roadmap', [TaskController::class, 'roadmap'])->name('sup-roadmap');
 Route::post('/roadmap', [TaskController::class, 'roadmapAction']);
+
+Route::post('/roadmap/delete/{id}', [TaskController::class, 'roadmapDelete'])->name('sup-roadmap-delete');
+Route::post('/roadmap/update', [TaskController::class, 'roadmapUpdate'])->name('sup-roadmap-update');

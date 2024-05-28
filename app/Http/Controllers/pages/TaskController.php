@@ -95,10 +95,33 @@ class TaskController extends Controller {
     $taskDetail->task_id = $data['roadmapTask'];
     $taskDetail->commit_reference = $data['roadmapCommit'];
     $taskDetail->description = $data['roadmapDescription'];
-    $taskDetail->task_type = 1;
+    $taskDetail->type = 1;
+    $taskDetail->situation = 1;
     $taskDetail->initial_dt = $data['roadmapDtSolicitation'];
     $taskDetail->ending_dt = $data['roadmapDtFinal'];
     $taskDetail->save();
+
+    return redirect()->route('sup-roadmap');
+  }
+
+  public function roadmapUpdate(Request $request) {
+    $update = $request->only(['roadmapId', 'roadmapTask', 'roadmapCommit', 'roadmapDescription', 'roadmapDtSolicitation', 'roadmapDtFinal']);
+    $taskUpdate = TaskDetail::find($update['roadmapId']);
+
+    $taskUpdate->task_id = $update['roadmapTask'];
+    $taskUpdate->commit_reference = $update['roadmapCommit'];
+    $taskUpdate->description = $update['roadmapDescription'];
+    $taskUpdate->type = 1;
+    $taskUpdate->situation = 1;
+    $taskUpdate->initial_dt = $update['roadmapDtSolicitation'];
+    $taskUpdate->ending_dt = $update['roadmapDtFinal'];
+    $taskUpdate->save();
+
+    return redirect()->route('sup-roadmap');
+  }
+
+  public function roadmapDelete(int $id) {
+    TaskDetail::where('id', $id)->delete();
 
     return redirect()->route('sup-roadmap');
   }
