@@ -35,7 +35,7 @@
     </div>
     <div class="d-flex align-content-center flex-wrap gap-3">{{-- Botão de novo usuário --}}
       <div class="dt-buttons" bis_skin_checked="1">
-        <a class="dt-button add-new btn btn-primary" href="{{ Route('sup-task-create') }}"><span> <i
+        <a class="dt-button add-new btn btn-primary" href="{{ route('sup-task-create') }}"><span> <i
               class="bx bx-plus me-0 me-sm-1"></i><span class="d-none d-sm-inline-block">Novo</span>
           </span>
         </a>
@@ -61,7 +61,7 @@
                         href="#"> <i class="bx bx-plus me-1"></i>
                       </a>
                       <a class="btn btn-outline-warning" style="margin-left: 5px"
-                        href="{{ Route('sup-task-update', $task->id) }}">
+                        href="{{ route('sup-task-update', $task->id) }}">
                         <i class="bx bx-edit-alt me-1"></i>
                       </a>
                     @endif
@@ -136,8 +136,8 @@
         </div>
         <div class="mb-3">
           <label class="form-label" for="add-comment-description">Descrição</label>
-          <input type="text" class="form-control" id="add-comment-description" placeholder="Descrição"
-            name="commentDescription" aria-label="description" />
+          <textarea class="form-control" id="add-comment-description" placeholder="Descrição" name="commentDescription"
+            aria-label="description" maxlength="250" rows="4"> </textarea>
         </div>
         <button type="submit" class="btn btn-primary me-sm-3 me-1 data-submit">Enviar</button>
         <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="offcanvas">Cancelar</button>
@@ -167,8 +167,8 @@
         </div>
         <div class="mb-3">
           <label class="form-label" for="update-comment-description">Descrição</label>
-          <input type="text" class="form-control" id="update-comment-description" placeholder="Descrição"
-            name="commentDescription" aria-label="description" />
+          <textarea class="form-control" id="update-comment-description" placeholder="Descrição" name="commentDescription"
+            aria-label="description" maxlength="250" rows="4"> </textarea>
         </div>
         <button type="submit" class="btn btn-primary me-sm-3 me-1 data-submit">Atualizar</button>
         <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="offcanvas">Cancelar</button>

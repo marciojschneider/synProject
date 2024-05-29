@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\pages;
 
 use App\Http\Controllers\Controller;
+use App\Models\Module;
 use App\Models\TaskDetail;
 use Illuminate\Http\Request;
 
@@ -51,16 +52,40 @@ class TaskController extends Controller {
     return view('content.pages.task.list', $data);
   }
 
-  public function task() {
+  public function taskCreate() {
     // $uriAdjust = $request->route(); Forma de pegar a rota atual.
+    $data['modules'] = Module::all();
 
     $data['condition'] = 'Cadastrar';
+    $data['formRoute'] = 'sup-task-create';
+    $data['readonly'] = 'readonly';
 
     return view('content.pages.task.detail', $data);
   }
 
-  public function taskUpdate() {
+  public function taskCreateAction(Request $request) {
+    $data = $request->only(['title', 'module', 'situation', 'solicitation', 'expectation', 'description']);
+
+    $task = new Task();
+    $task->title = $data['title'];
+    $task->module_id = $data['module'];
+    $task->initial_dt = $data['solicitation'];
+    $task->expected_dt = $data['solicitation'];
+    $task->user_id = 0;
+    $task->description = $data['description'];
+    $task->situation = $data['situation'];
+    $task->save();
+
+    return redirect()->route('sup-tasks');
+  }
+
+  public function taskUpdate(int $id) {
+    $data['modules'] = Module::all();
+    $data['task'] = Task::find($id);
+
     $data['condition'] = 'Atualizar';
+    // $data['formRoute'] = 'sup-task-update' . ',' . $id;
+    $data['readonly'] = '';
 
     return view('content.pages.task.detail', $data);
   }
