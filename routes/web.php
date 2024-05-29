@@ -24,10 +24,10 @@ Route::get('/modules', [ModuleController::class, 'index'])->name('sys-module');
 // Support
 //       → Tasks
 Route::get('/tasks', [TaskController::class, 'tasks'])->name('sup-tasks');
-Route::get('/task/create', [TaskController::class, 'task'])->name('sup-task-create');
-Route::post('/task/create', [TaskController::class, 'taskAction']);
-Route::get('/task/update', [TaskController::class, 'taskUpdate'])->name('sup-task-update');
-Route::post('/task/update', [TaskController::class, 'taskUpdateAction']);
+Route::get('/task/create', [TaskController::class, 'taskCreate'])->name('sup-task-create');
+Route::post('/task/create', [TaskController::class, 'taskCreateAction']);
+Route::get('/task/update/{id}', [TaskController::class, 'taskUpdate'])->name('sup-task-update');
+Route::post('/task/update/{id}', [TaskController::class, 'taskUpdateAction']);
 //               → Comments
 Route::post('/task/comment', [TaskController::class, 'commentAction'])->name('sup-comment');
 Route::post('/task/comment/update', [TaskController::class, 'commentUpdate'])->name('sup-comment-update');

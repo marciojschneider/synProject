@@ -41,8 +41,9 @@
                   aria-controls="chapter{{ $task->id }}">
                   <div class="d-flex flex-row">
                     @if ($task->situation != 4)
-                      <a class="btn btn-outline-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasAddComment"
-                        href="#"> <i class="bx bx-plus me-1"></i>
+                      <a class="add-new btn btn-outline-primary" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasAddRoadmap" onclick="newModal({{ $task->id }})" href="#"> <i
+                          class="bx bx-plus sm-me-1"></i>
                       </a>
                     @endif
 
@@ -125,8 +126,8 @@
         </div>
         <div class="mb-3">
           <label class="form-label" for="add-roadmap-description">Descrição</label>
-          <input type="text" class="form-control" id="add-roadmap-description" placeholder="Descrição"
-            name="roadmapDescription" aria-label="description" />
+          <textarea class="form-control" id="add-roadmap-description" placeholder="Descrição" name="roadmapDescription"
+            aria-label="description" maxlength="250" rows="4"> </textarea>
         </div>
         <div class="mb-3">
           <label for="add-roadmap-dt-solicitation" class="col-form-label">Solicitação</label>
@@ -177,8 +178,8 @@
         </div>
         <div class="mb-3">
           <label class="form-label" for="update-roadmap-description">Descrição</label>
-          <input type="text" class="form-control" id="update-roadmap-description" placeholder="Descrição"
-            name="roadmapDescription" aria-label="description" />
+          <textarea type="text" class="form-control" id="update-roadmap-description" placeholder="Descrição"
+            name="roadmapDescription" aria-label="description" maxlength="250" rows="4"> </textarea>
         </div>
         <div class="mb-3">
           <label for="update-roadmap-dt-solicitation" class="col-form-label">Solicitação</label>
