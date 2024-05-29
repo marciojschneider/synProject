@@ -56,11 +56,7 @@ class TaskController extends Controller {
     // $uriAdjust = $request->route(); Forma de pegar a rota atual.
     $data['modules'] = Module::all();
 
-    $data['condition'] = 'Cadastrar';
-    $data['formRoute'] = 'sup-task-create';
-    $data['readonly'] = 'readonly';
-
-    return view('content.pages.task.detail', $data);
+    return view('content.pages.task.create', $data);
   }
 
   public function taskCreateAction(Request $request) {
@@ -70,7 +66,7 @@ class TaskController extends Controller {
     $task->title = $data['title'];
     $task->module_id = $data['module'];
     $task->initial_dt = $data['solicitation'];
-    $task->expected_dt = $data['solicitation'];
+    $task->expected_dt = $data['expectation'];
     $task->user_id = 0;
     $task->description = $data['description'];
     $task->situation = $data['situation'];
@@ -83,11 +79,21 @@ class TaskController extends Controller {
     $data['modules'] = Module::all();
     $data['task'] = Task::find($id);
 
-    $data['condition'] = 'Atualizar';
-    // $data['formRoute'] = 'sup-task-update' . ',' . $id;
-    $data['readonly'] = '';
+    return view('content.pages.task.update', $data);
+  }
 
-    return view('content.pages.task.detail', $data);
+  public function taskUpdateAction(int $id, Request $request) {
+    $update = $request->only(['title', 'module', 'situation', 'solicitation', 'expectation', 'description']);
+    $taskUpdate = Task::find($id);
+
+    $taskUpdate->title = $update['title'];
+    $taskUpdate->module_id = $update['module'];
+    $taskUpdate->expected_dt = $update['expectation'];
+    $taskUpdate->description = $update['description'];
+    $taskUpdate->situation = $update['situation'];
+    $taskUpdate->save();
+
+    return redirect()->route('sup-tasks');
   }
 
   //         → Comments
