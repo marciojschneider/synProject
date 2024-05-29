@@ -4,7 +4,7 @@
 
 @extends('layouts/layoutMaster')
 
-@section('title', 'Tarefas')
+@section('title', 'Chamados')
 
 @section('vendor-style')
   @vite(['resources/assets/vendor/libs/animate-css/animate.scss', 'resources/assets/vendor/libs/sweetalert2/sweetalert2.scss', 'resources/assets/vendor/libs/plyr/plyr.scss'])
@@ -24,7 +24,7 @@
 
 @section('content')
   <h4 class="mb-0">
-    <span class="text-muted fw-light">Tarefas /</span> Roadmap
+    <span class="text-muted fw-light">Chamados /</span> Roadmap
   </h4>
 
   {{-- Listagem --}}
@@ -41,7 +41,7 @@
                   aria-controls="chapter{{ $task->id }}">
                   <div class="d-flex flex-row">
                     <a class="add-new btn btn-outline-primary" data-bs-toggle="offcanvas"
-                      data-bs-target="#offcanvasAddRoadmap"> +
+                      data-bs-target="#offcanvasAddRoadmap" onclick="newModal({{ $task->id }})"> +
                     </a>
 
                     <div class="d-flex flex-column" style="margin-left: 5px;">
@@ -64,7 +64,7 @@
                     <div class="d-flex">
                       {{-- <input class="form-check-input" type="checkbox" id="defaultCheck1" checked="" /> --}}
                       <label for="defaultCheck1" class="form-check-label col-sm-10">
-                        <span class="mb-0 h6">Descrição: {{ $detail->description }}</span>
+                        <span class="mb-0 h6">Detalhamento: {{ $detail->description }}</span>
                         <span class="text-muted d-block">Commit: {{ $detail->commit_reference }}</span>
                         <span class="text-muted d-block">Inicio:
                           {{ date('d/m/Y H:i:s', strtotime($detail->initial_dt)) }}
@@ -73,7 +73,7 @@
                       </label>
                       {{-- Botões de ação --}}
                       <form method="POST" action="{{ route('sup-roadmap-delete', $detail->id) }}"
-                        id="formDelete{{ $detail->id }}" display="none">
+                        id="roadmapDelete{{ $detail->id }}" display="none">
                         @csrf
                       </form>
                       <div class="d-flex flex-row-reverse col-sm-2">
@@ -109,9 +109,9 @@
         <div class="mb-3">
           <label class="form-label" for="add-roadmap-task">Tarefa</label>
           <select id="add-roadmap-task" name="roadmapTask" class="select2 form-select">
-            <option value="">Selecione uma tarefa</option>
-            <option value="1">Estrutura básica</option>
-            <option value="2">CRUD Tarefas - Base</option>
+            @foreach ($unapproveds as $unapproved)
+              <option value="{{ $unapproved->id }}">{{ $unapproved->title }}</option>
+            @endforeach
           </select>
         </div>
         <div class="mb-3">
@@ -161,8 +161,9 @@
         <div class="mb-3">
           <label class="form-label" for="update-roadmap-task">Tarefa</label>
           <select id="update-roadmap-task" name="roadmapTask" class="select2 form-select">
-            <option value="1">Estrutura básica</option>
-            <option value="2">CRUD Tarefas - Base</option>
+            @foreach ($unapproveds as $unapproved)
+              <option value="{{ $unapproved->id }}">{{ $unapproved->title }}</option>
+            @endforeach
           </select>
         </div>
         <div class="mb-3">
@@ -199,6 +200,10 @@
 @endsection
 
 <script>
+  function newModal(data) {
+    $('#add-roadmap-task option[value="' + data + '"]').prop('selected', true);
+  }
+
   function updateModal(data) {
     // document.getElementById('updateRoadmapForm').action = "{{ route('sup-roadmap-update') }}";
     $('#update-roadmap-id').val(data.id)
@@ -244,6 +249,6 @@
   }
 
   function sendDelete(id) {
-    document.getElementById('formDelete' + id).submit();
+    document.getElementById('roadmapDelete' + id).submit();
   }
 </script>

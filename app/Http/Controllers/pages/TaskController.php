@@ -10,8 +10,10 @@ use Illuminate\Http\Request;
 use App\Models\Task;
 
 class TaskController extends Controller {
-  public function index() {
+  // Tasks
+  public function task() {
     $tasks = Task::orderBy('created_at', 'DESC')->get();
+    $data['unapproveds'] = Task::orderBy('created_at', 'DESC')->where('situation', '!=', 4)->get();
 
     foreach ($tasks as $kTask => $vTask) {
       $data['tasks'][] = $vTask;
@@ -23,13 +25,13 @@ class TaskController extends Controller {
           break;
 
         case '2':
-          $data['tasks'][$kTask]['cSituation'] = 'warning';
-          $data['tasks'][$kTask]['nSituation'] = 'Pendente';
+          $data['tasks'][$kTask]['cSituation'] = 'success';
+          $data['tasks'][$kTask]['nSituation'] = 'Em desenvolvimento';
           break;
 
         case '3':
-          $data['tasks'][$kTask]['cSituation'] = 'success';
-          $data['tasks'][$kTask]['nSituation'] = 'Finalizada';
+          $data['tasks'][$kTask]['cSituation'] = 'warning';
+          $data['tasks'][$kTask]['nSituation'] = 'Pendente';
           break;
 
         case '4':
@@ -43,14 +45,47 @@ class TaskController extends Controller {
           break;
       }
 
-      $data['tasks'][$kTask]['details'] = TaskDetail::where('task_id', $vTask->id)->where('type', 2)->orderBy('created_at', 'DESC')->get();
+      $data['tasks'][$kTask]['details'] = TaskDetail::where('task_id', $vTask->id)->where('type', 2)->where('situation', 1)->orderBy('created_at', 'DESC')->get();
     }
 
     return view('content.pages.task.index', $data);
   }
 
+  //         → Comments
+  public function commentAction(Request $request) {
+    $data = $request->only(['commentTask', 'commentDescription']);
+
+    $taskDetail = new TaskDetail();
+    $taskDetail->task_id = $data['commentTask'];
+    $taskDetail->description = $data['commentDescription'];
+    $taskDetail->type = 2;
+    $taskDetail->situation = 1;
+    $taskDetail->save();
+
+    return redirect()->route('sup-task');
+  }
+
+  public function commentUpdate(Request $request) {
+    $update = $request->only(['commentId', 'commentTask', 'commentDescription']);
+    $taskUpdate = TaskDetail::find($update['commentId']);
+
+    $taskUpdate->task_id = $update['commentTask'];
+    $taskUpdate->description = $update['commentDescription'];
+    $taskUpdate->save();
+
+    return redirect()->route('sup-task');
+  }
+
+  public function commentDelete(int $id) {
+    TaskDetail::where('id', $id)->delete();
+
+    return redirect()->route('sup-task');
+  }
+
+  //         → Roadmap
   public function roadmap() {
     $tasks = Task::orderBy('created_at', 'DESC')->get();
+    $data['unapproveds'] = Task::orderBy('created_at', 'DESC')->where('situation', '!=', 4)->get();
 
     foreach ($tasks as $kTask => $vTask) {
       $data['tasks'][] = $vTask;
@@ -62,13 +97,13 @@ class TaskController extends Controller {
           break;
 
         case '2':
-          $data['tasks'][$kTask]['cSituation'] = 'warning';
-          $data['tasks'][$kTask]['nSituation'] = 'Pendente';
+          $data['tasks'][$kTask]['cSituation'] = 'success';
+          $data['tasks'][$kTask]['nSituation'] = 'Em desenvolvimento';
           break;
 
         case '3':
-          $data['tasks'][$kTask]['cSituation'] = 'success';
-          $data['tasks'][$kTask]['nSituation'] = 'Finalizada';
+          $data['tasks'][$kTask]['cSituation'] = 'warning';
+          $data['tasks'][$kTask]['nSituation'] = 'Pendente';
           break;
 
         case '4':
@@ -82,7 +117,7 @@ class TaskController extends Controller {
           break;
       }
 
-      $data['tasks'][$kTask]['details'] = TaskDetail::where('task_id', $vTask->id)->where('type', 1)->orderBy('created_at', 'DESC')->get();
+      $data['tasks'][$kTask]['details'] = TaskDetail::where('task_id', $vTask->id)->where('type', 1)->where('situation', 1)->orderBy('created_at', 'DESC')->get();
     }
 
     return view('content.pages.task.roadmap', $data);
@@ -111,8 +146,6 @@ class TaskController extends Controller {
     $taskUpdate->task_id = $update['roadmapTask'];
     $taskUpdate->commit_reference = $update['roadmapCommit'];
     $taskUpdate->description = $update['roadmapDescription'];
-    $taskUpdate->type = 1;
-    $taskUpdate->situation = 1;
     $taskUpdate->initial_dt = $update['roadmapDtSolicitation'];
     $taskUpdate->ending_dt = $update['roadmapDtFinal'];
     $taskUpdate->save();

@@ -108,7 +108,7 @@ class SidebarsSeeder extends Seeder {
         "updated_at" => "2024-05-23 19:56:11",
       ),
       array(
-        "name" => "Tarefas",
+        "name" => "Chamados",
         "icon" => NULL,
         "slug" => "task",
         "affiliate_id" => 7,
