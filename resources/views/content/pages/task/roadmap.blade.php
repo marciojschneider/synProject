@@ -40,9 +40,11 @@
                   data-bs-target="#chapter{{ $task->id }}" aria-expanded="false"
                   aria-controls="chapter{{ $task->id }}">
                   <div class="d-flex flex-row">
-                    <a class="add-new btn btn-outline-primary" data-bs-toggle="offcanvas"
-                      data-bs-target="#offcanvasAddRoadmap" onclick="newModal({{ $task->id }})"> +
-                    </a>
+                    @if ($task->situation != 4)
+                      <a class="btn btn-outline-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasAddComment"
+                        href="#"> <i class="bx bx-plus me-1"></i>
+                      </a>
+                    @endif
 
                     <div class="d-flex flex-column" style="margin-left: 5px;">
                       <span class="h5 mb-1">{{ $task->title }}
@@ -71,20 +73,22 @@
                           | Fim:
                           {{ date('d/m/Y H:i:s', strtotime($detail->ending_dt)) }}</span>
                       </label>
-                      {{-- Botões de ação --}}
-                      <form method="POST" action="{{ route('sup-roadmap-delete', $detail->id) }}"
-                        id="roadmapDelete{{ $detail->id }}" display="none">
-                        @csrf
-                      </form>
-                      <div class="d-flex flex-row-reverse col-sm-2">
-                        <a class="btn btn-outline-danger m-1" onclick="removeModal({{ $detail->id }})"> <i
-                            class="bx bx-trash me-1"></i>
-                        </a>
-                        <a class="btn btn-outline-warning m-1" onclick="updateModal({{ $detail }})"
-                          data-bs-toggle="offcanvas" data-bs-target="#offcanvasUpdateRoadmap"> <i
-                            class="bx bx-edit-alt me-1"></i>
-                        </a>
-                      </div>
+                      @if ($task->situation != 4)
+                        {{-- Botões de ação --}}
+                        <form method="POST" action="{{ route('sup-roadmap-delete', $detail->id) }}"
+                          id="roadmapDelete{{ $detail->id }}" display="none">
+                          @csrf
+                        </form>
+                        <div class="d-flex flex-row-reverse col-sm-2">
+                          <a class="btn btn-outline-danger m-1" onclick="removeModal({{ $detail->id }})"> <i
+                              class="bx bx-trash me-1"></i>
+                          </a>
+                          <a class="btn btn-outline-warning m-1" onclick="updateModal({{ $detail }})"
+                            data-bs-toggle="offcanvas" data-bs-target="#offcanvasUpdateRoadmap"> <i
+                              class="bx bx-edit-alt me-1"></i>
+                          </a>
+                        </div>
+                      @endif
                     </div>
                   </div>
                 @endforeach

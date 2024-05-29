@@ -23,14 +23,17 @@ Route::get('/modules', [ModuleController::class, 'index'])->name('sys-module');
 
 // Support
 //       → Tasks
-Route::get('/tasks', [TaskController::class, 'task'])->name('sup-task');
-Route::post('/tasks', [TaskController::class, 'taskAction']);
+Route::get('/tasks', [TaskController::class, 'tasks'])->name('sup-tasks');
+Route::get('/task/create', [TaskController::class, 'task'])->name('sup-task-create');
+Route::post('/task/create', [TaskController::class, 'taskAction']);
+Route::get('/task/update', [TaskController::class, 'taskUpdate'])->name('sup-task-update');
+Route::post('/task/update', [TaskController::class, 'taskUpdateAction']);
 //               → Comments
 Route::post('/task/comment', [TaskController::class, 'commentAction'])->name('sup-comment');
 Route::post('/task/comment/update', [TaskController::class, 'commentUpdate'])->name('sup-comment-update');
 Route::post('/task/comment/delete/{id}', [TaskController::class, 'commentDelete'])->name('sup-comment-delete');
 //               → Roadmap
-Route::get('/roadmap', [TaskController::class, 'roadmap'])->name('sup-roadmap');
-Route::post('/roadmap', [TaskController::class, 'roadmapAction']);
-Route::post('/roadmap/update', [TaskController::class, 'roadmapUpdate'])->name('sup-roadmap-update');
-Route::post('/roadmap/delete/{id}', [TaskController::class, 'roadmapDelete'])->name('sup-roadmap-delete');
+Route::get('/task/roadmap', [TaskController::class, 'roadmap'])->name('sup-roadmap');
+Route::post('/task/roadmap', [TaskController::class, 'roadmapAction']);
+Route::post('/task/roadmap/update', [TaskController::class, 'roadmapUpdate'])->name('sup-roadmap-update');
+Route::post('/task/roadmap/delete/{id}', [TaskController::class, 'roadmapDelete'])->name('sup-roadmap-delete');

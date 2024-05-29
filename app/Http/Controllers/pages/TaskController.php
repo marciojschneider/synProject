@@ -11,7 +11,7 @@ use App\Models\Task;
 
 class TaskController extends Controller {
   // Tasks
-  public function task() {
+  public function tasks() {
     $tasks = Task::orderBy('created_at', 'DESC')->get();
     $data['unapproveds'] = Task::orderBy('created_at', 'DESC')->where('situation', '!=', 4)->get();
 
@@ -21,7 +21,7 @@ class TaskController extends Controller {
       switch ($vTask->situation) {
         case '1':
           $data['tasks'][$kTask]['cSituation'] = 'danger';
-          $data['tasks'][$kTask]['nSituation'] = 'Não iniciada';
+          $data['tasks'][$kTask]['nSituation'] = 'Solicitado';
           break;
 
         case '2':
@@ -36,7 +36,7 @@ class TaskController extends Controller {
 
         case '4':
           $data['tasks'][$kTask]['cSituation'] = 'info';
-          $data['tasks'][$kTask]['nSituation'] = 'Aprovada';
+          $data['tasks'][$kTask]['nSituation'] = 'Aprovado';
           break;
 
         default:
@@ -48,7 +48,21 @@ class TaskController extends Controller {
       $data['tasks'][$kTask]['details'] = TaskDetail::where('task_id', $vTask->id)->where('type', 2)->where('situation', 1)->orderBy('created_at', 'DESC')->get();
     }
 
-    return view('content.pages.task.index', $data);
+    return view('content.pages.task.list', $data);
+  }
+
+  public function task() {
+    // $uriAdjust = $request->route(); Forma de pegar a rota atual.
+
+    $data['condition'] = 'Cadastrar';
+
+    return view('content.pages.task.detail', $data);
+  }
+
+  public function taskUpdate() {
+    $data['condition'] = 'Atualizar';
+
+    return view('content.pages.task.detail', $data);
   }
 
   //         → Comments
@@ -62,7 +76,7 @@ class TaskController extends Controller {
     $taskDetail->situation = 1;
     $taskDetail->save();
 
-    return redirect()->route('sup-task');
+    return redirect()->route('sup-tasks');
   }
 
   public function commentUpdate(Request $request) {
@@ -73,13 +87,13 @@ class TaskController extends Controller {
     $taskUpdate->description = $update['commentDescription'];
     $taskUpdate->save();
 
-    return redirect()->route('sup-task');
+    return redirect()->route('sup-tasks');
   }
 
   public function commentDelete(int $id) {
     TaskDetail::where('id', $id)->delete();
 
-    return redirect()->route('sup-task');
+    return redirect()->route('sup-tasks');
   }
 
   //         → Roadmap
@@ -93,7 +107,7 @@ class TaskController extends Controller {
       switch ($vTask->situation) {
         case '1':
           $data['tasks'][$kTask]['cSituation'] = 'danger';
-          $data['tasks'][$kTask]['nSituation'] = 'Não iniciada';
+          $data['tasks'][$kTask]['nSituation'] = 'Solicitado';
           break;
 
         case '2':
@@ -108,7 +122,7 @@ class TaskController extends Controller {
 
         case '4':
           $data['tasks'][$kTask]['cSituation'] = 'info';
-          $data['tasks'][$kTask]['nSituation'] = 'Aprovada';
+          $data['tasks'][$kTask]['nSituation'] = 'Aprovado';
           break;
 
         default:

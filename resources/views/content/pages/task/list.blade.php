@@ -35,8 +35,8 @@
     </div>
     <div class="d-flex align-content-center flex-wrap gap-3">{{-- Botão de novo usuário --}}
       <div class="dt-buttons" bis_skin_checked="1">
-        <a class="dt-button add-new btn btn-primary" href="#"><span> <i class="bx bx-plus me-0 me-sm-1"></i><span
-              class="d-none d-sm-inline-block">Nova</span>
+        <a class="dt-button add-new btn btn-primary" href="{{ Route('sup-task-create') }}"><span> <i
+              class="bx bx-plus me-0 me-sm-1"></i><span class="d-none d-sm-inline-block">Novo</span>
           </span>
         </a>
       </div>
@@ -44,7 +44,7 @@
   </div>
 
   {{-- Listagem --}}
-  <div class="card g-3 mt-4">
+  <div class="card g-3 mt-1">
     <div class="card-body row g-3">
       <div class="col-lg-12">
         <div class="accordion stick-top accordion-bordered" id="courseContent">
@@ -56,9 +56,15 @@
                   data-bs-target="#chapter{{ $task->id }}" aria-expanded="false"
                   aria-controls="chapter{{ $task->id }}">
                   <div class="d-flex flex-row">
-                    <a class="add-new btn btn-outline-primary" data-bs-toggle="offcanvas"
-                      data-bs-target="#offcanvasAddComment"> +
-                    </a>
+                    @if ($task->situation != 4)
+                      <a class="btn btn-outline-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasAddComment"
+                        href="#"> <i class="bx bx-plus me-1"></i>
+                      </a>
+                      <a class="btn btn-outline-warning" style="margin-left: 5px"
+                        href="{{ Route('sup-task-update', $task->id) }}">
+                        <i class="bx bx-edit-alt me-1"></i>
+                      </a>
+                    @endif
 
                     <div class="d-flex flex-column" style="margin-left: 5px;">
                       <span class="h5 mb-1">{{ $task->title }}
@@ -83,20 +89,22 @@
                         <span class="mb-0 h6">Detalhamento:</span>
                         <span class="text-muted d-block"> {{ $detail->description }}</span>
                       </label>
-                      {{-- Botões de ação --}}
-                      <form method="POST" action="{{ route('sup-comment-delete', $detail->id) }}"
-                        id="commentDelete{{ $detail->id }}" display="none">
-                        @csrf
-                      </form>
-                      <div class="d-flex flex-row-reverse col-sm-2">
-                        <a class="btn btn-outline-danger m-1" onclick="removeModal({{ $detail->id }})"> <i
-                            class="bx bx-trash me-1"></i>
-                        </a>
-                        <a class="btn btn-outline-warning m-1" onclick="updateModal({{ $detail }})"
-                          data-bs-toggle="offcanvas" data-bs-target="#offcanvasUpdateComment"> <i
-                            class="bx bx-edit-alt me-1"></i>
-                        </a>
-                      </div>
+                      @if ($task->situation != 4)
+                        {{-- Botões de ação --}}
+                        <form method="POST" action="{{ route('sup-comment-delete', $detail->id) }}"
+                          id="commentDelete{{ $detail->id }}" display="none">
+                          @csrf
+                        </form>
+                        <div class="d-flex flex-row-reverse col-sm-2">
+                          <a class="btn btn-outline-danger m-1" onclick="removeModal({{ $detail->id }})"
+                            href="#"> <i class="bx bx-trash me-1"></i>
+                          </a>
+                          <a class="btn btn-outline-warning m-1" onclick="updateModal({{ $detail }})"
+                            data-bs-toggle="offcanvas" data-bs-target="#offcanvasUpdateComment" href="#"> <i
+                              class="bx bx-edit-alt me-1"></i>
+                          </a>
+                        </div>
+                      @endif
                     </div>
                   </div>
                 @endforeach
@@ -170,6 +178,10 @@
 @endsection
 
 <script>
+  const div = document.getElementById('chapter3');
+
+  div.addEventListener('click', (event) => event.stopPropagation());
+
   function newModal(data) {
     $('#add-comment-task option[value="' + data + '"]').prop('selected', true);
   }
