@@ -58,7 +58,7 @@
                   <div class="d-flex flex-row">
                     @if ($task->situation != 4)
                       <a class="btn btn-outline-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasAddComment"
-                        href="#"> <i class="bx bx-plus me-1"></i>
+                        onclick="newModal({{ $task->id }})" href="#"> <i class="bx bx-plus me-1"></i>
                       </a>
                       <a class="btn btn-outline-warning" style="margin-left: 5px"
                         href="{{ route('sup-task-update', $task->id) }}">
@@ -178,10 +178,6 @@
 @endsection
 
 <script>
-  const div = document.getElementById('chapter3');
-
-  div.addEventListener('click', (event) => event.stopPropagation());
-
   function newModal(data) {
     $('#add-comment-task option[value="' + data + '"]').prop('selected', true);
   }
