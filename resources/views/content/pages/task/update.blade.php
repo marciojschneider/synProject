@@ -83,7 +83,7 @@
 
           <button type="submit" class="btn btn-primary">Salvar</button>
           <a href="{{ route('sup-tasks') }}" class="btn btn-secondary">Voltar</a>
-          <a class="btn btn-danger" onclick="removeModal({{ $task->id }})">Excluir</a>
+          <a class="btn btn-danger" onclick="removeModal({{ $task->id }})" href="#">Excluir</a>
         </form>
 
         <form method="POST" id="deleteForm{{ $task->id }}" action="{{ route('sup-task-delete', $task->id) }}">
