@@ -6,24 +6,23 @@ use Illuminate\Support\Facades\Schema;
 
 // Models
 use App\Models\Module;
-use App\Models\User;
+use App\Models\Profile;
 
 return new class extends Migration {
   public function up(): void {
-    Schema::create('tasks', function (Blueprint $table) {
+    Schema::create("module_permissions", function (Blueprint $table) {
       $table->id();
-      $table->string('title');
       $table->foreignIdFor(Module::class)->constrained()->onDelete('cascade');
-      $table->timestamp('initial_dt')->nullable();
-      $table->timestamp('expected_dt')->nullable();
-      // $table->foreignIdFor(User::class)->constrained()->onDelete('cascade');
-      $table->string('description');
-      $table->integer('situation');
+      $table->foreignIdFor(Profile::class)->constrained()->onDelete('cascade');
+      $table->integer('list');
+      $table->integer('create');
+      $table->integer('update');
+      $table->integer('delete');
       $table->timestamps();
     });
   }
 
   public function down(): void {
-    Schema::dropIfExists('tasks');
+    Schema::dropIfExists('module_permissions');
   }
 };

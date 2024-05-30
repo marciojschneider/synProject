@@ -7,6 +7,8 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder {
   public function run(): void {
+    $this->call(ClientsSeeder::class);
+    $this->call(ProfilesSeeder::class);
     $this->call(SidebarsSeeder::class);
     $this->call(ModulesSeeder::class);
   }
