@@ -143,7 +143,7 @@
         <div class="mb-3">
           <label class="form-label" for="add-comment-description">Descrição</label>
           <textarea class="form-control" id="add-comment-description" placeholder="Descrição" name="commentDescription"
-            aria-label="description" maxlength="250" rows="4"> </textarea>
+            aria-label="description" maxlength="250" rows="4"></textarea>
         </div>
         <button type="submit" class="btn btn-primary me-sm-3 me-1 data-submit">Enviar</button>
         <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="offcanvas">Cancelar</button>
@@ -174,7 +174,7 @@
         <div class="mb-3">
           <label class="form-label" for="update-comment-description">Descrição</label>
           <textarea class="form-control" id="update-comment-description" placeholder="Descrição" name="commentDescription"
-            aria-label="description" maxlength="250" rows="4"> </textarea>
+            aria-label="description" maxlength="250" rows="4"></textarea>
         </div>
         <button type="submit" class="btn btn-primary me-sm-3 me-1 data-submit">Atualizar</button>
         <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="offcanvas">Cancelar</button>

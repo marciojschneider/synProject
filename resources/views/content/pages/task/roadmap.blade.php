@@ -135,7 +135,7 @@
         <div class="mb-3">
           <label class="form-label" for="add-roadmap-description">Descrição</label>
           <textarea class="form-control" id="add-roadmap-description" placeholder="Descrição" name="roadmapDescription"
-            aria-label="description" maxlength="250" rows="4"> </textarea>
+            aria-label="description" maxlength="250" rows="4"></textarea>
         </div>
         <div class="mb-3">
           <label for="add-roadmap-dt-solicitation" class="col-form-label">Solicitação</label>
@@ -187,7 +187,7 @@
         <div class="mb-3">
           <label class="form-label" for="update-roadmap-description">Descrição</label>
           <textarea type="text" class="form-control" id="update-roadmap-description" placeholder="Descrição"
-            name="roadmapDescription" aria-label="description" maxlength="250" rows="4"> </textarea>
+            name="roadmapDescription" aria-label="description" maxlength="250" rows="4"></textarea>
         </div>
         <div class="mb-3">
           <label for="update-roadmap-dt-solicitation" class="col-form-label">Solicitação</label>

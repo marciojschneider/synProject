@@ -9,12 +9,12 @@
 @section('content')
   <div class="col-md">
     <h4 class="mb-4">
-      <span class="text-muted fw-light">Módulos /</span> Cadastrar
+      <span class="text-muted fw-light">Módulos /</span> Atualizar
     </h4>
     <div class="card mb-4">
       {{-- <h5 class="card-header">Novo chamado</h5> --}}
       <div class="card-body">
-        <form method="POST" action="{{ route('sys-module-create') }}">
+        <form method="POST" action="{{ route('sys-module-update') }}">
           @csrf
 
           <div class="row mb-4">
@@ -23,7 +23,8 @@
                 <label for="sidebar" class="form-label">Módulo</label>
                 <select id="sidebar" name="sidebar" class="form-select">
                   @foreach ($sidebars as $sidebar)
-                    <option value="{{ $sidebar->id }}">{{ $sidebar->name }}</option>
+                    <option value="{{ $sidebar->id }}" {{ str_contains($module->id, $sidebar->id) ? 'selected' : '' }}>
+                      {{ $sidebar->name }}</option>
                   @endforeach
                 </select>
               </div>
@@ -67,14 +68,14 @@
               </div>
 
               <div class="form-check ">
-                <input class="form-check-input" type="checkbox" name="updateCheck" />
-                <label class="form-check-label" for="updateCheck">
+                <input class="form-check-input" type="checkbox" name="editCheck" />
+                <label class="form-check-label" for="editCheck">
                   Edição
                 </label>
               </div>
 
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="deleteCheck" />
+                <input class="form-check-input" type="checkbox" id="deleteCheck" />
                 <label class="form-check-label" for="deleteCheck">
                   Remoção
                 </label>
