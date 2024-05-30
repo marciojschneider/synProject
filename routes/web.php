@@ -25,6 +25,7 @@ Route::get('/module/create', [ModuleController::class, 'moduleCreate'])->name('s
 Route::post('/module/create', [ModuleController::class, 'moduleCreateAction']);
 Route::get('/module/update/{id}', [ModuleController::class, 'moduleUpdate'])->name('sys-module-update');
 Route::post('/module/update/{id}', [ModuleController::class, 'moduleUpdateAction']);
+Route::post('/module/delete/{id}', [ModuleController::class, 'moduleDelete'])->name('sys-module-delete');
 
 //       → Modules
 Route::get('/profiles', [ProfileController::class, 'profiles'])->name('sys-profiles');
