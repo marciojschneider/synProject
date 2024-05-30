@@ -33,69 +33,71 @@
       <div class="col-lg-12">
         <div class="accordion stick-top accordion-bordered" id="courseContent">
           {{-- Inicio do item --}}
-          @foreach ($tasks as $task)
-            <div class="accordion-item shadow-none border mb-0">
-              <div class="accordion-header" id="headingOne">
-                <button type="button" class="bg-lighter rounded-0 accordion-button collapsed" data-bs-toggle="collapse"
-                  data-bs-target="#chapter{{ $task->id }}" aria-expanded="false"
-                  aria-controls="chapter{{ $task->id }}">
-                  <div class="d-flex flex-row">
-                    @if ($task->situation != 4)
-                      <a class="add-new btn btn-outline-primary" data-bs-toggle="offcanvas"
-                        data-bs-target="#offcanvasAddRoadmap" onclick="newModal({{ $task->id }})" href="#"> <i
-                          class="bx bx-plus sm-me-1"></i>
-                      </a>
-                    @endif
-
-                    <div class="d-flex flex-column" style="margin-left: 5px;">
-                      <span class="h5 mb-1">{{ $task->title }}
-                        <div class="badge bg-{{ $task->cSituation }} rounded-pill ms-auto" bis_skin_checked="1">
-                          {{ $task->nSituation }}
-                        </div>
-                      </span>
-                      <span class="fw-normal">
-                        Inicio: {{ date('d/m/Y', strtotime($task->initial_dt)) }} |
-                        Expectativa: {{ date('d/m/Y', strtotime($task->expected_dt)) }}
-                      </span>
-                    </div>
-                  </div>
-                </button>
-              </div>
-              <div id="chapter{{ $task->id }}" class="accordion-collapse collapse" data-bs-parent="#courseContent">
-                @foreach ($task->details as $detail)
-                  <div class="accordion-body py-3 border-top">
-                    <div class="d-flex">
-                      {{-- <input class="form-check-input" type="checkbox" id="defaultCheck1" checked="" /> --}}
-                      <label for="defaultCheck1" class="form-check-label col-sm-10">
-                        <span class="mb-0 h6">Detalhamento: {{ $detail->description }}</span>
-                        <span class="text-muted d-block">Commit: {{ $detail->commit_reference }}</span>
-                        <span class="text-muted d-block">Inicio:
-                          {{ date('d/m/Y H:i:s', strtotime($detail->initial_dt)) }}
-                          | Fim:
-                          {{ date('d/m/Y H:i:s', strtotime($detail->ending_dt)) }}</span>
-                      </label>
+          @if (isset($tasks))
+            @foreach ($tasks as $task)
+              <div class="accordion-item shadow-none border mb-0">
+                <div class="accordion-header" id="headingOne">
+                  <button type="button" class="bg-lighter rounded-0 accordion-button collapsed" data-bs-toggle="collapse"
+                    data-bs-target="#chapter{{ $task->id }}" aria-expanded="false"
+                    aria-controls="chapter{{ $task->id }}">
+                    <div class="d-flex flex-row">
                       @if ($task->situation != 4)
-                        {{-- Botões de ação --}}
-                        <form method="POST" action="{{ route('sup-roadmap-delete', $detail->id) }}"
-                          id="roadmapDelete{{ $detail->id }}" display="none">
-                          @csrf
-                        </form>
-                        <div class="d-flex flex-row-reverse col-sm-2">
-                          <a class="btn btn-outline-danger m-1" onclick="removeModal({{ $detail->id }})"> <i
-                              class="bx bx-trash me-1"></i>
-                          </a>
-                          <a class="btn btn-outline-warning m-1" onclick="updateModal({{ $detail }})"
-                            data-bs-toggle="offcanvas" data-bs-target="#offcanvasUpdateRoadmap"> <i
-                              class="bx bx-edit-alt me-1"></i>
-                          </a>
-                        </div>
+                        <a class="add-new btn btn-outline-primary" data-bs-toggle="offcanvas"
+                          data-bs-target="#offcanvasAddRoadmap" onclick="newModal({{ $task->id }})" href="#"> <i
+                            class="bx bx-plus sm-me-1"></i>
+                        </a>
                       @endif
+
+                      <div class="d-flex flex-column" style="margin-left: 5px;">
+                        <span class="h5 mb-1">{{ $task->title }}
+                          <div class="badge bg-{{ $task->cSituation }} rounded-pill ms-auto" bis_skin_checked="1">
+                            {{ $task->nSituation }}
+                          </div>
+                        </span>
+                        <span class="fw-normal">
+                          Inicio: {{ date('d/m/Y', strtotime($task->initial_dt)) }} |
+                          Expectativa: {{ date('d/m/Y', strtotime($task->expected_dt)) }}
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                @endforeach
+                  </button>
+                </div>
+                <div id="chapter{{ $task->id }}" class="accordion-collapse collapse" data-bs-parent="#courseContent">
+                  @foreach ($task->details as $detail)
+                    <div class="accordion-body py-3 border-top">
+                      <div class="d-flex">
+                        {{-- <input class="form-check-input" type="checkbox" id="defaultCheck1" checked="" /> --}}
+                        <label for="defaultCheck1" class="form-check-label col-sm-10">
+                          <span class="mb-0 h6">Detalhamento: {{ $detail->description }}</span>
+                          <span class="text-muted d-block">Commit: {{ $detail->commit_reference }}</span>
+                          <span class="text-muted d-block">Inicio:
+                            {{ date('d/m/Y H:i:s', strtotime($detail->initial_dt)) }}
+                            | Fim:
+                            {{ date('d/m/Y H:i:s', strtotime($detail->ending_dt)) }}</span>
+                        </label>
+                        @if ($task->situation != 4)
+                          {{-- Botões de ação --}}
+                          <form method="POST" action="{{ route('sup-roadmap-delete', $detail->id) }}"
+                            id="roadmapDelete{{ $detail->id }}" display="none">
+                            @csrf
+                          </form>
+                          <div class="d-flex flex-row-reverse col-sm-2">
+                            <a class="btn btn-outline-danger m-1" onclick="removeModal({{ $detail->id }})"
+                              href="#"> <i class="bx bx-trash me-1"></i>
+                            </a>
+                            <a class="btn btn-outline-warning m-1" onclick="updateModal({{ $detail }})"
+                              data-bs-toggle="offcanvas" data-bs-target="#offcanvasUpdateRoadmap" href="#"> <i
+                                class="bx bx-edit-alt me-1"></i>
+                            </a>
+                          </div>
+                        @endif
+                      </div>
+                    </div>
+                  @endforeach
+                </div>
               </div>
-            </div>
-          @endforeach
+            @endforeach
+          @endif
           {{-- Fim do item --}}
         </div>
       </div>
