@@ -76,4 +76,11 @@ class ModuleController extends Controller {
 
     return redirect()->route('sys-modules');
   }
+
+  public function moduleDelete(int $id) {
+    ModulePermission::where('module_id', $id)->delete();
+    Module::where('id', $id)->delete();
+
+    return redirect()->route('sys-modules');
+  }
 }

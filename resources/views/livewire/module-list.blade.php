@@ -59,10 +59,12 @@
                     <a class="dropdown-item" href="{{ route('sys-module-update', $row->id) }}"><i
                         class="bx bx-edit-alt me-1"></i> Editar</a>
 
-                    <form method="POST" action="#">
+                    <form method="POST" action="{{ route('sys-module-delete', $row->id) }}"
+                      id="moduleDelete{{ $row->id }}" display="none">
                       @csrf
-                      <button type="submit" class="dropdown-item"><i class="bx bx-trash me-1"></i> Remover</button>
                     </form>
+                    <button type="submit" class="dropdown-item" onclick="removeModal({{ $row->id }})"><i
+                        class="bx bx-trash me-1"></i> Remover</button>
                   </div>
                 </div>
               </td>
@@ -74,3 +76,38 @@
     </div>
   </div>
 </div>
+
+<script>
+  function removeModal(id) {
+    Swal.fire({
+      title: 'Você tem certeza?',
+      text: "Essa ação não será revertida!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sim, deletar isso!',
+      cancelButtonText: 'Cancelar',
+      customClass: {
+        confirmButton: 'btn btn-primary me-3',
+        cancelButton: 'btn btn-label-secondary'
+      },
+      buttonsStyling: false
+    }).then(function(result) {
+      if (result.value) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Deletado!',
+          text: 'O registro foi removido do sistema.',
+          customClass: {
+            confirmButton: 'btn btn-success'
+          }
+        }).then(function(result) {
+          sendDelete(id)
+        });
+      }
+    });
+  }
+
+  function sendDelete(id) {
+    document.getElementById('moduleDelete' + id).submit();
+  }
+</script>
