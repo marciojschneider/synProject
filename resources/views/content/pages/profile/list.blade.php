@@ -7,5 +7,5 @@
 @section('title', 'Perfis')
 
 @section('content')
-  <h4 class="pt-3 mb-0">Perfis</h4>
+  <livewire:profile-list />
 @endsection

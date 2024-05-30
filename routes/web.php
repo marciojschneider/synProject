@@ -17,9 +17,15 @@ Route::get('/', [HomePage::class, 'index'])->name('homepage');
 
 // Sistema
 Route::get('/users', [UserController::class, 'index'])->name('sys-user');
-Route::get('/profiles', [ProfileController::class, 'index'])->name('sys-profile');
 Route::get('/clients', [ClientController::class, 'index'])->name('sys-client');
-Route::get('/modules', [ModuleController::class, 'index'])->name('sys-module');
+
+//       → Modules
+Route::get('/modules', [ModuleController::class, 'modules'])->name('sys-modules');
+Route::get('/module/create', [ModuleController::class, 'moduleCreate'])->name('sys-module-create');
+Route::post('/modules/create', [ModuleController::class, 'moduleCreateAction']);
+
+//       → Modules
+Route::get('/profiles', [ProfileController::class, 'profiles'])->name('sys-profiles');
 
 // Support
 //       → Tasks
