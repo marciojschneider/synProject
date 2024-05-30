@@ -96,6 +96,13 @@ class TaskController extends Controller {
     return redirect()->route('sup-tasks');
   }
 
+  public function taskDelete(int $id) {
+    Task::where('id', $id)->delete();
+
+    return redirect()->route('sup-tasks');
+  }
+
+
   //         → Comments
   public function commentAction(Request $request) {
     $data = $request->only(['commentTask', 'commentDescription']);

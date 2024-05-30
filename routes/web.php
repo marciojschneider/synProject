@@ -28,6 +28,7 @@ Route::get('/task/create', [TaskController::class, 'taskCreate'])->name('sup-tas
 Route::post('/task/create', [TaskController::class, 'taskCreateAction']);
 Route::get('/task/update/{id}', [TaskController::class, 'taskUpdate'])->name('sup-task-update');
 Route::post('/task/update/{id}', [TaskController::class, 'taskUpdateAction']);
+Route::post('/task/delete/{id}', [TaskController::class, 'taskDelete'])->name('sup-task-delete');
 //               → Comments
 Route::post('/task/comment', [TaskController::class, 'commentAction'])->name('sup-comment');
 Route::post('/task/comment/update', [TaskController::class, 'commentUpdate'])->name('sup-comment-update');
