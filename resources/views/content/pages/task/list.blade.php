@@ -55,14 +55,16 @@
                 {{-- TODO Arrumar a cor dos botões para que fique padrão conforme o estilo da pagina. --}}
                 <div class="d-flex flex-row align-items-center">
                   @if ($task->situation != 4)
-                    <a class="btn btn-outline-primary d-flex h-25 align-content-center p-3" data-bs-toggle="offcanvas"
-                      data-bs-target="#offcanvasAddComment" onclick="newModal({{ $task->id }})" href="#"> <i
-                        class="bx bx-plus me-1"></i>
-                    </a>
-                    <a class="btn btn-outline-warning d-flex h-25 align-content-center p-3" style="margin-left: 5px"
-                      href="{{ route('sup-task-update', $task->id) }}">
-                      <i class="bx bx-edit-alt me-1"></i>
-                    </a>
+                    <div class="d-flex flex-row p-1">
+                      <a class="btn btn-outline-primary d-flex h-25 align-content-center p-3" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasAddComment" onclick="newModal({{ $task->id }})" href="#"> <i
+                          class="bx bx-plus me-1"></i>
+                      </a>
+                      <a class="btn btn-outline-warning d-flex h-25 align-content-center p-3" style="margin-left: 5px"
+                        href="{{ route('sup-task-update', $task->id) }}">
+                        <i class="bx bx-edit-alt me-1"></i>
+                      </a>
+                    </div>
                   @endif
                   <button type="button" class=" bg-lighter rounded-0 accordion-button collapsed"
                     data-bs-toggle="collapse" data-bs-target="#chapter{{ $task->id }}" aria-expanded="false"

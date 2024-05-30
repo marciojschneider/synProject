@@ -37,30 +37,36 @@
             @foreach ($tasks as $task)
               <div class="accordion-item shadow-none border mb-0">
                 <div class="accordion-header" id="headingOne">
-                  <button type="button" class="bg-lighter rounded-0 accordion-button collapsed" data-bs-toggle="collapse"
-                    data-bs-target="#chapter{{ $task->id }}" aria-expanded="false"
-                    aria-controls="chapter{{ $task->id }}">
-                    <div class="d-flex flex-row">
-                      @if ($task->situation != 4)
-                        <a class="add-new btn btn-outline-primary" data-bs-toggle="offcanvas"
-                          data-bs-target="#offcanvasAddRoadmap" onclick="newModal({{ $task->id }})" href="#"> <i
-                            class="bx bx-plus sm-me-1"></i>
+                  {{-- TODO Arrumar a cor dos botões para que fique padrão conforme o estilo da pagina. --}}
+                  <div class="d-flex flex-row align-items-center">
+                    @if ($task->situation != 4)
+                      <div class="p-1">
+                        <a class="add-new btn btn-outline-primary h-25 align-content-center p-3"
+                          data-bs-toggle="offcanvas" data-bs-target="#offcanvasAddRoadmap"
+                          onclick="newModal({{ $task->id }})" href="#"> <i class="bx bx-plus sm-me-1"></i>
                         </a>
-                      @endif
-
-                      <div class="d-flex flex-column" style="margin-left: 5px;">
-                        <span class="h5 mb-1">{{ $task->title }}
-                          <div class="badge bg-{{ $task->cSituation }} rounded-pill ms-auto" bis_skin_checked="1">
-                            {{ $task->nSituation }}
-                          </div>
-                        </span>
-                        <span class="fw-normal">
-                          Inicio: {{ date('d/m/Y', strtotime($task->initial_dt)) }} |
-                          Expectativa: {{ date('d/m/Y', strtotime($task->expected_dt)) }}
-                        </span>
                       </div>
-                    </div>
-                  </button>
+                    @endif
+
+                    <button type="button" class="bg-lighter rounded-0 accordion-button collapsed"
+                      data-bs-toggle="collapse" data-bs-target="#chapter{{ $task->id }}" aria-expanded="false"
+                      aria-controls="chapter{{ $task->id }}">
+                      <div class="d-flex flex-row">
+
+                        <div class="d-flex flex-column" style="margin-left: 5px;">
+                          <span class="h5 mb-1">{{ $task->title }}
+                            <div class="badge bg-{{ $task->cSituation }} rounded-pill ms-auto" bis_skin_checked="1">
+                              {{ $task->nSituation }}
+                            </div>
+                          </span>
+                          <span class="fw-normal">
+                            Inicio: {{ date('d/m/Y', strtotime($task->initial_dt)) }} |
+                            Expectativa: {{ date('d/m/Y', strtotime($task->expected_dt)) }}
+                          </span>
+                        </div>
+                      </div>
+                    </button>
+                  </div>
                 </div>
                 <div id="chapter{{ $task->id }}" class="accordion-collapse collapse" data-bs-parent="#courseContent">
                   @foreach ($task->details as $detail)
