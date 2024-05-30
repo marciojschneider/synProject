@@ -17,7 +17,7 @@ return new class extends Migration {
       $table->integer('affiliate_id');
       $table->string('url');
       $table->string('client_id')->default(0); // 0 = Todos | ? = client_id
-      $table->string('permission');
+      // $table->string('permission');
       $table->integer('order');
       $table->timestamps();
     });

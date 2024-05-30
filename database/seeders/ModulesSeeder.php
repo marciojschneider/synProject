@@ -16,13 +16,6 @@ class ModulesSeeder extends Seeder {
         "updated_at" => "2024-05-23 17:28:38",
         "description" => "Módulo genérico p/ testes",
       ),
-      array(
-        "name" => "Teste",
-        "slug" => "",
-        "created_at" => "2024-05-29 18:11:19",
-        "updated_at" => "2024-05-29 18:11:19",
-        "description" => "a",
-      ),
     );
 
     Module::insert($modules);

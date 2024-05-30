@@ -67,7 +67,7 @@ class TaskController extends Controller {
     $task->module_id = $data['module'];
     $task->initial_dt = $data['solicitation'];
     $task->expected_dt = $data['expectation'];
-    $task->user_id = 0;
+    // $task->user_id = 0;
     $task->description = $data['description'];
     $task->situation = $data['situation'];
     $task->save();
