@@ -40,10 +40,10 @@
                   {{-- TODO Arrumar a cor dos botões para que fique padrão conforme o estilo da pagina. --}}
                   <div class="d-flex flex-row align-items-center">
                     @if ($task->situation != 4)
-                      <div class="p-1">
+                      <div class="bg-lighter" style="padding: 11.5 0 11.5 11.5">
                         <a class="add-new btn btn-outline-primary h-25 align-content-center p-3"
                           data-bs-toggle="offcanvas" data-bs-target="#offcanvasAddRoadmap"
-                          onclick="newModal({{ $task->id }})" href="#"> <i class="bx bx-plus sm-me-1"></i>
+                          onclick="newModal({{ $task->id }})" href="#"> <i class="bx bx-plus"></i>
                         </a>
                       </div>
                     @endif
@@ -89,11 +89,11 @@
                           </form>
                           <div class="d-flex flex-row-reverse col-sm-2">
                             <a class="btn btn-outline-danger m-1" onclick="removeModal({{ $detail->id }})"
-                              href="#"> <i class="bx bx-trash me-1"></i>
+                              href="#"> <i class="bx bx-trash"></i>
                             </a>
                             <a class="btn btn-outline-warning m-1" onclick="updateModal({{ $detail }})"
                               data-bs-toggle="offcanvas" data-bs-target="#offcanvasUpdateRoadmap" href="#"> <i
-                                class="bx bx-edit-alt me-1"></i>
+                                class="bx bx-edit-alt"></i>
                             </a>
                           </div>
                         @endif
