@@ -22,7 +22,9 @@ Route::get('/clients', [ClientController::class, 'index'])->name('sys-client');
 //       → Modules
 Route::get('/modules', [ModuleController::class, 'modules'])->name('sys-modules');
 Route::get('/module/create', [ModuleController::class, 'moduleCreate'])->name('sys-module-create');
-Route::post('/modules/create', [ModuleController::class, 'moduleCreateAction']);
+Route::post('/module/create', [ModuleController::class, 'moduleCreateAction']);
+Route::get('/module/update/{id}', [ModuleController::class, 'moduleUpdate'])->name('sys-module-update');
+Route::post('/module/update/{id}', [ModuleController::class, 'moduleUpdateAction']);
 
 //       → Modules
 Route::get('/profiles', [ProfileController::class, 'profiles'])->name('sys-profiles');
