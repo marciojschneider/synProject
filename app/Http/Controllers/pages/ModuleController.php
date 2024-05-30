@@ -38,23 +38,42 @@ class ModuleController extends Controller {
 
     $modulePermission->module_id = $module->id;
     $modulePermission->profile_id = $data['profile'];
-    $modulePermission->list = $data['listCheck'] == 'on' ? 1 : 0;
-    $modulePermission->create = $data['createCheck'] == 'on' ? 1 : 0;
-    $modulePermission->update = $data['updateCheck'] == 'on' ? 1 : 0;
-    $modulePermission->delete = $data['deleteCheck'] == 'on' ? 1 : 0;
+    $modulePermission->list = isset($data['listCheck']) ? 1 : 0;
+    $modulePermission->create = isset($data['createCheck']) ? 1 : 0;
+    $modulePermission->update = isset($data['updateCheck']) ? 1 : 0;
+    $modulePermission->delete = isset($data['deleteCheck']) ? 1 : 0;
     $modulePermission->save();
 
     return redirect()->route('sys-modules');
   }
 
   public function moduleUpdate(int $id) {
-    $data['module'] = Module::find($id);
+    $data['sidebars'] = Sidebar::where('icon', null)->get();
     $data['profiles'] = Profile::where('client_id', 1)->get();
+
+    $data['module'] = Module::find($id);
+    $permissions = ModulePermission::where('module_id', $data['module']->id)->get();
+    $data['permissions'] = $permissions[0];
 
     return view('content.pages.module.update', $data);
   }
 
   public function moduleUpdateAction(int $id, Request $request) {
-    dd($request);
+    $update = $request->only(['sidebar', 'profile', 'description', 'listCheck', 'createCheck', 'updateCheck', 'deleteCheck']);
+    $moduleUpdate = Module::find($id);
+    $getPermission = ModulePermission::where('module_id', $moduleUpdate->id)->get();
+    $modulePermissionUpdate = ModulePermission::find($getPermission[0]->id);
+
+    $moduleUpdate->description = $update['description'];
+    $moduleUpdate->save();
+
+    $modulePermissionUpdate->profile_id = $update['profile'];
+    $modulePermissionUpdate->list = isset($update['listCheck']) ? 1 : 0;
+    $modulePermissionUpdate->create = isset($update['createCheck']) ? 1 : 0;
+    $modulePermissionUpdate->update = isset($update['updateCheck']) ? 1 : 0;
+    $modulePermissionUpdate->delete = isset($update['deleteCheck']) ? 1 : 0;
+    $modulePermissionUpdate->save();
+
+    return redirect()->route('sys-modules');
   }
 }
