@@ -4,7 +4,7 @@
 
 @extends('layouts/layoutMaster')
 
-@section('title', 'Novo chamado')
+@section('title', 'Editar Cliente')
 
 @section('content')
   <div class="col-md">

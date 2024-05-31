@@ -2,11 +2,13 @@
 
 namespace App\Livewire;
 
-use App\Models\Module;
 use Livewire\Component;
 
 // Livewire adicionais
 use Livewire\WithPagination;
+
+// Models
+use App\Models\Module;
 
 class ModuleList extends Component {
   use WithPagination;

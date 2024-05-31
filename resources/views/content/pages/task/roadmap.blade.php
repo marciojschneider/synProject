@@ -73,7 +73,7 @@
                     <div class="accordion-body py-3 border-top">
                       <div class="d-flex">
                         {{-- <input class="form-check-input" type="checkbox" id="defaultCheck1" checked="" /> --}}
-                        <label for="defaultCheck1" class="form-check-label col-sm-10">
+                        <label for="defaultCheck1" class="form-check-label col-md-10">
                           <span class="mb-0 h6">Detalhamento: {{ $detail->description }}</span>
                           <span class="text-muted d-block">Commit: {{ $detail->commit_reference }}</span>
                           <span class="text-muted d-block">Inicio:
@@ -87,7 +87,7 @@
                             id="roadmapDelete{{ $detail->id }}" display="none">
                             @csrf
                           </form>
-                          <div class="d-flex flex-row-reverse col-sm-2">
+                          <div class="d-flex flex-row-reverse col-md-2">
                             <a class="btn btn-outline-danger m-1" onclick="removeModal({{ $detail->id }})"
                               href="#"> <i class="bx bx-trash"></i>
                             </a>

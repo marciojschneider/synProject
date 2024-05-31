@@ -2,11 +2,13 @@
 
 namespace App\Livewire;
 
-use App\Models\Module;
 use Livewire\Component;
 
-// Livewire
+// Livewire Adicionais
 use Livewire\WithPagination;
+
+// Models
+use App\Models\Profile;
 
 class ProfileList extends Component {
   use WithPagination;
@@ -25,12 +27,16 @@ class ProfileList extends Component {
   }
 
   public function render() {
-    $query = Module::query();
+    $query = Profile::query();
+
+    $query->join('clients', 'clients.id', '=', 'profiles.client_id');
 
     if ($this->searchText) {
       $query->where('name', 'like', '%' . $this->searchText . '%');
       $query->orWhere('description', 'like', '%' . $this->searchText . '%');
     }
+
+    $query->select('profiles.*', 'clients.name as cName')->get();
 
     $data['rows'] = $query->paginate($this->pPage);
 

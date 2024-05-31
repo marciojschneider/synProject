@@ -4,7 +4,7 @@
 
 @extends('layouts/layoutMaster')
 
-@section('title', 'Novo chamado')
+@section('title', 'Editar Módulo')
 
 @section('content')
   <div class="col-md">
@@ -18,7 +18,7 @@
           @csrf
 
           <div class="row mb-4">
-            <div class="col-sm-4">
+            <div class="col-md-4">
               <div class="col-md-12">
                 <label for="sidebar" class="form-label">Módulo</label>
                 <select id="sidebar" name="sidebar" class="form-select" disabled>
@@ -42,7 +42,7 @@
               </div>
             </div>
 
-            <div class="col-sm-8">
+            <div class="col-md-8">
               <label for="description" class="form-label">Descrição</label>
               <textarea class="form-control" placeholder="Descreva o que precisa ser feito no chamado em questão." id="description"
                 name="description" maxlength="250" rows="4"> {{ $module->description }} </textarea>
