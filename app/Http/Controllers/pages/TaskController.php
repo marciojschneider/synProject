@@ -13,45 +13,7 @@ use App\Models\TaskDetail;
 class TaskController extends Controller {
   // Tasks
   public function tasks() {
-    $tasks = Task::join('sidebars', 'sidebars.id', '=', 'tasks.sidebar_id')
-      ->orderBy('situation', 'ASC')
-      ->orderBy('created_at', 'DESC')
-      ->select('tasks.*', 'sidebars.name as sName')
-      ->get();
-    $data['unapproveds'] = Task::orderBy('created_at', 'DESC')->where('situation', '!=', 4)->get();
-
-    foreach ($tasks as $kTask => $vTask) {
-      $data['tasks'][] = $vTask;
-
-      switch ($vTask->situation) {
-        case '1':
-          $data['tasks'][$kTask]['cSituation'] = 'danger';
-          $data['tasks'][$kTask]['nSituation'] = 'Solicitado';
-          break;
-
-        case '2':
-          $data['tasks'][$kTask]['cSituation'] = 'success';
-          $data['tasks'][$kTask]['nSituation'] = 'Em desenvolvimento';
-          break;
-
-        case '3':
-          $data['tasks'][$kTask]['cSituation'] = 'warning';
-          $data['tasks'][$kTask]['nSituation'] = 'Pendente';
-          break;
-
-        case '4':
-          $data['tasks'][$kTask]['cSituation'] = 'info';
-          $data['tasks'][$kTask]['nSituation'] = 'Aprovado';
-          break;
-
-        default:
-          $data['tasks'][$kTask]['cSituation'] = 'secondary';
-          $data['tasks'][$kTask]['nSituation'] = 'Inativo';
-          break;
-      }
-
-      $data['tasks'][$kTask]['details'] = TaskDetail::where('task_id', $vTask->id)->where('type', 2)->where('situation', 1)->orderBy('created_at', 'DESC')->get();
-    }
+    $data['unapproveds'] = Task::orderBy('created_at', 'DESC')->where('situation', '<', 4)->get();
 
     return view('content.pages.task.list', $data);
   }
@@ -87,11 +49,11 @@ class TaskController extends Controller {
   }
 
   public function taskUpdateAction(int $id, Request $request) {
-    $update = $request->only(['title', 'sidebar', 'situation', 'solicitation', 'expectation', 'description']);
+    $update = $request->only(['title', 'situation', 'solicitation', 'expectation', 'description']);
     $taskUpdate = Task::find($id);
 
     $taskUpdate->title = $update['title'];
-    $taskUpdate->sidebar_id = $update['sidebar'];
+    // $taskUpdate->sidebar_id = $update['sidebar']; Disabled select (Just to view)!
     $taskUpdate->expected_dt = $update['expectation'];
     $taskUpdate->description = $update['description'];
     $taskUpdate->situation = $update['situation'];
@@ -140,45 +102,7 @@ class TaskController extends Controller {
 
   //         → Roadmap
   public function roadmap() {
-    $tasks = Task::join('sidebars', 'sidebars.id', '=', 'tasks.sidebar_id')
-      ->orderBy('situation', 'ASC')
-      ->orderBy('created_at', 'DESC')
-      ->select('tasks.*', 'sidebars.name as sName')
-      ->get();
-    $data['unapproveds'] = Task::orderBy('created_at', 'DESC')->where('situation', '!=', 4)->get();
-
-    foreach ($tasks as $kTask => $vTask) {
-      $data['tasks'][] = $vTask;
-
-      switch ($vTask->situation) {
-        case '1':
-          $data['tasks'][$kTask]['cSituation'] = 'danger';
-          $data['tasks'][$kTask]['nSituation'] = 'Solicitado';
-          break;
-
-        case '2':
-          $data['tasks'][$kTask]['cSituation'] = 'success';
-          $data['tasks'][$kTask]['nSituation'] = 'Em desenvolvimento';
-          break;
-
-        case '3':
-          $data['tasks'][$kTask]['cSituation'] = 'warning';
-          $data['tasks'][$kTask]['nSituation'] = 'Pendente';
-          break;
-
-        case '4':
-          $data['tasks'][$kTask]['cSituation'] = 'info';
-          $data['tasks'][$kTask]['nSituation'] = 'Aprovado';
-          break;
-
-        default:
-          $data['tasks'][$kTask]['cSituation'] = 'secondary';
-          $data['tasks'][$kTask]['nSituation'] = 'Inativo';
-          break;
-      }
-
-      $data['tasks'][$kTask]['details'] = TaskDetail::where('task_id', $vTask->id)->where('type', 1)->where('situation', 1)->orderBy('created_at', 'DESC')->get();
-    }
+    $data['unapproveds'] = Task::orderBy('created_at', 'DESC')->where('situation', '<', 4)->get();
 
     return view('content.pages.task.roadmap', $data);
   }
