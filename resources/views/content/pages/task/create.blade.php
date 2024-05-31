@@ -23,10 +23,10 @@
             </div>
 
             <div class="col-md-2">
-              <label for="module" class="form-label">Módulo</label>
-              <select id="module" name="module" class="form-select">
-                @foreach ($modules as $module)
-                  <option value="{{ $module->id }}">{{ $module->name }}</option>
+              <label for="sidebar" class="form-label">Módulo</label>
+              <select id="sidebar" name="sidebar" class="form-select">
+                @foreach ($sidebars as $sidebar)
+                  <option value="{{ $sidebar->id }}">{{ $sidebar->name }}</option>
                 @endforeach
               </select>
             </div>

@@ -41,11 +41,12 @@
             </div>
 
             <div class="col-md-2">
-              <label for="module" class="form-label">Módulo</label>
-              <select id="module" name="module" class="form-select">
-                @foreach ($modules as $module)
-                  <option value="{{ $module->id }}" {{ str_contains($task->module_id, $module->id) ? 'selected' : '' }}>
-                    {{ $module->name }}</option>
+              <label for="sidebar" class="form-label">Módulo</label>
+              <select id="sidebar" name="sidebar" class="form-select" disabled>
+                @foreach ($sidebars as $sidebar)
+                  <option value="{{ $sidebar->id }}"
+                    {{ str_contains($task->sidebar_id, $sidebar->id) ? 'selected' : '' }}>
+                    {{ $sidebar->name }}</option>
                 @endforeach
               </select>
             </div>
