@@ -9,12 +9,12 @@
 @section('content')
   <div class="col-md">
     <h4 class="mb-4">
-      <span class="text-muted fw-light">Perfil /</span> Cadastrar
+      <span class="text-muted fw-light">Perfis /</span> Cadastrar
     </h4>
     <div class="card mb-4">
       {{-- <h5 class="card-header">Novo chamado</h5> --}}
       <div class="card-body">
-        <form method="POST" action="{{ route('sys-module-create') }}">
+        <form method="POST" action="{{ route('sys-profile-create') }}">
           @csrf
 
           <div class="row mb-4">
@@ -42,7 +42,7 @@
           </div>
 
           <button type="submit" class="btn btn-primary">Salvar</button>
-          <a href="{{ route('sys-modules') }}" class="btn btn-secondary">Voltar</a>
+          <a href="{{ route('sys-profiles') }}" class="btn btn-secondary">Voltar</a>
         </form>
       </div>
     </div>
