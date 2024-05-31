@@ -4,7 +4,7 @@
 
 @extends('layouts/layoutMaster')
 
-@section('title', 'Novo chamado')
+@section('title', 'Editar chamado')
 
 {{-- Verificar estilizações necessárias para o funcionamento da pagina --}}
 @section('vendor-style')

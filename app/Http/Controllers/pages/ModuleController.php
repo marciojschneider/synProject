@@ -16,7 +16,8 @@ class ModuleController extends Controller {
 
   public function moduleCreate() {
     $data['sidebars'] = Sidebar::where('icon', null)->get();
-    $data['profiles'] = Profile::where('client_id', 1)->get();
+    $data['profiles'] = Profile::all();
+    // $data['profiles'] = Profile::where('client_id', 1)->get();
 
     return view('content.pages.module.create', $data);
   }
