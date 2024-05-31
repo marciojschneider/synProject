@@ -23,7 +23,7 @@
 
         {{-- Botão de novo usuário --}}
         <div class="dt-buttons" bis_skin_checked="1">
-          <a class="dt-button add-new btn btn-primary" href="{{ route('sys-module-create') }}"><span> <i
+          <a class="dt-button add-new btn btn-primary" href="{{ route('sys-permission-create') }}"><span> <i
                 class="bx bx-plus me-0 me-sm-1"></i><span class="d-none d-sm-inline-block">Novo</span>
             </span>
           </a>
@@ -36,17 +36,17 @@
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th>Nome</th>
+            <th>Módulo</th>
+            <th>Perfil</th>
             <th>Descrição</th>
-            {{-- <th>Users</th> --}}
-            {{-- <th>Status</th> --}}
             <th>Ações</th>
           </tr>
         </thead>
         <tbody class="table-border-bottom-0">
           @foreach ($rows as $row)
             <tr>
-              <td>{{ $row->name }}</td>
+              <td>{{ $row->sName }}</td>
+              <td>{{ $row->pName }}</td>
               <td>{{ $row->description }}</td>
               {{-- <td><span
                   class="badge {{ $row->situation == 1 ? 'bg-label-primary' : 'bg-label-warning' }} me-1">{{ $row->situation == 1 ? 'Ativo' : 'Inativo' }}</span>
@@ -56,11 +56,11 @@
                   <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i
                       class="bx bx-dots-vertical-rounded"></i></button>
                   <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{{ route('sys-module-update', $row->id) }}"><i
+                    <a class="dropdown-item" href="{{ route('sys-permission-update', $row->id) }}"><i
                         class="bx bx-edit-alt me-1"></i> Editar</a>
 
-                    <form method="POST" action="{{ route('sys-module-delete', $row->id) }}"
-                      id="moduleDelete{{ $row->id }}" display="none">
+                    <form method="POST" action="{{ route('sys-permission-delete', $row->id) }}"
+                      id="permissionDelete{{ $row->id }}" display="none">
                       @csrf
                     </form>
                     <button type="submit" class="dropdown-item" onclick="removeModal({{ $row->id }})"><i
@@ -108,6 +108,6 @@
   }
 
   function sendDelete(id) {
-    document.getElementById('moduleDelete' + id).submit();
+    document.getElementById('permissionDelete' + id).submit();
   }
 </script>

@@ -9,7 +9,7 @@ use App\Http\Controllers\pages\HomePage;
 use App\Http\Controllers\pages\ProfileController;
 use App\Http\Controllers\pages\UserController;
 use App\Http\Controllers\pages\ClientController;
-use App\Http\Controllers\pages\ModuleController;
+use App\Http\Controllers\pages\ProfillePermissionController;
 
 // Main Page Route
 Route::get('/', [HomePage::class, 'index'])->name('homepage');
@@ -25,12 +25,12 @@ Route::get('/client/update/{id}', [ClientController::class, 'clientUpdate'])->na
 Route::post('/client/update/{id}', [ClientController::class, 'clientUpdateAction']);
 Route::post('/client/delete/{id}', [ClientController::class, 'clientDelete'])->name('sys-client-delete');
 //       → Modules
-Route::get('/modules', [ModuleController::class, 'modules'])->name('sys-modules');
-Route::get('/module/create', [ModuleController::class, 'moduleCreate'])->name('sys-module-create');
-Route::post('/module/create', [ModuleController::class, 'moduleCreateAction']);
-Route::get('/module/update/{id}', [ModuleController::class, 'moduleUpdate'])->name('sys-module-update');
-Route::post('/module/update/{id}', [ModuleController::class, 'moduleUpdateAction']);
-Route::post('/module/delete/{id}', [ModuleController::class, 'moduleDelete'])->name('sys-module-delete');
+Route::get('/profile/permissions', [ProfillePermissionController::class, 'profilePermissions'])->name('sys-permissions');
+Route::get('/profile/permission/create', [ProfillePermissionController::class, 'profilePermissionsCreate'])->name('sys-permission-create');
+Route::post('/profile/permission/create', [ProfillePermissionController::class, 'profilePermissionsCreateAction']);
+Route::get('/profile/permission/update/{id}', [ProfillePermissionController::class, 'profilePermissionsUpdate'])->name('sys-permission-update');
+Route::post('/profile/permission/update/{id}', [ProfillePermissionController::class, 'profilePermissionsUpdateAction']);
+Route::post('/profile/permission/delete/{id}', [ProfillePermissionController::class, 'profilePermissionsDelete'])->name('sys-permission-delete');
 //       → Profiles
 Route::get('/profiles', [ProfileController::class, 'profiles'])->name('sys-profiles');
 Route::get('/profile/create', [ProfileController::class, 'profileCreate'])->name('sys-profile-create');

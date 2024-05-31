@@ -49,74 +49,76 @@
       <div class="col-lg-12">
         <div class="accordion stick-top accordion-bordered" id="courseContent">
           {{-- Inicio do item --}}
-          @foreach ($tasks as $task)
-            <div class="accordion-item shadow-none border mb-0">
-              <div class="accordion-header" id="headingOne">
-                {{-- TODO Arrumar a cor dos botões para que fique padrão conforme o estilo da pagina. --}}
-                <div class="d-flex flex-row align-items-center">
-                  @if ($task->situation != 4)
-                    <div class="d-flex flex-row bg-lighter" style="padding: 11.5 0 11.5 11.5">
-                      <a class="btn btn-outline-primary d-flex h-25 align-content-center p-3" data-bs-toggle="offcanvas"
-                        data-bs-target="#offcanvasAddComment" onclick="newModal({{ $task->id }})" href="#"> <i
-                          class="bx bx-plus"></i>
-                      </a>
-                      <a class="btn btn-outline-warning d-flex h-25 align-content-center p-3" style="margin-left: 5px"
-                        href="{{ route('sup-task-update', $task->id) }}">
-                        <i class="bx bx-edit-alt"></i>
-                      </a>
-                    </div>
-                  @endif
-                  <button type="button" class=" bg-lighter rounded-0 accordion-button collapsed"
-                    data-bs-toggle="collapse" data-bs-target="#chapter{{ $task->id }}" aria-expanded="false"
-                    aria-controls="chapter{{ $task->id }}">
-                    <div class="d-flex flex-row">
+          @if (isset($tasks))
+            @foreach ($tasks as $task)
+              <div class="accordion-item shadow-none border mb-0">
+                <div class="accordion-header" id="headingOne">
+                  {{-- TODO Arrumar a cor dos botões para que fique padrão conforme o estilo da pagina. --}}
+                  <div class="d-flex flex-row align-items-center">
+                    @if ($task->situation != 4)
+                      <div class="d-flex flex-row bg-lighter" style="padding: 11.5 0 11.5 11.5">
+                        <a class="btn btn-outline-primary d-flex h-25 align-content-center p-3" data-bs-toggle="offcanvas"
+                          data-bs-target="#offcanvasAddComment" onclick="newModal({{ $task->id }})" href="#"> <i
+                            class="bx bx-plus"></i>
+                        </a>
+                        <a class="btn btn-outline-warning d-flex h-25 align-content-center p-3" style="margin-left: 5px"
+                          href="{{ route('sup-task-update', $task->id) }}">
+                          <i class="bx bx-edit-alt"></i>
+                        </a>
+                      </div>
+                    @endif
+                    <button type="button" class=" bg-lighter rounded-0 accordion-button collapsed"
+                      data-bs-toggle="collapse" data-bs-target="#chapter{{ $task->id }}" aria-expanded="false"
+                      aria-controls="chapter{{ $task->id }}">
+                      <div class="d-flex flex-row">
 
-                      <div class="d-flex flex-column" style="margin-left: 5px;">
-                        <span class="h5 mb-1">{{ $task->title }}
-                          <div class="badge bg-{{ $task->cSituation }} rounded-pill ms-auto" bis_skin_checked="1">
-                            {{ $task->nSituation }}
+                        <div class="d-flex flex-column" style="margin-left: 5px;">
+                          <span class="h5 mb-1">{{ $task->title }}
+                            <div class="badge bg-{{ $task->cSituation }} rounded-pill ms-auto" bis_skin_checked="1">
+                              {{ $task->nSituation }}
+                            </div>
+                          </span>
+                          <span class="fw-normal">
+                            Inicio: {{ date('d/m/Y', strtotime($task->initial_dt)) }} |
+                            Expectativa: {{ date('d/m/Y', strtotime($task->expected_dt)) }}
+                          </span>
+                        </div>
+                      </div>
+                    </button>
+                  </div>
+                </div>
+                <div id="chapter{{ $task->id }}" class="accordion-collapse collapse" data-bs-parent="#courseContent">
+                  @foreach ($task->details as $detail)
+                    <div class="accordion-body py-3 border-top">
+                      <div class="d-flex">
+                        {{-- <input class="form-check-input" type="checkbox" id="defaultCheck1" checked="" /> --}}
+                        <label for="defaultCheck1" class="form-check-label col-md-10">
+                          <span class="mb-0 h6">Detalhamento:</span>
+                          <span class="text-muted d-block"> {{ $detail->description }}</span>
+                        </label>
+                        @if ($task->situation != 4)
+                          {{-- Botões de ação --}}
+                          <form method="POST" action="{{ route('sup-comment-delete', $detail->id) }}"
+                            id="commentDelete{{ $detail->id }}" display="none">
+                            @csrf
+                          </form>
+                          <div class="d-flex flex-row-reverse col-md-2">
+                            <a class="btn btn-outline-danger m-1" onclick="removeModal({{ $detail->id }})"
+                              href="#"> <i class="bx bx-trash"></i>
+                            </a>
+                            <a class="btn btn-outline-warning m-1" onclick="updateModal({{ $detail }})"
+                              data-bs-toggle="offcanvas" data-bs-target="#offcanvasUpdateComment" href="#"> <i
+                                class="bx bx-edit-alt"></i>
+                            </a>
                           </div>
-                        </span>
-                        <span class="fw-normal">
-                          Inicio: {{ date('d/m/Y', strtotime($task->initial_dt)) }} |
-                          Expectativa: {{ date('d/m/Y', strtotime($task->expected_dt)) }}
-                        </span>
+                        @endif
                       </div>
                     </div>
-                  </button>
+                  @endforeach
                 </div>
               </div>
-              <div id="chapter{{ $task->id }}" class="accordion-collapse collapse" data-bs-parent="#courseContent">
-                @foreach ($task->details as $detail)
-                  <div class="accordion-body py-3 border-top">
-                    <div class="d-flex">
-                      {{-- <input class="form-check-input" type="checkbox" id="defaultCheck1" checked="" /> --}}
-                      <label for="defaultCheck1" class="form-check-label col-md-10">
-                        <span class="mb-0 h6">Detalhamento:</span>
-                        <span class="text-muted d-block"> {{ $detail->description }}</span>
-                      </label>
-                      @if ($task->situation != 4)
-                        {{-- Botões de ação --}}
-                        <form method="POST" action="{{ route('sup-comment-delete', $detail->id) }}"
-                          id="commentDelete{{ $detail->id }}" display="none">
-                          @csrf
-                        </form>
-                        <div class="d-flex flex-row-reverse col-md-2">
-                          <a class="btn btn-outline-danger m-1" onclick="removeModal({{ $detail->id }})"
-                            href="#"> <i class="bx bx-trash"></i>
-                          </a>
-                          <a class="btn btn-outline-warning m-1" onclick="updateModal({{ $detail }})"
-                            data-bs-toggle="offcanvas" data-bs-target="#offcanvasUpdateComment" href="#"> <i
-                              class="bx bx-edit-alt"></i>
-                          </a>
-                        </div>
-                      @endif
-                    </div>
-                  </div>
-                @endforeach
-              </div>
-            </div>
-          @endforeach
+            @endforeach
+          @endif
           {{-- Fim do item --}}
         </div>
       </div>
