@@ -8,9 +8,9 @@ use Livewire\Component;
 use Livewire\WithPagination;
 
 // Models
-use App\Models\Module;
+use App\Models\profilePermission;
 
-class ModuleList extends Component {
+class profilePermissionList extends Component {
   use WithPagination;
   protected $paginationTheme = 'bootstrap';
 
@@ -29,15 +29,20 @@ class ModuleList extends Component {
   }
 
   public function render() {
-    $query = Module::query();
+    $query = profilePermission::query();
+
+    $query->join('sidebars', 'sidebars.id', '=', 'profile_permissions.sidebar_id');
+    $query->join('profiles', 'profiles.id', '=', 'profile_permissions.profile_id');
 
     if ($this->searchText) {
       $query->where('name', 'like', '%' . $this->searchText . '%');
       $query->orWhere('description', 'like', '%' . $this->searchText . '%');
     }
 
+    $query->select('profile_permissions.*', 'sidebars.name as sName', 'profiles.name as pName')->get();
+
     $data['rows'] = $query->paginate($this->pPage);
 
-    return view('livewire.module-list', $data);
+    return view('livewire.profile-permission-list', $data);
   }
 }

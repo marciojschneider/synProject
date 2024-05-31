@@ -10,6 +10,5 @@ class DatabaseSeeder extends Seeder {
     $this->call(ClientsSeeder::class);
     $this->call(ProfilesSeeder::class);
     $this->call(SidebarsSeeder::class);
-    $this->call(ModulesSeeder::class);
   }
 }

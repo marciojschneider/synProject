@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 // Models
-use App\Models\Module;
+use App\Models\Sidebar;
 use App\Models\User;
 
 return new class extends Migration {
@@ -13,7 +13,7 @@ return new class extends Migration {
     Schema::create('tasks', function (Blueprint $table) {
       $table->id();
       $table->string('title');
-      $table->foreignIdFor(Module::class)->constrained()->onDelete('cascade');
+      $table->foreignIdFor(Sidebar::class)->constrained()->onDelete('cascade');
       $table->timestamp('initial_dt')->nullable();
       $table->timestamp('expected_dt')->nullable();
       // $table->foreignIdFor(User::class)->constrained()->onDelete('cascade');
