@@ -2,7 +2,7 @@
 <div class="card g-3 mt-1">
   <div class="row card-header" bis_skin_checked="1" style="align-items: center">
     <div class="col-md-2">
-      <h5>Chamados</h5>
+      <h5>Roadmap</h5>
     </div>
     <div class="col-md-10" bis_skin_checked="1">
       <div
@@ -69,19 +69,14 @@
                     {{-- TODO Arrumar a cor dos botões para que fique padrão conforme o estilo da pagina. --}}
                     <div class="d-flex flex-row align-items-center">
                       @if ($row->situation < 4)
-                        <div class="d-flex flex-row bg-lighter" style="padding: 11.5 0 11.5 11.5">
-                          <a class="btn btn-outline-primary d-flex h-25 align-content-center p-3"
-                            data-bs-toggle="offcanvas" data-bs-target="#offcanvasAddComment"
-                            onclick="newModal({{ $row->id }})" href="#">
-                            <i class="bx bx-plus"></i>
-                          </a>
-                          <a class="btn btn-outline-warning d-flex h-25 align-content-center p-3"
-                            style="margin-left: 5px" href="{{ route('sup-task-update', $row->id) }}">
-                            <i class="bx bx-edit-alt"></i>
+                        <div class="bg-lighter" style="padding: 11.5 0 11.5 11.5">
+                          <a class="add-new btn btn-outline-primary h-25 align-content-center p-3"
+                            data-bs-toggle="offcanvas" data-bs-target="#offcanvasAddRoadmap"
+                            onclick="newModal({{ $row->id }})" href="#"> <i class="bx bx-plus"></i>
                           </a>
                         </div>
                       @endif
-                      <button type="button" class=" bg-lighter rounded-0 accordion-button collapsed"
+                      <button type="button" class="bg-lighter rounded-0 accordion-button collapsed"
                         data-bs-toggle="collapse" data-bs-target="#chapter{{ $row->id }}" aria-expanded="false"
                         aria-controls="chapter{{ $row->id }}">
                         <div class="d-flex flex-row">
@@ -111,13 +106,17 @@
                         <div class="d-flex">
                           {{-- <input class="form-check-input" type="checkbox" id="defaultCheck1" checked="" /> --}}
                           <label for="defaultCheck1" class="form-check-label col-md-10">
-                            <span class="mb-0 h6">Detalhamento:</span>
-                            <span class="text-muted d-block"> {{ $detail->description }}</span>
+                            <span class="mb-0 h6">Detalhamento: {{ $detail->description }}</span>
+                            <span class="text-muted d-block">Commit: {{ $detail->commit_reference }}</span>
+                            <span class="text-muted d-block">Inicio:
+                              {{ date('d/m/Y H:i:s', strtotime($detail->initial_dt)) }}
+                              | Fim:
+                              {{ date('d/m/Y H:i:s', strtotime($detail->ending_dt)) }}</span>
                           </label>
                           @if ($row->situation < 4)
                             {{-- Botões de ação --}}
-                            <form method="POST" action="{{ route('sup-comment-delete', $detail->id) }}"
-                              id="commentDelete{{ $detail->id }}" display="none">
+                            <form method="POST" action="{{ route('sup-roadmap-delete', $detail->id) }}"
+                              id="roadmapDelete{{ $detail->id }}" display="none">
                               @csrf
                             </form>
                             <div class="d-flex flex-row-reverse col-md-2">
@@ -125,7 +124,7 @@
                                 href="#"> <i class="bx bx-trash"></i>
                               </a>
                               <a class="btn btn-outline-warning m-1" onclick="updateModal({{ $detail }})"
-                                data-bs-toggle="offcanvas" data-bs-target="#offcanvasUpdateComment" href="#">
+                                data-bs-toggle="offcanvas" data-bs-target="#offcanvasUpdateRoadmap" href="#">
                                 <i class="bx bx-edit-alt"></i>
                               </a>
                             </div>
