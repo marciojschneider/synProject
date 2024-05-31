@@ -17,7 +17,14 @@ Route::get('/', [HomePage::class, 'index'])->name('homepage');
 
 // Sistema
 Route::get('/users', [UserController::class, 'index'])->name('sys-user');
-Route::get('/clients', [ClientController::class, 'index'])->name('sys-client');
+
+//       → Clients
+Route::get('/clients', [ClientController::class, 'clients'])->name('sys-clients');
+Route::get('/client/create', [ClientController::class, 'clientCreate'])->name('sys-client-create');
+Route::post('/client/create', [ClientController::class, 'clientCreateAction']);
+Route::get('/client/update/{id}', [ClientController::class, 'clientUpdate'])->name('sys-client-update');
+Route::post('/client/update/{id}', [ClientController::class, 'clientUpdateAction']);
+Route::post('/client/delete/{id}', [ClientController::class, 'clientDelete'])->name('sys-client-delete');
 
 //       → Modules
 Route::get('/modules', [ModuleController::class, 'modules'])->name('sys-modules');

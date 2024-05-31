@@ -18,7 +18,7 @@
           @csrf
           <div class="row mb-4">
             <div class="col-md-4">
-              <label for="name" class="form-label">Título</label>
+              <label for="title" class="form-label">Título</label>
               <input type="text" class="form-control" id="title" name="title" maxlength="50" />
             </div>
 
