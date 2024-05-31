@@ -1,7 +1,7 @@
 <div class="card">
   <div class="row card-header" bis_skin_checked="1" style="align-items: center">
     <div class="col-md-2">
-      <h5>Módulos</h5>
+      <h5>Perfis</h5>
     </div>
     <div class="col-md-10" bis_skin_checked="1">
       <div
@@ -23,8 +23,8 @@
 
         {{-- Botão de novo usuário --}}
         <div class="dt-buttons" bis_skin_checked="1">
-          <a class="dt-button add-new btn btn-primary" href="{{ route('sys-module-create') }}"><span> <i
-                class="bx bx-plus me-0 me-sm-1"></i><span class="d-none d-sm-inline-block">Novo</span>
+          <a class="dt-button add-new btn btn-primary" href="{{ route('sys-profile-create') }}"><span> <i
+                class="bx bx-plus me-0 me-sm-1"></i> <span class="d-none d-sm-inline-block">Novo</span>
             </span>
           </a>
         </div>
@@ -37,9 +37,8 @@
         <thead>
           <tr>
             <th>Nome</th>
-            <th>Descrição</th>
-            {{-- <th>Users</th> --}}
-            {{-- <th>Status</th> --}}
+            <th>Cliente</th>
+            <th>Situação</th>
             <th>Ações</th>
           </tr>
         </thead>
@@ -47,10 +46,10 @@
           @foreach ($rows as $row)
             <tr>
               <td>{{ $row->name }}</td>
-              <td>{{ $row->description }}</td>
-              {{-- <td><span
+              <td>{{ $row->cName }}</td>
+              <td><span
                   class="badge {{ $row->situation == 1 ? 'bg-label-primary' : 'bg-label-warning' }} me-1">{{ $row->situation == 1 ? 'Ativo' : 'Inativo' }}</span>
-              </td> --}}
+              </td>
               <td>
                 <div class="dropdown">
                   <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i

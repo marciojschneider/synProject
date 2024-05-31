@@ -16,6 +16,7 @@ use App\Http\Controllers\pages\ModuleController;
 Route::get('/', [HomePage::class, 'index'])->name('homepage');
 
 // Sistema
+//       → Users
 Route::get('/users', [UserController::class, 'index'])->name('sys-user');
 
 //       → Clients
@@ -34,8 +35,13 @@ Route::get('/module/update/{id}', [ModuleController::class, 'moduleUpdate'])->na
 Route::post('/module/update/{id}', [ModuleController::class, 'moduleUpdateAction']);
 Route::post('/module/delete/{id}', [ModuleController::class, 'moduleDelete'])->name('sys-module-delete');
 
-//       → Modules
+//       → Profiles
 Route::get('/profiles', [ProfileController::class, 'profiles'])->name('sys-profiles');
+Route::get('/profile/create', [ProfileController::class, 'profileCreate'])->name('sys-profile-create');
+Route::post('/profile/create', [ProfileController::class, 'profileCreateAction']);
+Route::get('/profile/update/{id}', [ProfileController::class, 'profileUpdate'])->name('sys-profile-update');
+Route::post('/profile/update/{id}', [ProfileController::class, 'profileUpdateAction']);
+Route::post('/profile/delete/{id}', [ProfileController::class, 'profileDelete'])->name('sys-profile-delete');
 
 // Support
 //       → Tasks
