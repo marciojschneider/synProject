@@ -39,7 +39,7 @@
                 <div class="accordion-header" id="headingOne">
                   {{-- TODO Arrumar a cor dos botões para que fique padrão conforme o estilo da pagina. --}}
                   <div class="d-flex flex-row align-items-center">
-                    @if ($task->situation != 4)
+                    @if ($task->situation < 4)
                       <div class="bg-lighter" style="padding: 11.5 0 11.5 11.5">
                         <a class="add-new btn btn-outline-primary h-25 align-content-center p-3"
                           data-bs-toggle="offcanvas" data-bs-target="#offcanvasAddRoadmap"
@@ -55,6 +55,9 @@
 
                         <div class="d-flex flex-column" style="margin-left: 5px;">
                           <span class="h5 mb-1">{{ $task->title }}
+                            <div class="badge bg-secondary rounded-pill ms-auto" bis_skin_checked="1">
+                              {{ $task->sName }}
+                            </div>
                             <div class="badge bg-{{ $task->cSituation }} rounded-pill ms-auto" bis_skin_checked="1">
                               {{ $task->nSituation }}
                             </div>

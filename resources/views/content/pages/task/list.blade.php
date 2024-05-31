@@ -23,107 +23,7 @@
 @endsection
 
 @section('content')
-  <h4 class="mb-0">
-    Chamados
-  </h4>
-
-  <!-- Add -->
-  <div class="d-flex flex-wrap justify-content-between align-items-center">
-    <div class="d-flex flex-column justify-content-center">
-      <h4 class="mb-1 mt-3">Adicionar um chamado</h4>
-      <p class="text-muted">Os chamados serão feitos conforme a data da adesão definida no sistema.</p>
-    </div>
-    <div class="d-flex align-content-center flex-wrap gap-3">{{-- Botão de novo usuário --}}
-      <div class="dt-buttons" bis_skin_checked="1">
-        <a class="dt-button add-new btn btn-primary" href="{{ route('sup-task-create') }}"><span> <i
-              class="bx bx-plus me-0 me-sm-1"></i><span class="d-none d-sm-inline-block">Novo</span>
-          </span>
-        </a>
-      </div>
-    </div>
-  </div>
-
-  {{-- Listagem --}}
-  <div class="card g-3 mt-1">
-    <div class="card-body row g-3">
-      <div class="col-lg-12">
-        <div class="accordion stick-top accordion-bordered" id="courseContent">
-          {{-- Inicio do item --}}
-          @if (isset($tasks))
-            @foreach ($tasks as $task)
-              <div class="accordion-item shadow-none border mb-0">
-                <div class="accordion-header" id="headingOne">
-                  {{-- TODO Arrumar a cor dos botões para que fique padrão conforme o estilo da pagina. --}}
-                  <div class="d-flex flex-row align-items-center">
-                    @if ($task->situation != 4)
-                      <div class="d-flex flex-row bg-lighter" style="padding: 11.5 0 11.5 11.5">
-                        <a class="btn btn-outline-primary d-flex h-25 align-content-center p-3" data-bs-toggle="offcanvas"
-                          data-bs-target="#offcanvasAddComment" onclick="newModal({{ $task->id }})" href="#"> <i
-                            class="bx bx-plus"></i>
-                        </a>
-                        <a class="btn btn-outline-warning d-flex h-25 align-content-center p-3" style="margin-left: 5px"
-                          href="{{ route('sup-task-update', $task->id) }}">
-                          <i class="bx bx-edit-alt"></i>
-                        </a>
-                      </div>
-                    @endif
-                    <button type="button" class=" bg-lighter rounded-0 accordion-button collapsed"
-                      data-bs-toggle="collapse" data-bs-target="#chapter{{ $task->id }}" aria-expanded="false"
-                      aria-controls="chapter{{ $task->id }}">
-                      <div class="d-flex flex-row">
-
-                        <div class="d-flex flex-column" style="margin-left: 5px;">
-                          <span class="h5 mb-1">{{ $task->title }}
-                            <div class="badge bg-{{ $task->cSituation }} rounded-pill ms-auto" bis_skin_checked="1">
-                              {{ $task->nSituation }}
-                            </div>
-                          </span>
-                          <span class="fw-normal">
-                            Inicio: {{ date('d/m/Y', strtotime($task->initial_dt)) }} |
-                            Expectativa: {{ date('d/m/Y', strtotime($task->expected_dt)) }}
-                          </span>
-                        </div>
-                      </div>
-                    </button>
-                  </div>
-                </div>
-                <div id="chapter{{ $task->id }}" class="accordion-collapse collapse" data-bs-parent="#courseContent">
-                  @foreach ($task->details as $detail)
-                    <div class="accordion-body py-3 border-top">
-                      <div class="d-flex">
-                        {{-- <input class="form-check-input" type="checkbox" id="defaultCheck1" checked="" /> --}}
-                        <label for="defaultCheck1" class="form-check-label col-md-10">
-                          <span class="mb-0 h6">Detalhamento:</span>
-                          <span class="text-muted d-block"> {{ $detail->description }}</span>
-                        </label>
-                        @if ($task->situation != 4)
-                          {{-- Botões de ação --}}
-                          <form method="POST" action="{{ route('sup-comment-delete', $detail->id) }}"
-                            id="commentDelete{{ $detail->id }}" display="none">
-                            @csrf
-                          </form>
-                          <div class="d-flex flex-row-reverse col-md-2">
-                            <a class="btn btn-outline-danger m-1" onclick="removeModal({{ $detail->id }})"
-                              href="#"> <i class="bx bx-trash"></i>
-                            </a>
-                            <a class="btn btn-outline-warning m-1" onclick="updateModal({{ $detail }})"
-                              data-bs-toggle="offcanvas" data-bs-target="#offcanvasUpdateComment" href="#"> <i
-                                class="bx bx-edit-alt"></i>
-                            </a>
-                          </div>
-                        @endif
-                      </div>
-                    </div>
-                  @endforeach
-                </div>
-              </div>
-            @endforeach
-          @endif
-          {{-- Fim do item --}}
-        </div>
-      </div>
-    </div>
-  </div>
+  <livewire:task-list />
 
   <!-- Offcanvas to add new comment -->
   <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasAddComment" aria-labelledby="offcanvasAddCommentLabel">
@@ -161,8 +61,7 @@
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body mx-0 flex-grow-0">
-      <form class="update-report pt-0" id="updatecommentForm" method="POST"
-        action="{{ route('sup-comment-update') }}">
+      <form class="update-report pt-0" id="updatecommentForm" method="POST" action="{{ route('sup-comment-update') }}">
         @csrf
         <input type="hidden" id="update-comment-id" name="commentId" />
         <div class="mb-3">

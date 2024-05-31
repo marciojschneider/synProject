@@ -3,17 +3,21 @@
 namespace App\Http\Controllers\pages;
 
 use App\Http\Controllers\Controller;
-use App\Models\Module;
-use App\Models\TaskDetail;
 use Illuminate\Http\Request;
 
 // Models
 use App\Models\Task;
+use App\Models\Sidebar;
+use App\Models\TaskDetail;
 
 class TaskController extends Controller {
   // Tasks
   public function tasks() {
-    $tasks = Task::orderBy('created_at', 'DESC')->get();
+    $tasks = Task::join('sidebars', 'sidebars.id', '=', 'tasks.sidebar_id')
+      ->orderBy('situation', 'ASC')
+      ->orderBy('created_at', 'DESC')
+      ->select('tasks.*', 'sidebars.name as sName')
+      ->get();
     $data['unapproveds'] = Task::orderBy('created_at', 'DESC')->where('situation', '!=', 4)->get();
 
     foreach ($tasks as $kTask => $vTask) {
@@ -54,17 +58,17 @@ class TaskController extends Controller {
 
   public function taskCreate() {
     // $uriAdjust = $request->route(); Forma de pegar a rota atual.
-    $data['modules'] = Module::all();
+    $data['sidebars'] = Sidebar::where('icon', null)->get();
 
     return view('content.pages.task.create', $data);
   }
 
   public function taskCreateAction(Request $request) {
-    $data = $request->only(['title', 'module', 'situation', 'solicitation', 'expectation', 'description']);
+    $data = $request->only(['title', 'sidebar', 'situation', 'solicitation', 'expectation', 'description']);
 
     $task = new Task();
     $task->title = $data['title'];
-    $task->module_id = $data['module'];
+    $task->sidebar_id = $data['sidebar'];
     $task->initial_dt = $data['solicitation'];
     $task->expected_dt = $data['expectation'];
     // $task->user_id = 0;
@@ -76,18 +80,18 @@ class TaskController extends Controller {
   }
 
   public function taskUpdate(int $id) {
-    $data['modules'] = Module::all();
+    $data['sidebars'] = Sidebar::where('icon', null)->get();
     $data['task'] = Task::find($id);
 
     return view('content.pages.task.update', $data);
   }
 
   public function taskUpdateAction(int $id, Request $request) {
-    $update = $request->only(['title', 'module', 'situation', 'solicitation', 'expectation', 'description']);
+    $update = $request->only(['title', 'sidebar', 'situation', 'solicitation', 'expectation', 'description']);
     $taskUpdate = Task::find($id);
 
     $taskUpdate->title = $update['title'];
-    $taskUpdate->module_id = $update['module'];
+    $taskUpdate->sidebar_id = $update['sidebar'];
     $taskUpdate->expected_dt = $update['expectation'];
     $taskUpdate->description = $update['description'];
     $taskUpdate->situation = $update['situation'];
@@ -136,7 +140,11 @@ class TaskController extends Controller {
 
   //         → Roadmap
   public function roadmap() {
-    $tasks = Task::orderBy('created_at', 'DESC')->get();
+    $tasks = Task::join('sidebars', 'sidebars.id', '=', 'tasks.sidebar_id')
+      ->orderBy('situation', 'ASC')
+      ->orderBy('created_at', 'DESC')
+      ->select('tasks.*', 'sidebars.name as sName')
+      ->get();
     $data['unapproveds'] = Task::orderBy('created_at', 'DESC')->where('situation', '!=', 4)->get();
 
     foreach ($tasks as $kTask => $vTask) {
