@@ -29,7 +29,7 @@ class HarvestController extends Controller {
 
     $harvest->save();
 
-    return redirect()->route('harv-harvests');
+    return redirect()->route('structure-harvests');
   }
 
 }

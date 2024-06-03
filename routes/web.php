@@ -58,7 +58,14 @@ Route::post('/task/roadmap', [TaskController::class, 'roadmapAction']);
 Route::post('/task/roadmap/update', [TaskController::class, 'roadmapUpdate'])->name('sup-roadmap-update');
 Route::post('/task/roadmap/delete/{id}', [TaskController::class, 'roadmapDelete'])->name('sup-roadmap-delete');
 
-// Harvest (Safra)
-Route::get('/harvests', [HarvestController::class, 'harvests'])->name('harv-harvests');
-Route::get('/harvest/create', [HarvestController::class, 'harvestCreate'])->name('harv-harvest-create');
+// Structure
+//               → Harvest (Safra)
+Route::get('/harvests', [HarvestController::class, 'harvests'])->name('structure-harvests');
+Route::get('/harvest/create', [HarvestController::class, 'harvestCreate'])->name('structure-harvest-create');
 Route::post('/harvest/create', [HarvestController::class, 'harvestCreateAction']);
+//               → Organização
+//               → Cultura
+
+// Cultivo
+//               → Métodos
+//               → Hora Máquina
