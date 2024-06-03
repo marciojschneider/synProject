@@ -110,6 +110,28 @@ class SidebarsSeeder extends Seeder {
         "created_at" => "2024-05-27 16:27:17",
         "updated_at" => "2024-05-27 16:27:17",
       ),
+      array(
+        "name" => "Safra",
+        "icon" => "menu-icon bx bx-leaf",
+        "slug" => "harv",
+        "affiliate_id" => 0,
+        "url" => "",
+        "client_id" => "0",
+        "order" => 3,
+        "created_at" => "2024-06-03 11:39:09",
+        "updated_at" => "2024-06-03 11:39:09",
+      ),
+      array(
+        "name" => "Safra",
+        "icon" => NULL,
+        "slug" => "harvest",
+        "affiliate_id" => 10,
+        "url" => "/harvest",
+        "client_id" => "0",
+        "order" => 1,
+        "created_at" => "2024-06-03 11:42:15",
+        "updated_at" => "2024-06-03 11:42:15",
+      ),
     );
 
     Sidebar::insert($sidebars);
