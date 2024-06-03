@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\pages\ProcessController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\pages\HomePage;
@@ -79,3 +80,10 @@ Route::get('/cultive/method/update/{id}', [PlantingMethodController::class, 'pla
 Route::post('/cultive/method/update/{id}', [PlantingMethodController::class, 'plantingMethodUpdateAction']);
 Route::post('/cultive/method/delete/{id}', [PlantingMethodController::class, 'plantingMethodDelete'])->name('cultive-method-delete');
 //               → Hora Máquina
+//               → Processo Etapas
+Route::get('/cultive/processes', [ProcessController::class, 'processes'])->name('cultive-processes');
+Route::get('/cultive/process/create', [ProcessController::class, 'processCreate'])->name('cultive-process-create');
+Route::post('/cultive/process/create', [ProcessController::class, 'processCreateAction']);
+Route::get('/cultive/process/update/{id}', [ProcessController::class, 'processUpdate'])->name('cultive-process-update');
+Route::post('/cultive/process/update/{id}', [ProcessController::class, 'processUpdateAction']);
+Route::post('/cultive/process/delete/{id}', [ProcessController::class, 'processDelete'])->name('cultive-process-delete');
