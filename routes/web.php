@@ -59,4 +59,6 @@ Route::post('/task/roadmap/update', [TaskController::class, 'roadmapUpdate'])->n
 Route::post('/task/roadmap/delete/{id}', [TaskController::class, 'roadmapDelete'])->name('sup-roadmap-delete');
 
 // Harvest (Safra)
-Route::get('/harvest', [HarvestController::class, 'harvests'])->name('harv-harvests');
+Route::get('/harvests', [HarvestController::class, 'harvests'])->name('harv-harvests');
+Route::get('/harvest/create', [HarvestController::class, 'harvestCreate'])->name('harv-harvest-create');
+Route::post('/harvest/create', [HarvestController::class, 'harvestCreateAction']);
