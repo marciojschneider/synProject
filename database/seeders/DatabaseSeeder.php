@@ -11,5 +11,8 @@ class DatabaseSeeder extends Seeder {
     $this->call(ProfilesSeeder::class);
     $this->call(SidebarsSeeder::class);
     $this->call(HarvestSeeder::class);
+    $this->call(CulturesSeeder::class);
+    $this->call(PlantingMethodsSeeder::class);
+    $this->call(ProcessSeeder::class);
   }
 }
