@@ -18,7 +18,15 @@ class PlantingMethodController extends Controller {
   }
 
   public function plantingMethodCreateAction(Request $request) {
-    dd($request);
+    $data = $request->only(['name', 'code', 'situation']);
+
+    $plantingMethod = new PlantingMethod();
+    $plantingMethod->name = $data['name'];
+    $plantingMethod->code = $data['code'];
+    $plantingMethod->situation = $data['situation'];
+    $plantingMethod->save();
+
+    return redirect()->route('cultive-methods');
   }
 
   public function plantingMethodUpdate(int $id) {
@@ -27,11 +35,20 @@ class PlantingMethodController extends Controller {
     return view('content.pages.planting-method.update', $data);
   }
   public function plantingMethodUpdateAction(int $id, Request $request) {
-    dd($request);
+    $update = $request->only(['name', 'code', 'situation']);
+
+    $plantingMethodUpdate = PlantingMethod::find($id);
+    $plantingMethodUpdate->name = $update['name'];
+    $plantingMethodUpdate->code = $update['code'];
+    $plantingMethodUpdate->situation = $update['situation'];
+    $plantingMethodUpdate->save();
+
+    return redirect()->route('cultive-methods');
   }
 
   public function plantingMethodDelete(int $id) {
     PlantingMethod::where('id', $id)->delete();
-    return redirect('cultive-methods');
+
+    return redirect()->route('cultive-methods');
   }
 }
