@@ -28,6 +28,8 @@ class HarvestList extends Component {
   public function render() {
     $query = Harvest::query();
 
+    $query->orderBy('situation', 'DESC');
+
     $data['rows'] = $query->paginate($this->pPage);
 
     return view('livewire.harvest-list', $data);
