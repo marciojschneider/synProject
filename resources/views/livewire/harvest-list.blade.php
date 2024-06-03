@@ -59,9 +59,11 @@
                   <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i
                       class="bx bx-dots-vertical-rounded"></i></button>
                   <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#"><i class="bx bx-edit-alt me-1"></i> Editar</a>
+                    <a class="dropdown-item" href="{{ route('structure-harvest-update', $row->id) }}"><i
+                        class="bx bx-edit-alt me-1"></i> Editar</a>
 
-                    <form method="POST" action="#" id="profileDelete{{ $row->id }}" display="none">
+                    <form method="POST" action="{{ route('structure-harvest-delete', $row->id) }}"
+                      id="harvestDelete{{ $row->id }}" display="none">
                       @csrf
                     </form>
                     <button type="submit" class="dropdown-item" onclick="removeModal({{ $row->id }})"><i
@@ -109,6 +111,6 @@
   }
 
   function sendDelete(id) {
-    document.getElementById('profileDelete' + id).submit();
+    document.getElementById('harvestDelete' + id).submit();
   }
 </script>

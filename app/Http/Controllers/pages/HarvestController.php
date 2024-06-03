@@ -31,5 +31,30 @@ class HarvestController extends Controller {
 
     return redirect()->route('structure-harvests');
   }
+  public function harvestUpdate(int $id) {
+    $data['harvest'] = Harvest::find($id);
+    return view('content.pages.harvest.update', $data);
+  }
+
+  public function harvestUpdateAction(int $id, Request $request) {
+    $update = $request->only(['code', 'name', 'price_table', 'initial_dt', 'ending_dt', 'situation']);
+    $harvestUpdate = Harvest::find($id);
+
+    $harvestUpdate->code = $update['code'];
+    $harvestUpdate->name = $update['name'];
+    $harvestUpdate->price_table = $update['price_table'];
+    $harvestUpdate->initial_dt = $update['initial_dt'];
+    $harvestUpdate->ending_dt = $update['ending_dt'];
+    $harvestUpdate->situation = $update['situation'];
+
+    $harvestUpdate->save();
+
+    return redirect()->route('structure-harvests');
+  }
+
+  public function harvestDelete(int $id) {
+    Harvest::where('id', $id)->delete();
+    return redirect()->route('structure-harvests');
+  }
 
 }
