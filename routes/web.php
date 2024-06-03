@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\pages\TaskController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\pages\HomePage;
@@ -10,6 +9,8 @@ use App\Http\Controllers\pages\ProfileController;
 use App\Http\Controllers\pages\UserController;
 use App\Http\Controllers\pages\ClientController;
 use App\Http\Controllers\pages\ProfillePermissionController;
+use App\Http\Controllers\pages\TaskController;
+use App\Http\Controllers\pages\HarvestController;
 
 // Main Page Route
 Route::get('/', [HomePage::class, 'index'])->name('homepage');
@@ -56,3 +57,6 @@ Route::get('/task/roadmap', [TaskController::class, 'roadmap'])->name('sup-roadm
 Route::post('/task/roadmap', [TaskController::class, 'roadmapAction']);
 Route::post('/task/roadmap/update', [TaskController::class, 'roadmapUpdate'])->name('sup-roadmap-update');
 Route::post('/task/roadmap/delete/{id}', [TaskController::class, 'roadmapDelete'])->name('sup-roadmap-delete');
+
+// Harvest (Safra)
+Route::get('/harvest', [HarvestController::class, 'harvests'])->name('harv-harvests');
