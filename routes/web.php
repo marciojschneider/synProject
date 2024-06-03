@@ -11,6 +11,7 @@ use App\Http\Controllers\pages\ClientController;
 use App\Http\Controllers\pages\ProfillePermissionController;
 use App\Http\Controllers\pages\TaskController;
 use App\Http\Controllers\pages\HarvestController;
+use App\Http\Controllers\pages\PlantingMethodController;
 
 // Main Page Route
 Route::get('/', [HomePage::class, 'index'])->name('homepage');
@@ -68,4 +69,7 @@ Route::post('/harvest/create', [HarvestController::class, 'harvestCreateAction']
 
 // Cultivo
 //               → Métodos
+Route::get('/cultive/methods', [PlantingMethodController::class, 'plantingMethods'])->name('cultive-plantingmethods');
+Route::get('/cultive/method/create', [PlantingMethodController::class, 'plantingMethodsCreate'])->name('cultive-plantingmethods-create');
+Route::post('/cultive/method/create', [PlantingMethodController::class, 'plantingMethodsCreateAction']);
 //               → Hora Máquina
