@@ -44,6 +44,10 @@ class RoadmapList extends Component {
       $query->where('sidebar_id', $this->sidebar);
     }
 
+    if ($this->searchText) {
+      $query->where('title', 'like', '%' . $this->searchText . '%');
+    }
+
     if ($this->situation) {
       $query->where('situation', $this->situation);
     }
