@@ -64,6 +64,9 @@ Route::post('/task/roadmap/delete/{id}', [TaskController::class, 'roadmapDelete'
 Route::get('/harvests', [HarvestController::class, 'harvests'])->name('structure-harvests');
 Route::get('/harvest/create', [HarvestController::class, 'harvestCreate'])->name('structure-harvest-create');
 Route::post('/harvest/create', [HarvestController::class, 'harvestCreateAction']);
+Route::get('/harvest/update/{id}', [HarvestController::class, 'harvestUpdate'])->name('structure-harvest-update');
+Route::post('/harvest/update/{id}', [HarvestController::class, 'harvestUpdateAction']);
+Route::post('/harvest/delete/{id}', [HarvestController::class, 'harvestDelete'])->name('structure-harvest-delete');
 //               → Organização
 //               → Cultura
 
