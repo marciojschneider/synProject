@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\pages\CultureController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\pages\HomePage;
@@ -69,7 +70,12 @@ Route::post('/harvest/update/{id}', [HarvestController::class, 'harvestUpdateAct
 Route::post('/harvest/delete/{id}', [HarvestController::class, 'harvestDelete'])->name('structure-harvest-delete');
 //               → Organização
 //               → Cultura
-
+Route::get('/cultures', [CultureController::class, 'cultures'])->name('structure-cultures');
+Route::get('/culture/create', [CultureController::class, 'cultureCreate'])->name('structure-culture-create');
+Route::post('/culture/create', [CultureController::class, 'cultureCreateAction']);
+Route::get('/culture/update/{id}', [CultureController::class, 'cultureUpdate'])->name('structure-culture-update');
+Route::post('/culture/update/{id}', [CultureController::class, 'cultureUpdateAction']);
+Route::post('/culture/delete/{id}', [CultureController::class, 'cultureDelete'])->name('structure-culture-delete');
 // Cultivo
 //               → Métodos
 Route::get('/cultive/methods', [PlantingMethodController::class, 'plantingMethods'])->name('cultive-plantingmethods');
