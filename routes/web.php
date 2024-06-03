@@ -77,5 +77,5 @@ Route::get('/cultive/method/create', [PlantingMethodController::class, 'planting
 Route::post('/cultive/method/create', [PlantingMethodController::class, 'plantingMethodCreateAction']);
 Route::get('/cultive/method/update/{id}', [PlantingMethodController::class, 'plantingMethodUpdate'])->name('cultive-method-update');
 Route::post('/cultive/method/update/{id}', [PlantingMethodController::class, 'plantingMethodUpdateAction']);
-Route::post('/cultive/method/delete/{id}', [PlantingMethodController::class, 'plantingMethodUpdateAction'])->name('cultive-method-delete');
+Route::post('/cultive/method/delete/{id}', [PlantingMethodController::class, 'plantingMethodDelete'])->name('cultive-method-delete');
 //               → Hora Máquina
