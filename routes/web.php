@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\pages\CultureController;
+use App\Http\Controllers\pages\ProcessController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\pages\HomePage;
@@ -78,7 +79,17 @@ Route::post('/culture/update/{id}', [CultureController::class, 'cultureUpdateAct
 Route::post('/culture/delete/{id}', [CultureController::class, 'cultureDelete'])->name('structure-culture-delete');
 // Cultivo
 //               → Métodos
-Route::get('/cultive/methods', [PlantingMethodController::class, 'plantingMethods'])->name('cultive-plantingmethods');
-Route::get('/cultive/method/create', [PlantingMethodController::class, 'plantingMethodsCreate'])->name('cultive-plantingmethods-create');
-Route::post('/cultive/method/create', [PlantingMethodController::class, 'plantingMethodsCreateAction']);
+Route::get('/cultive/methods', [PlantingMethodController::class, 'plantingMethods'])->name('cultive-methods');
+Route::get('/cultive/method/create', [PlantingMethodController::class, 'plantingMethodCreate'])->name('cultive-method-create');
+Route::post('/cultive/method/create', [PlantingMethodController::class, 'plantingMethodCreateAction']);
+Route::get('/cultive/method/update/{id}', [PlantingMethodController::class, 'plantingMethodUpdate'])->name('cultive-method-update');
+Route::post('/cultive/method/update/{id}', [PlantingMethodController::class, 'plantingMethodUpdateAction']);
+Route::post('/cultive/method/delete/{id}', [PlantingMethodController::class, 'plantingMethodDelete'])->name('cultive-method-delete');
 //               → Hora Máquina
+//               → Processo Etapas
+Route::get('/cultive/processes', [ProcessController::class, 'processes'])->name('cultive-processes');
+Route::get('/cultive/process/create', [ProcessController::class, 'processCreate'])->name('cultive-process-create');
+Route::post('/cultive/process/create', [ProcessController::class, 'processCreateAction']);
+Route::get('/cultive/process/update/{id}', [ProcessController::class, 'processUpdate'])->name('cultive-process-update');
+Route::post('/cultive/process/update/{id}', [ProcessController::class, 'processUpdateAction']);
+Route::post('/cultive/process/delete/{id}', [ProcessController::class, 'processDelete'])->name('cultive-process-delete');

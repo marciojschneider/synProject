@@ -8,9 +8,9 @@ use Livewire\Component;
 use Livewire\WithPagination;
 
 // Models
-use App\Models\PlantingMethod;
+use App\Models\Process;
 
-class PlantingMethodList extends Component {
+class ProcessesList extends Component {
   use WithPagination;
   protected $paginationTheme = 'bootstrap';
 
@@ -27,10 +27,10 @@ class PlantingMethodList extends Component {
   }
 
   public function render() {
-    $query = PlantingMethod::query();
+    $query = Process::query();
 
     $data['rows'] = $query->paginate($this->pPage);
 
-    return view('livewire.planting-method-list', $data);
+    return view('livewire.processes-list', $data);
   }
 }

@@ -4,7 +4,7 @@
 
 @extends('layouts/layoutMaster')
 
-@section('title', 'Safras')
+@section('title', 'Usuários')
 
 {{-- Verificar estilizações necessárias para o funcionamento da pagina --}}
 @section('vendor-style')
@@ -24,5 +24,5 @@
 @endsection
 
 @section('content')
-  <livewire:harvest-list />
+  <livewire:processes-list />
 @endsection

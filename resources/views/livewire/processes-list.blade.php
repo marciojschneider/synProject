@@ -1,7 +1,7 @@
 <div class="card">
   <div class="row card-header" bis_skin_checked="1" style="align-items: center">
     <div class="col-md-2">
-      <h5>Métodos de plantio</h5>
+      <h5>Processo/Etapas</h5>
     </div>
     <div class="col-md-10" bis_skin_checked="1">
       <div
@@ -23,7 +23,7 @@
 
         {{-- Botão de novo usuário --}}
         <div class="dt-buttons" bis_skin_checked="1">
-          <a class="dt-button add-new btn btn-primary" href="{{ route('cultive-method-create') }}"><span> <i
+          <a class="dt-button add-new btn btn-primary" href="{{ route('cultive-process-create') }}"><span> <i
                 class="bx bx-plus me-0 me-sm-1"></i> <span class="d-none d-sm-inline-block">Novo</span>
             </span>
           </a>
@@ -55,11 +55,11 @@
                   <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i
                       class="bx bx-dots-vertical-rounded"></i></button>
                   <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{{ route('cultive-method-update', $row->id) }}"><i
+                    <a class="dropdown-item" href="{{ route('cultive-process-update', $row->id) }}"><i
                         class="bx bx-edit-alt me-1"></i> Editar</a>
 
-                    <form method="POST" action="{{ route('cultive-method-delete', $row->id) }}"
-                      id="plantingMethodDelete{{ $row->id }}" display="none">
+                    <form method="POST" action="{{ route('cultive-process-delete', $row->id) }}"
+                      id="processesDelete{{ $row->id }}" display="none">
                       @csrf
                     </form>
                     <button type="submit" class="dropdown-item" onclick="removeModal({{ $row->id }})"><i
@@ -107,6 +107,6 @@
   }
 
   function sendDelete(id) {
-    document.getElementById('plantingMethodDelete' + id).submit();
+    document.getElementById('processesDelete' + id).submit();
   }
 </script>
