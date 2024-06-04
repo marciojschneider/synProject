@@ -23,7 +23,7 @@
 
         {{-- Botão de novo usuário --}}
         <div class="dt-buttons" bis_skin_checked="1">
-          <a class="dt-button add-new btn btn-primary" href="{{ route('structure-harvest-create') }}"><span> <i
+          <a class="dt-button add-new btn btn-primary" href="{{ route('harv-harvest-create') }}"><span> <i
                 class="bx bx-plus me-0 me-sm-1"></i> <span class="d-none d-sm-inline-block">Novo</span>
             </span>
           </a>
@@ -59,10 +59,10 @@
                   <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i
                       class="bx bx-dots-vertical-rounded"></i></button>
                   <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{{ route('structure-harvest-update', $row->id) }}"><i
+                    <a class="dropdown-item" href="{{ route('harv-harvest-update', $row->id) }}"><i
                         class="bx bx-edit-alt me-1"></i> Editar</a>
 
-                    <form method="POST" action="{{ route('structure-harvest-delete', $row->id) }}"
+                    <form method="POST" action="{{ route('harv-harvest-delete', $row->id) }}"
                       id="harvestDelete{{ $row->id }}" display="none">
                       @csrf
                     </form>

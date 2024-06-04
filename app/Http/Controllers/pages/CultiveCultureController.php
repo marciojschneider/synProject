@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Culture;
 
-class CultureController extends Controller {
+class CultiveCultureController extends Controller {
   public function cultures() {
     return view("content.pages.culture.list");
   }

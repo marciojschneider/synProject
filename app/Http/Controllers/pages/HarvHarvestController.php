@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 // Models
 use App\Models\Harvest;
 
-class HarvestController extends Controller {
+class HarvHarvestController extends Controller {
   public function harvests() {
     return view('content.pages.harvest.list');
   }
@@ -29,7 +29,7 @@ class HarvestController extends Controller {
 
     $harvest->save();
 
-    return redirect()->route('structure-harvests');
+    return redirect()->route('harv-harvests');
   }
   public function harvestUpdate(int $id) {
     $data['harvest'] = Harvest::find($id);
@@ -49,12 +49,12 @@ class HarvestController extends Controller {
 
     $harvestUpdate->save();
 
-    return redirect()->route('structure-harvests');
+    return redirect()->route('harv-harvests');
   }
 
   public function harvestDelete(int $id) {
     Harvest::where('id', $id)->delete();
-    return redirect()->route('structure-harvests');
+    return redirect()->route('harv-harvests');
   }
 
 }

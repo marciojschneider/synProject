@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\Client;
 use App\Models\Profile;
 
-class ProfileController extends Controller {
+class SysProfileController extends Controller {
   public function profiles() {
     return view('content.pages.profile.list');
   }

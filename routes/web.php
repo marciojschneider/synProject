@@ -1,102 +1,125 @@
 <?php
 
-use App\Http\Controllers\pages\CultureController;
-use App\Http\Controllers\pages\OrganizationController;
-use App\Http\Controllers\pages\ProcessController;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\pages\HomePage;
-
 // Controllers
-use App\Http\Controllers\pages\ProfileController;
-use App\Http\Controllers\pages\UserController;
-use App\Http\Controllers\pages\ClientController;
-use App\Http\Controllers\pages\ProfillePermissionController;
-use App\Http\Controllers\pages\TaskController;
-use App\Http\Controllers\pages\HarvestController;
-use App\Http\Controllers\pages\PlantingMethodController;
+use App\Http\Controllers\pages\HomePage;
+//       → System
+use App\Http\Controllers\pages\SysClientController;
+use App\Http\Controllers\pages\SysProfileController;
+use App\Http\Controllers\pages\SysProfillePermissionController;
+use App\Http\Controllers\pages\SysUserController;
+//       → Support
+use App\Http\Controllers\pages\SupTaskController;
+//       → Structure
+use App\Http\Controllers\pages\StructureFarmController;
+use App\Http\Controllers\pages\StructureOrganizationController;
+//       → Cultive
+use App\Http\Controllers\pages\CultiveCultureController;
+use App\Http\Controllers\pages\CultivePlantingMethodController;
+use App\Http\Controllers\pages\CultiveProcessController;
+//       → Harvest
+use App\Http\Controllers\pages\HarvConfigController;
+use App\Http\Controllers\pages\HarvHarvestController;
 
 // Main Page Route
 Route::get('/', [HomePage::class, 'index'])->name('homepage');
 
-// Sistema
+// System
 //       → Users
-Route::get('/users', [UserController::class, 'index'])->name('sys-user');
+Route::get('/sys/users', [SysUserController::class, 'index'])->name('sys-user');
 //       → Clients
-Route::get('/clients', [ClientController::class, 'clients'])->name('sys-clients');
-Route::get('/client/create', [ClientController::class, 'clientCreate'])->name('sys-client-create');
-Route::post('/client/create', [ClientController::class, 'clientCreateAction']);
-Route::get('/client/update/{id}', [ClientController::class, 'clientUpdate'])->name('sys-client-update');
-Route::post('/client/update/{id}', [ClientController::class, 'clientUpdateAction']);
-Route::post('/client/delete/{id}', [ClientController::class, 'clientDelete'])->name('sys-client-delete');
-//       → Modules
-Route::get('/profile/permissions', [ProfillePermissionController::class, 'profilePermissions'])->name('sys-permissions');
-Route::get('/profile/permission/create', [ProfillePermissionController::class, 'profilePermissionsCreate'])->name('sys-permission-create');
-Route::post('/profile/permission/create', [ProfillePermissionController::class, 'profilePermissionsCreateAction']);
-Route::get('/profile/permission/update/{id}', [ProfillePermissionController::class, 'profilePermissionsUpdate'])->name('sys-permission-update');
-Route::post('/profile/permission/update/{id}', [ProfillePermissionController::class, 'profilePermissionsUpdateAction']);
-Route::post('/profile/permission/delete/{id}', [ProfillePermissionController::class, 'profilePermissionsDelete'])->name('sys-permission-delete');
+Route::get('/sys/clients', [SysClientController::class, 'clients'])->name('sys-clients');
+Route::get('/sys/client/create', [SysClientController::class, 'clientCreate'])->name('sys-client-create');
+Route::post('/sys/client/create', [SysClientController::class, 'clientCreateAction']);
+Route::get('/sys/client/update/{id}', [SysClientController::class, 'clientUpdate'])->name('sys-client-update');
+Route::post('/sys/client/update/{id}', [SysClientController::class, 'clientUpdateAction']);
+Route::post('/sys/client/delete/{id}', [SysClientController::class, 'clientDelete'])->name('sys-client-delete');
 //       → Profiles
-Route::get('/profiles', [ProfileController::class, 'profiles'])->name('sys-profiles');
-Route::get('/profile/create', [ProfileController::class, 'profileCreate'])->name('sys-profile-create');
-Route::post('/profile/create', [ProfileController::class, 'profileCreateAction']);
-Route::get('/profile/update/{id}', [ProfileController::class, 'profileUpdate'])->name('sys-profile-update');
-Route::post('/profile/update/{id}', [ProfileController::class, 'profileUpdateAction']);
-Route::post('/profile/delete/{id}', [ProfileController::class, 'profileDelete'])->name('sys-profile-delete');
+Route::get('/sys/profiles', [SysProfileController::class, 'profiles'])->name('sys-profiles');
+Route::get('/sys/profile/create', [SysProfileController::class, 'profileCreate'])->name('sys-profile-create');
+Route::post('/sys/profile/create', [SysProfileController::class, 'profileCreateAction']);
+Route::get('/sys/profile/update/{id}', [SysProfileController::class, 'profileUpdate'])->name('sys-profile-update');
+Route::post('/sys/profile/update/{id}', [SysProfileController::class, 'profileUpdateAction']);
+Route::post('/sys/profile/delete/{id}', [SysProfileController::class, 'profileDelete'])->name('sys-profile-delete');
+//       → Permissions
+Route::get('/sys/profile/permissions', [SysProfillePermissionController::class, 'profilePermissions'])->name('sys-permissions');
+Route::get('/sys/profile/permission/create', [SysProfillePermissionController::class, 'profilePermissionsCreate'])->name('sys-permission-create');
+Route::post('/sys/profile/permission/create', [SysProfillePermissionController::class, 'profilePermissionsCreateAction']);
+Route::get('/sys/profile/permission/update/{id}', [SysProfillePermissionController::class, 'profilePermissionsUpdate'])->name('sys-permission-update');
+Route::post('/sys/profile/permission/update/{id}', [SysProfillePermissionController::class, 'profilePermissionsUpdateAction']);
+Route::post('/sys/profile/permission/delete/{id}', [SysProfillePermissionController::class, 'profilePermissionsDelete'])->name('sys-permission-delete');
 
 // Support
 //       → Tasks
-Route::get('/tasks', [TaskController::class, 'tasks'])->name('sup-tasks');
-Route::get('/task/create', [TaskController::class, 'taskCreate'])->name('sup-task-create');
-Route::post('/task/create', [TaskController::class, 'taskCreateAction']);
-Route::get('/task/update/{id}', [TaskController::class, 'taskUpdate'])->name('sup-task-update');
-Route::post('/task/update/{id}', [TaskController::class, 'taskUpdateAction']);
-Route::post('/task/delete/{id}', [TaskController::class, 'taskDelete'])->name('sup-task-delete');
+Route::get('/sup/tasks', [SupTaskController::class, 'tasks'])->name('sup-tasks');
+Route::get('/sup/task/create', [SupTaskController::class, 'taskCreate'])->name('sup-task-create');
+Route::post('/sup/task/create', [SupTaskController::class, 'taskCreateAction']);
+Route::get('/sup/task/update/{id}', [SupTaskController::class, 'taskUpdate'])->name('sup-task-update');
+Route::post('/sup/task/update/{id}', [SupTaskController::class, 'taskUpdateAction']);
+Route::post('/sup/task/delete/{id}', [SupTaskController::class, 'taskDelete'])->name('sup-task-delete');
 //               → Comments
-Route::post('/task/comment', [TaskController::class, 'commentAction'])->name('sup-comment');
-Route::post('/task/comment/update', [TaskController::class, 'commentUpdate'])->name('sup-comment-update');
-Route::post('/task/comment/delete/{id}', [TaskController::class, 'commentDelete'])->name('sup-comment-delete');
+Route::post('/sup/task/comment', [SupTaskController::class, 'commentAction'])->name('sup-comment');
+Route::post('/sup/task/comment/update', [SupTaskController::class, 'commentUpdate'])->name('sup-comment-update');
+Route::post('/sup/task/comment/delete/{id}', [SupTaskController::class, 'commentDelete'])->name('sup-comment-delete');
 //               → Roadmap
-Route::get('/task/roadmap', [TaskController::class, 'roadmap'])->name('sup-roadmap');
-Route::post('/task/roadmap', [TaskController::class, 'roadmapAction']);
-Route::post('/task/roadmap/update', [TaskController::class, 'roadmapUpdate'])->name('sup-roadmap-update');
-Route::post('/task/roadmap/delete/{id}', [TaskController::class, 'roadmapDelete'])->name('sup-roadmap-delete');
+Route::get('/sup/task/roadmap', [SupTaskController::class, 'roadmap'])->name('sup-roadmap');
+Route::post('/sup/task/roadmap', [SupTaskController::class, 'roadmapAction']);
+Route::post('/sup/task/roadmap/update', [SupTaskController::class, 'roadmapUpdate'])->name('sup-roadmap-update');
+Route::post('/sup/task/roadmap/delete/{id}', [SupTaskController::class, 'roadmapDelete'])->name('sup-roadmap-delete');
 
 // Structure
-//               → Harvest (Safra)
-Route::get('/harvests', [HarvestController::class, 'harvests'])->name('structure-harvests');
-Route::get('/harvest/create', [HarvestController::class, 'harvestCreate'])->name('structure-harvest-create');
-Route::post('/harvest/create', [HarvestController::class, 'harvestCreateAction']);
-Route::get('/harvest/update/{id}', [HarvestController::class, 'harvestUpdate'])->name('structure-harvest-update');
-Route::post('/harvest/update/{id}', [HarvestController::class, 'harvestUpdateAction']);
-Route::post('/harvest/delete/{id}', [HarvestController::class, 'harvestDelete'])->name('structure-harvest-delete');
-//               → Organização
-Route::get('/organizations', [OrganizationController::class, 'organizations'])->name('structure-organizations');
-Route::get('/organization/create', [OrganizationController::class, 'organizationCreate'])->name('structure-organization-create');
-Route::post('/organization/create', [OrganizationController::class, 'organizationCreateAction']);
-Route::get('/organization/update/{id}', [OrganizationController::class, 'organizationUpdate'])->name('structure-organization-update');
-Route::post('/organization/update/{id}', [OrganizationController::class, 'organizationUpdateAction']);
-Route::post('/organization/delete/{id}', [OrganizationController::class, 'organizationDelete'])->name('structure-organization-delete');
-//               → Cultura
-Route::get('/cultures', [CultureController::class, 'cultures'])->name('structure-cultures');
-Route::get('/culture/create', [CultureController::class, 'cultureCreate'])->name('structure-culture-create');
-Route::post('/culture/create', [CultureController::class, 'cultureCreateAction']);
-Route::get('/culture/update/{id}', [CultureController::class, 'cultureUpdate'])->name('structure-culture-update');
-Route::post('/culture/update/{id}', [CultureController::class, 'cultureUpdateAction']);
-Route::post('/culture/delete/{id}', [CultureController::class, 'cultureDelete'])->name('structure-culture-delete');
-// Cultivo
-//               → Métodos
-Route::get('/cultive/methods', [PlantingMethodController::class, 'plantingMethods'])->name('cultive-methods');
-Route::get('/cultive/method/create', [PlantingMethodController::class, 'plantingMethodCreate'])->name('cultive-method-create');
-Route::post('/cultive/method/create', [PlantingMethodController::class, 'plantingMethodCreateAction']);
-Route::get('/cultive/method/update/{id}', [PlantingMethodController::class, 'plantingMethodUpdate'])->name('cultive-method-update');
-Route::post('/cultive/method/update/{id}', [PlantingMethodController::class, 'plantingMethodUpdateAction']);
-Route::post('/cultive/method/delete/{id}', [PlantingMethodController::class, 'plantingMethodDelete'])->name('cultive-method-delete');
-//               → Hora Máquina
-//               → Processo Etapas
-Route::get('/cultive/processes', [ProcessController::class, 'processes'])->name('cultive-processes');
-Route::get('/cultive/process/create', [ProcessController::class, 'processCreate'])->name('cultive-process-create');
-Route::post('/cultive/process/create', [ProcessController::class, 'processCreateAction']);
-Route::get('/cultive/process/update/{id}', [ProcessController::class, 'processUpdate'])->name('cultive-process-update');
-Route::post('/cultive/process/update/{id}', [ProcessController::class, 'processUpdateAction']);
-Route::post('/cultive/process/delete/{id}', [ProcessController::class, 'processDelete'])->name('cultive-process-delete');
+// //               → Organization
+Route::get('/structure/organizations', [StructureOrganizationController::class, 'organizations'])->name('structure-organizations');
+Route::get('/structure/organization/create', [StructureOrganizationController::class, 'organizationCreate'])->name('structure-organization-create');
+Route::post('/structure/organization/create', [StructureOrganizationController::class, 'organizationCreateAction']);
+Route::get('/structure/organization/update/{id}', [StructureOrganizationController::class, 'organizationUpdate'])->name('structure-organization-update');
+Route::post('/structure/organization/update/{id}', [StructureOrganizationController::class, 'organizationUpdateAction']);
+Route::post('/structure/organization/delete/{id}', [StructureOrganizationController::class, 'organizationDelete'])->name('structure-organization-delete');
+//               → Farm
+Route::get('/structure/farms', [StructureFarmController::class, 'farms'])->name('structure-farms');
+Route::get('/structure/farm/create', [StructureFarmController::class, 'farmCreate'])->name('structure-farm-create');
+Route::post('/structure/farm/create', [StructureFarmController::class, 'farmCreateAction']);
+Route::get('/structure/farm/update/{id}', [StructureFarmController::class, 'farmUpdate'])->name('structure-farm-update');
+Route::post('/structure/farm/update/{id}', [StructureFarmController::class, 'farmUpdateAction']);
+Route::post('/structure/farm/delete/{id}', [StructureFarmController::class, 'farmDelete'])->name('structure-farm-delete');
+
+// Cultive
+//               → Method
+Route::get('/cultive/methods', [CultivePlantingMethodController::class, 'plantingMethods'])->name('cultive-methods');
+Route::get('/cultive/method/create', [CultivePlantingMethodController::class, 'plantingMethodCreate'])->name('cultive-method-create');
+Route::post('/cultive/method/create', [CultivePlantingMethodController::class, 'plantingMethodCreateAction']);
+Route::get('/cultive/method/update/{id}', [CultivePlantingMethodController::class, 'plantingMethodUpdate'])->name('cultive-method-update');
+Route::post('/cultive/method/update/{id}', [CultivePlantingMethodController::class, 'plantingMethodUpdateAction']);
+Route::post('/cultive/method/delete/{id}', [CultivePlantingMethodController::class, 'plantingMethodDelete'])->name('cultive-method-delete');
+//               → Process
+Route::get('/cultive/processes', [CultiveProcessController::class, 'processes'])->name('cultive-processes');
+Route::get('/cultive/process/create', [CultiveProcessController::class, 'processCreate'])->name('cultive-process-create');
+Route::post('/cultive/process/create', [CultiveProcessController::class, 'processCreateAction']);
+Route::get('/cultive/process/update/{id}', [CultiveProcessController::class, 'processUpdate'])->name('cultive-process-update');
+Route::post('/cultive/process/update/{id}', [CultiveProcessController::class, 'processUpdateAction']);
+Route::post('/cultive/process/delete/{id}', [CultiveProcessController::class, 'processDelete'])->name('cultive-process-delete');
+//               → Culture
+Route::get('/cultive/cultures', [CultiveCultureController::class, 'cultures'])->name('structure-cultures');
+Route::get('/cultive/culture/create', [CultiveCultureController::class, 'cultureCreate'])->name('structure-culture-create');
+Route::post('/cultive/culture/create', [CultiveCultureController::class, 'cultureCreateAction']);
+Route::get('/cultive/culture/update/{id}', [CultiveCultureController::class, 'cultureUpdate'])->name('structure-culture-update');
+Route::post('/cultive/culture/update/{id}', [CultiveCultureController::class, 'cultureUpdateAction']);
+Route::post('/cultive/culture/delete/{id}', [CultiveCultureController::class, 'cultureDelete'])->name('structure-culture-delete');
+//               → Machine Hour
+
+//Harvest
+//               → Harvest
+Route::get('/harv/harvests', [HarvHarvestController::class, 'harvests'])->name('harv-harvests');
+Route::get('/harv/harvest/create', [HarvHarvestController::class, 'harvestCreate'])->name('harv-harvest-create');
+Route::post('/harv/harvest/create', [HarvHarvestController::class, 'harvestCreateAction']);
+Route::get('/harv/harvest/update/{id}', [HarvHarvestController::class, 'harvestUpdate'])->name('harv-harvest-update');
+Route::post('/harv/harvest/update/{id}', [HarvHarvestController::class, 'harvestUpdateAction']);
+Route::post('/harv/harvest/delete/{id}', [HarvHarvestController::class, 'harvestDelete'])->name('harv-harvest-delete');
+//               → Harvest Configurations
+Route::get('/harv/configuration', [HarvConfigController::class, 'configurations'])->name('harv-configurations');
+Route::get('/harv/configuration/create', [HarvConfigController::class, 'configurationCreate'])->name('harv-configuration-create');
+Route::post('/harv/configuration/create', [HarvConfigController::class, 'configurationCreateAction']);
+Route::get('/harv/configuration/update/{id}', [HarvConfigController::class, 'configurationUpdate'])->name('harv-configuration-update');
+Route::post('/harv/configuration/update/{id}', [HarvConfigController::class, 'configurationUpdateAction']);
+Route::post('/harv/configuration/delete/{id}', [HarvConfigController::class, 'configurationDelete'])->name('harv-configuration-delete');

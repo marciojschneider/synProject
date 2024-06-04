@@ -10,7 +10,7 @@ use App\Models\Task;
 use App\Models\Sidebar;
 use App\Models\TaskDetail;
 
-class TaskController extends Controller {
+class SupTaskController extends Controller {
   // Tasks
   public function tasks() {
     $data['unapproveds'] = Task::orderBy('created_at', 'DESC')->where('situation', '<', 4)->get();
