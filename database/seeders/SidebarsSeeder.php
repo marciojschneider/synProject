@@ -122,7 +122,7 @@ class SidebarsSeeder extends Seeder {
         "updated_at" => "2024-06-03 11:39:09",
       ),
       array(
-        "name" => "Safra",
+        "name" => "Safras",
         "icon" => NULL,
         "slug" => "harvest",
         "affiliate_id" => 10,
@@ -133,7 +133,7 @@ class SidebarsSeeder extends Seeder {
         "updated_at" => "2024-06-03 11:42:15",
       ),
       array(
-        "name" => "Organização",
+        "name" => "Organizações",
         "icon" => NULL,
         "slug" => "organization",
         "affiliate_id" => 10,
@@ -144,7 +144,7 @@ class SidebarsSeeder extends Seeder {
         "updated_at" => "2024-06-03 11:42:15",
       ),
       array(
-        "name" => "Cultura",
+        "name" => "Culturas",
         "icon" => NULL,
         "slug" => "culture",
         "affiliate_id" => 10,
@@ -177,7 +177,7 @@ class SidebarsSeeder extends Seeder {
         "updated_at" => "2024-06-03 11:42:15",
       ),
       array(
-        "name" => "Hora Máquina",
+        "name" => "Hora Máquinas",
         "icon" => NULL,
         "slug" => "machine-hour",
         "affiliate_id" => 14,
@@ -188,7 +188,7 @@ class SidebarsSeeder extends Seeder {
         "updated_at" => "2024-06-03 11:42:15",
       ),
       array(
-        "name" => "Processo/Etapa",
+        "name" => "Processo/Etapas",
         "icon" => NULL,
         "slug" => "process",
         "affiliate_id" => 14,

@@ -1,7 +1,7 @@
 <div class="card">
   <div class="row card-header" bis_skin_checked="1" style="align-items: center">
     <div class="col-md-2">
-      <h5>Cultura</h5>
+      <h5>Culturas</h5>
     </div>
     <div class="col-md-10" bis_skin_checked="1">
       <div

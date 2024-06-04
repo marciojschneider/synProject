@@ -4,12 +4,12 @@
 
 @extends('layouts/layoutMaster')
 
-@section('title', 'Editar Módulo')
+@section('title', 'Editar Permissão')
 
 @section('content')
   <div class="col-md">
     <h4 class="mb-4">
-      <span class="text-muted fw-light">Perfil / Permissões /</span> Atualizar
+      <span class="text-muted fw-light">Sistema / Permissões /</span> Atualizar
     </h4>
     <div class="card mb-4">
       {{-- <h5 class="card-header">Novo chamado</h5> --}}

@@ -4,7 +4,7 @@
 
 @extends('layouts/layoutMaster')
 
-@section('title', 'Novo Processo/Etapa')
+@section('title', 'Editar Processo/Etapa')
 
 {{-- Verificar estilizações necessárias para o funcionamento da pagina --}}
 @section('vendor-style')
@@ -26,7 +26,7 @@
 @section('content')
   <div class="col-md">
     <h4 class="mb-4">
-      <span class="text-muted fw-light">Cultivo / Processo/Etapa /</span> Atualizar
+      <span class="text-muted fw-light">Cultivo / Processo/Etapas /</span> Atualizar
     </h4>
     <div class="card mb-4">
       {{-- <h5 class="card-header">Novo chamado</h5> --}}

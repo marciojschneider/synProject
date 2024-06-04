@@ -9,7 +9,7 @@
 @section('content')
   <div class="col-md">
     <h4 class="mb-4">
-      <span class="text-muted fw-light">Cultura /</span> Cadastrar
+      <span class="text-muted fw-light">Culturas /</span> Atualizar
     </h4>
     <div class="card mb-4">
       {{-- <h5 class="card-header">Novo chamado</h5> --}}
