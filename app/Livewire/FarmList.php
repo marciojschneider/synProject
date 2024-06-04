@@ -18,11 +18,12 @@ class FarmList extends Component {
   // Variaveis
   public $searchText;
   public $pPage = 10;
+  public $situation;
+  public $property;
 
   public function mount() {
     // Caso precise pré carregar selects, declare a váriavel e faça a busca por aqui!
   }
-
   public function updated() {
     $this->resetPage();
   }
@@ -32,6 +33,13 @@ class FarmList extends Component {
     if ($this->searchText) {
       $query->where('code', 'like', '%' . $this->searchText . '%');
       $query->orWhere('name', 'like', '%' . $this->searchText . '%');
+    }
+
+    if ($this->situation) {
+      $query->where('situation', $this->situation);
+    }
+    if ($this->property) {
+      $query->where('property', $this->property);
     }
 
     $data["rows"] = $query->paginate($this->pPage);

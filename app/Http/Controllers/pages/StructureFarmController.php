@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Farm;
 use Illuminate\Http\Request;
 
-class FarmController extends Controller {
+class StructureFarmController extends Controller {
   public function farms() {
     return view("content.pages.farm.list");
   }
@@ -37,7 +37,7 @@ class FarmController extends Controller {
 
   public function farmUpdateAction(int $id, Request $request) {
     $update = $request->only(['code', 'name', 'property', 'owner', 'situation']);
-    $farmUpdate = new Farm();
+    $farmUpdate = Farm::find($id);
 
     $farmUpdate->code = $update['code'];
     $farmUpdate->name = $update['name'];

@@ -15,6 +15,23 @@
           </select>
         </div>
 
+        {{-- Busca por Situação --}}
+        <div id="DataTables_Table_0_filter" class="dataTables_filter" bis_skin_checked="1" style="margin-right: 5px;">
+          <select wire:model.live.click="situation" id="situation" name="situation" class="form-select">
+            <option value="" selected> Situação </option>
+            <option value="1">Ativo</option>
+            <option value="2">Inativo</option>
+          </select>
+        </div>
+
+        <div id="DataTables_Table_0_filter" class="dataTables_filter" bis_skin_checked="1" style="margin-right: 5px;">
+          <select wire:model.live.click="property" id="property" name="property" class="form-select">
+            <option value="" selected> Propriedade </option>
+            <option value="1">Próprio</option>
+            <option value="2">Terceiro</option>
+          </select>
+        </div>
+
         {{-- Caixa de pesquisa --}}
         <div id="DataTables_Table_0_filter" class="dataTables_filter" bis_skin_checked="1" style="margin-right: 5px;">
           <label><input wire:model.live.debounce.500ms="searchText" type="search" class="form-control"
@@ -52,9 +69,7 @@
               <td><span
                   class="badge {{ $row->property == 1 ? 'bg-label-primary' : 'bg-label-warning' }} me-1">{{ $row->situation == 1 ? 'Próprio' : 'Terceiro' }}</span>
               </td>
-              <td><span
-                  class="badge {{ $row->owner == 1 ? 'bg-label-primary' : 'bg-label-warning' }} me-1">{{ $row->situation == 1 ? '2 - Granjas Bretanhas S.A.' : '' }}</span>
-              </td>
+              <td>{{ $row->owner == 1 ? '2 - Granjas Bretanhas S.A.' : '' }}</td>
               <td><span
                   class="badge {{ $row->situation == 1 ? 'bg-label-primary' : 'bg-label-warning' }} me-1">{{ $row->situation == 1 ? 'Ativo' : 'Inativo' }}</span>
               </td>
