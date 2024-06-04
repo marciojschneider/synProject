@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Organization;
 use Illuminate\Http\Request;
 
-class OrganizationController extends Controller {
+class StructureOrganizationController extends Controller {
   public function organizations() {
     return view("content.pages.organization.list");
   }

@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 // Models
 use App\Models\Process;
 
-class ProcessController extends Controller {
+class CultiveProcessController extends Controller {
   public function processes() {
     return view('content.pages.process.list');
   }

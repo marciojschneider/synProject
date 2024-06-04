@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Client;
 use Illuminate\Http\Request;
 
-class ClientController extends Controller {
+class SysClientController extends Controller {
   public function clients() {
     return view('content.pages.client.list');
   }

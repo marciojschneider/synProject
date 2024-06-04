@@ -10,7 +10,7 @@ use App\Models\profilePermission;
 use App\Models\Sidebar;
 use Illuminate\Http\Request;
 
-class ProfillePermissionController extends Controller {
+class SysProfillePermissionController extends Controller {
   public function profilePermissions() {
     return view('content.pages.profile-permission.list');
   }

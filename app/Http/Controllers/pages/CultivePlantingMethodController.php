@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 // Models
 use App\Models\PlantingMethod;
 
-class PlantingMethodController extends Controller {
+class CultivePlantingMethodController extends Controller {
   public function plantingMethods() {
     return view('content.pages.planting-method.list');
   }

@@ -14,7 +14,7 @@
     <div class="card mb-4">
       {{-- <h5 class="card-header">Novo chamado</h5> --}}
       <div class="card-body">
-        <form method="POST" action="{{ route('structure-harvest-create') }}">
+        <form method="POST" action="{{ route('harv-harvest-create') }}">
           @csrf
 
           <div class="row mb-4">
@@ -58,7 +58,7 @@
           </div>
 
           <button type="submit" class="btn btn-primary">Salvar</button>
-          <a href="{{ route('structure-harvests') }}" class="btn btn-secondary">Voltar</a>
+          <a href="{{ route('harv-harvests') }}" class="btn btn-secondary">Voltar</a>
         </form>
       </div>
     </div>
