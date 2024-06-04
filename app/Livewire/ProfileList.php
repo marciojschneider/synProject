@@ -9,6 +9,7 @@ use Livewire\WithPagination;
 
 // Models
 use App\Models\Profile;
+use App\Models\Client;
 
 class ProfileList extends Component {
   use WithPagination;
@@ -17,9 +18,11 @@ class ProfileList extends Component {
   // Variaveis
   public $searchText;
   public $pPage = 10;
+  public $clients;
+  public $client;
 
   public function mount() {
-    // Caso precise pré carregar selects, declare a váriavel e faça a busca por aqui!
+    $this->clients = Client::where('situation', 1)->get();
   }
 
   public function updated() {
@@ -32,8 +35,11 @@ class ProfileList extends Component {
     $query->join('clients', 'clients.id', '=', 'profiles.client_id');
 
     if ($this->searchText) {
-      $query->where('name', 'like', '%' . $this->searchText . '%');
-      $query->orWhere('description', 'like', '%' . $this->searchText . '%');
+      $query->where('profiles.name', 'like', '%' . $this->searchText . '%');
+    }
+
+    if ($this->client) {
+      $query->where('client_id', $this->client);
     }
 
     $query->select('profiles.*', 'clients.name as cName')->get();

@@ -29,6 +29,11 @@ class ProcessesList extends Component {
   public function render() {
     $query = Process::query();
 
+    if ($this->searchText) {
+      $query->where('code', 'like', '%' . $this->searchText . '%');
+      $query->orWhere('name', 'like', '%' . $this->searchText . '%');
+    }
+
     $data['rows'] = $query->paginate($this->pPage);
 
     return view('livewire.processes-list', $data);

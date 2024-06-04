@@ -15,13 +15,27 @@
           </select>
         </div>
 
-        {{-- Caixa de pesquisa --}}
+        {{-- Busca por Módulo --}}
         <div id="DataTables_Table_0_filter" class="dataTables_filter" bis_skin_checked="1" style="margin-right: 5px;">
-          <label><input wire:model.live.debounce.500ms="searchText" type="search" class="form-control"
-              placeholder="Buscar..." aria-controls="DataTables_Table_0"></label>
+          <select wire:model.live.click="module" id="module" name="module" class="form-select">
+            <option value="" selected> Módulo </option>
+            @foreach ($modules as $module)
+              <option value="{{ $module->id }}">{{ $module->name }}</option>
+            @endforeach
+          </select>
         </div>
 
-        {{-- Botão de novo usuário --}}
+        {{-- Busca por Perfil --}}
+        <div id="DataTables_Table_0_filter" class="dataTables_filter" bis_skin_checked="1" style="margin-right: 5px;">
+          <select wire:model.live.click="profile" id="profile" name="profile" class="form-select">
+            <option value="" selected> Perfil </option>
+            @foreach ($profiles as $profile)
+              <option value="{{ $profile->id }}">{{ $profile->name }}</option>
+            @endforeach
+          </select>
+        </div>
+
+        {{-- Botão de nova permissão --}}
         <div class="dt-buttons" bis_skin_checked="1">
           <a class="dt-button add-new btn btn-primary" href="{{ route('sys-permission-create') }}"><span> <i
                 class="bx bx-plus me-0 me-sm-1"></i><span class="d-none d-sm-inline-block">Novo</span>

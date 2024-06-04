@@ -9,6 +9,8 @@ use Livewire\WithPagination;
 
 // Models
 use App\Models\profilePermission;
+use App\Models\Sidebar;
+use App\Models\Profile;
 
 class profilePermissionList extends Component {
   use WithPagination;
@@ -18,8 +20,14 @@ class profilePermissionList extends Component {
   public $searchText;
   public $pPage = 10;
 
+  public $modules;
+  public $module;
+  public $profiles;
+  public $profile;
+
   public function mount() {
-    // Caso precise pré carregar selects, declare a váriavel e faça a busca por aqui!
+    $this->modules = Sidebar::where('icon', null)->get();
+    $this->profiles = Profile::all();
   }
 
   // Essa função fica responsável por atualizar a pagina SEMPRE que houver qualquer alteração
@@ -37,6 +45,14 @@ class profilePermissionList extends Component {
     if ($this->searchText) {
       $query->where('name', 'like', '%' . $this->searchText . '%');
       $query->orWhere('description', 'like', '%' . $this->searchText . '%');
+    }
+
+    if ($this->profile) {
+      $query->where('profile_id', $this->profile);
+    }
+
+    if ($this->module) {
+      $query->where('sidebar_id', $this->module);
     }
 
     $query->select('profile_permissions.*', 'sidebars.name as sName', 'profiles.name as pName')->get();
