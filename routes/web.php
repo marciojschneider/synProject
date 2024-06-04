@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\pages\CultureController;
+use App\Http\Controllers\pages\OrganizationController;
 use App\Http\Controllers\pages\ProcessController;
 use Illuminate\Support\Facades\Route;
 
@@ -70,6 +71,12 @@ Route::get('/harvest/update/{id}', [HarvestController::class, 'harvestUpdate'])-
 Route::post('/harvest/update/{id}', [HarvestController::class, 'harvestUpdateAction']);
 Route::post('/harvest/delete/{id}', [HarvestController::class, 'harvestDelete'])->name('structure-harvest-delete');
 //               → Organização
+Route::get('/organizations', [OrganizationController::class, 'organizations'])->name('structure-organizations');
+Route::get('/organization/create', [OrganizationController::class, 'organizationCreate'])->name('structure-organization-create');
+Route::post('/organization/create', [OrganizationController::class, 'organizationCreateAction']);
+Route::get('/organization/update/{id}', [OrganizationController::class, 'organizationUpdate'])->name('structure-organization-update');
+Route::post('/organization/update/{id}', [OrganizationController::class, 'organizationUpdateAction']);
+Route::post('/organization/delete/{id}', [OrganizationController::class, 'organizationDelete'])->name('structure-organization-delete');
 //               → Cultura
 Route::get('/cultures', [CultureController::class, 'cultures'])->name('structure-cultures');
 Route::get('/culture/create', [CultureController::class, 'cultureCreate'])->name('structure-culture-create');
