@@ -37,6 +37,7 @@
         <thead>
           <tr>
             <th>Código</th>
+            <th>Externo</th>
             <th>Nome</th>
             <th>Hora Máquina</th>
             <th>Portaria</th>
@@ -44,7 +45,6 @@
             <th>Combustível</th>
             <th>Colheita</th>
             <th>Insumos</th>
-            <th>Código Externo</th>
             <th>Situação</th>
             <th>Ações</th>
           </tr>
@@ -53,6 +53,7 @@
           @foreach ($rows as $row)
             <tr>
               <td>{{ $row->code }}</td>
+              <td>{{ $row->external_code }}</td>
               <td>{{ $row->name }}</td>
               <td>{{ date('d/m/Y', strtotime($row->machine_hour_dt)) }}</td>
               <td>{{ date('d/m/Y', strtotime($row->ordinance_dt)) }}</td>
@@ -60,7 +61,6 @@
               <td>{{ date('d/m/Y', strtotime($row->fuel_dt)) }}</td>
               <td>{{ date('d/m/Y', strtotime($row->harvest_dt)) }}</td>
               <td>{{ date('d/m/Y', strtotime($row->inputs_dt)) }}</td>
-              <td>{{ $row->external_code }}</td>
               <td><span
                   class="badge {{ $row->situation == 1 ? 'bg-label-primary' : 'bg-label-warning' }} me-1">{{ $row->situation == 1 ? 'Ativo' : 'Inativo' }}</span>
               </td>
