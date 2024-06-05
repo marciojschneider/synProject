@@ -14,7 +14,7 @@
     <div class="card mb-4">
       {{-- <h5 class="card-header">Novo chamado</h5> --}}
       <div class="card-body">
-        <form method="POST" action="{{ route('structure-culture-create') }}">
+        <form method="POST" action="{{ route('cultive-culture-create') }}">
           @csrf
 
           <div class="row mb-4">
@@ -29,7 +29,7 @@
             </div>
           </div>
           <button type="submit" class="btn btn-primary">Salvar</button>
-          <a href="{{ route('structure-cultures') }}" class="btn btn-secondary">Voltar</a>
+          <a href="{{ route('cultive-cultures') }}" class="btn btn-secondary">Voltar</a>
         </form>
       </div>
     </div>

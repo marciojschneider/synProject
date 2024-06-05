@@ -100,12 +100,12 @@ Route::get('/cultive/process/update/{id}', [CultiveProcessController::class, 'pr
 Route::post('/cultive/process/update/{id}', [CultiveProcessController::class, 'processUpdateAction']);
 Route::post('/cultive/process/delete/{id}', [CultiveProcessController::class, 'processDelete'])->name('cultive-process-delete');
 //               → Culture
-Route::get('/cultive/cultures', [CultiveCultureController::class, 'cultures'])->name('structure-cultures');
-Route::get('/cultive/culture/create', [CultiveCultureController::class, 'cultureCreate'])->name('structure-culture-create');
+Route::get('/cultive/cultures', [CultiveCultureController::class, 'cultures'])->name('cultive-cultures');
+Route::get('/cultive/culture/create', [CultiveCultureController::class, 'cultureCreate'])->name('cultive-culture-create');
 Route::post('/cultive/culture/create', [CultiveCultureController::class, 'cultureCreateAction']);
-Route::get('/cultive/culture/update/{id}', [CultiveCultureController::class, 'cultureUpdate'])->name('structure-culture-update');
+Route::get('/cultive/culture/update/{id}', [CultiveCultureController::class, 'cultureUpdate'])->name('cultive-culture-update');
 Route::post('/cultive/culture/update/{id}', [CultiveCultureController::class, 'cultureUpdateAction']);
-Route::post('/cultive/culture/delete/{id}', [CultiveCultureController::class, 'cultureDelete'])->name('structure-culture-delete');
+Route::post('/cultive/culture/delete/{id}', [CultiveCultureController::class, 'cultureDelete'])->name('cultive-culture-delete');
 //               → Machine Hour
 
 //Harvest

@@ -25,7 +25,7 @@ class CultiveCultureController extends Controller {
 
     $culture->save();
 
-    return redirect()->route('structure-cultures');
+    return redirect()->route('cultive-cultures');
   }
 
   public function cultureUpdate(int $id) {
@@ -42,11 +42,11 @@ class CultiveCultureController extends Controller {
 
     $cultureUpdate->save();
 
-    return redirect()->route('structure-cultures');
+    return redirect()->route('cultive-cultures');
   }
 
   public function cultureDelete(int $id) {
     Culture::where('id', $id)->delete();
-    return redirect()->route('structure-cultures');
+    return redirect()->route('cultive-cultures');
   }
 }
