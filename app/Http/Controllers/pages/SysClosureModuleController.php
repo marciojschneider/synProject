@@ -5,28 +5,58 @@ namespace App\Http\Controllers\pages;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+// Models
+use App\Models\Sidebar;
+use App\Models\closureModule;
+
 class SysClosureModuleController extends Controller {
   public function closureModules() {
     return view('content.pages.closure-module.list');
   }
 
   public function closureModuleCreate() {
-    return view('content.pages.closure-module.create');
+    $data['sidebars'] = Sidebar::where('icon', null)->get();
+    return view('content.pages.closure-module.create', $data);
   }
 
-  public function closureModuleCreateAction(int $id, Request $request) {
-    dd($request);
+  public function closureModuleCreateAction(Request $request) {
+    $data = $request->only(['sidebar', 'dt_closure', 'situation']);
+
+    $closureModule = new closureModule();
+    $closureModule->sidebar_id = $data['sidebar'];
+    $closureModule->client_id = 1;
+    $closureModule->dt_closure = $data['dt_closure'];
+    $closureModule->situation = $data['situation'];
+
+    $closureModule->save();
+
+    return redirect()->route('sys-closures');
   }
 
-  public function closureModuleUpdate(int $id, Request $request) {
-    return view('content.pages.closure-module.update');
+  public function closureModuleUpdate(int $id) {
+    $data['closure_module'] = closureModule::find($id);
+    $data['sidebars'] = Sidebar::where('icon', null)->get();
+
+    return view('content.pages.closure-module.update', $data);
   }
 
   public function closureModuleUpdateAction(int $id, Request $request) {
-    dd($request);
+    $update = $request->only(['sidebar', 'dt_closure', 'situation']);
+
+    $closureModuleUpdate = closureModule::find($id);
+
+    $closureModuleUpdate->sidebar_id = $update['sidebar'];
+    $closureModuleUpdate->dt_closure = $update['dt_closure'];
+    $closureModuleUpdate->situation = $update['situation'];
+
+    $closureModuleUpdate->save();
+
+    return redirect()->route('sys-closures');
   }
 
   public function closureModuleDelete(int $id) {
-    dd($id);
+    closureModule::where('id', $id)->delete();
+
+    return redirect()->route('sys-closures');
   }
 }

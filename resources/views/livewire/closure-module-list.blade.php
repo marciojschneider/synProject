@@ -1,7 +1,7 @@
 <div class="card">
   <div class="row card-header" bis_skin_checked="1" style="align-items: center">
     <div class="col-md-2">
-      <h5>Clientes</h5>
+      <h5>Fechamentos</h5>
     </div>
     <div class="col-md-10" bis_skin_checked="1">
       <div
@@ -16,14 +16,14 @@
         </div>
 
         {{-- Caixa de pesquisa --}}
-        <div id="DataTables_Table_0_filter" class="dataTables_filter" bis_skin_checked="1" style="margin-right: 5px;">
+        {{-- <div id="DataTables_Table_0_filter" class="dataTables_filter" bis_skin_checked="1" style="margin-right: 5px;">
           <label><input wire:model.live.debounce.500ms="searchText" type="search" class="form-control"
               placeholder="Buscar..." aria-controls="DataTables_Table_0"></label>
-        </div>
+        </div> --}}
 
         {{-- Botão de novo usuário --}}
         <div class="dt-buttons" bis_skin_checked="1">
-          <a class="dt-button add-new btn btn-primary" href="#"><span> <i
+          <a class="dt-button add-new btn btn-primary" href="{{ route('sys-closure-create') }}"><span> <i
                 class="bx bx-plus me-0 me-sm-1"></i><span class="d-none d-sm-inline-block">Novo</span>
             </span>
           </a>
@@ -55,9 +55,11 @@
                   <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i
                       class="bx bx-dots-vertical-rounded"></i></button>
                   <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#"><i class="bx bx-edit-alt me-1"></i> Editar</a>
+                    <a class="dropdown-item" href="{{ route('sys-closure-update', $row->id) }}"><i
+                        class="bx bx-edit-alt me-1"></i> Editar</a>
 
-                    <form method="POST" action="#" id="closureDelete{{ $row->id }}" display="none">
+                    <form method="POST" action="{{ route('sys-closure-delete', $row->id) }}"
+                      id="closureDelete{{ $row->id }}" display="none">
                       @csrf
                     </form>
                     <button type="submit" class="dropdown-item" onclick="removeModal({{ $row->id }})"><i
