@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\pages\SysClosureModuleController;
 use Illuminate\Support\Facades\Route;
 
 // Controllers
@@ -42,13 +43,20 @@ Route::post('/sys/profile/create', [SysProfileController::class, 'profileCreateA
 Route::get('/sys/profile/update/{id}', [SysProfileController::class, 'profileUpdate'])->name('sys-profile-update');
 Route::post('/sys/profile/update/{id}', [SysProfileController::class, 'profileUpdateAction']);
 Route::post('/sys/profile/delete/{id}', [SysProfileController::class, 'profileDelete'])->name('sys-profile-delete');
-//       → Permissions
+//       → Permissions TODO: Transformar em singular, conforme restante das rotas.
 Route::get('/sys/profile/permissions', [SysProfillePermissionController::class, 'profilePermissions'])->name('sys-permissions');
 Route::get('/sys/profile/permission/create', [SysProfillePermissionController::class, 'profilePermissionsCreate'])->name('sys-permission-create');
 Route::post('/sys/profile/permission/create', [SysProfillePermissionController::class, 'profilePermissionsCreateAction']);
 Route::get('/sys/profile/permission/update/{id}', [SysProfillePermissionController::class, 'profilePermissionsUpdate'])->name('sys-permission-update');
 Route::post('/sys/profile/permission/update/{id}', [SysProfillePermissionController::class, 'profilePermissionsUpdateAction']);
 Route::post('/sys/profile/permission/delete/{id}', [SysProfillePermissionController::class, 'profilePermissionsDelete'])->name('sys-permission-delete');
+//       → Closure Modules
+Route::get('/sys/closure-modules', [SysClosureModuleController::class, 'closureModules'])->name('sys-closures');
+Route::get('/sys/closure-module/create', [SysClosureModuleController::class, 'closureModuleCreate'])->name('sys-closure-create');
+Route::post('/sys/closure-module/create', [SysClosureModuleController::class, 'closureModuleCreateAction']);
+Route::get('/sys/closure-module/update/{id}', [SysClosureModuleController::class, 'closureModuleUpdate'])->name('sys-closure-update');
+Route::post('/sys/closure-module/update/{id}', [SysClosureModuleController::class, 'closureModuleUpdateAction']);
+Route::post('/sys/closure-module/delete/{id}', [SysClosureModuleController::class, 'closureModuleDelete'])->name('sys-closure-delete');
 
 // Support
 //       → Tasks
