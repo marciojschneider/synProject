@@ -8,11 +8,11 @@ use Illuminate\Http\Request;
 
 class StructureOrganizationController extends Controller {
   public function organizations() {
-    return view("content.pages.organization.list");
+    return view("content.pages.structure.organization.list");
   }
 
   public function organizationCreate() {
-    return view("content.pages.organization.create");
+    return view("content.pages.structure.organization.create");
   }
   public function organizationCreateAction(Request $request) {
     $data = $request->only(['code', 'name', 'machine_hour_dt', 'ordinance_dt', 'maintenance_dt', 'fuel_dt', 'harvest_dt', 'inputs_dt', 'external_code', 'situation']);
@@ -36,7 +36,7 @@ class StructureOrganizationController extends Controller {
 
   public function organizationUpdate(int $id) {
     $data['organization'] = Organization::find($id);
-    return view('content.pages.organization.update', $data);
+    return view('content.pages.structure.organization.update', $data);
   }
 
   public function organizationUpdateAction(int $id, Request $request) {

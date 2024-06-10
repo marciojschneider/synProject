@@ -67,7 +67,7 @@
               <td>{{ $row->code }}</td>
               <td>{{ $row->name }}</td>
               <td><span
-                  class="badge {{ $row->property == 1 ? 'bg-label-primary' : 'bg-label-warning' }} me-1">{{ $row->situation == 1 ? 'Próprio' : 'Terceiro' }}</span>
+                  class="badge {{ $row->property == 1 ? 'bg-label-primary' : 'bg-label-warning' }} me-1">{{ $row->property == 1 ? 'Próprio' : 'Terceiro' }}</span>
               </td>
               <td>{{ $row->owner == 1 ? '2 - Granjas Bretanhas S.A.' : '' }}</td>
               <td><span

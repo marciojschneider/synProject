@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class HarvConfigController extends Controller {
   public function configurations() {
-    return view('');
+    return view('content.pages.harv.harvest.list');
   }
 
   public function configurationCreate() {

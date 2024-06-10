@@ -8,11 +8,11 @@ use App\Models\Culture;
 
 class CultiveCultureController extends Controller {
   public function cultures() {
-    return view("content.pages.culture.list");
+    return view("content.pages.cultive.culture.list");
   }
 
   public function cultureCreate() {
-    return view("content.pages.culture.create");
+    return view("content.pages.cultive.culture.create");
   }
 
   public function cultureCreateAction(Request $request) {
@@ -30,7 +30,7 @@ class CultiveCultureController extends Controller {
 
   public function cultureUpdate(int $id) {
     $data['culture'] = Culture::find($id);
-    return view('content.pages.culture.update', $data);
+    return view('content.pages.cultive.culture.update', $data);
   }
 
   public function cultureUpdateAction(int $id, Request $request) {

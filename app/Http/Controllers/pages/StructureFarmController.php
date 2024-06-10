@@ -8,11 +8,11 @@ use Illuminate\Http\Request;
 
 class StructureFarmController extends Controller {
   public function farms() {
-    return view("content.pages.farm.list");
+    return view("content.pages.structure.farm.list");
   }
 
   public function farmCreate() {
-    return view("content.pages.farm.create");
+    return view("content.pages.structure.farm.create");
   }
 
   public function farmCreateAction(Request $request) {
@@ -32,7 +32,7 @@ class StructureFarmController extends Controller {
 
   public function farmUpdate(int $id) {
     $data["farm"] = Farm::find($id);
-    return view("content.pages.farm.update", $data);
+    return view("content.pages.structure.farm.update", $data);
   }
 
   public function farmUpdateAction(int $id, Request $request) {

@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 
 class SysProfillePermissionController extends Controller {
   public function profilePermissions() {
-    return view('content.pages.sys.profile-permission.list');
+    return view('content.pages.sys.security.profile-permission.list');
   }
 
   public function profilePermissionsCreate() {
@@ -20,7 +20,7 @@ class SysProfillePermissionController extends Controller {
     $data['profiles'] = Profile::all();
     // $data['profiles'] = Profile::where('client_id', 1)->get();
 
-    return view('content.pages.sys.profile-permission.create', $data);
+    return view('content.pages.sys.security.profile-permission.create', $data);
   }
 
   public function profilePermissionsCreateAction(Request $request) {
@@ -46,7 +46,7 @@ class SysProfillePermissionController extends Controller {
 
     $data['profilePermission'] = profilePermission::find($id);
 
-    return view('content.pages.sys.profile-permission.update', $data);
+    return view('content.pages.sys.security.profile-permission.update', $data);
   }
 
   public function profilePermissionsUpdateAction(int $id, Request $request) {

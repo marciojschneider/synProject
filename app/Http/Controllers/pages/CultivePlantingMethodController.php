@@ -10,11 +10,11 @@ use App\Models\PlantingMethod;
 
 class CultivePlantingMethodController extends Controller {
   public function plantingMethods() {
-    return view('content.pages.planting-method.list');
+    return view('content.pages.cultive.planting-method.list');
   }
 
   public function plantingMethodCreate() {
-    return view('content.pages.planting-method.create');
+    return view('content.pages.cultive.planting-method.create');
   }
 
   public function plantingMethodCreateAction(Request $request) {
@@ -32,7 +32,7 @@ class CultivePlantingMethodController extends Controller {
   public function plantingMethodUpdate(int $id) {
     $data['plantingMethod'] = PlantingMethod::find($id);
 
-    return view('content.pages.planting-method.update', $data);
+    return view('content.pages.cultive.planting-method.update', $data);
   }
   public function plantingMethodUpdateAction(int $id, Request $request) {
     $update = $request->only(['name', 'code', 'situation']);

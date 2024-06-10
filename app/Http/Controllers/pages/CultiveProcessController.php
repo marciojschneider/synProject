@@ -10,11 +10,11 @@ use App\Models\Process;
 
 class CultiveProcessController extends Controller {
   public function processes() {
-    return view('content.pages.process.list');
+    return view('content.pages.cultive.process.list');
   }
 
   public function processCreate() {
-    return view('content.pages.process.create');
+    return view('content.pages.cultive.process.create');
   }
 
   public function processCreateAction(Request $request) {
@@ -34,7 +34,7 @@ class CultiveProcessController extends Controller {
   public function processUpdate(int $id) {
     $data['process'] = Process::find($id);
 
-    return view('content.pages.process.update', $data);
+    return view('content.pages.cultive.process.update', $data);
   }
 
   public function processUpdateAction(int $id, Request $request) {

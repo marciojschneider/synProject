@@ -15,14 +15,14 @@ class SupTaskController extends Controller {
   public function tasks() {
     $data['unapproveds'] = Task::orderBy('created_at', 'DESC')->where('situation', '<', 4)->get();
 
-    return view('content.pages.task.list', $data);
+    return view('content.pages.sup.task.list', $data);
   }
 
   public function taskCreate() {
     // $uriAdjust = $request->route(); Forma de pegar a rota atual.
     $data['sidebars'] = Sidebar::where('icon', null)->get();
 
-    return view('content.pages.task.create', $data);
+    return view('content.pages.sup.task.create', $data);
   }
 
   public function taskCreateAction(Request $request) {
@@ -45,7 +45,7 @@ class SupTaskController extends Controller {
     $data['sidebars'] = Sidebar::where('icon', null)->get();
     $data['task'] = Task::find($id);
 
-    return view('content.pages.task.update', $data);
+    return view('content.pages.sup.task.update', $data);
   }
 
   public function taskUpdateAction(int $id, Request $request) {
@@ -104,7 +104,7 @@ class SupTaskController extends Controller {
   public function roadmap() {
     $data['unapproveds'] = Task::orderBy('created_at', 'DESC')->where('situation', '<', 4)->get();
 
-    return view('content.pages.task.roadmap', $data);
+    return view('content.pages.sup.task.roadmap', $data);
   }
 
   public function roadmapAction(Request $request) {

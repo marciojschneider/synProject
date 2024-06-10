@@ -10,11 +10,11 @@ use App\Models\Harvest;
 
 class HarvHarvestController extends Controller {
   public function harvests() {
-    return view('content.pages.harvest.list');
+    return view('content.pages.harv.harvest.list');
   }
 
   public function harvestCreate() {
-    return view('content.pages.harvest.create');
+    return view('content.pages.harv.harvest.create');
   }
   public function harvestCreateAction(Request $request) {
     $data = $request->only(['code', 'name', 'price_table', 'initial_dt', 'ending_dt', 'situation']);
@@ -33,7 +33,7 @@ class HarvHarvestController extends Controller {
   }
   public function harvestUpdate(int $id) {
     $data['harvest'] = Harvest::find($id);
-    return view('content.pages.harvest.update', $data);
+    return view('content.pages.harv.harvest.update', $data);
   }
 
   public function harvestUpdateAction(int $id, Request $request) {
