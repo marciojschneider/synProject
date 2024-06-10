@@ -37,7 +37,7 @@
 
         {{-- Botão de nova permissão --}}
         <div class="dt-buttons" bis_skin_checked="1">
-          <a class="dt-button add-new btn btn-primary" href="{{ route('sys-permission-create') }}"><span> <i
+          <a class="dt-button add-new btn btn-primary" href="{{ route('sys-sec-permission-create') }}"><span> <i
                 class="bx bx-plus me-0 me-sm-1"></i><span class="d-none d-sm-inline-block">Novo</span>
             </span>
           </a>
@@ -70,10 +70,10 @@
                   <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i
                       class="bx bx-dots-vertical-rounded"></i></button>
                   <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{{ route('sys-permission-update', $row->id) }}"><i
+                    <a class="dropdown-item" href="{{ route('sys-sec-permission-update', $row->id) }}"><i
                         class="bx bx-edit-alt me-1"></i> Editar</a>
 
-                    <form method="POST" action="{{ route('sys-permission-delete', $row->id) }}"
+                    <form method="POST" action="{{ route('sys-sec-permission-delete', $row->id) }}"
                       id="permissionDelete{{ $row->id }}" display="none">
                       @csrf
                     </form>

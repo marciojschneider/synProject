@@ -35,6 +35,7 @@
         {{-- active menu method --}}
         @php
           $activeClass = null;
+          $active = 'active open';
           $currentRouteName = Route::currentRouteName();
 
           if ($currentRouteName === $menu['menu']['slug']) {
@@ -43,7 +44,7 @@
               if (gettype($menu['menu']['slug']) === 'array') {
                   foreach ($menu['menu']['slug'] as $slug) {
                       if (str_contains($currentRouteName, $slug) and strpos($currentRouteName, $slug) === 0) {
-                          $activeClass = 'active open';
+                          $activeClass = $active;
                       }
                   }
               } else {
@@ -51,7 +52,7 @@
                       str_contains($currentRouteName, $menu['menu']['slug']) and
                       strpos($currentRouteName, $menu['menu']['slug']) === 0
                   ) {
-                      $activeClass = 'active open';
+                      $activeClass = $active;
                   }
               }
           }

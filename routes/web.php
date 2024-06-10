@@ -44,12 +44,12 @@ Route::get('/sys/profile/update/{id}', [SysProfileController::class, 'profileUpd
 Route::post('/sys/profile/update/{id}', [SysProfileController::class, 'profileUpdateAction']);
 Route::post('/sys/profile/delete/{id}', [SysProfileController::class, 'profileDelete'])->name('sys-profile-delete');
 //       → Permissions TODO: Transformar em singular, conforme restante das rotas.
-Route::get('/sys/profile/permissions', [SysProfillePermissionController::class, 'profilePermissions'])->name('sys-permissions');
-Route::get('/sys/profile/permission/create', [SysProfillePermissionController::class, 'profilePermissionsCreate'])->name('sys-permission-create');
+Route::get('/sys/profile/permissions', [SysProfillePermissionController::class, 'profilePermissions'])->name('sys-sec-permissions');
+Route::get('/sys/profile/permission/create', [SysProfillePermissionController::class, 'profilePermissionsCreate'])->name('sys-sec-permission-create');
 Route::post('/sys/profile/permission/create', [SysProfillePermissionController::class, 'profilePermissionsCreateAction']);
-Route::get('/sys/profile/permission/update/{id}', [SysProfillePermissionController::class, 'profilePermissionsUpdate'])->name('sys-permission-update');
+Route::get('/sys/profile/permission/update/{id}', [SysProfillePermissionController::class, 'profilePermissionsUpdate'])->name('sys-sec-permission-update');
 Route::post('/sys/profile/permission/update/{id}', [SysProfillePermissionController::class, 'profilePermissionsUpdateAction']);
-Route::post('/sys/profile/permission/delete/{id}', [SysProfillePermissionController::class, 'profilePermissionsDelete'])->name('sys-permission-delete');
+Route::post('/sys/profile/permission/delete/{id}', [SysProfillePermissionController::class, 'profilePermissionsDelete'])->name('sys-sec-permission-delete');
 //       → Closure Modules
 Route::get('/sys/closure-modules', [SysClosureModuleController::class, 'closureModules'])->name('sys-closures');
 Route::get('/sys/closure-module/create', [SysClosureModuleController::class, 'closureModuleCreate'])->name('sys-closure-create');

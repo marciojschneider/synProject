@@ -37,7 +37,7 @@ class SysProfillePermissionController extends Controller {
     $profilePermission->description = $data['description'];
     $profilePermission->save();
 
-    return redirect()->route('sys-permissions');
+    return redirect()->route('sys-sec-permissions');
   }
 
   public function profilePermissionsUpdate(int $id) {
@@ -62,12 +62,12 @@ class SysProfillePermissionController extends Controller {
 
     $profilePermissionUpdate->save();
 
-    return redirect()->route('sys-permissions');
+    return redirect()->route('sys-sec-permissions');
   }
 
   public function profilePermissionsDelete(int $id) {
     profilePermission::where('id', $id)->delete();
 
-    return redirect()->route('sys-permissions');
+    return redirect()->route('sys-sec-permissions');
   }
 }

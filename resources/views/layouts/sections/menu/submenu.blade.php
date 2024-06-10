@@ -8,7 +8,7 @@
         $currentRouteName = Route::currentRouteName();
 
         if (str_contains($currentRouteName, $submenu['slug'])) {
-            $activeClass = 'active';
+            $activeClass = 'active open';
         } elseif (isset($submenu['submenu'])) {
             if (gettype($submenu['slug']) === 'array') {
                 foreach ($submenu['slug'] as $slug) {
