@@ -11,12 +11,12 @@ use App\Models\closureModule;
 
 class SysClosureModuleController extends Controller {
   public function closureModules() {
-    return view('content.pages.closure-module.list');
+    return view('content.pages.sys.closure-module.list');
   }
 
   public function closureModuleCreate() {
     $data['sidebars'] = Sidebar::where('icon', null)->get();
-    return view('content.pages.closure-module.create', $data);
+    return view('content.pages.sys.closure-module.create', $data);
   }
 
   public function closureModuleCreateAction(Request $request) {
@@ -37,7 +37,7 @@ class SysClosureModuleController extends Controller {
     $data['closure_module'] = closureModule::find($id);
     $data['sidebars'] = Sidebar::where('icon', null)->get();
 
-    return view('content.pages.closure-module.update', $data);
+    return view('content.pages.sys.closure-module.update', $data);
   }
 
   public function closureModuleUpdateAction(int $id, Request $request) {

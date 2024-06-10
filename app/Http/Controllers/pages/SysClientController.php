@@ -8,11 +8,11 @@ use Illuminate\Http\Request;
 
 class SysClientController extends Controller {
   public function clients() {
-    return view('content.pages.client.list');
+    return view('content.pages.sys.client.list');
   }
 
   public function clientCreate() {
-    return view('content.pages.client.create');
+    return view('content.pages.sys.client.create');
   }
 
   public function clientCreateAction(Request $request) {
@@ -31,7 +31,7 @@ class SysClientController extends Controller {
   public function clientUpdate(int $id) {
     $data['client'] = Client::find($id);
 
-    return view('content.pages.client.update', $data);
+    return view('content.pages.sys.client.update', $data);
   }
 
   public function ClientUpdateAction(int $id, Request $request) {

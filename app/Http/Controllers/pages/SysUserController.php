@@ -7,6 +7,6 @@ use Illuminate\Http\Request;
 
 class SysUserController extends Controller {
   public function index() {
-    return view('content.pages.user.index');
+    return view('content.pages.sys.user.index');
   }
 }

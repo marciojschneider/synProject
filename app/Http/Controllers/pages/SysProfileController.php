@@ -11,13 +11,13 @@ use App\Models\Profile;
 
 class SysProfileController extends Controller {
   public function profiles() {
-    return view('content.pages.profile.list');
+    return view('content.pages.sys.profile.list');
   }
 
   public function profileCreate() {
     $data['clients'] = Client::all();
 
-    return view('content.pages.profile.create', $data);
+    return view('content.pages.sys.profile.create', $data);
   }
 
   public function profileCreateAction(Request $request) {
@@ -37,7 +37,7 @@ class SysProfileController extends Controller {
     $data['profile'] = Profile::find($id);
     $data['clients'] = Client::all();
 
-    return view('content.pages.profile.update', $data);
+    return view('content.pages.sys.profile.update', $data);
   }
 
   public function profileUpdateAction(int $id, Request $request) {
