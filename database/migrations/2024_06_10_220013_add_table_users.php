@@ -12,9 +12,9 @@ return new class extends Migration {
       $table->string('email')->unique();
       $table->string('password');
       $table->rememberToken(); // Verificar necessidade
-      $table->integer('in_client');
-      $table->integer('in_profile');
-      $table->timestamp('in_time');
+      $table->integer('in_client')->nullable();
+      $table->integer('in_profile')->nullable();
+      $table->timestamp('in_time')->nullable();
       $table->integer('situation')->default(1);
       $table->string('creation_user')->nullable();
       $table->string('edition_user')->nullable();
