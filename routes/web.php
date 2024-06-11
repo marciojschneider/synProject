@@ -28,7 +28,12 @@ Route::get('/', [HomePage::class, 'index'])->name('homepage');
 
 // System
 //       → Users
-Route::get('/sys/users', [SysUserController::class, 'index'])->name('sys-user');
+Route::get('/sys/users', [SysUserController::class, 'users'])->name('sys-users');
+Route::get('/sys/users/create', [SysUserController::class, 'userCreate'])->name('sys-user-create');
+Route::post('/sys/users/create', [SysUserController::class, 'userCreateAction']);
+Route::get('/sys/users/update/{id}', [SysUserController::class, 'userUpdate'])->name('sys-user-update');
+Route::post('/sys/users/update/{id}', [SysUserController::class, 'userUpdateAction']);
+Route::post('/sys/users/delete/{id}', [SysUserController::class, 'userDelete'])->name('sys-user-delete');
 //       → Clients
 Route::get('/sys/clients', [SysClientController::class, 'clients'])->name('sys-clients');
 Route::get('/sys/client/create', [SysClientController::class, 'clientCreate'])->name('sys-client-create');
@@ -43,7 +48,7 @@ Route::post('/sys/profile/create', [SysProfileController::class, 'profileCreateA
 Route::get('/sys/profile/update/{id}', [SysProfileController::class, 'profileUpdate'])->name('sys-profile-update');
 Route::post('/sys/profile/update/{id}', [SysProfileController::class, 'profileUpdateAction']);
 Route::post('/sys/profile/delete/{id}', [SysProfileController::class, 'profileDelete'])->name('sys-profile-delete');
-//       → Permissions TODO: Transformar em singular, conforme restante das rotas.
+//       → Permissions
 Route::get('/sys/profile/permissions', [SysProfillePermissionController::class, 'profilePermissions'])->name('sys-sec-permissions');
 Route::get('/sys/profile/permission/create', [SysProfillePermissionController::class, 'profilePermissionsCreate'])->name('sys-sec-permission-create');
 Route::post('/sys/profile/permission/create', [SysProfillePermissionController::class, 'profilePermissionsCreateAction']);
