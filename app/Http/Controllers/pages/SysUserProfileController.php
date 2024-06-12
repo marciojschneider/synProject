@@ -28,6 +28,7 @@ class SysUserProfileController extends Controller {
     $userProfile = new UserProfile();
     $userProfile->user_id = $data['user'];
     $userProfile->profile_id = $data['profile'];
+    $userProfile->client_id = 1; // Salva de acordo com o usuário logado.
     $userProfile->situation = $data['situation'];
     $userProfile->save();
 
@@ -39,10 +40,20 @@ class SysUserProfileController extends Controller {
   }
 
   public function userProfileUpdateAction(int $id, Request $request) {
-    dd($request);
+    $update = $request->only(['user', 'profile', 'situation']);
+
+    $userProfileUpdate = UserProfile::find($id);
+    $userProfileUpdate->user_id = $update['user'];
+    $userProfileUpdate->profile_id = $update['profile'];
+    $userProfileUpdate->situation = $update['situation'];
+    $userProfileUpdate->save();
+
+    return redirect()->route('sys-sec-user-profiles');
   }
 
   public function userProfileDelete(int $id) {
-    dd($id);
+    UserProfile::where('id', $id)->delete();
+
+    return redirect()->route('sys-sec-user-profiles');
   }
 }
