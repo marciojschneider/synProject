@@ -16,7 +16,6 @@ class UserList extends Component {
   public function mount() {
     // Caso precise pré carregar selects, declare a váriavel e faça a busca por aqui!
   }
-
   public function updated() {
     $this->resetPage();
   }
