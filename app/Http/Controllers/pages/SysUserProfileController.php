@@ -32,11 +32,15 @@ class SysUserProfileController extends Controller {
     $userProfile->situation = $data['situation'];
     $userProfile->save();
 
-    return redirect()->route('sys-sec-user-profiles');
+    return redirect()->route('sys-sec-u-ps');
   }
 
   public function userProfileUpdate(int $id) {
-    return view('content.pages.sys.security.user-profile.update');
+    $data['users'] = User::all();
+    $data['profiles'] = Profile::all();
+    $data['userProfile'] = UserProfile::find($id);
+
+    return view('content.pages.sys.security.user-profile.update', $data);
   }
 
   public function userProfileUpdateAction(int $id, Request $request) {
@@ -48,12 +52,12 @@ class SysUserProfileController extends Controller {
     $userProfileUpdate->situation = $update['situation'];
     $userProfileUpdate->save();
 
-    return redirect()->route('sys-sec-user-profiles');
+    return redirect()->route('sys-sec-u-ps');
   }
 
   public function userProfileDelete(int $id) {
     UserProfile::where('id', $id)->delete();
 
-    return redirect()->route('sys-sec-user-profiles');
+    return redirect()->route('sys-sec-u-ps');
   }
 }

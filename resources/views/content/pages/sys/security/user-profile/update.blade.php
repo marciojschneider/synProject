@@ -19,8 +19,8 @@
 
           <div class="row mb-4">
             <div class="col-md-4">
-              <label for="sidebar" class="form-label">Usuário</label>
-              <select id="sidebar" name="sidebar" class="form-select">
+              <label for="user" class="form-label">Usuário</label>
+              <select id="user" name="user" class="form-select">
                 @foreach ($users as $user)
                   <option value="{{ $user->id }}"
                     {{ str_contains($userProfile->user_id, $user->id) ? 'selected' : '' }}>{{ $user->name }}
