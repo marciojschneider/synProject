@@ -4,12 +4,12 @@
 
 @extends('layouts/layoutMaster')
 
-@section('title', 'Nova Fazenda')
+@section('title', 'Atualizar Fazenda')
 
 @section('content')
   <div class="col-md">
     <h4 class="mb-4">
-      <span class="text-muted fw-light">Fazenda</span> Cadastrar
+      <span class="text-muted fw-light">Fazenda /</span> Atualizar
     </h4>
     <div class="card mb-4">
       {{-- <h5 class="card-header">Novo chamado</h5> --}}
