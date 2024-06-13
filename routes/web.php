@@ -31,6 +31,14 @@ Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'loginAction']);
 
 Route::middleware(['auth'])->group(function () {
+  // Authentication
+  Route::get('/select-client', [AuthController::class, 'selectClient'])->name('select-client');
+  Route::post('/select-client', [AuthController::class, 'selectClientAction']);
+  Route::get('/select-profile', [AuthController::class, 'selectProfile'])->name('select-profile');
+  Route::post('/select-profile', [AuthController::class, 'selectProfileAction']);
+});
+
+Route::middleware(['auth', 'canAccess'])->group(function () {
   // Homepage
   Route::get('/', [HomePage::class, 'index'])->name('homepage');
 

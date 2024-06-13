@@ -30,13 +30,13 @@
         <div class="card">
           <div class="card-body">
             <!-- Logo -->
-            {{-- <div class="app-brand justify-content-center mt-2"> --}}
-            {{-- <a href="{{ url('/') }}" class="app-brand-link gap-2"> --}}
-            {{-- <span class="app-brand-logo demo">@include('_partials.macros', ['width' => 25, 'withbg' => 'var(--bs-primary)'])</span> --}}
-            {{-- <span class="app-brand-text demo text-body fw-bold">{{ config('variables.templateName') }}</span> --}}
-            {{-- <span class="app-brand-logo demo"><img src="assets/img/kettlow/logotipo-soft-purple-696cff.png" /></span> --}}
-            {{-- </a> --}}
-            {{-- </div> --}}
+            {{-- <div class="app-brand justify-content-center mt-2">
+              <a href="{{ url('/') }}" class="app-brand-link gap-2">
+                <span class="app-brand-logo demo">@include('_partials.macros', ['width' => 25, 'withbg' => 'var(--bs-primary)'])</span>
+                <span class="app-brand-text demo text-body fw-bold">{{ config('variables.templateName') }}</span>
+                <span class="app-brand-logo demo"><img src="assets/img/kettlow/logotipo-soft-purple-696cff.png" /></span>
+              </a>
+            </div> --}}
             <!-- /Logo -->
             <h4 class="mb-2">Bem vindo à {{ config('variables.templateName') }}! 👋</h4>
             <p class="mb-4">Informe seus dados para acessar o sistema</p>
