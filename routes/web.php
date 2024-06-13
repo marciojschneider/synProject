@@ -19,6 +19,7 @@ use App\Http\Controllers\pages\SupTaskController;
 //       → Structure
 use App\Http\Controllers\pages\StructureFarmController;
 use App\Http\Controllers\pages\StructureOrganizationController;
+use App\Http\Controllers\pages\StructureLocalityController;
 //       → Cultive
 use App\Http\Controllers\pages\CultiveCultureController;
 use App\Http\Controllers\pages\CultivePlantingMethodController;
@@ -120,6 +121,13 @@ Route::middleware(['auth', 'canAccess'])->group(function () {
   Route::get('/structure/farm/update/{id}', [StructureFarmController::class, 'farmUpdate'])->name('structure-farm-update');
   Route::post('/structure/farm/update/{id}', [StructureFarmController::class, 'farmUpdateAction']);
   Route::post('/structure/farm/delete/{id}', [StructureFarmController::class, 'farmDelete'])->name('structure-farm-delete');
+  //       → Locality
+  Route::get('/structure/localities', [StructureLocalityController::class, 'localities'])->name('structure-localities');
+  Route::get('/structure/localities/create', [StructureLocalityController::class, 'localityCreate'])->name('structure-locality-create');
+  Route::post('/structure/localities/create', [StructureLocalityController::class, 'localityCreateAction']);
+  Route::get('/structure/localities/update/{id}', [StructureLocalityController::class, 'localityUpdate'])->name('structure-locality-update');
+  Route::post('/structure/localities/update/{id}', [StructureLocalityController::class, 'localityUpdateAction']);
+  Route::post('/structure/localities/delete/{id}', [StructureLocalityController::class, 'localityDelete'])->name('structure-locality-delete');
 
   // Cultive
   //       → Method
