@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\pages\StructureSectionController;
 use App\Http\Controllers\pages\StructureSectorController;
 use Illuminate\Support\Facades\Route;
 
@@ -144,6 +145,13 @@ Route::middleware(['auth', 'canAccess'])->group(function () {
   Route::get('/structure/sector/update/{id}', [StructureSectorController::class, 'sectorUpdate'])->name('structure-sector-update');
   Route::post('/structure/sector/update/{id}', [StructureSectorController::class, 'sectorUpdateAction']);
   Route::post('/structure/sector/delete/{id}', [StructureSectorController::class, 'sectorDelete'])->name('structure-sector-delete');
+  //       → Section
+  Route::get('/structure/sections', [StructureSectionController::class, 'sections'])->name('structure-sections');
+  Route::get('/structure/section/create', [StructureSectionController::class, 'sectionCreate'])->name('structure-section-create');
+  Route::post('/structure/section/create', [StructureSectionController::class, 'sectionCreateAction']);
+  Route::get('/structure/section/update/{id}', [StructureSectionController::class, 'sectionUpdate'])->name('structure-section-update');
+  Route::post('/structure/section/update/{id}', [StructureSectionController::class, 'sectionUpdateAction']);
+  Route::post('/structure/section/delete/{id}', [StructureSectionController::class, 'sectionDelete'])->name('structure-section-delete');
 
   // Cultive
   //       → Method
