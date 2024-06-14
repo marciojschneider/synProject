@@ -2,13 +2,13 @@
 
 namespace App\Livewire;
 
-use App\Models\Locality;
+use App\Models\Field;
 use Livewire\Component;
 
 // Livewire Adicionais
 use Livewire\WithPagination;
 
-class LocalityList extends Component {
+class FieldList extends Component {
   use WithPagination;
   protected $paginationTheme = 'bootstrap';
 
@@ -22,10 +22,10 @@ class LocalityList extends Component {
     $this->resetPage();
   }
   public function render() {
-    $query = Locality::query();
+    $query = Field::query();
 
     $data['rows'] = $query->paginate($this->pPage);
 
-    return view('livewire.locality-list', $data);
+    return view('livewire.field-list', $data);
   }
 }
