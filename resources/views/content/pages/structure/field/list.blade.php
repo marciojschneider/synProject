@@ -4,7 +4,7 @@
 
 @extends('layouts/layoutMaster')
 
-@section('title', 'Fazendas')
+@section('title', 'Talhões')
 
 {{-- Verificar estilizações necessárias para o funcionamento da pagina --}}
 @section('vendor-style')
@@ -24,5 +24,5 @@
 @endsection
 
 @section('content')
-  <livewire:farm-list />
+  <livewire:field-list />
 @endsection

@@ -20,6 +20,7 @@ use App\Http\Controllers\pages\SupTaskController;
 use App\Http\Controllers\pages\StructureFarmController;
 use App\Http\Controllers\pages\StructureOrganizationController;
 use App\Http\Controllers\pages\StructureLocalityController;
+use App\Http\Controllers\pages\StructureFieldController;
 //       → Cultive
 use App\Http\Controllers\pages\CultiveCultureController;
 use App\Http\Controllers\pages\CultivePlantingMethodController;
@@ -123,11 +124,18 @@ Route::middleware(['auth', 'canAccess'])->group(function () {
   Route::post('/structure/farm/delete/{id}', [StructureFarmController::class, 'farmDelete'])->name('structure-farm-delete');
   //       → Locality
   Route::get('/structure/localities', [StructureLocalityController::class, 'localities'])->name('structure-localities');
-  Route::get('/structure/localities/create', [StructureLocalityController::class, 'localityCreate'])->name('structure-locality-create');
-  Route::post('/structure/localities/create', [StructureLocalityController::class, 'localityCreateAction']);
-  Route::get('/structure/localities/update/{id}', [StructureLocalityController::class, 'localityUpdate'])->name('structure-locality-update');
-  Route::post('/structure/localities/update/{id}', [StructureLocalityController::class, 'localityUpdateAction']);
-  Route::post('/structure/localities/delete/{id}', [StructureLocalityController::class, 'localityDelete'])->name('structure-locality-delete');
+  Route::get('/structure/locality/create', [StructureLocalityController::class, 'localityCreate'])->name('structure-locality-create');
+  Route::post('/structure/locality/create', [StructureLocalityController::class, 'localityCreateAction']);
+  Route::get('/structure/locality/update/{id}', [StructureLocalityController::class, 'localityUpdate'])->name('structure-locality-update');
+  Route::post('/structure/locality/update/{id}', [StructureLocalityController::class, 'localityUpdateAction']);
+  Route::post('/structure/locality/delete/{id}', [StructureLocalityController::class, 'localityDelete'])->name('structure-locality-delete');
+  //       → Field
+  Route::get('/structure/fields', [StructureFieldController::class, 'fields'])->name('structure-fields');
+  Route::get('/structure/field/create', [StructureFieldController::class, 'fieldCreate'])->name('structure-field-create');
+  Route::post('/structure/field/create', [StructureFieldController::class, 'fieldCreateAction']);
+  Route::get('/structure/field/update/{id}', [StructureFieldController::class, 'fieldUpdate'])->name('structure-field-update');
+  Route::post('/structure/field/update/{id}', [StructureFieldController::class, 'fieldUpdateAction']);
+  Route::post('/structure/field/delete/{id}', [StructureFieldController::class, 'fieldDelete'])->name('structure-field-delete');
 
   // Cultive
   //       → Method

@@ -1,0 +1,31 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+// Models
+use App\Models\Farm;
+use App\Models\Locality;
+
+return new class extends Migration {
+  public function up(): void {
+    Schema::create('fields', function (Blueprint $table) {
+      $table->id();
+      $table->string('code');
+      $table->string('name');
+      $table->foreignIdFor(Farm::class)->constrained();
+      $table->decimal('total_area', 10, 2)->default(0);
+      $table->decimal('productive_area', 10, 2)->default(0);
+      $table->string('property_registration')->nullable();
+      $table->string('local_group')->nullable();
+      $table->foreignIdFor(Locality::class)->constrained();
+      $table->integer('situation')->default(1);
+      $table->timestamps();
+    });
+  }
+
+  public function down(): void {
+    Schema::dropIfExists('fields');
+  }
+};
