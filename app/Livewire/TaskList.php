@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 
 // Livewire adicionais
+use Livewire\Attributes\Session;
 use Livewire\WithPagination;
 
 // Models
@@ -18,9 +19,9 @@ class TaskList extends Component {
   public $sidebars;
 
   // Variaveis
-  public $searchText;
-  public $sidebar;
-  public $situation;
+  #[Session] public $searchText;
+  #[Session] public $sidebar;
+  #[Session] public $situation;
   public $pPage = 5;
 
   public function mount() {
