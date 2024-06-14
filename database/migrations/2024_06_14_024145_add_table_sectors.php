@@ -1,0 +1,23 @@
+<?php
+
+use App\Models\Farm;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration {
+  public function up(): void {
+    Schema::create('sectors', function (Blueprint $table) {
+      $table->id();
+      $table->string('code');
+      $table->string('name');
+      $table->foreignIdFor(Farm::class)->constrained();
+      $table->integer('situation')->default(1);
+      $table->timestamps();
+    });
+  }
+
+  public function down(): void {
+    Schema::dropIfExists('sectors');
+  }
+};

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\pages\StructureSectorController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
@@ -136,6 +137,13 @@ Route::middleware(['auth', 'canAccess'])->group(function () {
   Route::get('/structure/field/update/{id}', [StructureFieldController::class, 'fieldUpdate'])->name('structure-field-update');
   Route::post('/structure/field/update/{id}', [StructureFieldController::class, 'fieldUpdateAction']);
   Route::post('/structure/field/delete/{id}', [StructureFieldController::class, 'fieldDelete'])->name('structure-field-delete');
+  //       → Sector
+  Route::get('/structure/sectors', [StructureSectorController::class, 'sectors'])->name('structure-sectors');
+  Route::get('/structure/sector/create', [StructureSectorController::class, 'sectorCreate'])->name('structure-sector-create');
+  Route::post('/structure/sector/create', [StructureSectorController::class, 'sectorCreateAction']);
+  Route::get('/structure/sector/update/{id}', [StructureSectorController::class, 'sectorUpdate'])->name('structure-sector-update');
+  Route::post('/structure/sector/update/{id}', [StructureSectorController::class, 'sectorUpdateAction']);
+  Route::post('/structure/sector/delete/{id}', [StructureSectorController::class, 'sectorDelete'])->name('structure-sector-delete');
 
   // Cultive
   //       → Method
