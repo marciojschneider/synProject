@@ -29,14 +29,21 @@ class SupTaskController extends Controller {
     $data = $request->only(['title', 'sidebar', 'situation', 'solicitation', 'expectation', 'description']);
 
     $task = new Task();
-    $task->title = $data['title'];
+    $task->title = strtoupper($data['title']);
     $task->sidebar_id = $data['sidebar'];
     $task->initial_dt = $data['solicitation'];
     $task->expected_dt = $data['expectation'];
     // $task->user_id = 0;
-    $task->description = $data['description'];
+    $task->description = strtoupper($data['description']);
     $task->situation = $data['situation'];
     $task->save();
+
+    $taskDetail = new TaskDetail();
+    $taskDetail->task_id = $task->id;
+    $taskDetail->description = strtoupper($data['description']);
+    $taskDetail->type = 2;
+    $taskDetail->situation = 1;
+    $taskDetail->save();
 
     return redirect()->route('sup-tasks');
   }
@@ -50,12 +57,12 @@ class SupTaskController extends Controller {
 
   public function taskUpdateAction(int $id, Request $request) {
     $update = $request->only(['title', 'situation', 'solicitation', 'expectation', 'description']);
-    $taskUpdate = Task::find($id);
 
-    $taskUpdate->title = $update['title'];
+    $taskUpdate = Task::find($id);
+    $taskUpdate->title = strtoupper($update['title']);
     // $taskUpdate->sidebar_id = $update['sidebar']; Disabled select (Just to view)!
     $taskUpdate->expected_dt = $update['expectation'];
-    $taskUpdate->description = $update['description'];
+    $taskUpdate->description = strtoupper($update['description']);
     $taskUpdate->situation = $update['situation'];
     $taskUpdate->save();
 
@@ -75,7 +82,7 @@ class SupTaskController extends Controller {
 
     $taskDetail = new TaskDetail();
     $taskDetail->task_id = $data['commentTask'];
-    $taskDetail->description = $data['commentDescription'];
+    $taskDetail->description = strtoupper($data['commentDescription']);
     $taskDetail->type = 2;
     $taskDetail->situation = 1;
     $taskDetail->save();
@@ -85,10 +92,10 @@ class SupTaskController extends Controller {
 
   public function commentUpdate(Request $request) {
     $update = $request->only(['commentId', 'commentTask', 'commentDescription']);
-    $taskUpdate = TaskDetail::find($update['commentId']);
 
+    $taskUpdate = TaskDetail::find($update['commentId']);
     $taskUpdate->task_id = $update['commentTask'];
-    $taskUpdate->description = $update['commentDescription'];
+    $taskUpdate->description = strtoupper($update['commentDescription']);
     $taskUpdate->save();
 
     return redirect()->route('sup-tasks');
@@ -113,7 +120,7 @@ class SupTaskController extends Controller {
     $taskDetail = new TaskDetail();
     $taskDetail->task_id = $data['roadmapTask'];
     $taskDetail->commit_reference = $data['roadmapCommit'];
-    $taskDetail->description = $data['roadmapDescription'];
+    $taskDetail->description = strtoupper($data['roadmapDescription']);
     $taskDetail->type = 1;
     $taskDetail->situation = 1;
     $taskDetail->initial_dt = $data['roadmapDtSolicitation'];
@@ -125,11 +132,11 @@ class SupTaskController extends Controller {
 
   public function roadmapUpdate(Request $request) {
     $update = $request->only(['roadmapId', 'roadmapTask', 'roadmapCommit', 'roadmapDescription', 'roadmapDtSolicitation', 'roadmapDtFinal']);
-    $taskUpdate = TaskDetail::find($update['roadmapId']);
 
+    $taskUpdate = TaskDetail::find($update['roadmapId']);
     $taskUpdate->task_id = $update['roadmapTask'];
     $taskUpdate->commit_reference = $update['roadmapCommit'];
-    $taskUpdate->description = $update['roadmapDescription'];
+    $taskUpdate->description = strtoupper($update['roadmapDescription']);
     $taskUpdate->initial_dt = $update['roadmapDtSolicitation'];
     $taskUpdate->ending_dt = $update['roadmapDtFinal'];
     $taskUpdate->save();

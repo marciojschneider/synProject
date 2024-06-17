@@ -27,14 +27,13 @@ class SysProfillePermissionController extends Controller {
     $data = $request->only(['sidebar', 'profile', 'description', 'listCheck', 'createCheck', 'updateCheck', 'deleteCheck']);
 
     $profilePermission = new profilePermission();
-
     $profilePermission->profile_id = $data['profile'];
     $profilePermission->sidebar_id = $data['sidebar'];
     $profilePermission->list = isset($data['listCheck']) ? 1 : 0;
     $profilePermission->create = isset($data['createCheck']) ? 1 : 0;
     $profilePermission->update = isset($data['updateCheck']) ? 1 : 0;
     $profilePermission->delete = isset($data['deleteCheck']) ? 1 : 0;
-    $profilePermission->description = $data['description'];
+    $profilePermission->description = strtoupper($data['description']);
     $profilePermission->save();
 
     return redirect()->route('sys-sec-permissions');
@@ -51,15 +50,14 @@ class SysProfillePermissionController extends Controller {
 
   public function profilePermissionsUpdateAction(int $id, Request $request) {
     $update = $request->only(['sidebar', 'profile', 'description', 'listCheck', 'createCheck', 'updateCheck', 'deleteCheck']);
-    $profilePermissionUpdate = profilePermission::find($id);
 
+    $profilePermissionUpdate = profilePermission::find($id);
     $profilePermissionUpdate->profile_id = $update['profile'];
     $profilePermissionUpdate->list = isset($update['listCheck']) ? 1 : 0;
     $profilePermissionUpdate->create = isset($update['createCheck']) ? 1 : 0;
     $profilePermissionUpdate->update = isset($update['updateCheck']) ? 1 : 0;
     $profilePermissionUpdate->delete = isset($update['deleteCheck']) ? 1 : 0;
-    $profilePermissionUpdate->description = $update['description'];
-
+    $profilePermissionUpdate->description = strtoupper($update['description']);
     $profilePermissionUpdate->save();
 
     return redirect()->route('sys-sec-permissions');

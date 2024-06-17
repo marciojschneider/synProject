@@ -19,10 +19,8 @@ class CultiveCultureController extends Controller {
     $data = $request->only(['code', 'name']);
 
     $culture = new Culture();
-
-    $culture->code = $data['code'];
-    $culture->name = $data['name'];
-
+    $culture->code = strtoupper($data['code']);
+    $culture->name = strtoupper($data['name']);
     $culture->save();
 
     return redirect()->route('cultive-cultures');
@@ -35,11 +33,10 @@ class CultiveCultureController extends Controller {
 
   public function cultureUpdateAction(int $id, Request $request) {
     $update = $request->only(['code', 'name']);
+
     $cultureUpdate = Culture::find($id);
-
-    $cultureUpdate->code = $update['code'];
-    $cultureUpdate->name = $update['name'];
-
+    $cultureUpdate->code = strtoupper($update['code']);
+    $cultureUpdate->name = strtoupper($update['name']);
     $cultureUpdate->save();
 
     return redirect()->route('cultive-cultures');

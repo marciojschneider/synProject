@@ -30,8 +30,7 @@ class SysUserController extends Controller {
     ]);
 
     $user = new User();
-
-    $user->name = $data['name'];
+    $user->name = strtoupper($data['name']);
     $user->email = $data['email'];
     $user->password = Hash::make($data['password']);
     $user->situation = $data['situation'];
@@ -47,14 +46,13 @@ class SysUserController extends Controller {
   }
 
   public function userUpdateAction(int $id, Request $request) {
-    $update = $request->only('password', 'situation');
+    $update = $request->only('name', 'password', 'situation');
 
     $userUpdate = User::find($id);
-
+    $userUpdate->name = strtoupper($update['name']);
     if ($update['password']) {
       $userUpdate->password = Hash::make($update['password']);
     }
-
     $userUpdate->situation = $update['situation'];
     $userUpdate->save();
 

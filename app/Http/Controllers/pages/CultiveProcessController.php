@@ -21,9 +21,8 @@ class CultiveProcessController extends Controller {
     $data = $request->only(['code', 'name', 'type', 'situation']);
 
     $process = new Process();
-
-    $process->code = $data['code'];
-    $process->name = $data['name'];
+    $process->code = strtoupper($data['code']);
+    $process->name = strtoupper($data['name']);
     $process->type = $data['type'];
     $process->situation = $data['situation'];
     $process->save();
@@ -41,9 +40,8 @@ class CultiveProcessController extends Controller {
     $update = $request->only(['code', 'name', 'type', 'situation']);
 
     $processUpdate = Process::find($id);
-
-    $processUpdate->code = $update['code'];
-    $processUpdate->name = $update['name'];
+    $processUpdate->code = strtoupper($update['code']);
+    $processUpdate->name = strtoupper($update['name']);
     $processUpdate->type = $update['type'];
     $processUpdate->situation = $update['situation'];
     $processUpdate->save();

@@ -19,8 +19,8 @@ class SysClientController extends Controller {
     $data = $request->only(['code', 'name', 'url', 'situation']);
 
     $client = new Client();
-    $client->code = $data['code'];
-    $client->name = $data['name'];
+    $client->code = strtoupper($data['code']);
+    $client->name = strtoupper($data['name']);
     $client->url = $data['url'];
     $client->situation = $data['situation'];
     $client->save();
@@ -38,8 +38,8 @@ class SysClientController extends Controller {
     $update = $request->only(['code', 'name', 'url', 'situation']);
 
     $clientUpdate = Client::find($id);
-    $clientUpdate->code = $update['code'];
-    $clientUpdate->name = $update['name'];
+    $clientUpdate->code = strtoupper($update['code']);
+    $clientUpdate->name = strtoupper($update['name']);
     $clientUpdate->url = $update['url'];
     $clientUpdate->situation = $update['situation'];
     $clientUpdate->save();

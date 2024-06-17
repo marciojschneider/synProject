@@ -1,8 +1,5 @@
 <?php
 
-use App\Http\Controllers\pages\CultiveGroupController;
-use App\Http\Controllers\pages\StructureSectionController;
-use App\Http\Controllers\pages\StructureSectorController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
@@ -24,10 +21,14 @@ use App\Http\Controllers\pages\StructureFarmController;
 use App\Http\Controllers\pages\StructureOrganizationController;
 use App\Http\Controllers\pages\StructureLocalityController;
 use App\Http\Controllers\pages\StructureFieldController;
+use App\Http\Controllers\pages\StructureSectionController;
+use App\Http\Controllers\pages\StructureSectorController;
 //       → Cultive
 use App\Http\Controllers\pages\CultiveCultureController;
 use App\Http\Controllers\pages\CultivePlantingMethodController;
 use App\Http\Controllers\pages\CultiveProcessController;
+use App\Http\Controllers\pages\CultiveGroupController;
+use App\Http\Controllers\pages\CultiveVarietyController;
 //       → Harvest
 use App\Http\Controllers\pages\HarvConfigController;
 use App\Http\Controllers\pages\HarvHarvestController;
@@ -183,6 +184,13 @@ Route::middleware(['auth', 'canAccess'])->group(function () {
   Route::get('/cultive/group/update/{id}', [CultiveGroupController::class, 'groupUpdate'])->name('cultive-group-update');
   Route::post('/cultive/group/update/{id}', [CultiveGroupController::class, 'groupUpdateAction']);
   Route::post('/cultive/group/delete/{id}', [CultiveGroupController::class, 'groupDelete'])->name('cultive-group-delete');
+  //       → Variety
+  Route::get('/cultive/varieties', [CultiveVarietyController::class, 'varieties'])->name('cultive-varieties');
+  Route::get('/cultive/variety/create', [CultiveVarietyController::class, 'varietyCreate'])->name('cultive-variety-create');
+  Route::post('/cultive/variety/create', [CultiveVarietyController::class, 'varietyCreateAction']);
+  Route::get('/cultive/variety/update/{id}', [CultiveVarietyController::class, 'varietyUpdate'])->name('cultive-variety-update');
+  Route::post('/cultive/variety/update/{id}', [CultiveVarietyController::class, 'varietyUpdateAction']);
+  Route::post('/cultive/variety/delete/{id}', [CultiveVarietyController::class, 'varietyDelete'])->name('cultive-variety-delete');
   //       → Machine Hour
 
   //Harvest

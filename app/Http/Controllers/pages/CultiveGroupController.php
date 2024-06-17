@@ -21,10 +21,8 @@ class CultiveGroupController extends Controller {
     $data = $request->only(['code', 'name']);
 
     $group = new Group();
-
-    $group->code = $data['code'];
-    $group->name = $data['name'];
-
+    $group->code = strtoupper($data['code']);
+    $group->name = strtoupper($data['name']);
     $group->save();
 
     return redirect()->route('cultive-groups');
@@ -40,9 +38,8 @@ class CultiveGroupController extends Controller {
     $update = $request->only(['code', 'name']);
 
     $groupUpdate = Group::find($id);
-
-    $groupUpdate->code = $update['code'];
-    $groupUpdate->name = $update['name'];
+    $groupUpdate->code = strtoupper($update['code']);
+    $groupUpdate->name = strtoupper($update['name']);
     $groupUpdate->save();
 
     return redirect()->route('cultive-groups');

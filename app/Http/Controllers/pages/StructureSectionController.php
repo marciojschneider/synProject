@@ -22,9 +22,8 @@ class StructureSectionController extends Controller {
     $data = $request->only(['code', 'name', 'organization', 'responsible', 'situation']);
 
     $section = new Section();
-
-    $section->code = $data['code'];
-    $section->name = $data['name'];
+    $section->code = strtoupper($data['code']);
+    $section->name = strtoupper($data['name']);
     $section->organization_id = $data['organization'];
     $section->responsible = $data['responsible'];
     $section->situation = $data['situation'];
@@ -43,9 +42,8 @@ class StructureSectionController extends Controller {
     $update = $request->only(['code', 'name', 'organization', 'responsible', 'situation']);
 
     $sectionUpdate = Section::find($id);
-
-    $sectionUpdate->code = $update['code'];
-    $sectionUpdate->name = $update['name'];
+    $sectionUpdate->code = strtoupper($update['code']);
+    $sectionUpdate->name = strtoupper($update['name']);
     $sectionUpdate->organization_id = $update['organization'];
     $sectionUpdate->responsible = $update['responsible'];
     $sectionUpdate->situation = $update['situation'];

@@ -22,12 +22,10 @@ class StructureSectorController extends Controller {
     $data = $request->only(['code', 'name', 'farm', 'situation']);
 
     $sector = new Sector();
-
-    $sector->code = $data['code'];
-    $sector->name = $data['name'];
+    $sector->code = strtoupper($data['code']);
+    $sector->name = strtoupper($data['name']);
     $sector->farm_id = $data['farm'];
     $sector->situation = $data['situation'];
-
     $sector->save();
 
     return redirect()->route('structure-sectors');
@@ -44,12 +42,10 @@ class StructureSectorController extends Controller {
     $update = $request->only(['code', 'name', 'farm', 'situation']);
 
     $sectorUpdate = Sector::find($id);
-
-    $sectorUpdate->code = $update['code'];
-    $sectorUpdate->name = $update['name'];
+    $sectorUpdate->code = strtoupper($update['code']);
+    $sectorUpdate->name = strtoupper($update['name']);
     $sectorUpdate->farm_id = $update['farm'];
     $sectorUpdate->situation = $update['situation'];
-
     $sectorUpdate->save();
 
     return redirect()->route('structure-sectors');

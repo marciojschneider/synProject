@@ -21,9 +21,8 @@ class StructureLocalityController extends Controller {
     $data = $request->only(['code', 'name', 'situation']);
 
     $locality = new Locality();
-
-    $locality->code = $data['code'];
-    $locality->name = $data['name'];
+    $locality->code = strtoupper($data['code']);
+    $locality->name = strtoupper($data['name']);
     $locality->situation = $data['situation'];
     $locality->save();
 
@@ -40,9 +39,8 @@ class StructureLocalityController extends Controller {
     $update = $request->only(['code', 'name', 'situation']);
 
     $localityUpdate = Locality::find($id);
-
-    $localityUpdate->code = $update['code'];
-    $localityUpdate->name = $update['name'];
+    $localityUpdate->code = strtoupper($update['code']);
+    $localityUpdate->name = strtoupper($update['name']);
     $localityUpdate->situation = $update['situation'];
     $localityUpdate->save();
 

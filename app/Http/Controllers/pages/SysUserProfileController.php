@@ -23,12 +23,13 @@ class SysUserProfileController extends Controller {
   }
 
   public function userProfileCreateAction(Request $request) {
+    $user = auth()->user();
     $data = $request->only(['user', 'profile', 'situation']);
 
     $userProfile = new UserProfile();
     $userProfile->user_id = $data['user'];
     $userProfile->profile_id = $data['profile'];
-    $userProfile->client_id = 1; // Salva de acordo com o usuário logado.
+    $userProfile->client_id = $user->in_client; // Salva de acordo com o usuário logado.
     $userProfile->situation = $data['situation'];
     $userProfile->save();
 

@@ -21,8 +21,8 @@ class CultivePlantingMethodController extends Controller {
     $data = $request->only(['name', 'code', 'situation']);
 
     $plantingMethod = new PlantingMethod();
-    $plantingMethod->name = $data['name'];
-    $plantingMethod->code = $data['code'];
+    $plantingMethod->name = strtoupper($data['name']);
+    $plantingMethod->code = strtoupper($data['code']);
     $plantingMethod->situation = $data['situation'];
     $plantingMethod->save();
 
@@ -38,8 +38,8 @@ class CultivePlantingMethodController extends Controller {
     $update = $request->only(['name', 'code', 'situation']);
 
     $plantingMethodUpdate = PlantingMethod::find($id);
-    $plantingMethodUpdate->name = $update['name'];
-    $plantingMethodUpdate->code = $update['code'];
+    $plantingMethodUpdate->name = strtoupper($update['name']);
+    $plantingMethodUpdate->code = strtoupper($update['code']);
     $plantingMethodUpdate->situation = $update['situation'];
     $plantingMethodUpdate->save();
 

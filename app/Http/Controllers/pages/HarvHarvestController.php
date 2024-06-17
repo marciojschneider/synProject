@@ -18,15 +18,14 @@ class HarvHarvestController extends Controller {
   }
   public function harvestCreateAction(Request $request) {
     $data = $request->only(['code', 'name', 'price_table', 'initial_dt', 'ending_dt', 'situation']);
-    $harvest = new Harvest();
 
-    $harvest->code = $data['code'];
-    $harvest->name = $data['name'];
+    $harvest = new Harvest();
+    $harvest->code = strtoupper($data['code']);
+    $harvest->name = strtoupper($data['name']);
     $harvest->price_table = $data['price_table'];
     $harvest->initial_dt = $data['initial_dt'];
     $harvest->ending_dt = $data['ending_dt'];
     $harvest->situation = $data['situation'];
-
     $harvest->save();
 
     return redirect()->route('harv-harvests');
@@ -38,15 +37,14 @@ class HarvHarvestController extends Controller {
 
   public function harvestUpdateAction(int $id, Request $request) {
     $update = $request->only(['code', 'name', 'price_table', 'initial_dt', 'ending_dt', 'situation']);
-    $harvestUpdate = Harvest::find($id);
 
-    $harvestUpdate->code = $update['code'];
-    $harvestUpdate->name = $update['name'];
+    $harvestUpdate = Harvest::find($id);
+    $harvestUpdate->code = strtoupper($update['code']);
+    $harvestUpdate->name = strtoupper($update['name']);
     $harvestUpdate->price_table = $update['price_table'];
     $harvestUpdate->initial_dt = $update['initial_dt'];
     $harvestUpdate->ending_dt = $update['ending_dt'];
     $harvestUpdate->situation = $update['situation'];
-
     $harvestUpdate->save();
 
     return redirect()->route('harv-harvests');

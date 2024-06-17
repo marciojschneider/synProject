@@ -24,7 +24,7 @@ class SysProfileController extends Controller {
     $data = $request->only(['name', 'client', 'situation']);
 
     $profile = new Profile();
-    $profile->name = $data['name'];
+    $profile->name = strtoupper($data['name']);
     $profile->client_id = $data['client'];
     $profile->situation = $data['situation'];
     $profile->save();
@@ -42,9 +42,9 @@ class SysProfileController extends Controller {
 
   public function profileUpdateAction(int $id, Request $request) {
     $update = $request->only(['name', 'client', 'situation']);
-    $profileUpdate = Profile::find($id);
 
-    $profileUpdate->name = $update['name'];
+    $profileUpdate = Profile::find($id);
+    $profileUpdate->name = strtoupper($update['name']);
     $profileUpdate->client_id = $update['client'];
     $profileUpdate->situation = $update['situation'];
     $profileUpdate->save();
