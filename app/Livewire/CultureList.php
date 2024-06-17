@@ -10,7 +10,6 @@ use Livewire\WithPagination;
 // Models
 use App\Models\Culture;
 
-
 class CultureList extends Component {
   use WithPagination;
   protected $paginationTheme = 'bootstrap';
@@ -26,6 +25,7 @@ class CultureList extends Component {
   public function updated() {
     $this->resetPage();
   }
+
   public function render() {
     $query = Culture::query();
 
