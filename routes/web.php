@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\pages\CultiveGroupController;
 use App\Http\Controllers\pages\StructureSectionController;
 use App\Http\Controllers\pages\StructureSectorController;
 use Illuminate\Support\Facades\Route;
@@ -175,6 +176,13 @@ Route::middleware(['auth', 'canAccess'])->group(function () {
   Route::get('/cultive/culture/update/{id}', [CultiveCultureController::class, 'cultureUpdate'])->name('cultive-culture-update');
   Route::post('/cultive/culture/update/{id}', [CultiveCultureController::class, 'cultureUpdateAction']);
   Route::post('/cultive/culture/delete/{id}', [CultiveCultureController::class, 'cultureDelete'])->name('cultive-culture-delete');
+  //       → Group
+  Route::get('/cultive/groups', [CultiveGroupController::class, 'groups'])->name('cultive-groups');
+  Route::get('/cultive/group/create', [CultiveGroupController::class, 'groupCreate'])->name('cultive-group-create');
+  Route::post('/cultive/group/create', [CultiveGroupController::class, 'groupCreateAction']);
+  Route::get('/cultive/group/update/{id}', [CultiveGroupController::class, 'groupUpdate'])->name('cultive-group-update');
+  Route::post('/cultive/group/update/{id}', [CultiveGroupController::class, 'groupUpdateAction']);
+  Route::post('/cultive/group/delete/{id}', [CultiveGroupController::class, 'groupDelete'])->name('cultive-group-delete');
   //       → Machine Hour
 
   //Harvest
