@@ -6,16 +6,18 @@ use Illuminate\Support\Facades\Schema;
 
 // Models
 use App\Models\Sidebar;
+use App\Models\Client;
 
 return new class extends Migration {
   public function up(): void {
     Schema::create('tasks', function (Blueprint $table) {
       $table->id();
       $table->string('title');
-      $table->foreignIdFor(Sidebar::class)->constrained()->onDelete('cascade');
+      $table->foreignIdFor(Sidebar::class)->constrained();
+      $table->foreignIdFor(Client::class)->constrained()->onDelete('cascade');
       $table->timestamp('initial_dt')->nullable();
       $table->timestamp('expected_dt')->nullable();
-      $table->string('creation_user')->nullable();
+      $table->integer('creation_user')->nullable();
       $table->string('description');
       $table->integer('situation');
       $table->timestamps();

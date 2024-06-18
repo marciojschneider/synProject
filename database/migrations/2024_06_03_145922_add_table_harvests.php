@@ -4,6 +4,9 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+// Models
+use App\Models\Client;
+
 return new class extends Migration {
   public function up(): void {
     Schema::create("harvests", function (Blueprint $table) {
@@ -13,7 +16,8 @@ return new class extends Migration {
       $table->integer('situation')->default(1); // 1 Ativo - 0 Inativo - ?
       $table->timestamp('initial_dt')->nullable();
       $table->timestamp('ending_dt')->nullable();
-      $table->string('creation_user')->nullable();
+      $table->integer('creation_user')->nullable();
+      $table->foreignIdFor(Client::class)->constrained()->onDelete('cascade');
       $table->integer('price_table')->default(0); // Apenas provisório.
       $table->timestamps();
     });

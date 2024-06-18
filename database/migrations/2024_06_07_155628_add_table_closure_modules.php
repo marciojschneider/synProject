@@ -16,7 +16,7 @@ return new class extends Migration {
       $table->foreignIdFor(Client::class)->constrained()->onDelete('cascade');
       $table->timestamp('dt_closure');
       $table->integer('situation')->default(1);
-      $table->string('creation_user')->nullable();
+      $table->integer('creation_user')->nullable();
       $table->timestamps();
     });
   }

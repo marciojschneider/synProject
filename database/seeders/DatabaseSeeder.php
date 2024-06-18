@@ -7,8 +7,8 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder {
   public function run(): void {
-    $this->call(OrganizationsSeeder::class);
     $this->call(ClientsSeeder::class);
+    $this->call(OrganizationsSeeder::class);
     $this->call(CulturesSeeder::class);
     $this->call(FarmsSeeder::class);
     $this->call(LocalitiesSeeder::class);

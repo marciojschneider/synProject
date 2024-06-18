@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Schema;
 // Models
 use App\Models\Sidebar;
 use App\Models\Profile;
+use App\Models\Client;
 
 return new class extends Migration {
   public function up(): void {
@@ -14,12 +15,13 @@ return new class extends Migration {
       $table->id();
       $table->foreignIdFor(Profile::class)->constrained()->onDelete('cascade');
       $table->foreignIdFor(Sidebar::class)->constrained();
+      $table->foreignIdFor(Client::class)->constrained()->onDelete('cascade'); // Verificar a possibilidade de ter dois onDelete('cascade')
       $table->integer('list');
       $table->integer('create');
       $table->integer('update');
       $table->integer('delete');
       $table->string('description')->nullable();
-      $table->string('creation_user')->nullable();
+      $table->integer('creation_user')->nullable();
       $table->timestamps();
     });
   }

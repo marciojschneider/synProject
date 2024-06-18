@@ -12,6 +12,7 @@ use App\Models\Organization;
 use App\Models\PlantingMethod;
 use App\Models\Section;
 use App\Models\Variety;
+use App\Models\Client;
 
 return new class extends Migration {
   public function up(): void {
@@ -26,7 +27,8 @@ return new class extends Migration {
       $table->foreignIdFor(Organization::class)->constrained();
       $table->decimal('planting_area', 10, 2)->default(0);
       $table->integer('situation')->default(1);
-      $table->string('creation_user')->nullable();
+      $table->integer('creation_user')->nullable();
+      $table->foreignIdFor(Client::class)->constrained()->onDelete('cascade');
       $table->timestamps();
     });
   }

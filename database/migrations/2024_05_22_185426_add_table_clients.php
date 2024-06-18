@@ -12,7 +12,7 @@ return new class extends Migration {
       $table->string('name');
       $table->string('url')->nullable();
       $table->integer('situation')->default(1);
-      $table->string('creation_user')->nullable();
+      $table->integer('creation_user')->nullable();
       $table->timestamps();
     });
   }

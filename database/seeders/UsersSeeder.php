@@ -32,7 +32,7 @@ class UsersSeeder extends Seeder {
         "in_profile" => 1,
         "in_time" => "2024-06-13 19:43:01",
         "situation" => 1,
-        "creation_user" => NULL,
+        "creation_user" => 1,
         "created_at" => "2024-06-12 06:02:43",
         "updated_at" => "2024-06-13 19:43:01",
         "deleted_at" => NULL,

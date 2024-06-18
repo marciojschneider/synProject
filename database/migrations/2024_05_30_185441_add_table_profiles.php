@@ -13,7 +13,7 @@ return new class extends Migration {
       $table->id();
       $table->string('name');
       $table->foreignIdFor(Client::class)->constrained()->onDelete('cascade');
-      $table->string('creation_user')->nullable();
+      $table->integer('creation_user')->nullable();
       $table->timestamps();
     });
   }

@@ -13,6 +13,7 @@ class ProfilesSeeder extends Seeder {
       array(
         "name" => "USUÁRIO",
         "client_id" => 1,
+        "creation_user" => 1,
         "created_at" => "2024-05-27 16:27:17",
         "updated_at" => "2024-06-17 18:31:21",
         "situation" => 1,
@@ -20,6 +21,7 @@ class ProfilesSeeder extends Seeder {
       array(
         "name" => "ADMINISTRADOR",
         "client_id" => 1,
+        "creation_user" => 1,
         "created_at" => "2024-05-27 16:27:17",
         "updated_at" => "2024-05-27 16:27:17",
         "situation" => 1,
@@ -27,6 +29,7 @@ class ProfilesSeeder extends Seeder {
       array(
         "name" => "USUÁRIO",
         "client_id" => 2,
+        "creation_user" => 1,
         "created_at" => "2024-05-27 16:27:17",
         "updated_at" => "2024-05-27 16:27:17",
         "situation" => 1,
@@ -34,6 +37,7 @@ class ProfilesSeeder extends Seeder {
       array(
         "name" => "ADMINISTRADOR",
         "client_id" => 2,
+        "creation_user" => 1,
         "created_at" => "2024-05-27 16:27:17",
         "updated_at" => "2024-05-27 16:27:17",
         "situation" => 1,
