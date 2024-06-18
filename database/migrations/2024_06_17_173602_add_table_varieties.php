@@ -17,6 +17,7 @@ return new class extends Migration {
       $table->foreignIdFor(Culture::class)->constrained();
       $table->foreignIdFor(Group::class)->constrained();
       $table->integer('situation')->default(1);
+      $table->string('creation_user')->nullable();
       $table->timestamps();
     });
   }

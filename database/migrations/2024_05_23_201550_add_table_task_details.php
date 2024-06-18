@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 // Models
 use App\Models\Task;
-use App\Models\User;
 
 return new class extends Migration {
   public function up(): void {
@@ -17,7 +16,7 @@ return new class extends Migration {
       $table->string('description');
       $table->integer('type');
       $table->integer('situation');
-      // $table->foreignIdFor(User::class)->constrained()->onDelete('cascade');
+      $table->string('creation_user')->nullable();
       $table->timestamp('initial_dt')->nullable();
       $table->timestamp('ending_dt')->nullable();
       $table->timestamps();

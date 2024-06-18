@@ -18,7 +18,6 @@ return new class extends Migration {
       $table->foreignIdFor(Client::class)->constrained();
       $table->integer('situation')->default(1);
       $table->string('creation_user')->nullable();
-      $table->string('edition_user')->nullable();
       $table->timestamps();
     });
   }

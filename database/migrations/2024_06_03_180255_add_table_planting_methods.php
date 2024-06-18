@@ -11,6 +11,7 @@ return new class extends Migration {
       $table->string('code');
       $table->string('name');
       $table->integer('situation')->default(1);
+      $table->string('creation_user')->nullable();
       $table->timestamps();
     });
   }

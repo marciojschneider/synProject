@@ -18,7 +18,8 @@ return new class extends Migration {
       $table->integer('create');
       $table->integer('update');
       $table->integer('delete');
-      $table->string('description');
+      $table->string('description')->nullable();
+      $table->string('creation_user')->nullable();
       $table->timestamps();
     });
   }

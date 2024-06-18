@@ -23,9 +23,10 @@ return new class extends Migration {
       $table->foreignIdFor(Culture::class)->constrained();
       $table->foreignIdFor(Variety::class)->constrained();
       $table->foreignIdFor(PlantingMethod::class)->constrained();
+      $table->foreignIdFor(Organization::class)->constrained();
       $table->decimal('planting_area', 10, 2)->default(0);
       $table->integer('situation')->default(1);
-      $table->foreignIdFor(Organization::class)->constrained();
+      $table->string('creation_user')->nullable();
       $table->timestamps();
     });
   }

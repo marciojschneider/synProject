@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 // Models
 use App\Models\Sidebar;
-use App\Models\User;
 
 return new class extends Migration {
   public function up(): void {
@@ -16,7 +15,7 @@ return new class extends Migration {
       $table->foreignIdFor(Sidebar::class)->constrained()->onDelete('cascade');
       $table->timestamp('initial_dt')->nullable();
       $table->timestamp('expected_dt')->nullable();
-      // $table->foreignIdFor(User::class)->constrained()->onDelete('cascade');
+      $table->string('creation_user')->nullable();
       $table->string('description');
       $table->integer('situation');
       $table->timestamps();

@@ -13,6 +13,7 @@ return new class extends Migration {
       $table->integer('situation')->default(1); // 1 Ativo - 0 Inativo - ?
       $table->timestamp('initial_dt')->nullable();
       $table->timestamp('ending_dt')->nullable();
+      $table->string('creation_user')->nullable();
       $table->integer('price_table')->default(0); // Apenas provisório.
       $table->timestamps();
     });

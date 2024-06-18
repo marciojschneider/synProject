@@ -17,7 +17,6 @@ return new class extends Migration {
       $table->timestamp('in_time')->nullable();
       $table->integer('situation')->default(1);
       $table->string('creation_user')->nullable();
-      $table->string('edition_user')->nullable();
       $table->timestamps();
       $table->softDeletes();
     });

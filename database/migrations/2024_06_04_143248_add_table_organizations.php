@@ -10,14 +10,9 @@ return new class extends Migration {
       $table->id();
       $table->string('code');
       $table->string('name');
-      $table->timestamp('machine_hour_dt')->nullable();
-      $table->timestamp('ordinance_dt')->nullable();
-      $table->timestamp('maintenance_dt')->nullable();
-      $table->timestamp('fuel_dt')->nullable();
-      $table->timestamp('harvest_dt')->nullable();
-      $table->timestamp('inputs_dt')->nullable();
       $table->string('external_code');
       $table->integer('situation')->default(1);
+      $table->string('creation_user')->nullable();
       $table->timestamps();
     });
   }

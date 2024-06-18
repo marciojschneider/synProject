@@ -13,6 +13,7 @@ return new class extends Migration {
       $table->integer('property')->default(1);
       $table->integer('owner')->default(1);
       $table->integer('situation')->default(1);
+      $table->string('creation_user')->nullable();
       $table->timestamps();
     });
   }

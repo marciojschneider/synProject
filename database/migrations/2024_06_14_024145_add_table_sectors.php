@@ -13,6 +13,7 @@ return new class extends Migration {
       $table->string('name');
       $table->foreignIdFor(Farm::class)->constrained();
       $table->integer('situation')->default(1);
+      $table->string('creation_user')->nullable();
       $table->timestamps();
     });
   }

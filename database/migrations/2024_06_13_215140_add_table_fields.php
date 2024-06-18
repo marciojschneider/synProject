@@ -21,6 +21,7 @@ return new class extends Migration {
       $table->string('local_group')->nullable();
       $table->foreignIdFor(Locality::class)->constrained();
       $table->integer('situation')->default(1);
+      $table->string('creation_user')->nullable();
       $table->timestamps();
     });
   }
