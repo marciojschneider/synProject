@@ -30,8 +30,13 @@ class AuthController extends Controller {
       return view('content.authentications.login', $data);
     }
 
-    return redirect()->route('select-client');
+    if (Auth::user()->situation !== 1) {
+      $data['message'] = 'Você não possui acesso ao sistema';
+      $data['email'] = $dataLogin['email'];
+      return view('content.authentications.login', $data);
+    }
 
+    return redirect()->route('select-client');
   }
 
   public function selectClient() {
@@ -39,7 +44,8 @@ class AuthController extends Controller {
 
     $sql = UserProfile::join('clients', 'clients.id', '=', 'user_profiles.client_id')
       ->where('user_id', '=', $user->id)
-      ->where('user_profiles.situation', '=', 1)
+      ->where('clients.situation', 1)
+      ->where('user_profiles.situation', 1)
       ->select('clients.id as idClient', 'clients.name as nClient')
       ->groupBy('clients.id', 'clients.name')
       ->get();
@@ -71,6 +77,7 @@ class AuthController extends Controller {
 
     $sql = UserProfile::join('profiles', 'profiles.id', '=', 'user_profiles.profile_id')
       ->where('user_id', '=', $user->id)
+      ->where('profiles.situation', 1)
       ->where('user_profiles.client_id', '=', $user->in_client)
       ->where('user_profiles.situation', '=', 1)
       ->select('profiles.id as idProfile', 'profiles.name as nProfile')

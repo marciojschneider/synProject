@@ -14,13 +14,26 @@ class Sidebar extends Component {
   public $dataMenu;
 
   public function __construct() {
-    $data = DB::table('sidebars')->orderBy('order')->orderBy('affiliate_id')->get();
+    $user = auth()->user();
+    $data = DB::table('profile_permissions')
+      ->where('sidebars.client_id', 'REGEXP', '[[:<:]]' . $user->in_client . '[[:>:]]')
+      ->orWhere('sidebars.client_id', 0)
+      ->join('sidebars', 'sidebars.id', '=', 'profile_permissions.sidebar_id')
+      ->where('profile_permissions.profile_id', $user->in_profile)
+      ->orderBy('order')->orderBy('affiliate_id')->get();
 
     $array = [];
 
     foreach ($data as $key => $menu) {
       if (empty($menu->affiliate_id)) {
-        $fDataMenu = DB::table('sidebars')->where('affiliate_id', $menu->id)->orderBy('order')->get();
+        $fDataMenu = DB::table('profile_permissions')
+          ->where('sidebars.client_id', 'REGEXP', '[[:<:]]' . $user->in_client . '[[:>:]]')
+          ->where('sidebars.affiliate_id', $menu->id)
+          ->orWhere('sidebars.client_id', 0)
+          ->where('sidebars.affiliate_id', $menu->id)
+          ->join('sidebars', 'sidebars.id', '=', 'profile_permissions.sidebar_id')
+          ->where('profile_permissions.profile_id', $user->in_profile)
+          ->orderBy('order')->get();
         $array[$key] = ['menu' => ['name' => $menu->name, 'icon' => $menu->icon, 'slug' => $menu->slug, 'url' => $menu->url]];
 
         foreach ($fDataMenu as $fkey => $fMenu) {
@@ -29,7 +42,14 @@ class Sidebar extends Component {
           ];
 
           if (!empty($fMenu->affiliate_id)) {
-            $sDataMenu = DB::table('sidebars')->where('affiliate_id', $fMenu->id)->orderBy('order')->get();
+            $sDataMenu = DB::table('profile_permissions')
+              ->where('sidebars.client_id', 'REGEXP', '[[:<:]]' . $user->in_client . '[[:>:]]')
+              ->where('sidebars.affiliate_id', $fMenu->id)
+              ->orWhere('sidebars.client_id', 0)
+              ->where('sidebars.affiliate_id', $fMenu->id)
+              ->join('sidebars', 'sidebars.id', '=', 'profile_permissions.sidebar_id')
+              ->where('profile_permissions.profile_id', $user->in_profile)
+              ->orderBy('order')->get();
             foreach ($sDataMenu as $sMenu) {
               $array[$key]['menu']['submenu'][$fkey]['submenu'][] = [
                 'name' => $sMenu->name, 'url' => $sMenu->url, 'slug' => $sMenu->slug

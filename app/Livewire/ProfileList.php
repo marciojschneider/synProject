@@ -22,7 +22,8 @@ class ProfileList extends Component {
   public $client;
 
   public function mount() {
-    $this->clients = Client::where('situation', 1)->get();
+    $user = auth()->user();
+    $this->clients = Client::where('situation', 1)->where('id', $user->in_client)->get();
   }
 
   public function updated() {
@@ -30,6 +31,7 @@ class ProfileList extends Component {
   }
 
   public function render() {
+    $user = auth()->user();
     $query = Profile::query();
 
     $query->join('clients', 'clients.id', '=', 'profiles.client_id');
@@ -41,6 +43,8 @@ class ProfileList extends Component {
     if ($this->client) {
       $query->where('client_id', $this->client);
     }
+
+    $query->where('clients.id', $user->in_client);
 
     $query->select('profiles.*', 'clients.name as cName')->get();
 

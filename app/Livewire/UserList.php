@@ -20,7 +20,20 @@ class UserList extends Component {
     $this->resetPage();
   }
   public function render() {
+    $user = auth()->user();
     $query = User::query();
+
+    $query->select('users.id', 'users.name', 'users.email', 'users.situation')
+      ->join('user_profiles', 'user_profiles.user_id', '=', 'users.id')
+      ->where('user_profiles.client_id', $user->in_client)
+      ->groupBy('users.id', 'users.name', 'users.email', 'users.situation')
+      ->orderBy('situation', 'desc')
+      ->get();
+
+    if ($this->searchText) {
+      $query->where('name', 'like', '%' . $this->searchText . '%');
+      $query->orWhere('email', 'like', '%' . $this->searchText . '%');
+    }
 
     $data['rows'] = $query->paginate($this->pPage);
 

@@ -7,10 +7,11 @@
   @if (!isset($navbarFull))
     <div class="app-brand demo">
       <a href="{{ url('/') }}" class="app-brand-link">
-        <span class="app-brand-logo demo">
+        <span class="app-brand-logo demo pb-2">
           @include('_partials.macros', ['width' => 25, 'withbg' => 'var(--bs-primary)'])
         </span>
-        <span class="app-brand-text demo menu-text fw-bold ms-2">{{ config('variables.templateName') }}</span>
+        <span class="app-brand-text demo menu-text fw-bold ms-2"
+          style="text-transform: uppercase !important">{{ config('variables.templateName') }}</span>
       </a>
 
       <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">

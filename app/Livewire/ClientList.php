@@ -35,6 +35,8 @@ class ClientList extends Component {
       $query->orWhere('name', 'like', '%' . $this->searchText . '%');
     }
 
+    $query->orderBy('situation', 'desc');
+
     $data['rows'] = $query->paginate($this->pPage);
 
     return view('livewire.client-list', $data);

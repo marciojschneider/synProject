@@ -5,7 +5,7 @@
 
 @extends('layouts/blankLayout')
 
-@section('title', 'Error - Pages')
+@section('title', 'Sem permissão')
 
 @section('page-style')
   <!-- Page -->
@@ -16,9 +16,9 @@
   <!-- Error -->
   <div class="container-xxl container-p-y">
     <div class="misc-wrapper">
-      <h2 class="mb-2 mx-2">Page Not Found :(</h2>
-      <p class="mb-4 mx-2">Oops! 😖 The requested URL was not found on this server.</p>
-      <a href="{{ url('/') }}" class="btn btn-primary">Back to home</a>
+      <h2 class="mb-2 mx-2">Acesso negado!</h2>
+      <p class="mb-4 mx-2">Oops! 😖 Parece que você está tentando acessar uma página que não tem permissão.</p>
+      <a href="{{ route('home-homepage1') }}" class="btn btn-primary">Voltar para o inicio</a>
       <div class="mt-3">
         <img src="{{ asset('assets/img/illustrations/page-misc-error-' . $configData['style'] . '.png') }}"
           alt="page-misc-error-light" width="500" class="img-fluid"

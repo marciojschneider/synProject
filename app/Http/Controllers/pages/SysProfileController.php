@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 // Models
 use App\Models\Client;
 use App\Models\Profile;
+use App\Models\UserProfile;
 
 class SysProfileController extends Controller {
   public function profiles() {
@@ -15,7 +16,8 @@ class SysProfileController extends Controller {
   }
 
   public function profileCreate() {
-    $data['clients'] = Client::all();
+    $user = auth()->user();
+    $data['clients'] = Client::where('id', $user->in_client)->get();
 
     return view('content.pages.sys.profile.create', $data);
   }
@@ -23,19 +25,26 @@ class SysProfileController extends Controller {
   public function profileCreateAction(Request $request) {
     $data = $request->only(['name', 'client', 'situation']);
 
-    $profile = new Profile();
-    $profile->name = strtoupper($data['name']);
-    $profile->client_id = $data['client'];
-    $profile->situation = $data['situation'];
-    $profile->save();
+    $profileCreate = new Profile();
+    $profileCreate->name = strtoupper($data['name']);
+    $profileCreate->client_id = $data['client'];
+    $profileCreate->situation = $data['situation'];
+    $profileCreate->save();
 
     // return redirect()->back()->with('success',''); → Redireciona para a própria página.
     return redirect()->route('sys-profiles');
   }
 
   public function profileUpdate(int $id) {
+    $user = auth()->user();
     $data['profile'] = Profile::find($id);
-    $data['clients'] = Client::all();
+    $data['clients'] = Client::where('id', $user->in_client)->get();
+
+    $verifyClient = UserProfile::where('client_id', $user->in_client)->where('client_id', $data['profile']['id'])->first();
+
+    if (!$verifyClient) {
+      return redirect()->route('sys-profiles');
+    }
 
     return view('content.pages.sys.profile.update', $data);
   }

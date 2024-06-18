@@ -47,7 +47,7 @@
           @foreach ($rows as $row)
             <tr>
               <td>{{ $row->name }}</td>
-              <td>{{ $row->email }}</td>
+              <td>{{ strtoupper($row->email) }}</td>
               <td><span
                   class="badge {{ $row->situation == 1 ? 'bg-label-primary' : 'bg-label-warning' }} me-1">{{ $row->situation == 1 ? 'Ativo' : 'Inativo' }}</span>
               </td>

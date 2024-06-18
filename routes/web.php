@@ -43,11 +43,15 @@ Route::middleware(['auth'])->group(function () {
   Route::post('/select-client', [AuthController::class, 'selectClientAction']);
   Route::get('/select-profile', [AuthController::class, 'selectProfile'])->name('select-profile');
   Route::post('/select-profile', [AuthController::class, 'selectProfileAction']);
+
+  Route::get('/no-permission', function () {
+    return view('content.pages.errors.no-permission');
+  })->name('no-permission');
 });
 
 Route::middleware(['auth', 'canAccess'])->group(function () {
   // Homepage
-  Route::get('/', [HomePage::class, 'index'])->name('homepage');
+  Route::get('/', [HomePage::class, 'index'])->name('home-homepage1');
 
   // System
   //       → Users

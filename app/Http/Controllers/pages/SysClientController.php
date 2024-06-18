@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\pages;
 
 use App\Http\Controllers\Controller;
-use App\Models\Client;
 use Illuminate\Http\Request;
+
+// Models
+use App\Models\Client;
+use App\Models\UserProfile;
 
 class SysClientController extends Controller {
   public function clients() {
@@ -16,14 +19,16 @@ class SysClientController extends Controller {
   }
 
   public function clientCreateAction(Request $request) {
+    $user = auth()->user();
     $data = $request->only(['code', 'name', 'url', 'situation']);
 
-    $client = new Client();
-    $client->code = strtoupper($data['code']);
-    $client->name = strtoupper($data['name']);
-    $client->url = $data['url'];
-    $client->situation = $data['situation'];
-    $client->save();
+    $clientCreate = new Client();
+    $clientCreate->code = strtoupper($data['code']);
+    $clientCreate->name = strtoupper($data['name']);
+    $clientCreate->url = $data['url'];
+    $clientCreate->situation = $data['situation'];
+    $clientCreate->creation_user = $user->id;
+    $clientCreate->save();
 
     return redirect()->route('sys-clients');
   }

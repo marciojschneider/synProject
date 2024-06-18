@@ -26,6 +26,7 @@ class SupTaskController extends Controller {
   }
 
   public function taskCreateAction(Request $request) {
+    $user = auth()->user();
     $data = $request->only(['title', 'sidebar', 'situation', 'solicitation', 'expectation', 'description']);
 
     $task = new Task();
@@ -33,9 +34,10 @@ class SupTaskController extends Controller {
     $task->sidebar_id = $data['sidebar'];
     $task->initial_dt = $data['solicitation'];
     $task->expected_dt = $data['expectation'];
-    // $task->user_id = 0;
     $task->description = strtoupper($data['description']);
     $task->situation = $data['situation'];
+    $task->creation_user = $user->id;
+    $task->client_id = $user->in_client;
     $task->save();
 
     $taskDetail = new TaskDetail();
@@ -43,6 +45,8 @@ class SupTaskController extends Controller {
     $taskDetail->description = strtoupper($data['description']);
     $taskDetail->type = 2;
     $taskDetail->situation = 1;
+    $task->creation_user = $user->id;
+    $task->client_id = $user->in_client;
     $taskDetail->save();
 
     return redirect()->route('sup-tasks');
@@ -75,9 +79,9 @@ class SupTaskController extends Controller {
     return redirect()->route('sup-tasks');
   }
 
-
   //         → Comments
   public function commentAction(Request $request) {
+    $user = auth()->user();
     $data = $request->only(['commentTask', 'commentDescription']);
 
     $taskDetail = new TaskDetail();
@@ -85,6 +89,8 @@ class SupTaskController extends Controller {
     $taskDetail->description = strtoupper($data['commentDescription']);
     $taskDetail->type = 2;
     $taskDetail->situation = 1;
+    $taskDetail->creation_user = $user->id;
+    $taskDetail->client_id = $user->in_client;
     $taskDetail->save();
 
     return redirect()->route('sup-tasks');
@@ -115,6 +121,7 @@ class SupTaskController extends Controller {
   }
 
   public function roadmapAction(Request $request) {
+    $user = auth()->user();
     $data = $request->only(['roadmapTask', 'roadmapCommit', 'roadmapDescription', 'roadmapDtSolicitation', 'roadmapDtFinal']);
 
     $taskDetail = new TaskDetail();
@@ -123,6 +130,8 @@ class SupTaskController extends Controller {
     $taskDetail->description = strtoupper($data['roadmapDescription']);
     $taskDetail->type = 1;
     $taskDetail->situation = 1;
+    $taskDetail->creation_user = $user->id;
+    $taskDetail->client_id = $user->in_client;
     $taskDetail->initial_dt = $data['roadmapDtSolicitation'];
     $taskDetail->ending_dt = $data['roadmapDtFinal'];
     $taskDetail->save();

@@ -24,17 +24,20 @@ class SysProfillePermissionController extends Controller {
   }
 
   public function profilePermissionsCreateAction(Request $request) {
+    $user = auth()->user();
     $data = $request->only(['sidebar', 'profile', 'description', 'listCheck', 'createCheck', 'updateCheck', 'deleteCheck']);
 
-    $profilePermission = new profilePermission();
-    $profilePermission->profile_id = $data['profile'];
-    $profilePermission->sidebar_id = $data['sidebar'];
-    $profilePermission->list = isset($data['listCheck']) ? 1 : 0;
-    $profilePermission->create = isset($data['createCheck']) ? 1 : 0;
-    $profilePermission->update = isset($data['updateCheck']) ? 1 : 0;
-    $profilePermission->delete = isset($data['deleteCheck']) ? 1 : 0;
-    $profilePermission->description = strtoupper($data['description']);
-    $profilePermission->save();
+    $profilePermissionCreate = new profilePermission();
+    $profilePermissionCreate->profile_id = $data['profile'];
+    $profilePermissionCreate->sidebar_id = $data['sidebar'];
+    $profilePermissionCreate->list = isset($data['listCheck']) ? 1 : 0;
+    $profilePermissionCreate->create = isset($data['createCheck']) ? 1 : 0;
+    $profilePermissionCreate->update = isset($data['updateCheck']) ? 1 : 0;
+    $profilePermissionCreate->delete = isset($data['deleteCheck']) ? 1 : 0;
+    $profilePermissionCreate->description = strtoupper($data['description']);
+    $profilePermissionCreate->client_id = $user->in_client;
+    $profilePermissionCreate->creation_user = $user->id;
+    $profilePermissionCreate->save();
 
     return redirect()->route('sys-sec-permissions');
   }
