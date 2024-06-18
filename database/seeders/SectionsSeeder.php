@@ -1,0 +1,124 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\Section;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+
+class SectionsSeeder extends Seeder {
+  public function run(): void {
+    $sections = array(
+      array(
+        "code" => "01",
+        "name" => "SEC.01",
+        "organization_id" => 1,
+        "situation" => 1,
+        "responsible" => 8,
+        "created_at" => "2024-06-14 06:16:44",
+        "updated_at" => "2024-06-14 06:16:58",
+      ),
+      array(
+        "code" => "02",
+        "name" => "SEC.02",
+        "organization_id" => 1,
+        "situation" => 1,
+        "responsible" => 8,
+        "created_at" => "2024-06-14 06:17:11",
+        "updated_at" => "2024-06-14 06:17:11",
+      ),
+      array(
+        "code" => "03",
+        "name" => "SEC.03",
+        "organization_id" => 3,
+        "situation" => 1,
+        "responsible" => 8,
+        "created_at" => "2024-06-14 06:17:27",
+        "updated_at" => "2024-06-14 06:17:27",
+      ),
+      array(
+        "code" => "04",
+        "name" => "SEC.04",
+        "organization_id" => 1,
+        "situation" => 1,
+        "responsible" => 8,
+        "created_at" => "2024-06-18 00:44:40",
+        "updated_at" => "2024-06-18 00:44:40",
+      ),
+      array(
+        "code" => "05",
+        "name" => "SEC.05",
+        "organization_id" => 1,
+        "situation" => 1,
+        "responsible" => 8,
+        "created_at" => "2024-06-18 00:44:49",
+        "updated_at" => "2024-06-18 00:44:49",
+      ),
+      array(
+        "code" => "06",
+        "name" => "SEC.06",
+        "organization_id" => 1,
+        "situation" => 1,
+        "responsible" => 8,
+        "created_at" => "2024-06-18 00:44:59",
+        "updated_at" => "2024-06-18 00:44:59",
+      ),
+      array(
+        "code" => "07",
+        "name" => "SEC.07",
+        "organization_id" => 3,
+        "situation" => 1,
+        "responsible" => 8,
+        "created_at" => "2024-06-18 00:45:17",
+        "updated_at" => "2024-06-18 00:45:17",
+      ),
+      array(
+        "code" => "08",
+        "name" => "SEC.08",
+        "organization_id" => 3,
+        "situation" => 1,
+        "responsible" => 8,
+        "created_at" => "2024-06-18 00:45:34",
+        "updated_at" => "2024-06-18 00:45:34",
+      ),
+      array(
+        "code" => "09",
+        "name" => "SEC.09",
+        "organization_id" => 1,
+        "situation" => 1,
+        "responsible" => 8,
+        "created_at" => "2024-06-18 00:45:48",
+        "updated_at" => "2024-06-18 00:45:48",
+      ),
+      array(
+        "code" => "01-SOJA",
+        "name" => "SEC.01 SOJA",
+        "organization_id" => 1,
+        "situation" => 1,
+        "responsible" => 8,
+        "created_at" => "2024-06-18 00:46:06",
+        "updated_at" => "2024-06-18 00:46:06",
+      ),
+      array(
+        "code" => "02-SOJA",
+        "name" => "SEC.02 SOJA",
+        "organization_id" => 1,
+        "situation" => 1,
+        "responsible" => 8,
+        "created_at" => "2024-06-18 00:46:47",
+        "updated_at" => "2024-06-18 00:46:47",
+      ),
+      array(
+        "code" => "03-SOJA",
+        "name" => "SEC.03 SOJA",
+        "organization_id" => 1,
+        "situation" => 1,
+        "responsible" => 8,
+        "created_at" => "2024-06-18 00:47:12",
+        "updated_at" => "2024-06-18 00:47:12",
+      ),
+    );
+
+    Section::insert($sections);
+  }
+}

@@ -12,15 +12,19 @@ class ClientsSeeder extends Seeder {
     $clients = array(
       array(
         "code" => "SYN",
-        "name" => "Synérgya",
+        "name" => "SYNÉRGYA",
+        "url" => NULL,
+        "situation" => 1,
         "created_at" => "2024-05-27 16:27:17",
-        "updated_at" => "2024-05-27 16:27:17",
+        "updated_at" => "2024-06-17 18:31:00",
       ),
       array(
         "code" => "KET",
-        "name" => "Kettlow",
+        "name" => "KETTLOW",
+        "url" => NULL,
+        "situation" => 0,
         "created_at" => "2024-05-27 16:27:17",
-        "updated_at" => "2024-05-27 16:27:17",
+        "updated_at" => "2024-06-17 18:31:13",
       ),
     );
 

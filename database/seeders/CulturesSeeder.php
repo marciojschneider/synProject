@@ -11,33 +11,33 @@ class CulturesSeeder extends Seeder {
     $cultures = array(
       array(
         "code" => "01",
-        "name" => "Arroz",
+        "name" => "ARROZ",
         "created_at" => "2024-06-03 22:13:28",
-        "updated_at" => "2024-06-03 22:13:28",
+        "updated_at" => "2024-06-17 18:29:38",
       ),
       array(
         "code" => "02",
-        "name" => "Soja",
+        "name" => "SOJA",
         "created_at" => "2024-06-03 22:13:40",
-        "updated_at" => "2024-06-03 22:13:40",
+        "updated_at" => "2024-06-17 18:29:46",
       ),
       array(
         "code" => "03",
-        "name" => "Mirtilo",
+        "name" => "MIRTILO",
         "created_at" => "2024-06-03 22:13:47",
-        "updated_at" => "2024-06-03 22:13:47",
+        "updated_at" => "2024-06-17 18:29:51",
       ),
       array(
         "code" => "04",
-        "name" => "Pastagem",
+        "name" => "PASTAGEM",
         "created_at" => "2024-06-03 22:13:56",
-        "updated_at" => "2024-06-03 22:13:56",
+        "updated_at" => "2024-06-17 18:29:54",
       ),
       array(
         "code" => "88",
-        "name" => "Diversos",
+        "name" => "DIVERSOS",
         "created_at" => "2024-06-03 22:14:04",
-        "updated_at" => "2024-06-03 22:14:04",
+        "updated_at" => "2024-06-17 18:29:57",
       ),
     );
 

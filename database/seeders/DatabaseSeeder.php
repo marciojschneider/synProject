@@ -7,12 +7,23 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder {
   public function run(): void {
+    $this->call(OrganizationsSeeder::class);
     $this->call(ClientsSeeder::class);
+    $this->call(CulturesSeeder::class);
+    $this->call(FarmsSeeder::class);
+    $this->call(LocalitiesSeeder::class);
+    $this->call(FieldsSeeder::class);
+    $this->call(SectorsSeeder::class);
+    $this->call(SectionsSeeder::class);
+    $this->call(GroupsSeeder::class);
+    $this->call(VarietiesSeeder::class);
     $this->call(ProfilesSeeder::class);
     $this->call(SidebarsSeeder::class);
     $this->call(HarvestSeeder::class);
     $this->call(CulturesSeeder::class);
     $this->call(PlantingMethodsSeeder::class);
     $this->call(ProcessSeeder::class);
+    $this->call(UsersSeeder::class);
+    $this->call(UserProfilesSeeder::class);
   }
 }
