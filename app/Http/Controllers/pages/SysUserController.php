@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\pages;
 
 use App\Http\Controllers\Controller;
+use App\Models\profilePermission;
 use Illuminate\Http\Request;
 
 // Importações adicionais
@@ -53,11 +54,11 @@ class SysUserController extends Controller {
 
   public function userUpdate(int $id) {
     $user = auth()->user();
-    $data['user'] = User::find($id);
+    $data['user'] = User::join('user_profiles', 'user_profiles.user_id', '=', 'users.id')
+      ->where('users.id', $id)
+      ->where('user_profiles.client_id', $user->in_client)->first();
 
-    $verifyClient = UserProfile::where('client_id', $user->in_client)->where('user_id', $data['user']['id'])->first();
-
-    if (!$verifyClient) {
+    if (!$data['user']) {
       return redirect()->route('sys-users');
     }
 
@@ -65,9 +66,16 @@ class SysUserController extends Controller {
   }
 
   public function userUpdateAction(int $id, Request $request) {
+    $user = auth()->user();
     $update = $request->only('name', 'password', 'situation');
+    $userUpdate = User::join('user_profiles', 'user_profiles.user_id', '=', 'users.id')
+      ->where('users.id', $id)
+      ->where('user_profiles.client_id', $user->in_client)->first();
 
-    $userUpdate = User::find($id);
+    if (!$userUpdate) {
+      return redirect()->route('sys-users');
+    }
+
     $userUpdate->name = strtoupper($update['name']);
     if ($update['password']) {
       $userUpdate->password = Hash::make($update['password']);
@@ -79,7 +87,11 @@ class SysUserController extends Controller {
   }
 
   public function userDelete(int $id) {
-    User::where('id', $id)->delete();
+    $user = auth()->user();
+
+    User::join('user_profiles', 'user_profiles.user_id', '=', 'users.id')
+      ->where('users.id', $id)
+      ->where('user_profiles.client_id', $user->in_client)->delete();
 
     return redirect()->route('sys-users');
   }

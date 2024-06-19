@@ -35,22 +35,31 @@ class canAccess {
 
     $user = auth()->user();
 
-    $sql = UserProfile::where('user_id', $user->id)
+    $checkExistence = UserProfile::where('user_id', $user->id)
       ->where('client_id', $user->in_client)
       ->where('profile_id', $user->in_profile)
       ->where('situation', 1)
       ->get();
 
-    $checkExistence = json_decode($sql, true);
-
     if (count($checkExistence) !== 1) {
       return redirect()->route('login');
     }
 
-    $sqlPermission = profilePermission::where('profile_permissions.profile_id', $user->in_profile)
-      ->join('sidebars', 'sidebars.id', '=', 'profile_permissions.sidebar_id')
+    if (Route::currentRouteName() === 'homepage') {
+      return $next($request);
+    }
+
+    $sqlPermission = profilePermission::join('sidebars', 'sidebars.id', '=', 'profile_permissions.sidebar_id')
+      ->where('profile_permissions.profile_id', $user->in_profile)
       ->where('sidebars.url', 'like', '%' . $stringRoute . '%')
+      ->where('profile_permissions.view', 1)
       ->get();
+
+    if (isset($arrRoute[2])) {
+      if ($sqlPermission[0][$arrRoute[2]] !== 1) {
+        return redirect()->route('no-permission');
+      }
+    }
 
     if (count($sqlPermission) !== 1) {
       return redirect()->route('no-permission');

@@ -36,13 +36,21 @@ class SysClientController extends Controller {
   public function clientUpdate(int $id) {
     $data['client'] = Client::find($id);
 
+    if (!$data['client']) {
+      return redirect()->route('sys-clients');
+    }
+
     return view('content.pages.sys.client.update', $data);
   }
 
   public function ClientUpdateAction(int $id, Request $request) {
     $update = $request->only(['code', 'name', 'url', 'situation']);
-
     $clientUpdate = Client::find($id);
+
+    if (!$clientUpdate) {
+      return redirect()->route('sys-clients');
+    }
+
     $clientUpdate->code = strtoupper($update['code']);
     $clientUpdate->name = strtoupper($update['name']);
     $clientUpdate->url = $update['url'];

@@ -37,12 +37,10 @@ class SysProfileController extends Controller {
 
   public function profileUpdate(int $id) {
     $user = auth()->user();
-    $data['profile'] = Profile::find($id);
+    $data['profile'] = Profile::where('id', $id)->where('client_id', $user->in_client)->first();
     $data['clients'] = Client::where('id', $user->in_client)->get();
 
-    $verifyClient = UserProfile::where('client_id', $user->in_client)->where('client_id', $data['profile']['id'])->first();
-
-    if (!$verifyClient) {
+    if (!$data['profile']) {
       return redirect()->route('sys-profiles');
     }
 
@@ -50,9 +48,14 @@ class SysProfileController extends Controller {
   }
 
   public function profileUpdateAction(int $id, Request $request) {
+    $user = auth()->user();
     $update = $request->only(['name', 'client', 'situation']);
+    $profileUpdate = Profile::where('id', $id)->where('client_id', $user->in_client)->first();
 
-    $profileUpdate = Profile::find($id);
+    if (!$profileUpdate) {
+      return redirect()->route('sys-profiles');
+    }
+
     $profileUpdate->name = strtoupper($update['name']);
     $profileUpdate->client_id = $update['client'];
     $profileUpdate->situation = $update['situation'];
@@ -62,7 +65,8 @@ class SysProfileController extends Controller {
   }
 
   public function profileDelete(int $id) {
-    Profile::where('id', $id)->delete();
+    $user = auth()->user();
+    Profile::where('id', $id)->where('client_id', $user->in_client)->delete();
 
     return redirect()->route('sys-profiles');
   }
