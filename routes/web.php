@@ -47,11 +47,15 @@ Route::middleware(['auth'])->group(function () {
   Route::get('/no-permission', function () {
     return view('content.pages.errors.no-permission');
   })->name('no-permission');
+
+  route::post('/logout', function () {
+    return redirect()->route('login');
+  })->name('logout');
 });
 
 Route::middleware(['auth', 'canAccess'])->group(function () {
   // Homepage
-  Route::get('/', [HomePage::class, 'index'])->name('home-homepage1');
+  Route::get('/homepage', [HomePage::class, 'index'])->name('homepage');
 
   // System
   //       → Users
@@ -84,19 +88,19 @@ Route::middleware(['auth', 'canAccess'])->group(function () {
   Route::post('/sys/closure-module/delete/{id}', [SysClosureModuleController::class, 'closureModuleDelete'])->name('sys-closure-delete');
   //       → Security
   //                  → Permissions
-  Route::get('/sys/profile/permissions', [SysProfillePermissionController::class, 'profilePermissions'])->name('sys-sec-permissions');
-  Route::get('/sys/profile/permission/create', [SysProfillePermissionController::class, 'profilePermissionsCreate'])->name('sys-sec-permission-create');
-  Route::post('/sys/profile/permission/create', [SysProfillePermissionController::class, 'profilePermissionsCreateAction']);
-  Route::get('/sys/profile/permission/update/{id}', [SysProfillePermissionController::class, 'profilePermissionsUpdate'])->name('sys-sec-permission-update');
-  Route::post('/sys/profile/permission/update/{id}', [SysProfillePermissionController::class, 'profilePermissionsUpdateAction']);
-  Route::post('/sys/profile/permission/delete/{id}', [SysProfillePermissionController::class, 'profilePermissionsDelete'])->name('sys-sec-permission-delete');
+  Route::get('/sys/profile-permissions', [SysProfillePermissionController::class, 'profilePermissions'])->name('sys-sec-permissions');
+  Route::get('/sys/profile-permission/create', [SysProfillePermissionController::class, 'profilePermissionsCreate'])->name('sys-sec-permission-create');
+  Route::post('/sys/profile-permission/create', [SysProfillePermissionController::class, 'profilePermissionsCreateAction']);
+  Route::get('/sys/profile-permission/update/{id}', [SysProfillePermissionController::class, 'profilePermissionsUpdate'])->name('sys-sec-permission-update');
+  Route::post('/sys/profile-permission/update/{id}', [SysProfillePermissionController::class, 'profilePermissionsUpdateAction']);
+  Route::post('/sys/profile-permission/delete/{id}', [SysProfillePermissionController::class, 'profilePermissionsDelete'])->name('sys-sec-permission-delete');
   //                  → User Profiles TODO: (Verificar nomenclatura de rotas)
-  Route::get('/sys/user/profile', [SysUserProfileController::class, 'userProfiles'])->name('sys-sec-u-ps');
-  Route::get('/sys/user/profile/create', [SysUserProfileController::class, 'userProfileCreate'])->name('sys-sec-u-p-create');
-  Route::post('/sys/user/profile/create', [SysUserProfileController::class, 'userProfileCreateAction']);
-  Route::get('/sys/user/profile/update/{id}', [SysUserProfileController::class, 'userProfileUpdate'])->name('sys-sec-u-p-update');
-  Route::post('/sys/user/profile/update/{id}', [SysUserProfileController::class, 'userProfileUpdateAction']);
-  Route::post('/sys/user/profile/delete/{id}', [SysUserProfileController::class, 'userProfileDelete'])->name('sys-sec-u-p-delete');
+  Route::get('/sys/user-profile', [SysUserProfileController::class, 'userProfiles'])->name('sys-sec-u-ps');
+  Route::get('/sys/user-profile/create', [SysUserProfileController::class, 'userProfileCreate'])->name('sys-sec-u-p-create');
+  Route::post('/sys/user-profile/create', [SysUserProfileController::class, 'userProfileCreateAction']);
+  Route::get('/sys/user-profile/update/{id}', [SysUserProfileController::class, 'userProfileUpdate'])->name('sys-sec-u-p-update');
+  Route::post('/sys/user-profile/update/{id}', [SysUserProfileController::class, 'userProfileUpdateAction']);
+  Route::post('/sys/user-profile/delete/{id}', [SysUserProfileController::class, 'userProfileDelete'])->name('sys-sec-u-p-delete');
 
   // Support
   //       → Tasks
@@ -107,14 +111,14 @@ Route::middleware(['auth', 'canAccess'])->group(function () {
   Route::post('/sup/task/update/{id}', [SupTaskController::class, 'taskUpdateAction']);
   Route::post('/sup/task/delete/{id}', [SupTaskController::class, 'taskDelete'])->name('sup-task-delete');
   //       → Comments
-  Route::post('/sup/task/comment', [SupTaskController::class, 'commentAction'])->name('sup-comment');
-  Route::post('/sup/task/comment/update', [SupTaskController::class, 'commentUpdate'])->name('sup-comment-update');
-  Route::post('/sup/task/comment/delete/{id}', [SupTaskController::class, 'commentDelete'])->name('sup-comment-delete');
+  Route::post('/sup/task-comment', [SupTaskController::class, 'commentAction'])->name('sup-comment');
+  Route::post('/sup/task-comment/update', [SupTaskController::class, 'commentUpdate'])->name('sup-comment-update');
+  Route::post('/sup/task-comment/delete/{id}', [SupTaskController::class, 'commentDelete'])->name('sup-comment-delete');
   //       → Roadmap
-  Route::get('/sup/task/roadmap', [SupTaskController::class, 'roadmap'])->name('sup-roadmap');
-  Route::post('/sup/task/roadmap', [SupTaskController::class, 'roadmapAction']);
-  Route::post('/sup/task/roadmap/update', [SupTaskController::class, 'roadmapUpdate'])->name('sup-roadmap-update');
-  Route::post('/sup/task/roadmap/delete/{id}', [SupTaskController::class, 'roadmapDelete'])->name('sup-roadmap-delete');
+  Route::get('/sup/task-roadmap', [SupTaskController::class, 'roadmap'])->name('sup-roadmap');
+  Route::post('/sup/task-roadmap', [SupTaskController::class, 'roadmapAction']);
+  Route::post('/sup/task-roadmap/update', [SupTaskController::class, 'roadmapUpdate'])->name('sup-roadmap-update');
+  Route::post('/sup/task-roadmap/delete/{id}', [SupTaskController::class, 'roadmapDelete'])->name('sup-roadmap-delete');
 
   // Structure
   //       → Organization

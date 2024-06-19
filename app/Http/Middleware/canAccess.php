@@ -20,7 +20,14 @@ class canAccess {
    * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
    */
   public function handle(Request $request, Closure $next): Response {
-    $routeName = Route::currentRouteName();
+    $routeName = Route::getCurrentRoute();
+    $arrRoute = explode('/', $routeName->uri);
+
+    if (count($arrRoute) > 1) {
+      $stringRoute = $arrRoute[0] . '/' . $arrRoute[1];
+    } else {
+      $stringRoute = $arrRoute[0];
+    }
 
     if (!auth()->check()) {
       return redirect()->route('login');
@@ -40,11 +47,9 @@ class canAccess {
       return redirect()->route('login');
     }
 
-    $arr = explode('-', $routeName);
-
     $sqlPermission = profilePermission::where('profile_permissions.profile_id', $user->in_profile)
       ->join('sidebars', 'sidebars.id', '=', 'profile_permissions.sidebar_id')
-      ->where('sidebars.module', 'like', '%' . $arr[1] . '%')
+      ->where('sidebars.url', 'like', '%' . $stringRoute . '%')
       ->get();
 
     if (count($sqlPermission) !== 1) {

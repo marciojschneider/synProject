@@ -18,7 +18,7 @@
     <div class="misc-wrapper">
       <h2 class="mb-2 mx-2">Acesso negado!</h2>
       <p class="mb-4 mx-2">Oops! 😖 Parece que você está tentando acessar uma página que não tem permissão.</p>
-      <a href="{{ route('home-homepage1') }}" class="btn btn-primary">Voltar para o inicio</a>
+      <a href="{{ route('homepage') }}" class="btn btn-primary">Voltar para o inicio</a>
       <div class="mt-3">
         <img src="{{ asset('assets/img/illustrations/page-misc-error-' . $configData['style'] . '.png') }}"
           alt="page-misc-error-light" width="500" class="img-fluid"

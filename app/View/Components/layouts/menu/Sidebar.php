@@ -17,9 +17,12 @@ class Sidebar extends Component {
     $user = auth()->user();
     $data = DB::table('profile_permissions')
       ->where('sidebars.client_id', 'REGEXP', '[[:<:]]' . $user->in_client . '[[:>:]]')
-      ->orWhere('sidebars.client_id', 0)
-      ->join('sidebars', 'sidebars.id', '=', 'profile_permissions.sidebar_id')
       ->where('profile_permissions.profile_id', $user->in_profile)
+      ->where('profile_permissions.client_id', $user->in_client)
+      ->orWhere('sidebars.client_id', 0)
+      ->where('profile_permissions.profile_id', $user->in_profile)
+      ->where('profile_permissions.client_id', $user->in_client)
+      ->join('sidebars', 'sidebars.id', '=', 'profile_permissions.sidebar_id')
       ->orderBy('order')->orderBy('affiliate_id')->get();
 
     $array = [];
@@ -29,10 +32,13 @@ class Sidebar extends Component {
         $fDataMenu = DB::table('profile_permissions')
           ->where('sidebars.client_id', 'REGEXP', '[[:<:]]' . $user->in_client . '[[:>:]]')
           ->where('sidebars.affiliate_id', $menu->id)
+          ->where('profile_permissions.profile_id', $user->in_profile)
+          ->where('profile_permissions.client_id', $user->in_client)
           ->orWhere('sidebars.client_id', 0)
           ->where('sidebars.affiliate_id', $menu->id)
-          ->join('sidebars', 'sidebars.id', '=', 'profile_permissions.sidebar_id')
           ->where('profile_permissions.profile_id', $user->in_profile)
+          ->where('profile_permissions.client_id', $user->in_client)
+          ->join('sidebars', 'sidebars.id', '=', 'profile_permissions.sidebar_id')
           ->orderBy('order')->get();
         $array[$key] = ['menu' => ['name' => $menu->name, 'icon' => $menu->icon, 'slug' => $menu->slug, 'url' => $menu->url]];
 
@@ -45,10 +51,13 @@ class Sidebar extends Component {
             $sDataMenu = DB::table('profile_permissions')
               ->where('sidebars.client_id', 'REGEXP', '[[:<:]]' . $user->in_client . '[[:>:]]')
               ->where('sidebars.affiliate_id', $fMenu->id)
+              ->where('profile_permissions.profile_id', $user->in_profile)
+              ->where('profile_permissions.client_id', $user->in_client)
               ->orWhere('sidebars.client_id', 0)
               ->where('sidebars.affiliate_id', $fMenu->id)
-              ->join('sidebars', 'sidebars.id', '=', 'profile_permissions.sidebar_id')
               ->where('profile_permissions.profile_id', $user->in_profile)
+              ->where('profile_permissions.client_id', $user->in_client)
+              ->join('sidebars', 'sidebars.id', '=', 'profile_permissions.sidebar_id')
               ->orderBy('order')->get();
             foreach ($sDataMenu as $sMenu) {
               $array[$key]['menu']['submenu'][$fkey]['submenu'][] = [

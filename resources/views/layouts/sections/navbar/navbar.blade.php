@@ -188,7 +188,7 @@
           </form>
         @else
           <li>
-            <a class="dropdown-item" href="{{ Route::has('login') ? route('login') : url('auth/login-basic') }}">
+            <a class="dropdown-item" href="{{ route('login') }}">
               <i class='bx bx-log-in me-2'></i>
               <span class="align-middle">Login</span>
             </a>
