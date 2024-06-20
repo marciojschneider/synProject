@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\pages;
+namespace App\Http\Controllers\pages\Structure;
 
 use App\Http\Controllers\Controller;
 use App\Models\Organization;
 use Illuminate\Http\Request;
 
-class StructureOrganizationController extends Controller {
+class OrganizationController extends Controller {
   public function organizations() {
     return view("content.pages.structure.organization.list");
   }

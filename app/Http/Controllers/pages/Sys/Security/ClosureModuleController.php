@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\pages;
+namespace App\Http\Controllers\pages\Sys\Security;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 // Models
-use App\Models\Sidebar;
 use App\Models\closureModule;
 
-class SysClosureModuleController extends Controller {
+class ClosureModuleController extends Controller {
   public function closureModules() {
     return view('content.pages.sys.security.closure-module.list');
   }

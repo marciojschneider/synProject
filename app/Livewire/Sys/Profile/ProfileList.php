@@ -22,8 +22,6 @@ class ProfileList extends Component {
   public $client;
 
   public function mount() {
-    $user = auth()->user();
-    $this->clients = Client::where('situation', 1)->where('id', $user->in_client)->get();
   }
 
   public function updated() {

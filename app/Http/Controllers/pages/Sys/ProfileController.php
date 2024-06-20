@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\pages;
+namespace App\Http\Controllers\pages\Sys;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -8,9 +8,8 @@ use Illuminate\Http\Request;
 // Models
 use App\Models\Client;
 use App\Models\Profile;
-use App\Models\UserProfile;
 
-class SysProfileController extends Controller {
+class ProfileController extends Controller {
   public function profiles() {
     return view('content.pages.sys.profile.list');
   }

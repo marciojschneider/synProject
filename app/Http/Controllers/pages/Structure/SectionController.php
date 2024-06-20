@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\pages;
+namespace App\Http\Controllers\pages\Structure;
 
 use App\Http\Controllers\Controller;
 use App\Models\Organization;
 use App\Models\Section;
 use Illuminate\Http\Request;
 
-class StructureSectionController extends Controller {
+class SectionController extends Controller {
   public function sections() {
     return view('content.pages.structure.section.list');
   }

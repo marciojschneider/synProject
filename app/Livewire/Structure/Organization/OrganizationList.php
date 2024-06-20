@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Structure\Organization;
 
 use App\Models\Organization;
 use Livewire\Component;
@@ -35,6 +35,6 @@ class OrganizationList extends Component {
     }
 
     $data['rows'] = $query->paginate($this->pPage);
-    return view('livewire.organization-list', $data);
+    return view('livewire.structure.organization.organization-list', $data);
   }
 }

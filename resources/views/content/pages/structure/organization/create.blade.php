@@ -42,39 +42,6 @@
             </div>
           </div>
 
-          <div class="row mb-4">
-            <div class="col-md-2">
-              <label for="machine_hour_dt" class="form-label">Hora Máquina</label>
-              <input type="datetime-local" step="1" class="form-control" id="machine_hour_dt"
-                name="machine_hour_dt" />
-            </div>
-
-            <div class="col-md-2">
-              <label for="ordinance_dt" class="form-label">Portaria</label>
-              <input type="datetime-local" step="1" class="form-control" id="ordinance_dt" name="ordinance_dt" />
-            </div>
-
-            <div class="col-md-2">
-              <label for="maintenance_dt" class="form-label">Manutenção</label>
-              <input type="datetime-local" step="1" class="form-control" id="maintenance_dt"
-                name="maintenance_dt" />
-            </div>
-            <div class="col-md-2">
-              <label for="fuel_dt" class="form-label">Combustível</label>
-              <input type="datetime-local" step="1" class="form-control" id="fuel_dt" name="fuel_dt" />
-            </div>
-
-            <div class="col-md-2">
-              <label for="harvest_dt" class="form-label">Colheita</label>
-              <input type="datetime-local" step="1" class="form-control" id="harvest_dt" name="harvest_dt" />
-            </div>
-
-            <div class="col-md-2">
-              <label for="inputs_dt" class="form-label">Insumos</label>
-              <input type="datetime-local" step="1" class="form-control" id="inputs_dt" name="inputs_dt" />
-            </div>
-          </div>
-
           <button type="submit" class="btn btn-primary">Salvar</button>
           <a href="{{ route('structure-organizations') }}" class="btn btn-secondary">Voltar</a>
         </form>

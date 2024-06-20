@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\pages;
+namespace App\Http\Controllers\pages\Structure;
 
 use App\Http\Controllers\Controller;
 use App\Models\Farm;
 use App\Models\Sector;
 use Illuminate\Http\Request;
 
-class StructureSectorController extends Controller {
+class SectorController extends Controller {
   public function sectors() {
     return view('content.pages.structure.sector.list');
   }

@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\pages;
+namespace App\Http\Controllers\pages\Sys;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 // Models
 use App\Models\Client;
-use App\Models\UserProfile;
 
-class SysClientController extends Controller {
+class ClientController extends Controller {
   public function clients() {
     return view('content.pages.sys.client.list');
   }

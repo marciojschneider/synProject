@@ -16,10 +16,10 @@
         </div>
 
         {{-- Caixa de pesquisa --}}
-        {{-- <div id="DataTables_Table_0_filter" class="dataTables_filter" bis_skin_checked="1" style="margin-right: 5px;">
+        <div id="DataTables_Table_0_filter" class="dataTables_filter" bis_skin_checked="1" style="margin-right: 5px;">
           <label><input wire:model.live.debounce.500ms="searchText" type="search" class="form-control"
               placeholder="Buscar..." aria-controls="DataTables_Table_0"></label>
-        </div> --}}
+        </div>
 
         {{-- Botão de novo usuário --}}
         <div class="dt-buttons" bis_skin_checked="1">

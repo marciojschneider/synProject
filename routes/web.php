@@ -8,22 +8,22 @@ use App\Http\Controllers\AuthController;
 // Controllers
 use App\Http\Controllers\pages\HomePage;
 //       → System
-use App\Http\Controllers\pages\SysClientController;
-use App\Http\Controllers\pages\SysProfileController;
-use App\Http\Controllers\pages\SysUserController;
-use App\Http\Controllers\pages\SysClosureModuleController;
+use App\Http\Controllers\pages\Sys\ClientController;
+use App\Http\Controllers\pages\Sys\ProfileController;
+use App\Http\Controllers\pages\Sys\UserController;
 //                → Security
-use App\Http\Controllers\pages\SysUserProfileController;
-use App\Http\Controllers\pages\SysProfillePermissionController;
-//       → Support
-use App\Http\Controllers\pages\SupTaskController;
+use App\Http\Controllers\pages\Sys\Security\UserProfileController;
+use App\Http\Controllers\pages\Sys\Security\ProfillePermissionController;
+use App\Http\Controllers\pages\Sys\Security\ClosureModuleController;
+
 //       → Structure
-use App\Http\Controllers\pages\StructureFarmController;
-use App\Http\Controllers\pages\StructureOrganizationController;
-use App\Http\Controllers\pages\StructureLocalityController;
-use App\Http\Controllers\pages\StructureFieldController;
-use App\Http\Controllers\pages\StructureSectionController;
-use App\Http\Controllers\pages\StructureSectorController;
+use App\Http\Controllers\pages\Structure\FarmController;
+use App\Http\Controllers\pages\Structure\OrganizationController;
+use App\Http\Controllers\pages\Structure\LocalityController;
+use App\Http\Controllers\pages\Structure\FieldController;
+use App\Http\Controllers\pages\Structure\SectionController;
+use App\Http\Controllers\pages\Structure\SectorController;
+
 //       → Cultive
 use App\Http\Controllers\pages\CultiveCultureController;
 use App\Http\Controllers\pages\CultivePlantingMethodController;
@@ -33,6 +33,9 @@ use App\Http\Controllers\pages\CultiveVarietyController;
 //       → Harvest
 use App\Http\Controllers\pages\HarvConfigController;
 use App\Http\Controllers\pages\HarvHarvestController;
+
+//       → Support
+use App\Http\Controllers\pages\SupTaskController;
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'loginAction']);
@@ -59,110 +62,92 @@ Route::middleware(['auth', 'canAccess'])->group(function () {
 
   // System
   //       → Users
-  Route::get('/sys/users', [SysUserController::class, 'users'])->name('sys-users');
-  Route::get('/sys/users/create', [SysUserController::class, 'userCreate'])->name('sys-user-create');
-  Route::post('/sys/users/create', [SysUserController::class, 'userCreateAction']);
-  Route::get('/sys/users/update/{id}', [SysUserController::class, 'userUpdate'])->name('sys-user-update');
-  Route::post('/sys/users/update/{id}', [SysUserController::class, 'userUpdateAction']);
-  Route::post('/sys/users/delete/{id}', [SysUserController::class, 'userDelete'])->name('sys-user-delete');
+  Route::get('/sys/users', [UserController::class, 'users'])->name('sys-users');
+  Route::get('/sys/users/create', [UserController::class, 'userCreate'])->name('sys-user-create');
+  Route::post('/sys/users/create', [UserController::class, 'userCreateAction']);
+  Route::get('/sys/users/update/{id}', [UserController::class, 'userUpdate'])->name('sys-user-update');
+  Route::post('/sys/users/update/{id}', [UserController::class, 'userUpdateAction']);
+  Route::post('/sys/users/delete/{id}', [UserController::class, 'userDelete'])->name('sys-user-delete');
   //       → Clients
-  Route::get('/sys/clients', [SysClientController::class, 'clients'])->name('sys-clients');
-  Route::get('/sys/client/create', [SysClientController::class, 'clientCreate'])->name('sys-client-create');
-  Route::post('/sys/client/create', [SysClientController::class, 'clientCreateAction']);
-  Route::get('/sys/client/update/{id}', [SysClientController::class, 'clientUpdate'])->name('sys-client-update');
-  Route::post('/sys/client/update/{id}', [SysClientController::class, 'clientUpdateAction']);
-  Route::post('/sys/client/delete/{id}', [SysClientController::class, 'clientDelete'])->name('sys-client-delete');
+  Route::get('/sys/clients', [ClientController::class, 'clients'])->name('sys-clients');
+  Route::get('/sys/client/create', [ClientController::class, 'clientCreate'])->name('sys-client-create');
+  Route::post('/sys/client/create', [ClientController::class, 'clientCreateAction']);
+  Route::get('/sys/client/update/{id}', [ClientController::class, 'clientUpdate'])->name('sys-client-update');
+  Route::post('/sys/client/update/{id}', [ClientController::class, 'clientUpdateAction']);
+  Route::post('/sys/client/delete/{id}', [ClientController::class, 'clientDelete'])->name('sys-client-delete');
   //       → Profiles
-  Route::get('/sys/profiles', [SysProfileController::class, 'profiles'])->name('sys-profiles');
-  Route::get('/sys/profile/create', [SysProfileController::class, 'profileCreate'])->name('sys-profile-create');
-  Route::post('/sys/profile/create', [SysProfileController::class, 'profileCreateAction']);
-  Route::get('/sys/profile/update/{id}', [SysProfileController::class, 'profileUpdate'])->name('sys-profile-update');
-  Route::post('/sys/profile/update/{id}', [SysProfileController::class, 'profileUpdateAction']);
-  Route::post('/sys/profile/delete/{id}', [SysProfileController::class, 'profileDelete'])->name('sys-profile-delete');
+  Route::get('/sys/profiles', [ProfileController::class, 'profiles'])->name('sys-profiles');
+  Route::get('/sys/profile/create', [ProfileController::class, 'profileCreate'])->name('sys-profile-create');
+  Route::post('/sys/profile/create', [ProfileController::class, 'profileCreateAction']);
+  Route::get('/sys/profile/update/{id}', [ProfileController::class, 'profileUpdate'])->name('sys-profile-update');
+  Route::post('/sys/profile/update/{id}', [ProfileController::class, 'profileUpdateAction']);
+  Route::post('/sys/profile/delete/{id}', [ProfileController::class, 'profileDelete'])->name('sys-profile-delete');
   //       → Security
   //                  → Closure Modules
-  Route::get('/sys/closure-modules', [SysClosureModuleController::class, 'closureModules'])->name('sys-sec-closures');
-  Route::get('/sys/closure-module/create', [SysClosureModuleController::class, 'closureModuleCreate'])->name('sys-sec-closure-create');
-  Route::post('/sys/closure-module/create', [SysClosureModuleController::class, 'closureModuleCreateAction']);
-  Route::get('/sys/closure-module/update/{id}', [SysClosureModuleController::class, 'closureModuleUpdate'])->name('sys-sec-closure-update');
-  Route::post('/sys/closure-module/update/{id}', [SysClosureModuleController::class, 'closureModuleUpdateAction']);
-  Route::post('/sys/closure-module/delete/{id}', [SysClosureModuleController::class, 'closureModuleDelete'])->name('sys-sec-closure-delete');
+  Route::get('/sys/closure-modules', [ClosureModuleController::class, 'closureModules'])->name('sys-sec-closures');
+  Route::get('/sys/closure-module/create', [ClosureModuleController::class, 'closureModuleCreate'])->name('sys-sec-closure-create');
+  Route::post('/sys/closure-module/create', [ClosureModuleController::class, 'closureModuleCreateAction']);
+  Route::get('/sys/closure-module/update/{id}', [ClosureModuleController::class, 'closureModuleUpdate'])->name('sys-sec-closure-update');
+  Route::post('/sys/closure-module/update/{id}', [ClosureModuleController::class, 'closureModuleUpdateAction']);
+  Route::post('/sys/closure-module/delete/{id}', [ClosureModuleController::class, 'closureModuleDelete'])->name('sys-sec-closure-delete');
   //                  → Permissions
-  Route::get('/sys/p-permissions', [SysProfillePermissionController::class, 'profilePermissions'])->name('sys-sec-permissions');
-  Route::get('/sys/p-permission/create', [SysProfillePermissionController::class, 'profilePermissionCreate'])->name('sys-sec-permission-create');
-  Route::post('/sys/p-permission/create', [SysProfillePermissionController::class, 'profilePermissionCreateAction']);
-  Route::get('/sys/p-permission/update/{id}', [SysProfillePermissionController::class, 'profilePermissionUpdate'])->name('sys-sec-permission-update');
-  Route::post('/sys/p-permission/update/{id}', [SysProfillePermissionController::class, 'profilePermissionUpdateAction']);
-  Route::post('/sys/p-permission/delete/{id}', [SysProfillePermissionController::class, 'profilePermissionDelete'])->name('sys-sec-permission-delete');
+  Route::get('/sys/p-permissions', [ProfillePermissionController::class, 'profilePermissions'])->name('sys-sec-permissions');
+  Route::get('/sys/p-permission/create', [ProfillePermissionController::class, 'profilePermissionCreate'])->name('sys-sec-permission-create');
+  Route::post('/sys/p-permission/create', [ProfillePermissionController::class, 'profilePermissionCreateAction']);
+  Route::get('/sys/p-permission/update/{id}', [ProfillePermissionController::class, 'profilePermissionUpdate'])->name('sys-sec-permission-update');
+  Route::post('/sys/p-permission/update/{id}', [ProfillePermissionController::class, 'profilePermissionUpdateAction']);
+  Route::post('/sys/p-permission/delete/{id}', [ProfillePermissionController::class, 'profilePermissionDelete'])->name('sys-sec-permission-delete');
   //                  → User Profiles
-  Route::get('/sys/u-profile', [SysUserProfileController::class, 'userProfiles'])->name('sys-sec-u-ps');
-  Route::get('/sys/u-profile/create', [SysUserProfileController::class, 'userProfileCreate'])->name('sys-sec-u-p-create');
-  Route::post('/sys/u-profile/create', [SysUserProfileController::class, 'userProfileCreateAction']);
-  Route::get('/sys/u-profile/update/{id}', [SysUserProfileController::class, 'userProfileUpdate'])->name('sys-sec-u-p-update');
-  Route::post('/sys/u-profile/update/{id}', [SysUserProfileController::class, 'userProfileUpdateAction']);
-  Route::post('/sys/u-profile/delete/{id}', [SysUserProfileController::class, 'userProfileDelete'])->name('sys-sec-u-p-delete');
-
-  // Support
-  //       → Tasks
-  Route::get('/sup/tasks', [SupTaskController::class, 'tasks'])->name('sup-tasks');
-  Route::get('/sup/task/create', [SupTaskController::class, 'taskCreate'])->name('sup-task-create');
-  Route::post('/sup/task/create', [SupTaskController::class, 'taskCreateAction']);
-  Route::get('/sup/task/update/{id}', [SupTaskController::class, 'taskUpdate'])->name('sup-task-update');
-  Route::post('/sup/task/update/{id}', [SupTaskController::class, 'taskUpdateAction']);
-  Route::post('/sup/task/delete/{id}', [SupTaskController::class, 'taskDelete'])->name('sup-task-delete');
-  //       → Comments
-  Route::post('/sup/task-comment', [SupTaskController::class, 'commentAction'])->name('sup-comment');
-  Route::post('/sup/task-comment/update', [SupTaskController::class, 'commentUpdate'])->name('sup-comment-update');
-  Route::post('/sup/task-comment/delete/{id}', [SupTaskController::class, 'commentDelete'])->name('sup-comment-delete');
-  //       → Roadmap
-  Route::get('/sup/task-roadmap', [SupTaskController::class, 'roadmap'])->name('sup-roadmap');
-  Route::post('/sup/task-roadmap', [SupTaskController::class, 'roadmapAction']);
-  Route::post('/sup/task-roadmap/update', [SupTaskController::class, 'roadmapUpdate'])->name('sup-roadmap-update');
-  Route::post('/sup/task-roadmap/delete/{id}', [SupTaskController::class, 'roadmapDelete'])->name('sup-roadmap-delete');
+  Route::get('/sys/u-profile', [UserProfileController::class, 'userProfiles'])->name('sys-sec-u-ps');
+  Route::get('/sys/u-profile/create', [UserProfileController::class, 'userProfileCreate'])->name('sys-sec-u-p-create');
+  Route::post('/sys/u-profile/create', [UserProfileController::class, 'userProfileCreateAction']);
+  Route::get('/sys/u-profile/update/{id}', [UserProfileController::class, 'userProfileUpdate'])->name('sys-sec-u-p-update');
+  Route::post('/sys/u-profile/update/{id}', [UserProfileController::class, 'userProfileUpdateAction']);
+  Route::post('/sys/u-profile/delete/{id}', [UserProfileController::class, 'userProfileDelete'])->name('sys-sec-u-p-delete');
 
   // Structure
   //       → Organization
-  Route::get('/structure/organizations', [StructureOrganizationController::class, 'organizations'])->name('structure-organizations');
-  Route::get('/structure/organization/create', [StructureOrganizationController::class, 'organizationCreate'])->name('structure-organization-create');
-  Route::post('/structure/organization/create', [StructureOrganizationController::class, 'organizationCreateAction']);
-  Route::get('/structure/organization/update/{id}', [StructureOrganizationController::class, 'organizationUpdate'])->name('structure-organization-update');
-  Route::post('/structure/organization/update/{id}', [StructureOrganizationController::class, 'organizationUpdateAction']);
-  Route::post('/structure/organization/delete/{id}', [StructureOrganizationController::class, 'organizationDelete'])->name('structure-organization-delete');
+  Route::get('/structure/organizations', [OrganizationController::class, 'organizations'])->name('structure-organizations');
+  Route::get('/structure/organization/create', [OrganizationController::class, 'organizationCreate'])->name('structure-organization-create');
+  Route::post('/structure/organization/create', [OrganizationController::class, 'organizationCreateAction']);
+  Route::get('/structure/organization/update/{id}', [OrganizationController::class, 'organizationUpdate'])->name('structure-organization-update');
+  Route::post('/structure/organization/update/{id}', [OrganizationController::class, 'organizationUpdateAction']);
+  Route::post('/structure/organization/delete/{id}', [OrganizationController::class, 'organizationDelete'])->name('structure-organization-delete');
   //       → Farm
-  Route::get('/structure/farms', [StructureFarmController::class, 'farms'])->name('structure-farms');
-  Route::get('/structure/farm/create', [StructureFarmController::class, 'farmCreate'])->name('structure-farm-create');
-  Route::post('/structure/farm/create', [StructureFarmController::class, 'farmCreateAction']);
-  Route::get('/structure/farm/update/{id}', [StructureFarmController::class, 'farmUpdate'])->name('structure-farm-update');
-  Route::post('/structure/farm/update/{id}', [StructureFarmController::class, 'farmUpdateAction']);
-  Route::post('/structure/farm/delete/{id}', [StructureFarmController::class, 'farmDelete'])->name('structure-farm-delete');
+  Route::get('/structure/farms', [FarmController::class, 'farms'])->name('structure-farms');
+  Route::get('/structure/farm/create', [FarmController::class, 'farmCreate'])->name('structure-farm-create');
+  Route::post('/structure/farm/create', [FarmController::class, 'farmCreateAction']);
+  Route::get('/structure/farm/update/{id}', [FarmController::class, 'farmUpdate'])->name('structure-farm-update');
+  Route::post('/structure/farm/update/{id}', [FarmController::class, 'farmUpdateAction']);
+  Route::post('/structure/farm/delete/{id}', [FarmController::class, 'farmDelete'])->name('structure-farm-delete');
   //       → Locality
-  Route::get('/structure/localities', [StructureLocalityController::class, 'localities'])->name('structure-localities');
-  Route::get('/structure/locality/create', [StructureLocalityController::class, 'localityCreate'])->name('structure-locality-create');
-  Route::post('/structure/locality/create', [StructureLocalityController::class, 'localityCreateAction']);
-  Route::get('/structure/locality/update/{id}', [StructureLocalityController::class, 'localityUpdate'])->name('structure-locality-update');
-  Route::post('/structure/locality/update/{id}', [StructureLocalityController::class, 'localityUpdateAction']);
-  Route::post('/structure/locality/delete/{id}', [StructureLocalityController::class, 'localityDelete'])->name('structure-locality-delete');
+  Route::get('/structure/localities', [LocalityController::class, 'localities'])->name('structure-localities');
+  Route::get('/structure/locality/create', [LocalityController::class, 'localityCreate'])->name('structure-locality-create');
+  Route::post('/structure/locality/create', [LocalityController::class, 'localityCreateAction']);
+  Route::get('/structure/locality/update/{id}', [LocalityController::class, 'localityUpdate'])->name('structure-locality-update');
+  Route::post('/structure/locality/update/{id}', [LocalityController::class, 'localityUpdateAction']);
+  Route::post('/structure/locality/delete/{id}', [LocalityController::class, 'localityDelete'])->name('structure-locality-delete');
   //       → Field
-  Route::get('/structure/fields', [StructureFieldController::class, 'fields'])->name('structure-fields');
-  Route::get('/structure/field/create', [StructureFieldController::class, 'fieldCreate'])->name('structure-field-create');
-  Route::post('/structure/field/create', [StructureFieldController::class, 'fieldCreateAction']);
-  Route::get('/structure/field/update/{id}', [StructureFieldController::class, 'fieldUpdate'])->name('structure-field-update');
-  Route::post('/structure/field/update/{id}', [StructureFieldController::class, 'fieldUpdateAction']);
-  Route::post('/structure/field/delete/{id}', [StructureFieldController::class, 'fieldDelete'])->name('structure-field-delete');
+  Route::get('/structure/fields', [FieldController::class, 'fields'])->name('structure-fields');
+  Route::get('/structure/field/create', [FieldController::class, 'fieldCreate'])->name('structure-field-create');
+  Route::post('/structure/field/create', [FieldController::class, 'fieldCreateAction']);
+  Route::get('/structure/field/update/{id}', [FieldController::class, 'fieldUpdate'])->name('structure-field-update');
+  Route::post('/structure/field/update/{id}', [FieldController::class, 'fieldUpdateAction']);
+  Route::post('/structure/field/delete/{id}', [FieldController::class, 'fieldDelete'])->name('structure-field-delete');
   //       → Sector
-  Route::get('/structure/sectors', [StructureSectorController::class, 'sectors'])->name('structure-sectors');
-  Route::get('/structure/sector/create', [StructureSectorController::class, 'sectorCreate'])->name('structure-sector-create');
-  Route::post('/structure/sector/create', [StructureSectorController::class, 'sectorCreateAction']);
-  Route::get('/structure/sector/update/{id}', [StructureSectorController::class, 'sectorUpdate'])->name('structure-sector-update');
-  Route::post('/structure/sector/update/{id}', [StructureSectorController::class, 'sectorUpdateAction']);
-  Route::post('/structure/sector/delete/{id}', [StructureSectorController::class, 'sectorDelete'])->name('structure-sector-delete');
+  Route::get('/structure/sectors', [SectorController::class, 'sectors'])->name('structure-sectors');
+  Route::get('/structure/sector/create', [SectorController::class, 'sectorCreate'])->name('structure-sector-create');
+  Route::post('/structure/sector/create', [SectorController::class, 'sectorCreateAction']);
+  Route::get('/structure/sector/update/{id}', [SectorController::class, 'sectorUpdate'])->name('structure-sector-update');
+  Route::post('/structure/sector/update/{id}', [SectorController::class, 'sectorUpdateAction']);
+  Route::post('/structure/sector/delete/{id}', [SectorController::class, 'sectorDelete'])->name('structure-sector-delete');
   //       → Section
-  Route::get('/structure/sections', [StructureSectionController::class, 'sections'])->name('structure-sections');
-  Route::get('/structure/section/create', [StructureSectionController::class, 'sectionCreate'])->name('structure-section-create');
-  Route::post('/structure/section/create', [StructureSectionController::class, 'sectionCreateAction']);
-  Route::get('/structure/section/update/{id}', [StructureSectionController::class, 'sectionUpdate'])->name('structure-section-update');
-  Route::post('/structure/section/update/{id}', [StructureSectionController::class, 'sectionUpdateAction']);
-  Route::post('/structure/section/delete/{id}', [StructureSectionController::class, 'sectionDelete'])->name('structure-section-delete');
+  Route::get('/structure/sections', [SectionController::class, 'sections'])->name('structure-sections');
+  Route::get('/structure/section/create', [SectionController::class, 'sectionCreate'])->name('structure-section-create');
+  Route::post('/structure/section/create', [SectionController::class, 'sectionCreateAction']);
+  Route::get('/structure/section/update/{id}', [SectionController::class, 'sectionUpdate'])->name('structure-section-update');
+  Route::post('/structure/section/update/{id}', [SectionController::class, 'sectionUpdateAction']);
+  Route::post('/structure/section/delete/{id}', [SectionController::class, 'sectionDelete'])->name('structure-section-delete');
 
   // Cultive
   //       → Method
@@ -217,4 +202,22 @@ Route::middleware(['auth', 'canAccess'])->group(function () {
   Route::get('/harv/harvest-configuration/update/{id}', [HarvHarvestConfigurationController::class, 'harvestConfigurationUpdate'])->name('harv-configuration-update');
   Route::post('/harv/harvest-configuration/update/{id}', [HarvHarvestConfigurationController::class, 'harvestConfigurationUpdateAction']);
   Route::post('/harv/harvest-configuration/delete/{id}', [HarvHarvestConfigurationController::class, 'harvestConfigurationDelete'])->name('harv-configuration-delete');
+
+  // Support
+  //       → Tasks
+  Route::get('/sup/tasks', [SupTaskController::class, 'tasks'])->name('sup-tasks');
+  Route::get('/sup/task/create', [SupTaskController::class, 'taskCreate'])->name('sup-task-create');
+  Route::post('/sup/task/create', [SupTaskController::class, 'taskCreateAction']);
+  Route::get('/sup/task/update/{id}', [SupTaskController::class, 'taskUpdate'])->name('sup-task-update');
+  Route::post('/sup/task/update/{id}', [SupTaskController::class, 'taskUpdateAction']);
+  Route::post('/sup/task/delete/{id}', [SupTaskController::class, 'taskDelete'])->name('sup-task-delete');
+  //       → Comments
+  Route::post('/sup/task-comment', [SupTaskController::class, 'commentAction'])->name('sup-comment');
+  Route::post('/sup/task-comment/update', [SupTaskController::class, 'commentUpdate'])->name('sup-comment-update');
+  Route::post('/sup/task-comment/delete/{id}', [SupTaskController::class, 'commentDelete'])->name('sup-comment-delete');
+  //       → Roadmap
+  Route::get('/sup/task-roadmap', [SupTaskController::class, 'roadmap'])->name('sup-roadmap');
+  Route::post('/sup/task-roadmap', [SupTaskController::class, 'roadmapAction']);
+  Route::post('/sup/task-roadmap/update', [SupTaskController::class, 'roadmapUpdate'])->name('sup-roadmap-update');
+  Route::post('/sup/task-roadmap/delete/{id}', [SupTaskController::class, 'roadmapDelete'])->name('sup-roadmap-delete');
 });

@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\pages;
+namespace App\Http\Controllers\pages\Sys;
 
 use App\Http\Controllers\Controller;
-use App\Models\profilePermission;
 use Illuminate\Http\Request;
 
 // Importações adicionais
@@ -14,7 +13,7 @@ use App\Models\User;
 use App\Models\Profile;
 use App\Models\UserProfile;
 
-class SysUserController extends Controller {
+class UserController extends Controller {
   public function users() {
     return view('content.pages.sys.user.list');
   }

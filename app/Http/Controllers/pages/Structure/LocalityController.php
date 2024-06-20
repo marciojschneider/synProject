@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\pages;
+namespace App\Http\Controllers\pages\Structure;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 // Models
 use App\Models\Locality;
 
-class StructureLocalityController extends Controller {
+class LocalityController extends Controller {
   public function localities() {
     return view('content.pages.structure.locality.list');
   }

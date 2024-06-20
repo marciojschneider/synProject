@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\pages;
+namespace App\Http\Controllers\pages\Structure;
 
 use App\Http\Controllers\Controller;
 use App\Models\Farm;
@@ -8,7 +8,7 @@ use App\Models\Field;
 use App\Models\Locality;
 use Illuminate\Http\Request;
 
-class StructureFieldController extends Controller {
+class FieldController extends Controller {
   public function fields() {
     return view('content.pages.structure.field.list');
   }

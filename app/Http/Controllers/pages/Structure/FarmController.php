@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\pages;
+namespace App\Http\Controllers\pages\Structure;
 
 use App\Http\Controllers\Controller;
 use App\Models\Farm;
 use Illuminate\Http\Request;
 
-class StructureFarmController extends Controller {
+class FarmController extends Controller {
   public function farms() {
     return view("content.pages.structure.farm.list");
   }

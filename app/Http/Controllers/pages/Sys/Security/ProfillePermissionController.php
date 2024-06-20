@@ -1,16 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\pages;
+namespace App\Http\Controllers\pages\Sys\Security;
 
 use App\Http\Controllers\Controller;
-use App\Models\Module;
-use App\Models\ModulePermission;
-use App\Models\Profile;
 use App\Models\profilePermission;
-use App\Models\Sidebar;
 use Illuminate\Http\Request;
 
-class SysProfillePermissionController extends Controller {
+class ProfillePermissionController extends Controller {
   public function profilePermissions() {
     return view('content.pages.sys.security.profile-permission.list');
   }

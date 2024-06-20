@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\pages;
+namespace App\Http\Controllers\pages\Sys\Security;
 
 use App\Http\Controllers\Controller;
 use App\Models\UserProfile;
@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\Profile;
 use App\Models\User;
 
-class SysUserProfileController extends Controller {
+class UserProfileController extends Controller {
   public function userProfiles() {
     return view('content.pages.sys.security.user-profile.list');
   }

@@ -34,6 +34,10 @@ class ClosureModuleList extends Component {
       ->select('closure_modules.*', 'sidebars.name as sName')
       ->get();
 
+    if ($this->searchText) {
+      $query->where('sidebars.name', 'like', '%' . $this->searchText . '%');
+    }
+
     $data['rows'] = $query->paginate($this->pPage);
 
     return view('livewire.sys.security.closure-module.closure-module-list', $data);
