@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Sys\Profile;
 
 use Livewire\Component;
 
@@ -50,6 +50,6 @@ class ProfileList extends Component {
 
     $data['rows'] = $query->paginate($this->pPage);
 
-    return view('livewire.profile-list', $data);
+    return view('livewire.sys.profile.profile-list', $data);
   }
 }

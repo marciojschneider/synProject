@@ -1,10 +1,14 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Sys\User;
 
-use App\Models\User;
 use Livewire\Component;
+
+// Livewire Adicionais
 use Livewire\WithPagination;
+
+// Models
+use App\Models\User;
 
 class UserList extends Component {
   use WithPagination;
@@ -37,6 +41,6 @@ class UserList extends Component {
 
     $data['rows'] = $query->paginate($this->pPage);
 
-    return view('livewire.user-list', $data);
+    return view('livewire.sys.user.user-list', $data);
   }
 }

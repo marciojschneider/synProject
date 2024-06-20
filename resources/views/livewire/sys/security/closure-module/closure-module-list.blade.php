@@ -23,7 +23,7 @@
 
         {{-- Botão de novo usuário --}}
         <div class="dt-buttons" bis_skin_checked="1">
-          <a class="dt-button add-new btn btn-primary" href="{{ route('sys-closure-create') }}"><span> <i
+          <a class="dt-button add-new btn btn-primary" href="{{ route('sys-sec-closure-create') }}"><span> <i
                 class="bx bx-plus me-0 me-sm-1"></i><span class="d-none d-sm-inline-block">Novo</span>
             </span>
           </a>
@@ -45,7 +45,7 @@
         <tbody class="table-border-bottom-0">
           @foreach ($rows as $row)
             <tr>
-              <td>{{ $row->sName }}</td>
+              <td>{{ mb_strtoupper($row->sName, 'UTF-8') }}</td>
               <td>{{ date('d/m/Y', strtotime($row->dt_closure)) }}</td>
               <td><span
                   class="badge {{ $row->situation == 1 ? 'bg-label-primary' : 'bg-label-warning' }} me-1">{{ $row->situation == 1 ? 'Ativo' : 'Inativo' }}</span>
@@ -55,10 +55,10 @@
                   <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i
                       class="bx bx-dots-vertical-rounded"></i></button>
                   <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{{ route('sys-closure-update', $row->id) }}"><i
+                    <a class="dropdown-item" href="{{ route('sys-sec-closure-update', $row->id) }}"><i
                         class="bx bx-edit-alt me-1"></i> Editar</a>
 
-                    <form method="POST" action="{{ route('sys-closure-delete', $row->id) }}"
+                    <form method="POST" action="{{ route('sys-sec-closure-delete', $row->id) }}"
                       id="closureDelete{{ $row->id }}" display="none">
                       @csrf
                     </form>

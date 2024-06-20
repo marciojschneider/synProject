@@ -24,5 +24,5 @@
 @endsection
 
 @section('content')
-  <livewire:profile-list />
+  <livewire:sys.profile.profile-list />
 @endsection

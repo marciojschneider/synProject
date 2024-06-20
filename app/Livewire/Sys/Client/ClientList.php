@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Sys\Client;
 
 use Livewire\Component;
 
@@ -39,6 +39,6 @@ class ClientList extends Component {
 
     $data['rows'] = $query->paginate($this->pPage);
 
-    return view('livewire.client-list', $data);
+    return view('livewire.sys.client.client-list', $data);
   }
 }

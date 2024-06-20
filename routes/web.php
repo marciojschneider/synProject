@@ -79,14 +79,14 @@ Route::middleware(['auth', 'canAccess'])->group(function () {
   Route::get('/sys/profile/update/{id}', [SysProfileController::class, 'profileUpdate'])->name('sys-profile-update');
   Route::post('/sys/profile/update/{id}', [SysProfileController::class, 'profileUpdateAction']);
   Route::post('/sys/profile/delete/{id}', [SysProfileController::class, 'profileDelete'])->name('sys-profile-delete');
-  //       → Closure Modules
-  Route::get('/sys/closure-modules', [SysClosureModuleController::class, 'closureModules'])->name('sys-closures');
-  Route::get('/sys/closure-module/create', [SysClosureModuleController::class, 'closureModuleCreate'])->name('sys-closure-create');
-  Route::post('/sys/closure-module/create', [SysClosureModuleController::class, 'closureModuleCreateAction']);
-  Route::get('/sys/closure-module/update/{id}', [SysClosureModuleController::class, 'closureModuleUpdate'])->name('sys-closure-update');
-  Route::post('/sys/closure-module/update/{id}', [SysClosureModuleController::class, 'closureModuleUpdateAction']);
-  Route::post('/sys/closure-module/delete/{id}', [SysClosureModuleController::class, 'closureModuleDelete'])->name('sys-closure-delete');
   //       → Security
+  //                  → Closure Modules
+  Route::get('/sys/closure-modules', [SysClosureModuleController::class, 'closureModules'])->name('sys-sec-closures');
+  Route::get('/sys/closure-module/create', [SysClosureModuleController::class, 'closureModuleCreate'])->name('sys-sec-closure-create');
+  Route::post('/sys/closure-module/create', [SysClosureModuleController::class, 'closureModuleCreateAction']);
+  Route::get('/sys/closure-module/update/{id}', [SysClosureModuleController::class, 'closureModuleUpdate'])->name('sys-sec-closure-update');
+  Route::post('/sys/closure-module/update/{id}', [SysClosureModuleController::class, 'closureModuleUpdateAction']);
+  Route::post('/sys/closure-module/delete/{id}', [SysClosureModuleController::class, 'closureModuleDelete'])->name('sys-sec-closure-delete');
   //                  → Permissions
   Route::get('/sys/p-permissions', [SysProfillePermissionController::class, 'profilePermissions'])->name('sys-sec-permissions');
   Route::get('/sys/p-permission/create', [SysProfillePermissionController::class, 'profilePermissionsCreate'])->name('sys-sec-permission-create');

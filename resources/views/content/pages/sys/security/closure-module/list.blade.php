@@ -24,5 +24,5 @@
 @endsection
 
 @section('content')
-  <livewire:closure-module-list />
+  <livewire:sys.security.closure-module.closure-module-list />
 @endsection

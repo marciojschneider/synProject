@@ -20,10 +20,6 @@ class Sidebar extends Component {
       ->where('profile_permissions.profile_id', $user->in_profile)
       ->where('profile_permissions.client_id', $user->in_client)
       ->where('profile_permissions.view', 1)
-      ->orWhere('sidebars.client_id', 0)
-      ->where('profile_permissions.profile_id', $user->in_profile)
-      ->where('profile_permissions.client_id', $user->in_client)
-      ->where('profile_permissions.view', 1)
       ->join('sidebars', 'sidebars.id', '=', 'profile_permissions.sidebar_id')
       ->orderBy('order')->orderBy('affiliate_id')->get();
 
@@ -33,11 +29,6 @@ class Sidebar extends Component {
       if (empty($menu->affiliate_id)) {
         $fDataMenu = DB::table('profile_permissions')
           ->where('sidebars.client_id', 'REGEXP', '[[:<:]]' . $user->in_client . '[[:>:]]')
-          ->where('sidebars.affiliate_id', $menu->id)
-          ->where('profile_permissions.profile_id', $user->in_profile)
-          ->where('profile_permissions.client_id', $user->in_client)
-          ->where('profile_permissions.view', 1)
-          ->orWhere('sidebars.client_id', 0)
           ->where('sidebars.affiliate_id', $menu->id)
           ->where('profile_permissions.profile_id', $user->in_profile)
           ->where('profile_permissions.client_id', $user->in_client)
@@ -54,11 +45,6 @@ class Sidebar extends Component {
           if (!empty($fMenu->affiliate_id)) {
             $sDataMenu = DB::table('profile_permissions')
               ->where('sidebars.client_id', 'REGEXP', '[[:<:]]' . $user->in_client . '[[:>:]]')
-              ->where('sidebars.affiliate_id', $fMenu->id)
-              ->where('profile_permissions.profile_id', $user->in_profile)
-              ->where('profile_permissions.client_id', $user->in_client)
-              ->where('profile_permissions.view', 1)
-              ->orWhere('sidebars.client_id', 0)
               ->where('sidebars.affiliate_id', $fMenu->id)
               ->where('profile_permissions.profile_id', $user->in_profile)
               ->where('profile_permissions.client_id', $user->in_client)

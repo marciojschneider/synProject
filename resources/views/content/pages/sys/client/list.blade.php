@@ -24,5 +24,5 @@
 @endsection
 
 @section('content')
-  <livewire:client-list />
+  <livewire:sys.client.client-list />
 @endsection
