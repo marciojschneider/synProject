@@ -89,12 +89,12 @@ Route::middleware(['auth', 'canAccess'])->group(function () {
   Route::post('/sys/closure-module/delete/{id}', [SysClosureModuleController::class, 'closureModuleDelete'])->name('sys-sec-closure-delete');
   //                  → Permissions
   Route::get('/sys/p-permissions', [SysProfillePermissionController::class, 'profilePermissions'])->name('sys-sec-permissions');
-  Route::get('/sys/p-permission/create', [SysProfillePermissionController::class, 'profilePermissionsCreate'])->name('sys-sec-permission-create');
-  Route::post('/sys/p-permission/create', [SysProfillePermissionController::class, 'profilePermissionsCreateAction']);
-  Route::get('/sys/p-permission/update/{id}', [SysProfillePermissionController::class, 'profilePermissionsUpdate'])->name('sys-sec-permission-update');
-  Route::post('/sys/p-permission/update/{id}', [SysProfillePermissionController::class, 'profilePermissionsUpdateAction']);
-  Route::post('/sys/p-permission/delete/{id}', [SysProfillePermissionController::class, 'profilePermissionsDelete'])->name('sys-sec-permission-delete');
-  //                  → User Profiles TODO: (Verificar nomenclatura de rotas)
+  Route::get('/sys/p-permission/create', [SysProfillePermissionController::class, 'profilePermissionCreate'])->name('sys-sec-permission-create');
+  Route::post('/sys/p-permission/create', [SysProfillePermissionController::class, 'profilePermissionCreateAction']);
+  Route::get('/sys/p-permission/update/{id}', [SysProfillePermissionController::class, 'profilePermissionUpdate'])->name('sys-sec-permission-update');
+  Route::post('/sys/p-permission/update/{id}', [SysProfillePermissionController::class, 'profilePermissionUpdateAction']);
+  Route::post('/sys/p-permission/delete/{id}', [SysProfillePermissionController::class, 'profilePermissionDelete'])->name('sys-sec-permission-delete');
+  //                  → User Profiles
   Route::get('/sys/u-profile', [SysUserProfileController::class, 'userProfiles'])->name('sys-sec-u-ps');
   Route::get('/sys/u-profile/create', [SysUserProfileController::class, 'userProfileCreate'])->name('sys-sec-u-p-create');
   Route::post('/sys/u-profile/create', [SysUserProfileController::class, 'userProfileCreateAction']);

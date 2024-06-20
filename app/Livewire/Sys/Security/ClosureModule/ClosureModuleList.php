@@ -24,7 +24,6 @@ class ClosureModuleList extends Component {
   public function mount() {
     $this->sidebars = Sidebar::where('icon', null)->get();
   }
-
   public function updated() {
     $this->resetPage();
   }

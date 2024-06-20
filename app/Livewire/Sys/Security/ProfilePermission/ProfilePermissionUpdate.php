@@ -1,31 +1,42 @@
 <?php
 
-namespace App\Livewire\Sys\Security\ClosureModule;
+namespace App\Livewire\Sys\Security\ProfilePermission;
 
 use Livewire\Component;
 
-//Models
+// Models
 use App\Models\Sidebar;
-use App\Models\ClosureModule;
+use App\Models\Profile;
+use App\Models\profilePermission;
 
-class ClosureModuleUpdate extends Component {
+class ProfilePermissionUpdate extends Component {
   public $id;
-  public $closure_module;
   public $modules = [];
   public $module = null;
+
+  public $profile_permission;
+
   public $screens = [];
   public $screen = null;
 
+  public $profiles = [];
+  public $profile = null;
+
   public function mount() {
-    $this->closure_module = closureModule::find($this->id);
+    $user = auth()->user();
+    $this->profile_permission = profilePermission::find($this->id);
 
-    if (!$this->closure_module) {
-      return redirect()->route('sys-sec-closures');
+    if (!$this->profile_permission) {
+      return redirect()->route('sys-sec-permissions');
     }
+    // abort(404);
 
-    // TODO: verificar possibilidade de melhoria de lógica
-    $affiliate = Sidebar::where('id', $this->closure_module->sidebar_id)->first();
+    $affiliate = Sidebar::where('id', $this->profile_permission->sidebar_id)->first();
     $module = Sidebar::where('id', $affiliate->affiliate_id)->first();
+
+    if (!$module) {
+      return redirect()->route('sys-sec-permissions');
+    }
 
     $this->module = $module->id;
 
@@ -38,6 +49,8 @@ class ClosureModuleUpdate extends Component {
       ->where('client_id', 'REGEXP', '[[:<:]]' . auth()->user()->in_client . '[[:>:]]')
       ->where('affiliate_id', $affiliate->affiliate_id)
       ->get();
+
+    $this->profiles = Profile::where('client_id', $user->in_client)->get();
   }
 
   public function updatedModule() {

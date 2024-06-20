@@ -24,5 +24,5 @@
 @endsection
 
 @section('content')
-  <livewire:profile-permission-list />
+  <livewire:sys.security.profile-permission.profile-permission-list />
 @endsection

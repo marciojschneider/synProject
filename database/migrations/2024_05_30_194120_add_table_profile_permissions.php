@@ -16,10 +16,10 @@ return new class extends Migration {
       $table->foreignIdFor(Profile::class)->constrained()->onDelete('cascade');
       $table->foreignIdFor(Sidebar::class)->constrained();
       $table->foreignIdFor(Client::class)->constrained()->onDelete('cascade'); // Verificar a possibilidade de ter dois onDelete('cascade')
-      $table->integer('list');
-      $table->integer('create');
-      $table->integer('update');
-      $table->integer('delete');
+      $table->integer('view')->default(1);
+      $table->integer('create')->default(0);
+      $table->integer('update')->default(0);
+      $table->integer('delete')->default(0);
       $table->string('description')->nullable();
       $table->integer('creation_user')->nullable();
       $table->timestamps();

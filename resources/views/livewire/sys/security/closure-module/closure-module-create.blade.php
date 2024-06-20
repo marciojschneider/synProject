@@ -29,7 +29,7 @@
 
           <div class="col-md-3">
             <label for="ending_dt" class="form-label">Fechamento</label>
-            <input type="datetime-local" step="1" class="form-control" id="dt_closure" name="dt_closure"
+            <input type="date" step="1" class="form-control" id="dt_closure" name="dt_closure"
               value="{{ date('Y-m-d', strtotime(now('America/Sao_Paulo'))) }}" />
           </div>
 

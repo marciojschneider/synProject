@@ -15,22 +15,34 @@ class SysProfillePermissionController extends Controller {
     return view('content.pages.sys.security.profile-permission.list');
   }
 
-  public function profilePermissionsCreate() {
-    $data['sidebars'] = Sidebar::where('icon', null)->get();
-    $data['profiles'] = Profile::all();
-    // $data['profiles'] = Profile::where('client_id', 1)->get();
-
-    return view('content.pages.sys.security.profile-permission.create', $data);
+  public function profilePermissionCreate() {
+    return view('content.pages.sys.security.profile-permission.create');
   }
 
-  public function profilePermissionsCreateAction(Request $request) {
+  public function profilePermissionCreateAction(Request $request) {
     $user = auth()->user();
-    $data = $request->only(['sidebar', 'profile', 'description', 'listCheck', 'createCheck', 'updateCheck', 'deleteCheck']);
+    $data = $request->only(['module', 'screen', 'profile', 'description', 'viewCheck', 'createCheck', 'updateCheck', 'deleteCheck']);
+
+    $limitModule = profilePermission::where('sidebar_id', $data['module'])->where('profile_id', $data['profile'])->first();
+    if (!$limitModule) {
+      $moduleCreate = new profilePermission();
+      $moduleCreate->profile_id = $data['profile'];
+      $moduleCreate->sidebar_id = $data['module'];
+      $moduleCreate->client_id = $user->in_client;
+      $moduleCreate->view = 1;
+      $moduleCreate->creation_user = $user->id;
+      $moduleCreate->save();
+    }
+
+    $limitScreen = profilePermission::where('sidebar_id', $data['screen'])->where('profile_id', $data['profile'])->first();
+    if ($limitScreen) {
+      return redirect()->route('sys-sec-permissions');
+    }
 
     $profilePermissionCreate = new profilePermission();
     $profilePermissionCreate->profile_id = $data['profile'];
-    $profilePermissionCreate->sidebar_id = $data['sidebar'];
-    $profilePermissionCreate->list = isset($data['listCheck']) ? 1 : 0;
+    $profilePermissionCreate->sidebar_id = $data['screen'];
+    $profilePermissionCreate->view = isset($data['viewCheck']) ? 1 : 0;
     $profilePermissionCreate->create = isset($data['createCheck']) ? 1 : 0;
     $profilePermissionCreate->update = isset($data['updateCheck']) ? 1 : 0;
     $profilePermissionCreate->delete = isset($data['deleteCheck']) ? 1 : 0;
@@ -42,21 +54,23 @@ class SysProfillePermissionController extends Controller {
     return redirect()->route('sys-sec-permissions');
   }
 
-  public function profilePermissionsUpdate(int $id) {
-    $data['sidebars'] = Sidebar::where('icon', null)->get();
-    $data['profiles'] = Profile::all();
-
-    $data['profilePermission'] = profilePermission::find($id);
-
-    return view('content.pages.sys.security.profile-permission.update', $data);
+  public function profilePermissionUpdate(int $id) {
+    return view('content.pages.sys.security.profile-permission.update', compact('id'));
   }
 
-  public function profilePermissionsUpdateAction(int $id, Request $request) {
-    $update = $request->only(['sidebar', 'profile', 'description', 'listCheck', 'createCheck', 'updateCheck', 'deleteCheck']);
+  public function profilePermissionUpdateAction(int $id, Request $request) {
+    $user = auth()->user();
+    $update = $request->only(['module', 'screen', 'profile', 'description', 'viewCheck', 'createCheck', 'updateCheck', 'deleteCheck']);
+
+
+    $limitScreen = profilePermission::where('sidebar_id', $update['screen'])->where('profile_id', $update['profile'])->get();
+    if ($limitScreen) {
+      return redirect()->route('sys-sec-permissions');
+    }
 
     $profilePermissionUpdate = profilePermission::find($id);
     $profilePermissionUpdate->profile_id = $update['profile'];
-    $profilePermissionUpdate->list = isset($update['listCheck']) ? 1 : 0;
+    $profilePermissionUpdate->view = isset($update['viewCheck']) ? 1 : 0;
     $profilePermissionUpdate->create = isset($update['createCheck']) ? 1 : 0;
     $profilePermissionUpdate->update = isset($update['updateCheck']) ? 1 : 0;
     $profilePermissionUpdate->delete = isset($update['deleteCheck']) ? 1 : 0;
@@ -66,7 +80,7 @@ class SysProfillePermissionController extends Controller {
     return redirect()->route('sys-sec-permissions');
   }
 
-  public function profilePermissionsDelete(int $id) {
+  public function profilePermissionDelete(int $id) {
     profilePermission::where('id', $id)->delete();
 
     return redirect()->route('sys-sec-permissions');
