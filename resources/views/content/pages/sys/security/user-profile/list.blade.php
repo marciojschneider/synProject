@@ -24,5 +24,5 @@
 @endsection
 
 @section('content')
-  <livewire:user-profile-list />
+  <livewire:sys.security.user-profile.user-profile-list />
 @endsection

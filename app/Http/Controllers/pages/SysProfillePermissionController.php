@@ -23,8 +23,8 @@ class SysProfillePermissionController extends Controller {
     $user = auth()->user();
     $data = $request->only(['module', 'screen', 'profile', 'description', 'viewCheck', 'createCheck', 'updateCheck', 'deleteCheck']);
 
-    $limitModule = profilePermission::where('sidebar_id', $data['module'])->where('profile_id', $data['profile'])->first();
-    if (!$limitModule) {
+    $verifyUniqueModule = profilePermission::where('sidebar_id', $data['module'])->where('profile_id', $data['profile'])->first();
+    if (!$verifyUniqueModule) {
       $moduleCreate = new profilePermission();
       $moduleCreate->profile_id = $data['profile'];
       $moduleCreate->sidebar_id = $data['module'];
@@ -34,8 +34,8 @@ class SysProfillePermissionController extends Controller {
       $moduleCreate->save();
     }
 
-    $limitScreen = profilePermission::where('sidebar_id', $data['screen'])->where('profile_id', $data['profile'])->first();
-    if ($limitScreen) {
+    $verifyUniqueScreen = profilePermission::where('sidebar_id', $data['screen'])->where('profile_id', $data['profile'])->first();
+    if ($verifyUniqueScreen) {
       return redirect()->route('sys-sec-permissions');
     }
 
@@ -59,12 +59,10 @@ class SysProfillePermissionController extends Controller {
   }
 
   public function profilePermissionUpdateAction(int $id, Request $request) {
-    $user = auth()->user();
     $update = $request->only(['module', 'screen', 'profile', 'description', 'viewCheck', 'createCheck', 'updateCheck', 'deleteCheck']);
 
-
-    $limitScreen = profilePermission::where('sidebar_id', $update['screen'])->where('profile_id', $update['profile'])->get();
-    if ($limitScreen) {
+    $verifyUniqueScreen = profilePermission::where('sidebar_id', $update['screen'])->where('profile_id', $update['profile'])->get();
+    if ($verifyUniqueScreen) {
       return redirect()->route('sys-sec-permissions');
     }
 

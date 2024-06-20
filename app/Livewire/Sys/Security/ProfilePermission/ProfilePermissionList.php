@@ -3,6 +3,7 @@
 namespace App\Livewire\Sys\Security\ProfilePermission;
 
 use Livewire\Component;
+
 // Livewire adicionais
 use Livewire\WithPagination;
 

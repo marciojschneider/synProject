@@ -22,6 +22,11 @@ class SysClosureModuleController extends Controller {
     $user = auth()->user();
     $data = $request->only(['screen', 'dt_closure', 'situation']);
 
+    $verifyUniqueClosure = closureModule::where('sidebar_id', $data['screen'])->where('client_id', $user->in_client)->first();
+    if ($verifyUniqueClosure) {
+      return redirect()->route('sys-sec-closures');
+    }
+
     $closureModule = new closureModule();
     $closureModule->sidebar_id = $data['screen'];
     $closureModule->client_id = $user->in_client;
@@ -37,7 +42,13 @@ class SysClosureModuleController extends Controller {
   }
 
   public function closureModuleUpdateAction(int $id, Request $request) {
+    $user = auth()->user();
     $update = $request->only(['screen', 'dt_closure', 'situation']);
+
+    $verifyUniqueClosure = closureModule::where('sidebar_id', $update['screen'])->where('client_id', $user->in_client)->first();
+    if ($verifyUniqueClosure) {
+      return redirect()->route('sys-sec-closures');
+    }
 
     $closureModuleUpdate = closureModule::find($id);
     $closureModuleUpdate->sidebar_id = $update['screen'];
