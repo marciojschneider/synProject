@@ -30,7 +30,12 @@ class FarmController extends Controller {
   }
 
   public function farmUpdate(int $id) {
-    $data["farm"] = Farm::find($id);
+    $data['farm'] = Farm::find($id);
+
+    if (!$data['farm']) {
+      return redirect()->route('structure-farms');
+    }
+
     return view("content.pages.structure.farm.update", $data);
   }
 

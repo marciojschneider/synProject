@@ -20,6 +20,7 @@ class UserProfileController extends Controller {
 
     $data['users'] = User::join('user_profiles', 'user_profiles.user_id', '=', 'users.id')
       ->where('user_profiles.client_id', $user->in_client)
+      ->where('users.situation', 1)
       ->select('users.id', 'users.name')
       ->groupBy('users.id', 'users.name')
       ->get();

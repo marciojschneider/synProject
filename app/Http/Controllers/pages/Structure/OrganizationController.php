@@ -14,6 +14,7 @@ class OrganizationController extends Controller {
   public function organizationCreate() {
     return view("content.pages.structure.organization.create");
   }
+
   public function organizationCreateAction(Request $request) {
     $data = $request->only(['code', 'name', 'external_code', 'situation']);
 
@@ -29,6 +30,11 @@ class OrganizationController extends Controller {
 
   public function organizationUpdate(int $id) {
     $data['organization'] = Organization::find($id);
+
+    if (!$data['organization']) {
+      return redirect()->route('structure-organizations');
+    }
+
     return view('content.pages.structure.organization.update', $data);
   }
 

@@ -13,7 +13,8 @@ class SectorController extends Controller {
   }
 
   public function sectorCreate() {
-    $data['farms'] = Farm::all();
+    $user = auth()->user();
+    $data['farms'] = Farm::where('client_id', $user->in_client)->where('situation', 1)->get();
 
     return view('content.pages.structure.sector.create', $data);
   }
@@ -32,8 +33,14 @@ class SectorController extends Controller {
   }
 
   public function sectorUpdate(int $id) {
-    $data['farms'] = Farm::all();
+    $user = auth()->user();
+    $data['farms'] = Farm::where('client_id', $user->in_client)->get();
+
     $data['sector'] = Sector::find($id);
+
+    if (!$data['sector']) {
+      return redirect()->route('structure-sectors');
+    }
 
     return view('content.pages.structure.sector.update', $data);
   }

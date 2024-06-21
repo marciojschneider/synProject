@@ -4,10 +4,33 @@ namespace App\Livewire\Structure\Sector;
 
 use Livewire\Component;
 
-class SectorList extends Component
-{
-    public function render()
-    {
-        return view('livewire.structure.sector.sector-list');
-    }
+// Livewire Adicionais
+use Livewire\WithPagination;
+
+// Models
+use App\Models\Sector;
+
+class SectorList extends Component {
+  use WithPagination;
+  protected $paginationTheme = 'bootstrap';
+
+  // Variaveis
+  public $searchText;
+  public $pPage = 10;
+  public function mount() {
+    // Caso precise pré carregar selects, declare a váriavel e faça a busca por aqui!
+  }
+  public function updated() {
+    $this->resetPage();
+  }
+  public function render() {
+    $user = auth()->user();
+    $query = Sector::query();
+
+    $query->where('client_id', $user->in_client);
+
+    $data['rows'] = $query->paginate($this->pPage);
+
+    return view('livewire.structure.sector.sector-list', $data);
+  }
 }

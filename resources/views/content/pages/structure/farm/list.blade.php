@@ -24,5 +24,5 @@
 @endsection
 
 @section('content')
-  <livewire:farm-list />
+  <livewire:structure.farm.farm-list />
 @endsection

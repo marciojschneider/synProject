@@ -27,7 +27,10 @@ class OrganizationList extends Component {
     $this->resetPage();
   }
   public function render() {
+    $user = auth()->user();
     $query = Organization::query();
+
+    $query->where('client_id', $user->in_client);
 
     if ($this->searchText) {
       $query->where('code', 'like', '%' . $this->searchText . '%');

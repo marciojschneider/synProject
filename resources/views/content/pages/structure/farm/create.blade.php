@@ -9,7 +9,7 @@
 @section('content')
   <div class="col-md">
     <h4 class="mb-4">
-      <span class="text-muted fw-light">Fazenda /</span> Cadastrar
+      <span class="text-muted fw-light">Fazendas /</span> Cadastrar
     </h4>
     <div class="card mb-4">
       {{-- <h5 class="card-header">Novo chamado</h5> --}}
@@ -31,15 +31,15 @@
             <div class="col-md-2">
               <label for="property" class="form-label">Propriedade</label>
               <select id="property" name="property" class="form-select">
-                <option value="0">Terceiro</option>
-                <option value="1">Próprio</option>
+                <option value="0">TERCEIRO</option>
+                <option value="1" selected>PRÓPRIO</option>
               </select>
             </div>
 
             <div class="col-md-3">
               <label for="owner" class="form-label">Proprietário</label>
               <select id="owner" name="owner" class="form-select">
-                <option value="1" selected>2 - Granjas Bretanhas S.A.</option>
+                <option value="1" selected>2 - GRANJAS BRETANHAS S.A.</option>
               </select>
             </div>
 

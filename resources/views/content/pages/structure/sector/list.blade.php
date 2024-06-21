@@ -4,7 +4,7 @@
 
 @extends('layouts/layoutMaster')
 
-@section('title', 'Setor')
+@section('title', 'Setores')
 
 {{-- Verificar estilizações necessárias para o funcionamento da pagina --}}
 @section('vendor-style')
@@ -24,5 +24,5 @@
 @endsection
 
 @section('content')
-  <livewire:sector-list />
+  <livewire:structure.sector.sector-list />
 @endsection
