@@ -32,7 +32,7 @@
               <label for="farm" class="form-label">Fazenda</label>
               <select id="farm" name="farm" class="form-select">
                 @foreach ($farms as $farm)
-                  <option value="{{ $farm->id }}"> {{ $farm->name }} </option>
+                  <option value="{{ $farm->id }}"> {{ $farm->code }} - {{ $farm->name }} </option>
                 @endforeach
               </select>
             </div>
@@ -40,8 +40,8 @@
             <div class="col-md-3">
               <label for="situation" class="form-label">Situação</label>
               <select id="situation" name="situation" class="form-select">
-                <option value="0">Inativo</option>
-                <option value="1" selected>Ativo</option>
+                <option value="0">INATIVO</option>
+                <option value="1" selected>ATIVO</option>
               </select>
             </div>
           </div>

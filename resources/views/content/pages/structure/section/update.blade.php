@@ -9,7 +9,7 @@
 @section('content')
   <div class="col-md">
     <h4 class="mb-4">
-      <span class="text-muted fw-light">Secção /</span> Atualizar
+      <span class="text-muted fw-light">Secções /</span> Atualizar
     </h4>
     <div class="card mb-4">
       {{-- <h5 class="card-header">Novo chamado</h5> --}}
@@ -35,7 +35,8 @@
               <select id="organization" name="organization" class="form-select">
                 @foreach ($orgs as $org)
                   <option value="{{ $org->id }}"
-                    {{ str_contains($section->organization_id, $org->id) ? 'selected' : '' }}> {{ $org->name }}
+                    {{ str_contains($section->organization_id, $org->id) ? 'selected' : '' }}> {{ $org->code }} -
+                    {{ $org->name }}
                   </option>
                 @endforeach
               </select>

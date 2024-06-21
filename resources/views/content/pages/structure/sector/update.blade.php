@@ -35,7 +35,7 @@
               <select id="farm" name="farm" class="form-select">
                 @foreach ($farms as $farm)
                   <option value="{{ $farm->id }}" {{ str_contains($sector->farm_id, $farm->id) ? 'selected' : '' }}>
-                    {{ $farm->name }} </option>
+                    {{ $farm->code }} - {{ $farm->name }} </option>
                 @endforeach
               </select>
             </div>
@@ -43,8 +43,8 @@
             <div class="col-md-3">
               <label for="situation" class="form-label">Situação</label>
               <select id="situation" name="situation" class="form-select">
-                <option value="0" {{ str_contains($sector->situation, 0) ? 'selected' : '' }}>Inativo</option>
-                <option value="1" {{ str_contains($sector->situation, 1) ? 'selected' : '' }}>Ativo</option>
+                <option value="0" {{ str_contains($sector->situation, 0) ? 'selected' : '' }}>INATIVO</option>
+                <option value="1" {{ str_contains($sector->situation, 1) ? 'selected' : '' }}>ATIVO</option>
               </select>
             </div>
           </div>

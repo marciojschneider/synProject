@@ -13,7 +13,8 @@ class SectionController extends Controller {
   }
 
   public function sectionCreate() {
-    $data['orgs'] = Organization::all();
+    $user = auth()->user();
+    $data['orgs'] = Organization::where('client_id', $user->in_client)->where('situation', 1)->get();
 
     return view('content.pages.structure.section.create', $data);
   }
@@ -32,16 +33,26 @@ class SectionController extends Controller {
     return redirect()->route('structure-sections');
   }
   public function sectionUpdate(int $id) {
-    $data['orgs'] = Organization::all();
-    $data['section'] = Section::find($id);
+    $user = auth()->user();
+    $data['orgs'] = Organization::where('client_id', $user->in_client)->get();
+    $data['section'] = Section::where('id', $id)->where('client_id', $user->in_client)->first();
+
+    if (!$data['section']) {
+      return redirect()->route('structure-sections');
+    }
 
     return view('content.pages.structure.section.update', $data);
   }
 
   public function sectionUpdateAction(int $id, Request $request) {
+    $user = auth()->user();
     $update = $request->only(['code', 'name', 'organization', 'responsible', 'situation']);
+    $sectionUpdate = Section::where('id', $id)->where('client_id', $user->in_client)->first();
 
-    $sectionUpdate = Section::find($id);
+    if (!$sectionUpdate) {
+      return redirect()->route('structure-sections');
+    }
+
     $sectionUpdate->code = strtoupper($update['code']);
     $sectionUpdate->name = strtoupper($update['name']);
     $sectionUpdate->organization_id = $update['organization'];
@@ -53,7 +64,8 @@ class SectionController extends Controller {
   }
 
   public function sectionDelete(int $id) {
-    Section::where('id', $id)->delete();
+    $user = auth()->user();
+    Section::where('id', $id)->where('client_id', $user->in_client)->delete();
 
     return redirect()->route('structure-sections');
   }

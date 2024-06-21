@@ -51,7 +51,7 @@ class UserProfileController extends Controller {
 
   public function userProfileUpdate(int $id) {
     $user = auth()->user();
-    $data['userProfile'] = UserProfile::find($id);
+    $data['userProfile'] = UserProfile::where('id', $id)->where('client_id', $user->in_client)->first();
 
     $data['users'] = User::join('user_profiles', 'user_profiles.user_id', '=', 'users.id')
       ->where('user_profiles.client_id', $user->in_client)
@@ -61,10 +61,15 @@ class UserProfileController extends Controller {
 
     $data['profiles'] = Profile::where('client_id', $user->in_client)->get();
 
+    if (!$data['userProfile']) {
+      return redirect()->route('sys-sec-u-ps');
+    }
+
     return view('content.pages.sys.security.user-profile.update', $data);
   }
 
   public function userProfileUpdateAction(int $id, Request $request) {
+    $user = auth()->user();
     $update = $request->only(['user', 'profile', 'situation']);
 
     $verifyUniqueUserProfile = UserProfile::where('user_id', $update['user'])->where('profile_id', $update['profile'])->first();
@@ -72,7 +77,11 @@ class UserProfileController extends Controller {
       return redirect()->route('sys-sec-u-ps');
     }
 
-    $userProfileUpdate = UserProfile::find($id);
+    $userProfileUpdate = UserProfile::where('id', $id)->where('client_id', $user->in_client);
+    if ($userProfileUpdate) {
+      return redirect()->route('sys-sec-u-ps');
+    }
+
     $userProfileUpdate->user_id = $update['user'];
     $userProfileUpdate->profile_id = $update['profile'];
     $userProfileUpdate->situation = $update['situation'];
@@ -82,7 +91,8 @@ class UserProfileController extends Controller {
   }
 
   public function userProfileDelete(int $id) {
-    UserProfile::where('id', $id)->delete();
+    $user = auth()->user();
+    UserProfile::where('id', $id)->where('client_id', $user->in_client)->delete();
 
     return redirect()->route('sys-sec-u-ps');
   }

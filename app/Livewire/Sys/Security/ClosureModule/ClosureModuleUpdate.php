@@ -17,7 +17,8 @@ class ClosureModuleUpdate extends Component {
   public $screen = null;
 
   public function mount() {
-    $this->closure_module = closureModule::find($this->id);
+    $user = auth()->user();
+    $this->closure_module = closureModule::where('id', $this->id)->where('client_id', $user->in_client)->first();
 
     if (!$this->closure_module) {
       return redirect()->route('sys-sec-closures');

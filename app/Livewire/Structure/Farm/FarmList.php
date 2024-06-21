@@ -44,7 +44,7 @@ class FarmList extends Component {
       $query->where('property', $this->property);
     }
 
-    $data["rows"] = $query->paginate($this->pPage);
+    $data['rows'] = $query->paginate($this->pPage);
 
     return view('livewire.structure.farm.farm-list', $data);
   }

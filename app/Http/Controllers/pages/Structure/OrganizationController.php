@@ -29,7 +29,8 @@ class OrganizationController extends Controller {
   }
 
   public function organizationUpdate(int $id) {
-    $data['organization'] = Organization::find($id);
+    $user = auth()->user();
+    $data['organization'] = Organization::where('id', $id)->where('client_id', $user->in_client)->first();
 
     if (!$data['organization']) {
       return redirect()->route('structure-organizations');
@@ -39,9 +40,14 @@ class OrganizationController extends Controller {
   }
 
   public function organizationUpdateAction(int $id, Request $request) {
+    $user = auth()->user();
     $update = $request->only(['code', 'name', 'external_code', 'situation']);
+    $organizationUpdate = Organization::where('id', $id)->where('client_id', $user->in_client)->first();
 
-    $organizationUpdate = Organization::find($id);
+    if (!$organizationUpdate) {
+      return redirect()->route('structure-farms');
+    }
+
     $organizationUpdate->code = strtoupper($update['code']);
     $organizationUpdate->name = strtoupper($update['name']);
     $organizationUpdate->external_code = strtoupper($update['external_code']);
@@ -52,7 +58,9 @@ class OrganizationController extends Controller {
   }
 
   public function organizationDelete(int $id) {
-    Organization::where('id', $id)->delete();
+    $user = auth()->user();
+    Organization::where('id', $id)->where('client_id', $user->in_client)->delete();
+
     return redirect()->route('structure-organizations');
   }
 }

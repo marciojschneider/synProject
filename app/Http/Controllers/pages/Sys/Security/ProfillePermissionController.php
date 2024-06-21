@@ -55,6 +55,7 @@ class ProfillePermissionController extends Controller {
   }
 
   public function profilePermissionUpdateAction(int $id, Request $request) {
+    $user = auth()->user();
     $update = $request->only(['module', 'screen', 'profile', 'description', 'viewCheck', 'createCheck', 'updateCheck', 'deleteCheck']);
 
     $verifyUniqueScreen = profilePermission::where('sidebar_id', $update['screen'])->where('profile_id', $update['profile'])->get();
@@ -62,7 +63,11 @@ class ProfillePermissionController extends Controller {
       return redirect()->route('sys-sec-permissions');
     }
 
-    $profilePermissionUpdate = profilePermission::find($id);
+    $profilePermissionUpdate = profilePermission::where('id', $id)->where('client_id', $user->in_client)->first();
+    if ($profilePermissionUpdate) {
+      return redirect()->route('sys-sec-permissions');
+    }
+
     $profilePermissionUpdate->profile_id = $update['profile'];
     $profilePermissionUpdate->view = isset($update['viewCheck']) ? 1 : 0;
     $profilePermissionUpdate->create = isset($update['createCheck']) ? 1 : 0;
@@ -75,7 +80,8 @@ class ProfillePermissionController extends Controller {
   }
 
   public function profilePermissionDelete(int $id) {
-    profilePermission::where('id', $id)->delete();
+    $user = auth()->user();
+    profilePermission::where('id', $id)->where('client_id', $user->in_client)->delete();
 
     return redirect()->route('sys-sec-permissions');
   }

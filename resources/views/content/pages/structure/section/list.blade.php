@@ -24,5 +24,5 @@
 @endsection
 
 @section('content')
-  <livewire:section-list />
+  <livewire:structure.section.section-list />
 @endsection

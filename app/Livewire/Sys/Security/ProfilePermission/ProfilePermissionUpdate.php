@@ -24,7 +24,7 @@ class ProfilePermissionUpdate extends Component {
 
   public function mount() {
     $user = auth()->user();
-    $this->profile_permission = profilePermission::find($this->id);
+    $this->profile_permission = profilePermission::where('id', $this->id)->where('client_id', $user->in_client)->first();
 
     if (!$this->profile_permission) {
       return redirect()->route('sys-sec-permissions');

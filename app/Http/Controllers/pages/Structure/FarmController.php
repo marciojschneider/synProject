@@ -30,7 +30,8 @@ class FarmController extends Controller {
   }
 
   public function farmUpdate(int $id) {
-    $data['farm'] = Farm::find($id);
+    $user = auth()->user();
+    $data['farm'] = Farm::where('id', $id)->where('client_id', $user->in_client)->first();
 
     if (!$data['farm']) {
       return redirect()->route('structure-farms');
@@ -40,9 +41,14 @@ class FarmController extends Controller {
   }
 
   public function farmUpdateAction(int $id, Request $request) {
+    $user = auth()->user();
     $update = $request->only(['code', 'name', 'property', 'owner', 'situation']);
+    $farmUpdate = Farm::where('id', $id)->where('client_id', $user->in_client)->first();
 
-    $farmUpdate = Farm::find($id);
+    if (!$farmUpdate) {
+      return redirect()->route('structure-farms');
+    }
+
     $farmUpdate->code = strtoupper($update['code']);
     $farmUpdate->name = strtoupper($update['name']);
     $farmUpdate->property = $update['property'];
@@ -54,7 +60,9 @@ class FarmController extends Controller {
   }
 
   public function farmDelete(int $id) {
-    Farm::where('id', $id)->delete();
+    $user = auth()->user();
+    Farm::where('id', $id)->where('client_id', $user->in_client)->delete();
+
     return redirect()->route('structure-farms');
   }
 }

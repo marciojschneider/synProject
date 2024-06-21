@@ -36,7 +36,7 @@ class SectorController extends Controller {
     $user = auth()->user();
     $data['farms'] = Farm::where('client_id', $user->in_client)->get();
 
-    $data['sector'] = Sector::find($id);
+    $data['sector'] = Sector::where('id', $id)->where('client_id', $user->in_client)->first();
 
     if (!$data['sector']) {
       return redirect()->route('structure-sectors');
@@ -46,14 +46,26 @@ class SectorController extends Controller {
   }
 
   public function sectorUpdateAction(int $id, Request $request) {
+    $user = auth()->user();
     $update = $request->only(['code', 'name', 'farm', 'situation']);
+    $sectorUpdate = Sector::where('id', $id)->where('client_id', $user->in_client)->first();
 
-    $sectorUpdate = Sector::find($id);
+    if (!$sectorUpdate) {
+      return redirect()->route('structure-sectors');
+    }
+
     $sectorUpdate->code = strtoupper($update['code']);
     $sectorUpdate->name = strtoupper($update['name']);
     $sectorUpdate->farm_id = $update['farm'];
     $sectorUpdate->situation = $update['situation'];
     $sectorUpdate->save();
+
+    return redirect()->route('structure-sectors');
+  }
+
+  public function sectorDelete(int $id) {
+    $user = auth()->user();
+    Sector::where('id', $id)->where('client_id', $user->in_client)->delete();
 
     return redirect()->route('structure-sectors');
   }

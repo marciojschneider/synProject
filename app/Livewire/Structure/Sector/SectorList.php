@@ -27,7 +27,11 @@ class SectorList extends Component {
     $user = auth()->user();
     $query = Sector::query();
 
-    $query->where('client_id', $user->in_client);
+    $query->join('farms', 'farms.id', '=', 'sectors.farm_id');
+
+    $query->where('sectors.client_id', $user->in_client);
+
+    $query->select('sectors.*', 'farms.code as cFarm', 'farms.name as nFarm');
 
     $data['rows'] = $query->paginate($this->pPage);
 

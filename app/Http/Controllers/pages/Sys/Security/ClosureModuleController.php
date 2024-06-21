@@ -59,7 +59,8 @@ class ClosureModuleController extends Controller {
   }
 
   public function closureModuleDelete(int $id) {
-    closureModule::where('id', $id)->delete();
+    $user = auth()->user();
+    closureModule::where('id', $id)->where('client_id', $user->in_client)->delete();
 
     return redirect()->route('sys-sec-closures');
   }

@@ -47,7 +47,7 @@
             <tr>
               <td>{{ $row->code }}</td>
               <td>{{ $row->name }}</td>
-              <td>{{ $row->nFazenda }}</td>
+              <td>{{ $row->cFarm }} - {{ $row->nFarm }}</td>
               <td>
                 <div class="dropdown">
                   <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i
