@@ -30,15 +30,25 @@ class LocalityController extends Controller {
   }
 
   public function localityUpdate(int $id) {
-    $data['locality'] = Locality::find($id);
+    $user = auth()->user();
+    $data['locality'] = Locality::where('id', $id)->where('client_id', $user->in_client)->first();
+
+    if (!$data['locality']) {
+      return redirect()->route('structure-localities');
+    }
 
     return view('content.pages.structure.locality.update', $data);
   }
 
   public function localityUpdateAction(int $id, Request $request) {
+    $user = auth()->user();
     $update = $request->only(['code', 'name', 'situation']);
+    $localityUpdate = Locality::where('id', $id)->where('client_id', $user->in_client)->first();
 
-    $localityUpdate = Locality::find($id);
+    if (!$localityUpdate) {
+      return redirect()->route('structure-localities');
+    }
+
     $localityUpdate->code = strtoupper($update['code']);
     $localityUpdate->name = strtoupper($update['name']);
     $localityUpdate->situation = $update['situation'];
@@ -48,7 +58,8 @@ class LocalityController extends Controller {
   }
 
   public function localityDelete(int $id) {
-    Locality::where('id', $id)->delete();
+    $user = auth()->user();
+    Locality::where('id', $id)->where('client_id', $user->in_client)->delete();
 
     return redirect()->route('structure-localities');
   }

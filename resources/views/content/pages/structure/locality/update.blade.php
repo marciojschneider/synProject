@@ -33,8 +33,8 @@
             <div class="col-md-4">
               <label for="situation" class="form-label">Situação</label>
               <select id="situation" name="situation" class="form-select">
-                <option value="0" {{ str_contains($locality->situation, 0) ? 'selected' : '' }}>Inativo</option>
-                <option value="1" {{ str_contains($locality->situation, 1) ? 'selected' : '' }}>Ativo</option>
+                <option value="0" {{ str_contains($locality->situation, 0) ? 'selected' : '' }}>INATIVO</option>
+                <option value="1" {{ str_contains($locality->situation, 1) ? 'selected' : '' }}>ATIVO</option>
               </select>
             </div>
           </div>

@@ -49,6 +49,8 @@ class canAccess {
       return $next($request);
     }
 
+    // dd($stringRoute);
+
     $sqlPermission = profilePermission::join('sidebars', 'sidebars.id', '=', 'profile_permissions.sidebar_id')
       ->where('profile_permissions.profile_id', $user->in_profile)
       ->where('sidebars.url', 'like', '%' . $stringRoute . '%')

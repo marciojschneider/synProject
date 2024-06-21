@@ -24,5 +24,5 @@
 @endsection
 
 @section('content')
-  <livewire:locality-list />
+  <livewire:structure.locality.locality-list />
 @endsection
