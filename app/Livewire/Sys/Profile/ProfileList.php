@@ -6,22 +6,21 @@ use Livewire\Component;
 
 // Livewire Adicionais
 use Livewire\WithPagination;
+use Livewire\Attributes\Session;
 
 // Models
 use App\Models\Profile;
-use App\Models\Client;
 
 class ProfileList extends Component {
   use WithPagination;
   protected $paginationTheme = 'bootstrap';
 
   // Variaveis
-  public $searchText;
+  #[Session] public $searchText;
   public $pPage = 10;
-  public $clients;
-  public $client;
 
   public function mount() {
+    // Caso precise pré carregar selects, declare a váriavel e faça a busca por aqui!
   }
 
   public function updated() {
@@ -36,10 +35,6 @@ class ProfileList extends Component {
 
     if ($this->searchText) {
       $query->where('profiles.name', 'like', '%' . $this->searchText . '%');
-    }
-
-    if ($this->client) {
-      $query->where('client_id', $this->client);
     }
 
     $query->where('clients.id', $user->in_client);

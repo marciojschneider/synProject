@@ -7,6 +7,7 @@ use Livewire\Component;
 
 // Livewire Adicionais
 use Livewire\WithPagination;
+use Livewire\Attributes\Session;
 
 // Models
 use App\Models\Culture;
@@ -16,7 +17,7 @@ class OrganizationList extends Component {
   protected $paginationTheme = 'bootstrap';
 
   // Variaveis
-  public $searchText;
+  #[Session] public $searchText;
   public $pPage = 10;
 
   public function mount() {
@@ -26,6 +27,7 @@ class OrganizationList extends Component {
   public function updated() {
     $this->resetPage();
   }
+
   public function render() {
     $user = auth()->user();
     $query = Organization::query();
@@ -35,6 +37,7 @@ class OrganizationList extends Component {
     if ($this->searchText) {
       $query->where('code', 'like', '%' . $this->searchText . '%');
       $query->orWhere('name', 'like', '%' . $this->searchText . '%');
+      $query->where('client_id', $user->in_client);
     }
 
     $data['rows'] = $query->paginate($this->pPage);

@@ -6,6 +6,7 @@ use Livewire\Component;
 
 // Livewire Adicionais
 use Livewire\WithPagination;
+use Livewire\Attributes\Session;
 
 // Models
 use App\Models\Farm;
@@ -15,17 +16,19 @@ class FarmList extends Component {
   protected $paginationTheme = 'bootstrap';
 
   // Variaveis
-  public $searchText;
+  #[Session] public $searchText;
   public $pPage = 10;
-  public $situation;
-  public $property;
+  #[Session] public $situation = null;
+  #[Session] public $property = null;
 
   public function mount() {
     // Caso precise pré carregar selects, declare a váriavel e faça a busca por aqui!
   }
+
   public function updated() {
     $this->resetPage();
   }
+
   public function render() {
     $user = auth()->user();
     $query = Farm::query();
@@ -33,8 +36,7 @@ class FarmList extends Component {
     $query->where('client_id', $user->in_client);
 
     if ($this->searchText) {
-      $query->where('code', 'like', '%' . $this->searchText . '%');
-      $query->orWhere('name', 'like', '%' . $this->searchText . '%');
+      $query->where('name', 'like', '%' . $this->searchText . '%');
     }
 
     if ($this->situation) {

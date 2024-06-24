@@ -6,6 +6,7 @@ use Livewire\Component;
 
 // Livewire Adicionais
 use Livewire\WithPagination;
+use Livewire\Attributes\Session;
 
 // Models
 use App\Models\User;
@@ -15,14 +16,16 @@ class UserList extends Component {
   protected $paginationTheme = 'bootstrap';
 
   // Variaveis
-  public $searchText;
+  #[Session] public $searchText;
   public $pPage = 10;
   public function mount() {
     // Caso precise pré carregar selects, declare a váriavel e faça a busca por aqui!
   }
+
   public function updated() {
     $this->resetPage();
   }
+
   public function render() {
     $user = auth()->user();
     $query = User::query();
@@ -37,6 +40,7 @@ class UserList extends Component {
     if ($this->searchText) {
       $query->where('name', 'like', '%' . $this->searchText . '%');
       $query->orWhere('email', 'like', '%' . $this->searchText . '%');
+      $query->where('user_profiles.client_id', $user->in_client);
     }
 
     $data['rows'] = $query->paginate($this->pPage);

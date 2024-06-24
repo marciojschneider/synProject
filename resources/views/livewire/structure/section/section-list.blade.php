@@ -15,6 +15,17 @@
           </select>
         </div>
 
+        {{-- Busca por Estabelecimento --}}
+        <div id="DataTables_Table_0_filter" class="dataTables_filter" bis_skin_checked="1" style="margin-right: 5px;">
+          <select wire:model.live.click="org" id="org" name="org" class="form-select">
+            <option value="" selected> ESTABELECIMENTO </option>
+            @foreach ($orgs as $org)
+              <option value="{{ $org->id }}">{{ mb_strtoupper($org->code, 'UTF-8') }} -
+                {{ mb_strtoupper($org->name, 'UTF-8') }}</option>
+            @endforeach
+          </select>
+        </div>
+
         {{-- Caixa de pesquisa --}}
         <div id="DataTables_Table_0_filter" class="dataTables_filter" bis_skin_checked="1" style="margin-right: 5px;">
           <label><input wire:model.live.debounce.500ms="searchText" type="search" class="form-control"

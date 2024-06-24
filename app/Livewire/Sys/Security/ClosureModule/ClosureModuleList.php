@@ -6,6 +6,7 @@ use Livewire\Component;
 
 // Livewire Adicionais
 use Livewire\WithPagination;
+use Livewire\Attributes\Session;
 
 //Models
 use App\Models\Sidebar;
@@ -16,17 +17,17 @@ class ClosureModuleList extends Component {
   // Declaração de paginationTheme para a utilização da linguagem bootstrap.
   protected $paginationTheme = 'bootstrap';
 
-  public $searchText;
+  #[Session] public $searchText;
   public $pPage = 10;
-  public $sidebars;
-  public $sidebar;
 
   public function mount() {
-    $this->sidebars = Sidebar::where('icon', null)->get();
+    // Caso precise pré carregar selects, declare a váriavel e faça a busca por aqui!
   }
+
   public function updated() {
     $this->resetPage();
   }
+
   public function render() {
     $query = closureModule::query();
 

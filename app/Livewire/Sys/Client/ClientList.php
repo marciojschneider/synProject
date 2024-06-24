@@ -6,6 +6,7 @@ use Livewire\Component;
 
 // Livewire Adicionais
 use Livewire\WithPagination;
+use Livewire\Attributes\Session;
 
 // Models
 use App\Models\Client;
@@ -15,7 +16,7 @@ class ClientList extends Component {
   // Declaração de paginationTheme para a utilização da linguagem bootstrap.
   protected $paginationTheme = 'bootstrap';
 
-  public $searchText;
+  #[Session] public $searchText;
   public $pPage = 10;
 
 

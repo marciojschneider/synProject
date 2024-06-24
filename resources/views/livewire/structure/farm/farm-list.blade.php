@@ -68,11 +68,11 @@
               <td>{{ $row->code }}</td>
               <td>{{ $row->name }}</td>
               <td><span
-                  class="badge {{ $row->property == 1 ? 'bg-label-primary' : 'bg-label-warning' }} me-1">{{ $row->property == 1 ? 'Próprio' : 'Terceiro' }}</span>
+                  class="badge {{ $row->property == 1 ? 'bg-label-primary' : 'bg-label-warning' }} me-1">{{ $row->property == 1 ? 'PRÓPRIO' : 'TERCEIRO' }}</span>
               </td>
-              <td>{{ $row->owner == 1 ? '2 - Granjas Bretanhas S.A.' : '' }}</td>
+              <td>{{ $row->owner == 1 ? '2 - GRANJAS BRETANHAS S.A.' : '' }}</td>
               <td><span
-                  class="badge {{ $row->situation == 1 ? 'bg-label-primary' : 'bg-label-warning' }} me-1">{{ $row->situation == 1 ? 'Ativo' : 'Inativo' }}</span>
+                  class="badge {{ $row->situation == 1 ? 'bg-label-primary' : 'bg-label-warning' }} me-1">{{ $row->situation == 1 ? 'ATIVO' : 'INATIVO' }}</span>
               </td>
               <td>
                 <div class="dropdown">

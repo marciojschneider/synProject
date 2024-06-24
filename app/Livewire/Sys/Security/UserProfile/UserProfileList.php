@@ -6,6 +6,7 @@ use Livewire\Component;
 
 // Livewire adicionais
 use Livewire\WithPagination;
+use Livewire\Attributes\Session;
 
 // Models
 use App\Models\UserProfile;
@@ -16,20 +17,21 @@ class UserProfileList extends Component {
   protected $paginationTheme = 'bootstrap';
 
   // Variaveis
-  public $searchText;
+  #[Session] public $searchText;
   public $pPage = 10;
 
   public $profiles = [];
-  public $profile = null;
+  #[Session] public $profile = null;
 
   public function mount() {
     $user = auth()->user();
-    // Caso precise pré carregar selects, declare a váriavel e faça a busca por aqui!
     $this->profiles = Profile::where('client_id', $user->in_client)->get();
   }
+
   public function updated() {
     $this->resetPage();
   }
+
   public function render() {
     $user = auth()->user();
 

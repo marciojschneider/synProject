@@ -15,6 +15,16 @@
           </select>
         </div>
 
+        {{-- Busca por Fazenda --}}
+        <div id="DataTables_Table_0_filter" class="dataTables_filter" bis_skin_checked="1" style="margin-right: 5px;">
+          <select wire:model.live.click="farm" id="farm" name="farm" class="form-select">
+            <option value="" selected> FAZENDA </option>
+            @foreach ($farms as $farm)
+              <option value="{{ $farm->id }}">{{ mb_strtoupper($farm->name, 'UTF-8') }}</option>
+            @endforeach
+          </select>
+        </div>
+
         {{-- Caixa de pesquisa --}}
         <div id="DataTables_Table_0_filter" class="dataTables_filter" bis_skin_checked="1" style="margin-right: 5px;">
           <label><input wire:model.live.debounce.500ms="searchText" type="search" class="form-control"

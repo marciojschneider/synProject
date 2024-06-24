@@ -6,6 +6,7 @@ use Livewire\Component;
 
 // Livewire Adicionais
 use Livewire\WithPagination;
+use Livewire\Attributes\Session;
 
 // Models
 use App\Models\Locality;
@@ -15,19 +16,25 @@ class LocalityList extends Component {
   protected $paginationTheme = 'bootstrap';
 
   // Variaveis
-  public $searchText;
+  #[Session] public $searchText;
   public $pPage = 10;
   public function mount() {
     // Caso precise pré carregar selects, declare a váriavel e faça a busca por aqui!
   }
+
   public function updated() {
     $this->resetPage();
   }
+
   public function render() {
     $user = auth()->user();
     $query = Locality::query();
 
     $query->where('client_id', $user->in_client);
+
+    if ($this->searchText) {
+      $query->where('localities.name', 'like', '%' . $this->searchText . '%');
+    }
 
     $data['rows'] = $query->paginate($this->pPage);
 

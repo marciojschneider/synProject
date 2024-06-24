@@ -15,6 +15,16 @@
           </select>
         </div>
 
+        {{-- Busca por módulo --}}
+        {{-- <div id="DataTables_Table_0_filter" class="dataTables_filter" bis_skin_checked="1" style="margin-right: 5px;">
+          <select wire:model.live.click="module" id="module" name="module" class="form-select">
+            <option value="" selected> MÓDULO </option>
+            @foreach ($modules as $module)
+              <option value="{{ $module->id }}">{{ mb_strtoupper($module->name, 'UTF-8') }}</option>
+            @endforeach
+          </select>
+        </div> --}}
+
         {{-- Busca por Tela --}}
         <div id="DataTables_Table_0_filter" class="dataTables_filter" bis_skin_checked="1" style="margin-right: 5px;">
           <select wire:model.live.click="screen" id="screen" name="screen" class="form-select">
