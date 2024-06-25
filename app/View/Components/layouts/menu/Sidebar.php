@@ -20,6 +20,7 @@ class Sidebar extends Component {
       ->where('profile_permissions.profile_id', $user->in_profile)
       ->where('profile_permissions.client_id', $user->in_client)
       ->where('profile_permissions.view', 1)
+      ->where('sidebars.visibility', 1)
       ->join('sidebars', 'sidebars.id', '=', 'profile_permissions.sidebar_id')
       ->orderBy('order')->orderBy('affiliate_id')->get();
 
@@ -33,6 +34,7 @@ class Sidebar extends Component {
           ->where('profile_permissions.profile_id', $user->in_profile)
           ->where('profile_permissions.client_id', $user->in_client)
           ->where('profile_permissions.view', 1)
+          ->where('sidebars.visibility', 1)
           ->join('sidebars', 'sidebars.id', '=', 'profile_permissions.sidebar_id')
           ->orderBy('order')->get();
         $array[$key] = ['menu' => ['name' => $menu->name, 'icon' => $menu->icon, 'slug' => $menu->slug, 'url' => $menu->url]];
@@ -49,6 +51,7 @@ class Sidebar extends Component {
               ->where('profile_permissions.profile_id', $user->in_profile)
               ->where('profile_permissions.client_id', $user->in_client)
               ->where('profile_permissions.view', 1)
+              ->where('sidebars.visibility', 1)
               ->join('sidebars', 'sidebars.id', '=', 'profile_permissions.sidebar_id')
               ->orderBy('order')->get();
             foreach ($sDataMenu as $sMenu) {

@@ -57,6 +57,8 @@ class canAccess {
       ->where('profile_permissions.view', 1)
       ->get();
 
+    // dd(count($sqlPermission));
+
     if (isset($arrRoute[2])) {
       if ($sqlPermission[0][$arrRoute[2]] !== 1) {
         return redirect()->route('no-permission');

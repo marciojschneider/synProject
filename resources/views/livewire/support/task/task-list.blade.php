@@ -116,7 +116,7 @@
                           </label>
                           @if ($row->situation < 4)
                             {{-- Botões de ação --}}
-                            <form method="POST" action="{{ route('sup-comment-delete', $detail->id) }}"
+                            <form method="POST" action="{{ route('sup-task-comment-delete', $detail->id) }}"
                               id="commentDelete{{ $detail->id }}" display="none">
                               @csrf
                             </form>

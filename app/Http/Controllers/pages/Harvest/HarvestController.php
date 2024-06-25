@@ -10,11 +10,11 @@ use App\Models\Harvest;
 
 class HarvestController extends Controller {
   public function harvests() {
-    return view('content.pages.harv.harvest.list');
+    return view('content.pages.harvest.harvest.list');
   }
 
   public function harvestCreate() {
-    return view('content.pages.harv.harvest.create');
+    return view('content.pages.harvest.harvest.create');
   }
   public function harvestCreateAction(Request $request) {
     $user = auth()->user();
@@ -41,7 +41,7 @@ class HarvestController extends Controller {
       return redirect()->route('harv-harvests');
     }
 
-    return view('content.pages.harv.harvest.update', $data);
+    return view('content.pages.harvest.harvest.update', $data);
   }
 
   public function harvestUpdateAction(int $id, Request $request) {

@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 
 class HarvestConfigurationController extends Controller {
   public function harvestConfigurations() {
-    return view('content.pages.harv.harvest-configuration.list');
+    return view('content.pages.harvest.harvest-configuration.list');
   }
 
   public function getData() {
@@ -34,7 +34,7 @@ class HarvestConfigurationController extends Controller {
   public function harvestConfigurationCreate() {
     $data = $this->getData();
 
-    return view('content.pages.harv.harvest-configuration.create', $data);
+    return view('content.pages.harvest.harvest-configuration.create', $data);
   }
 
   public function harvestConfigurationCreateAction(Request $request) {
@@ -66,7 +66,7 @@ class HarvestConfigurationController extends Controller {
 
     $data['harvestConfiguration'] = HarvestConfiguration::find($id);
 
-    return view('content.pages.harv.harvest-configuration.update', $data);
+    return view('content.pages.harvest.harvest-configuration.update', $data);
   }
 
   public function harvestConfigurationUpdateAction(int $id, Request $request) {

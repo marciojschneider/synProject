@@ -23,7 +23,7 @@
 @endsection
 
 @section('content')
-  <livewire:roadmap-list />
+  <livewire:support.roadmap.roadmap-list />
 
   <!-- Offcanvas to add new roadmap -->
   <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasAddRoadmap" aria-labelledby="offcanvasAddRoadmapLabel">

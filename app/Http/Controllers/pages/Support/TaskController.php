@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\pages;
+namespace App\Http\Controllers\pages\Support;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -10,17 +10,21 @@ use App\Models\Task;
 use App\Models\Sidebar;
 use App\Models\TaskDetail;
 
-class SupTaskController extends Controller {
+class TaskController extends Controller {
   // Tasks
   public function tasks() {
-    $data['unapproveds'] = Task::orderBy('created_at', 'DESC')->where('situation', '<', 4)->get();
+    $user = auth()->user();
+    $data['unapproveds'] = Task::orderBy('created_at', 'DESC')->where('situation', '<', 4)->where('client_id', $user->in_client)->get();
 
     return view('content.pages.support.task.list', $data);
   }
 
   public function taskCreate() {
     // $uriAdjust = $request->route(); Forma de pegar a rota atual.
-    $data['sidebars'] = Sidebar::where('icon', null)->get();
+    $data['sidebars'] = Sidebar::where('icon', '!=', null)
+      ->where('name', '!=', 'Inicio')
+      ->where('client_id', 'REGEXP', '[[:<:]]' . auth()->user()->in_client . '[[:>:]]')
+      ->get();
 
     return view('content.pages.support.task.create', $data);
   }
@@ -30,11 +34,11 @@ class SupTaskController extends Controller {
     $data = $request->only(['title', 'sidebar', 'situation', 'solicitation', 'expectation', 'description']);
 
     $task = new Task();
-    $task->title = strtoupper($data['title']);
+    $task->title = mb_strtoupper($data['title'], 'UTF-8');
     $task->sidebar_id = $data['sidebar'];
     $task->initial_dt = $data['solicitation'];
     $task->expected_dt = $data['expectation'];
-    $task->description = strtoupper($data['description']);
+    $task->description = mb_strtoupper($data['description'], 'UTF-8');
     $task->situation = $data['situation'];
     $task->creation_user = $user->id;
     $task->client_id = $user->in_client;
@@ -42,7 +46,7 @@ class SupTaskController extends Controller {
 
     $taskDetail = new TaskDetail();
     $taskDetail->task_id = $task->id;
-    $taskDetail->description = strtoupper($data['description']);
+    $taskDetail->description = mb_strtoupper($data['description'], 'UTF-8');
     $taskDetail->type = 2;
     $taskDetail->situation = 1;
     $task->creation_user = $user->id;
@@ -53,20 +57,29 @@ class SupTaskController extends Controller {
   }
 
   public function taskUpdate(int $id) {
-    $data['sidebars'] = Sidebar::where('icon', null)->get();
+    $data['sidebars'] = Sidebar::where('icon', '!=', null)
+      ->where('name', '!=', 'Inicio')
+      ->where('client_id', 'REGEXP', '[[:<:]]' . auth()->user()->in_client . '[[:>:]]')
+      ->get();
+
     $data['task'] = Task::find($id);
 
     return view('content.pages.support.task.update', $data);
   }
 
   public function taskUpdateAction(int $id, Request $request) {
+    $user = auth()->user();
     $update = $request->only(['title', 'situation', 'solicitation', 'expectation', 'description']);
+    $taskUpdate = Task::where('id', $id)->where('client_id', $user->in_client)->first();
 
-    $taskUpdate = Task::find($id);
-    $taskUpdate->title = strtoupper($update['title']);
+    if (!$taskUpdate) {
+      return redirect()->route('sup-tasks');
+    }
+
+    $taskUpdate->title = mb_strtoupper($update['title'], 'UTF-8');
     // $taskUpdate->sidebar_id = $update['sidebar']; Disabled select (Just to view)!
     $taskUpdate->expected_dt = $update['expectation'];
-    $taskUpdate->description = strtoupper($update['description']);
+    $taskUpdate->description = mb_strtoupper($update['description'], 'UTF-8');
     $taskUpdate->situation = $update['situation'];
     $taskUpdate->save();
 
@@ -86,7 +99,7 @@ class SupTaskController extends Controller {
 
     $taskDetail = new TaskDetail();
     $taskDetail->task_id = $data['commentTask'];
-    $taskDetail->description = strtoupper($data['commentDescription']);
+    $taskDetail->description = mb_strtoupper($data['commentDescription'], 'UTF-8');
     $taskDetail->type = 2;
     $taskDetail->situation = 1;
     $taskDetail->creation_user = $user->id;
@@ -101,7 +114,7 @@ class SupTaskController extends Controller {
 
     $taskUpdate = TaskDetail::find($update['commentId']);
     $taskUpdate->task_id = $update['commentTask'];
-    $taskUpdate->description = strtoupper($update['commentDescription']);
+    $taskUpdate->description = mb_strtoupper($update['commentDescription'], 'UTF-8');
     $taskUpdate->save();
 
     return redirect()->route('sup-tasks');
@@ -111,51 +124,5 @@ class SupTaskController extends Controller {
     TaskDetail::where('id', $id)->delete();
 
     return redirect()->route('sup-tasks');
-  }
-
-  //         → Roadmap
-  public function roadmap() {
-    $data['unapproveds'] = Task::orderBy('created_at', 'DESC')->where('situation', '<', 4)->get();
-
-    return view('content.pages.support.task.roadmap', $data);
-  }
-
-  public function roadmapAction(Request $request) {
-    $user = auth()->user();
-    $data = $request->only(['roadmapTask', 'roadmapCommit', 'roadmapDescription', 'roadmapDtSolicitation', 'roadmapDtFinal']);
-
-    $taskDetail = new TaskDetail();
-    $taskDetail->task_id = $data['roadmapTask'];
-    $taskDetail->commit_reference = $data['roadmapCommit'];
-    $taskDetail->description = strtoupper($data['roadmapDescription']);
-    $taskDetail->type = 1;
-    $taskDetail->situation = 1;
-    $taskDetail->creation_user = $user->id;
-    $taskDetail->client_id = $user->in_client;
-    $taskDetail->initial_dt = $data['roadmapDtSolicitation'];
-    $taskDetail->ending_dt = $data['roadmapDtFinal'];
-    $taskDetail->save();
-
-    return redirect()->route('sup-roadmap');
-  }
-
-  public function roadmapUpdate(Request $request) {
-    $update = $request->only(['roadmapId', 'roadmapTask', 'roadmapCommit', 'roadmapDescription', 'roadmapDtSolicitation', 'roadmapDtFinal']);
-
-    $taskUpdate = TaskDetail::find($update['roadmapId']);
-    $taskUpdate->task_id = $update['roadmapTask'];
-    $taskUpdate->commit_reference = $update['roadmapCommit'];
-    $taskUpdate->description = strtoupper($update['roadmapDescription']);
-    $taskUpdate->initial_dt = $update['roadmapDtSolicitation'];
-    $taskUpdate->ending_dt = $update['roadmapDtFinal'];
-    $taskUpdate->save();
-
-    return redirect()->route('sup-roadmap');
-  }
-
-  public function roadmapDelete(int $id) {
-    TaskDetail::where('id', $id)->delete();
-
-    return redirect()->route('sup-roadmap');
   }
 }

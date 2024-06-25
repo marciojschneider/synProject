@@ -35,7 +35,8 @@ use App\Http\Controllers\pages\Harvest\HarvestController;
 use App\Http\Controllers\pages\Harvest\HarvestConfigurationController;
 
 //       → Support
-use App\Http\Controllers\pages\SupTaskController;
+use App\Http\Controllers\pages\Support\TaskController;
+use App\Http\Controllers\pages\Support\RoadmapController;
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'loginAction']);
@@ -205,19 +206,19 @@ Route::middleware(['auth', 'canAccess'])->group(function () {
 
   // Support
   //       → Tasks
-  Route::get('/sup/tasks', [SupTaskController::class, 'tasks'])->name('sup-tasks');
-  Route::get('/sup/task/create', [SupTaskController::class, 'taskCreate'])->name('sup-task-create');
-  Route::post('/sup/task/create', [SupTaskController::class, 'taskCreateAction']);
-  Route::get('/sup/task/update/{id}', [SupTaskController::class, 'taskUpdate'])->name('sup-task-update');
-  Route::post('/sup/task/update/{id}', [SupTaskController::class, 'taskUpdateAction']);
-  Route::post('/sup/task/delete/{id}', [SupTaskController::class, 'taskDelete'])->name('sup-task-delete');
+  Route::get('/support/tasks', [TaskController::class, 'tasks'])->name('sup-tasks');
+  Route::get('/support/tasks/create', [TaskController::class, 'taskCreate'])->name('sup-task-create');
+  Route::post('/support/tasks/create', [TaskController::class, 'taskCreateAction']);
+  Route::get('/support/tasks/update/{id}', [TaskController::class, 'taskUpdate'])->name('sup-task-update');
+  Route::post('/support/tasks/update/{id}', [TaskController::class, 'taskUpdateAction']);
+  Route::post('/support/tasks/delete/{id}', [TaskController::class, 'taskDelete'])->name('sup-task-delete');
   //       → Comments
-  Route::post('/sup/task-comment', [SupTaskController::class, 'commentAction'])->name('sup-comment');
-  Route::post('/sup/task-comment/update', [SupTaskController::class, 'commentUpdate'])->name('sup-comment-update');
-  Route::post('/sup/task-comment/delete/{id}', [SupTaskController::class, 'commentDelete'])->name('sup-comment-delete');
+  Route::post('/support/task-comments', [TaskController::class, 'commentAction'])->name('sup-task-comment');
+  Route::post('/support/task-comments/update', [TaskController::class, 'commentUpdate'])->name('sup-task-comment-update');
+  Route::post('/support/task-comments/delete/{id}', [TaskController::class, 'commentDelete'])->name('sup-task-comment-delete');
   //       → Roadmap
-  Route::get('/sup/task-roadmap', [SupTaskController::class, 'roadmap'])->name('sup-roadmap');
-  Route::post('/sup/task-roadmap', [SupTaskController::class, 'roadmapAction']);
-  Route::post('/sup/task-roadmap/update', [SupTaskController::class, 'roadmapUpdate'])->name('sup-roadmap-update');
-  Route::post('/sup/task-roadmap/delete/{id}', [SupTaskController::class, 'roadmapDelete'])->name('sup-roadmap-delete');
+  Route::get('/support/task-roadmap', [RoadmapController::class, 'roadmap'])->name('sup-roadmap');
+  Route::post('/support/task-roadmap', [RoadmapController::class, 'roadmapAction']);
+  Route::post('/support/task-roadmap/update', [RoadmapController::class, 'roadmapUpdate'])->name('sup-roadmap-update');
+  Route::post('/support/task-roadmap/delete/{id}', [RoadmapController::class, 'roadmapDelete'])->name('sup-roadmap-delete');
 });

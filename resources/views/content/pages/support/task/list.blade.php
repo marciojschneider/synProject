@@ -23,7 +23,7 @@
 @endsection
 
 @section('content')
-  <livewire:task-list />
+  <livewire:support.task.task-list />
 
   <!-- Offcanvas to add new comment -->
   <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasAddComment" aria-labelledby="offcanvasAddCommentLabel">
@@ -32,7 +32,7 @@
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body mx-0 flex-grow-0">
-      <form class="add-new-comment pt-0" id="addNewCommentForm" method="POST" action="{{ route('sup-comment') }}">
+      <form class="add-new-comment pt-0" id="addNewCommentForm" method="POST" action="{{ route('sup-task-comment') }}">
         @csrf
         <div class="mb-3">
           <label class="form-label" for="add-comment-task">Tarefa</label>
@@ -61,7 +61,8 @@
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body mx-0 flex-grow-0">
-      <form class="update-report pt-0" id="updatecommentForm" method="POST" action="{{ route('sup-comment-update') }}">
+      <form class="update-report pt-0" id="updatecommentForm" method="POST"
+        action="{{ route('sup-task-comment-update') }}">
         @csrf
         <input type="hidden" id="update-comment-id" name="commentId" />
         <div class="mb-3">
