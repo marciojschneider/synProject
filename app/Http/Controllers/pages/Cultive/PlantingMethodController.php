@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\pages;
+namespace App\Http\Controllers\pages\Cultive;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 // Models
 use App\Models\PlantingMethod;
 
-class CultivePlantingMethodController extends Controller {
+class PlantingMethodController extends Controller {
   public function plantingMethods() {
     return view('content.pages.cultive.planting-method.list');
   }

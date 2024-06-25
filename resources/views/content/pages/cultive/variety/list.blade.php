@@ -24,5 +24,5 @@
 @endsection
 
 @section('content')
-  <livewire:variety-list />
+  <livewire:cultive.variety.variety-list />
 @endsection

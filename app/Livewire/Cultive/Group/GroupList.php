@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Cultive\Group;
 
 use Livewire\Component;
 
@@ -8,9 +8,9 @@ use Livewire\Component;
 use Livewire\WithPagination;
 
 // Models
-use App\Models\Variety;
+use App\Models\Group;
 
-class VarietyList extends Component {
+class GroupList extends Component {
   use WithPagination;
   protected $paginationTheme = 'bootstrap';
 
@@ -25,12 +25,19 @@ class VarietyList extends Component {
   public function updated() {
     $this->resetPage();
   }
-
   public function render() {
-    $query = Variety::query();
+    $user = auth()->user();
+    $query = Group::query();
+
+    $query->where('client_id', $user->in_client);
+
+    if ($this->searchText) {
+      $query->where('name', 'like', '%' . $this->searchText . '%');
+      $query->orWhere('code', 'like', '%' . $this->searchText . '%');
+    }
 
     $data['rows'] = $query->paginate($this->pPage);
 
-    return view('livewire.variety-list', $data);
+    return view('livewire.cultive.group.group-list', $data);
   }
 }

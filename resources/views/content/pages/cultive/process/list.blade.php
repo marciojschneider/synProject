@@ -24,5 +24,5 @@
 @endsection
 
 @section('content')
-  <livewire:processes-list />
+  <livewire:cultive.process.process-list />
 @endsection

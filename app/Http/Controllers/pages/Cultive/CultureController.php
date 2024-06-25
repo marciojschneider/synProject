@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\pages;
+namespace App\Http\Controllers\pages\Cultive;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+
+// Models
 use App\Models\Culture;
 
-class CultiveCultureController extends Controller {
+class CultureController extends Controller {
   public function cultures() {
     return view("content.pages.cultive.culture.list");
   }

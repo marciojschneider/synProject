@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Cultive\PlantingMethod;
 
 use Livewire\Component;
 
@@ -8,9 +8,9 @@ use Livewire\Component;
 use Livewire\WithPagination;
 
 // Models
-use App\Models\Culture;
+use App\Models\PlantingMethod;
 
-class CultureList extends Component {
+class PlantingMethodList extends Component {
   use WithPagination;
   protected $paginationTheme = 'bootstrap';
 
@@ -27,7 +27,10 @@ class CultureList extends Component {
   }
 
   public function render() {
-    $query = Culture::query();
+    $user = auth()->user();
+    $query = PlantingMethod::query();
+
+    $query->where('client_id', $user->in_client);
 
     if ($this->searchText) {
       $query->where('code', 'like', '%' . $this->searchText . '%');
@@ -36,6 +39,6 @@ class CultureList extends Component {
 
     $data['rows'] = $query->paginate($this->pPage);
 
-    return view('livewire.culture-list', $data);
+    return view('livewire.cultive.planting-method.planting-method-list', $data);
   }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\pages;
+namespace App\Http\Controllers\pages\Cultive;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 // Models
 use App\Models\Group;
 
-class CultiveGroupController extends Controller {
+class GroupController extends Controller {
+
   public function groups() {
     return view('content.pages.cultive.group.list');
   }

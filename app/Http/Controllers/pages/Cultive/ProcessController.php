@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\pages;
+namespace App\Http\Controllers\pages\Cultive;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 // Models
 use App\Models\Process;
 
-class CultiveProcessController extends Controller {
+class ProcessController extends Controller {
+
   public function processes() {
     return view('content.pages.cultive.process.list');
   }

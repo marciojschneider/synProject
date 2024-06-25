@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Cultive\Variety;
 
 use Livewire\Component;
 
@@ -8,9 +8,9 @@ use Livewire\Component;
 use Livewire\WithPagination;
 
 // Models
-use App\Models\PlantingMethod;
+use App\Models\Variety;
 
-class PlantingMethodList extends Component {
+class VarietyList extends Component {
   use WithPagination;
   protected $paginationTheme = 'bootstrap';
 
@@ -27,7 +27,10 @@ class PlantingMethodList extends Component {
   }
 
   public function render() {
-    $query = PlantingMethod::query();
+    $user = auth()->user();
+    $query = Variety::query();
+
+    $query->where('client_id', $user->in_client);
 
     if ($this->searchText) {
       $query->where('code', 'like', '%' . $this->searchText . '%');
@@ -36,6 +39,6 @@ class PlantingMethodList extends Component {
 
     $data['rows'] = $query->paginate($this->pPage);
 
-    return view('livewire.planting-method-list', $data);
+    return view('livewire.cultive.variety.variety-list', $data);
   }
 }

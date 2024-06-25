@@ -24,5 +24,5 @@
 @endsection
 
 @section('content')
-  <livewire:group-list />
+  <livewire:cultive.group.group-list />
 @endsection

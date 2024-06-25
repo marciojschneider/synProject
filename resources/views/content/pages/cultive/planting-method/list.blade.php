@@ -24,5 +24,5 @@
 @endsection
 
 @section('content')
-  <livewire:planting-method-list />
+  <livewire:cultive.planting-method.planting-method-list />
 @endsection

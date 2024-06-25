@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Cultive\Culture;
 
 use Livewire\Component;
 
@@ -8,9 +8,9 @@ use Livewire\Component;
 use Livewire\WithPagination;
 
 // Models
-use App\Models\Harvest;
+use App\Models\Culture;
 
-class HarvestList extends Component {
+class CultureList extends Component {
   use WithPagination;
   protected $paginationTheme = 'bootstrap';
 
@@ -25,10 +25,12 @@ class HarvestList extends Component {
   public function updated() {
     $this->resetPage();
   }
-  public function render() {
-    $query = Harvest::query();
 
-    $query->orderBy('situation', 'DESC');
+  public function render() {
+    $user = auth()->user();
+    $query = Culture::query();
+
+    $query->where('client_id', $user->in_client);
 
     if ($this->searchText) {
       $query->where('code', 'like', '%' . $this->searchText . '%');
@@ -37,6 +39,6 @@ class HarvestList extends Component {
 
     $data['rows'] = $query->paginate($this->pPage);
 
-    return view('livewire.harvest-list', $data);
+    return view('livewire.cultive.culture.culture-list', $data);
   }
 }

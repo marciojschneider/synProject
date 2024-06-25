@@ -24,5 +24,5 @@
 @endsection
 
 @section('content')
-  <livewire:culture-list />
+  <livewire:cultive.culture.culture-list />
 @endsection

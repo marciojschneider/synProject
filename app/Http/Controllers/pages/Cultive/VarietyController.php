@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\pages;
+namespace App\Http\Controllers\pages\Cultive;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -10,7 +10,7 @@ use App\Models\Culture;
 use App\Models\Variety;
 use App\Models\Group;
 
-class CultiveVarietyController extends Controller {
+class VarietyController extends Controller {
   public function varieties() {
     return view('content.pages.cultive.variety.list');
   }

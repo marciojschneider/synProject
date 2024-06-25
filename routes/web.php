@@ -25,11 +25,11 @@ use App\Http\Controllers\pages\Structure\SectionController;
 use App\Http\Controllers\pages\Structure\SectorController;
 
 //       → Cultive
-use App\Http\Controllers\pages\CultiveCultureController;
-use App\Http\Controllers\pages\CultivePlantingMethodController;
-use App\Http\Controllers\pages\CultiveProcessController;
-use App\Http\Controllers\pages\CultiveGroupController;
-use App\Http\Controllers\pages\CultiveVarietyController;
+use App\Http\Controllers\pages\Cultive\CultureController;
+use App\Http\Controllers\pages\Cultive\PlantingMethodController;
+use App\Http\Controllers\pages\Cultive\ProcessController;
+use App\Http\Controllers\pages\Cultive\GroupController;
+use App\Http\Controllers\pages\Cultive\VarietyController;
 //       → Harvest
 use App\Http\Controllers\pages\Harvest\HarvestController;
 use App\Http\Controllers\pages\Harvest\HarvestConfigurationController;
@@ -152,40 +152,40 @@ Route::middleware(['auth', 'canAccess'])->group(function () {
 
   // Cultive
   //       → Method
-  Route::get('/cultive/methods', [CultivePlantingMethodController::class, 'plantingMethods'])->name('cultive-methods');
-  Route::get('/cultive/method/create', [CultivePlantingMethodController::class, 'plantingMethodCreate'])->name('cultive-method-create');
-  Route::post('/cultive/method/create', [CultivePlantingMethodController::class, 'plantingMethodCreateAction']);
-  Route::get('/cultive/method/update/{id}', [CultivePlantingMethodController::class, 'plantingMethodUpdate'])->name('cultive-method-update');
-  Route::post('/cultive/method/update/{id}', [CultivePlantingMethodController::class, 'plantingMethodUpdateAction']);
-  Route::post('/cultive/method/delete/{id}', [CultivePlantingMethodController::class, 'plantingMethodDelete'])->name('cultive-method-delete');
+  Route::get('/cultive/methods', [PlantingMethodController::class, 'plantingMethods'])->name('cultive-methods');
+  Route::get('/cultive/methods/create', [PlantingMethodController::class, 'plantingMethodCreate'])->name('cultive-method-create');
+  Route::post('/cultive/methods/create', [PlantingMethodController::class, 'plantingMethodCreateAction']);
+  Route::get('/cultive/methods/update/{id}', [PlantingMethodController::class, 'plantingMethodUpdate'])->name('cultive-method-update');
+  Route::post('/cultive/methods/update/{id}', [PlantingMethodController::class, 'plantingMethodUpdateAction']);
+  Route::post('/cultive/methods/delete/{id}', [PlantingMethodController::class, 'plantingMethodDelete'])->name('cultive-method-delete');
   //       → Process
-  Route::get('/cultive/processes', [CultiveProcessController::class, 'processes'])->name('cultive-processes');
-  Route::get('/cultive/process/create', [CultiveProcessController::class, 'processCreate'])->name('cultive-process-create');
-  Route::post('/cultive/process/create', [CultiveProcessController::class, 'processCreateAction']);
-  Route::get('/cultive/process/update/{id}', [CultiveProcessController::class, 'processUpdate'])->name('cultive-process-update');
-  Route::post('/cultive/process/update/{id}', [CultiveProcessController::class, 'processUpdateAction']);
-  Route::post('/cultive/process/delete/{id}', [CultiveProcessController::class, 'processDelete'])->name('cultive-process-delete');
+  Route::get('/cultive/processes', [ProcessController::class, 'processes'])->name('cultive-processes');
+  Route::get('/cultive/processes/create', [ProcessController::class, 'processCreate'])->name('cultive-process-create');
+  Route::post('/cultive/processes/create', [ProcessController::class, 'processCreateAction']);
+  Route::get('/cultive/processes/update/{id}', [ProcessController::class, 'processUpdate'])->name('cultive-process-update');
+  Route::post('/cultive/processes/update/{id}', [ProcessController::class, 'processUpdateAction']);
+  Route::post('/cultive/processes/delete/{id}', [ProcessController::class, 'processDelete'])->name('cultive-process-delete');
   //       → Culture
-  Route::get('/cultive/cultures', [CultiveCultureController::class, 'cultures'])->name('cultive-cultures');
-  Route::get('/cultive/culture/create', [CultiveCultureController::class, 'cultureCreate'])->name('cultive-culture-create');
-  Route::post('/cultive/culture/create', [CultiveCultureController::class, 'cultureCreateAction']);
-  Route::get('/cultive/culture/update/{id}', [CultiveCultureController::class, 'cultureUpdate'])->name('cultive-culture-update');
-  Route::post('/cultive/culture/update/{id}', [CultiveCultureController::class, 'cultureUpdateAction']);
-  Route::post('/cultive/culture/delete/{id}', [CultiveCultureController::class, 'cultureDelete'])->name('cultive-culture-delete');
+  Route::get('/cultive/cultures', [CultureController::class, 'cultures'])->name('cultive-cultures');
+  Route::get('/cultive/cultures/create', [CultureController::class, 'cultureCreate'])->name('cultive-culture-create');
+  Route::post('/cultive/cultures/create', [CultureController::class, 'cultureCreateAction']);
+  Route::get('/cultive/cultures/update/{id}', [CultureController::class, 'cultureUpdate'])->name('cultive-culture-update');
+  Route::post('/cultive/cultures/update/{id}', [CultureController::class, 'cultureUpdateAction']);
+  Route::post('/cultive/cultures/delete/{id}', [CultureController::class, 'cultureDelete'])->name('cultive-culture-delete');
   //       → Group
-  Route::get('/cultive/groups', [CultiveGroupController::class, 'groups'])->name('cultive-groups');
-  Route::get('/cultive/group/create', [CultiveGroupController::class, 'groupCreate'])->name('cultive-group-create');
-  Route::post('/cultive/group/create', [CultiveGroupController::class, 'groupCreateAction']);
-  Route::get('/cultive/group/update/{id}', [CultiveGroupController::class, 'groupUpdate'])->name('cultive-group-update');
-  Route::post('/cultive/group/update/{id}', [CultiveGroupController::class, 'groupUpdateAction']);
-  Route::post('/cultive/group/delete/{id}', [CultiveGroupController::class, 'groupDelete'])->name('cultive-group-delete');
+  Route::get('/cultive/groups', [GroupController::class, 'groups'])->name('cultive-groups');
+  Route::get('/cultive/groups/create', [GroupController::class, 'groupCreate'])->name('cultive-group-create');
+  Route::post('/cultive/groups/create', [GroupController::class, 'groupCreateAction']);
+  Route::get('/cultive/groups/update/{id}', [GroupController::class, 'groupUpdate'])->name('cultive-group-update');
+  Route::post('/cultive/groups/update/{id}', [GroupController::class, 'groupUpdateAction']);
+  Route::post('/cultive/groups/delete/{id}', [GroupController::class, 'groupDelete'])->name('cultive-group-delete');
   //       → Variety
-  Route::get('/cultive/varieties', [CultiveVarietyController::class, 'varieties'])->name('cultive-varieties');
-  Route::get('/cultive/variety/create', [CultiveVarietyController::class, 'varietyCreate'])->name('cultive-variety-create');
-  Route::post('/cultive/variety/create', [CultiveVarietyController::class, 'varietyCreateAction']);
-  Route::get('/cultive/variety/update/{id}', [CultiveVarietyController::class, 'varietyUpdate'])->name('cultive-variety-update');
-  Route::post('/cultive/variety/update/{id}', [CultiveVarietyController::class, 'varietyUpdateAction']);
-  Route::post('/cultive/variety/delete/{id}', [CultiveVarietyController::class, 'varietyDelete'])->name('cultive-variety-delete');
+  Route::get('/cultive/varieties', [VarietyController::class, 'varieties'])->name('cultive-varieties');
+  Route::get('/cultive/varieties/create', [VarietyController::class, 'varietyCreate'])->name('cultive-variety-create');
+  Route::post('/cultive/varieties/create', [VarietyController::class, 'varietyCreateAction']);
+  Route::get('/cultive/varieties/update/{id}', [VarietyController::class, 'varietyUpdate'])->name('cultive-variety-update');
+  Route::post('/cultive/varieties/update/{id}', [VarietyController::class, 'varietyUpdateAction']);
+  Route::post('/cultive/varieties/delete/{id}', [VarietyController::class, 'varietyDelete'])->name('cultive-variety-delete');
   //       → Machine Hour
 
   //Harvest
