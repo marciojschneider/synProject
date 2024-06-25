@@ -22,8 +22,8 @@ class ClientController extends Controller {
     $data = $request->only(['code', 'name', 'url', 'situation']);
 
     $clientCreate = new Client();
-    $clientCreate->code = strtoupper($data['code']);
-    $clientCreate->name = strtoupper($data['name']);
+    $clientCreate->code = mb_strtoupper($data['code'], 'UTF-8');
+    $clientCreate->name = mb_strtoupper($data['name'], 'UTF-8');
     $clientCreate->url = $data['url'];
     $clientCreate->situation = $data['situation'];
     $clientCreate->creation_user = $user->id;
@@ -50,8 +50,8 @@ class ClientController extends Controller {
       return redirect()->route('sys-clients');
     }
 
-    $clientUpdate->code = strtoupper($update['code']);
-    $clientUpdate->name = strtoupper($update['name']);
+    $clientUpdate->code = mb_strtoupper($update['code'], 'UTF-8');
+    $clientUpdate->name = mb_strtoupper($update['name'], 'UTF-8');
     $clientUpdate->url = $update['url'];
     $clientUpdate->situation = $update['situation'];
     $clientUpdate->save();

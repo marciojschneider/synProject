@@ -20,14 +20,17 @@ class SectionController extends Controller {
   }
 
   public function sectionCreateAction(Request $request) {
+    $user = auth()->user();
     $data = $request->only(['code', 'name', 'organization', 'responsible', 'situation']);
 
     $section = new Section();
-    $section->code = strtoupper($data['code']);
-    $section->name = strtoupper($data['name']);
+    $section->code = mb_strtoupper($data['code'], 'UTF-8');
+    $section->name = mb_strtoupper($data['name'], 'UTF-8');
     $section->organization_id = $data['organization'];
     $section->responsible = $data['responsible'];
     $section->situation = $data['situation'];
+    $section->creation_user = $user->id;
+    $section->client_id = $user->in_client;
     $section->save();
 
     return redirect()->route('structure-sections');
@@ -53,8 +56,8 @@ class SectionController extends Controller {
       return redirect()->route('structure-sections');
     }
 
-    $sectionUpdate->code = strtoupper($update['code']);
-    $sectionUpdate->name = strtoupper($update['name']);
+    $sectionUpdate->code = mb_strtoupper($update['code'], 'UTF-8');
+    $sectionUpdate->name = mb_strtoupper($update['name'], 'UTF-8');
     $sectionUpdate->organization_id = $update['organization'];
     $sectionUpdate->responsible = $update['responsible'];
     $sectionUpdate->situation = $update['situation'];

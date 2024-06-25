@@ -33,10 +33,11 @@ class UserController extends Controller {
     ]);
 
     $userCreate = new User();
-    $userCreate->name = strtoupper($data['name']);
+    $userCreate->name = mb_strtoupper($data['name'], 'UTF-8');
     $userCreate->email = $data['email'];
     $userCreate->password = Hash::make($data['password']);
     $userCreate->situation = $data['situation'];
+    $userCreate->creation_user = $user->id;
     $userCreate->save();
 
     $profileId = Profile::where('client_id', $user->in_client)->where('name', 'USUÁRIO')->select('id')->get();
@@ -44,8 +45,8 @@ class UserController extends Controller {
     $userProfile = new UserProfile();
     $userProfile->user_id = $userCreate->id;
     $userProfile->profile_id = $profileId[0]->id;
-    $userProfile->client_id = $user->in_client;
     $userProfile->creation_user = $user->id;
+    $userProfile->client_id = $user->in_client;
     $userProfile->save();
 
     return redirect()->route('sys-users');
@@ -75,7 +76,7 @@ class UserController extends Controller {
       return redirect()->route('sys-users');
     }
 
-    $userUpdate->name = strtoupper($update['name']);
+    $userUpdate->name = mb_strtoupper($update['name'], 'UTF-8');
     if ($update['password']) {
       $userUpdate->password = Hash::make($update['password']);
     }

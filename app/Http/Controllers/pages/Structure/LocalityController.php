@@ -18,12 +18,15 @@ class LocalityController extends Controller {
   }
 
   public function localityCreateAction(Request $request) {
+    $user = auth()->user();
     $data = $request->only(['code', 'name', 'situation']);
 
     $locality = new Locality();
-    $locality->code = strtoupper($data['code']);
-    $locality->name = strtoupper($data['name']);
+    $locality->code = mb_strtoupper($data['code'], 'UTF-8');
+    $locality->name = mb_strtoupper($data['name'], 'UTF-8');
     $locality->situation = $data['situation'];
+    $locality->creation_user = $user->id;
+    $locality->client_id = $user->in_client;
     $locality->save();
 
     return redirect()->route('structure-localities');
@@ -49,8 +52,8 @@ class LocalityController extends Controller {
       return redirect()->route('structure-localities');
     }
 
-    $localityUpdate->code = strtoupper($update['code']);
-    $localityUpdate->name = strtoupper($update['name']);
+    $localityUpdate->code = mb_strtoupper($update['code'], 'UTF-8');
+    $localityUpdate->name = mb_strtoupper($update['name'], 'UTF-8');
     $localityUpdate->situation = $update['situation'];
     $localityUpdate->save();
 

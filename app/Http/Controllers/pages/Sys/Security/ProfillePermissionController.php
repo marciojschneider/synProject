@@ -24,9 +24,9 @@ class ProfillePermissionController extends Controller {
       $moduleCreate = new profilePermission();
       $moduleCreate->profile_id = $data['profile'];
       $moduleCreate->sidebar_id = $data['module'];
-      $moduleCreate->client_id = $user->in_client;
       $moduleCreate->view = 1;
       $moduleCreate->creation_user = $user->id;
+      $moduleCreate->client_id = $user->in_client;
       $moduleCreate->save();
     }
 

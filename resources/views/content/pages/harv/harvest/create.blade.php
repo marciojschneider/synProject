@@ -38,14 +38,14 @@
 
           <div class="row mb-4">
             <div class="col-md-4">
-              <label for="initial_dt" class="form-label">Início</label>
-              <input type="datetime-local" step="1" class="form-control" id="initial_dt" name="initial_dt" />
+              <label for="ending_dt" class="form-label">Início</label>
+              <input type="date" step="1" class="form-control" id="initial_dt" name="initial_dt" />
             </div>
 
             <div class="col-md-4">
               <label for="ending_dt" class="form-label">Fim</label>
-              <input type="datetime-local" step="1" class="form-control" id="ending_dt" name="ending_dt"
-                value="{{ date('Y-m-d H:i:s', strtotime(now('America/Sao_Paulo'))) }}" />
+              <input type="date" step="1" class="form-control" id="ending_dt" name="ending_dt"
+                value="{{ date('Y-m-d', strtotime(now('America/Sao_Paulo'))) }}" />
             </div>
 
             <div class="col-md-4">

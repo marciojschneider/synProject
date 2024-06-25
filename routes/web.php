@@ -31,8 +31,8 @@ use App\Http\Controllers\pages\CultiveProcessController;
 use App\Http\Controllers\pages\CultiveGroupController;
 use App\Http\Controllers\pages\CultiveVarietyController;
 //       → Harvest
-use App\Http\Controllers\pages\HarvConfigController;
-use App\Http\Controllers\pages\HarvHarvestController;
+use App\Http\Controllers\pages\Harvest\HarvestController;
+use App\Http\Controllers\pages\Harvest\HarvestConfigurationController;
 
 //       → Support
 use App\Http\Controllers\pages\SupTaskController;
@@ -189,19 +189,19 @@ Route::middleware(['auth', 'canAccess'])->group(function () {
 
   //Harvest
   //       → Harvest
-  Route::get('/harv/harvests', [HarvHarvestController::class, 'harvests'])->name('harv-harvests');
-  Route::get('/harv/harvest/create', [HarvHarvestController::class, 'harvestCreate'])->name('harv-harvest-create');
-  Route::post('/harv/harvest/create', [HarvHarvestController::class, 'harvestCreateAction']);
-  Route::get('/harv/harvest/update/{id}', [HarvHarvestController::class, 'harvestUpdate'])->name('harv-harvest-update');
-  Route::post('/harv/harvest/update/{id}', [HarvHarvestController::class, 'harvestUpdateAction']);
-  Route::post('/harv/harvest/delete/{id}', [HarvHarvestController::class, 'harvestDelete'])->name('harv-harvest-delete');
+  Route::get('/harvest/harvests', [HarvestController::class, 'harvests'])->name('harv-harvests');
+  Route::get('/harvest/harvests/create', [HarvestController::class, 'harvestCreate'])->name('harv-harvest-create');
+  Route::post('/harvest/harvests/create', [HarvestController::class, 'harvestCreateAction']);
+  Route::get('/harvest/harvests/update/{id}', [HarvestController::class, 'harvestUpdate'])->name('harv-harvest-update');
+  Route::post('/harvest/harvests/update/{id}', [HarvestController::class, 'harvestUpdateAction']);
+  Route::post('/harvest/harvests/delete/{id}', [HarvestController::class, 'harvestDelete'])->name('harv-harvest-delete');
   //       → Harvest Configurations
-  Route::get('/harv/harvest-configurations', [HarvHarvestConfigurationController::class, 'harvestConfigurations'])->name('harv-configurations');
-  Route::get('/harv/harvest-configuration/create', [HarvHarvestConfigurationController::class, 'harvestConfigurationCreate'])->name('harv-configuration-create');
-  Route::post('/harv/harvest-configuration/create', [HarvHarvestConfigurationController::class, 'harvestConfigurationCreateAction']);
-  Route::get('/harv/harvest-configuration/update/{id}', [HarvHarvestConfigurationController::class, 'harvestConfigurationUpdate'])->name('harv-configuration-update');
-  Route::post('/harv/harvest-configuration/update/{id}', [HarvHarvestConfigurationController::class, 'harvestConfigurationUpdateAction']);
-  Route::post('/harv/harvest-configuration/delete/{id}', [HarvHarvestConfigurationController::class, 'harvestConfigurationDelete'])->name('harv-configuration-delete');
+  Route::get('/harvest/harvest-configurations', [HarvestConfigurationController::class, 'harvestConfigurations'])->name('harv-configurations');
+  Route::get('/harvest/harvest-configurations/create', [HarvestConfigurationController::class, 'harvestConfigurationCreate'])->name('harv-configuration-create');
+  Route::post('/harvest/harvest-configurations/create', [HarvestConfigurationController::class, 'harvestConfigurationCreateAction']);
+  Route::get('/harvest/harvest-configurations/update/{id}', [HarvestConfigurationController::class, 'harvestConfigurationUpdate'])->name('harv-configuration-update');
+  Route::post('/harvest/harvest-configurations/update/{id}', [HarvestConfigurationController::class, 'harvestConfigurationUpdateAction']);
+  Route::post('/harvest/harvest-configurations/delete/{id}', [HarvestConfigurationController::class, 'harvestConfigurationDelete'])->name('harv-configuration-delete');
 
   // Support
   //       → Tasks

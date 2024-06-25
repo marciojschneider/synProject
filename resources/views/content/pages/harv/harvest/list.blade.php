@@ -24,5 +24,5 @@
 @endsection
 
 @section('content')
-  <livewire:harvest-list />
+  <livewire:harvest.harvest.harvest-list />
 @endsection

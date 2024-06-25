@@ -16,13 +16,16 @@ class OrganizationController extends Controller {
   }
 
   public function organizationCreateAction(Request $request) {
+    $user = auth()->user();
     $data = $request->only(['code', 'name', 'external_code', 'situation']);
 
     $organization = new Organization();
-    $organization->code = strtoupper($data['code']);
-    $organization->name = strtoupper($data['name']);
-    $organization->external_code = strtoupper($data['external_code']);
+    $organization->code = mb_strtoupper($data['code'], 'UTF-8');
+    $organization->name = mb_strtoupper($data['name'], 'UTF-8');
+    $organization->external_code = mb_strtoupper($data['external_code'], 'UTF-8');
     $organization->situation = $data['situation'];
+    $organization->creation_user = $user->id;
+    $organization->client_id = $user->in_client;
     $organization->save();
 
     return redirect()->route('structure-organizations');
@@ -48,9 +51,9 @@ class OrganizationController extends Controller {
       return redirect()->route('structure-farms');
     }
 
-    $organizationUpdate->code = strtoupper($update['code']);
-    $organizationUpdate->name = strtoupper($update['name']);
-    $organizationUpdate->external_code = strtoupper($update['external_code']);
+    $organizationUpdate->code = mb_strtoupper($update['code'], 'UTF-8');
+    $organizationUpdate->name = mb_strtoupper($update['name'], 'UTF-8');
+    $organizationUpdate->external_code = mb_strtoupper($update['external_code'], 'UTF-8');
     $organizationUpdate->situation = $update['situation'];
     $organizationUpdate->save();
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\pages;
+namespace App\Http\Controllers\pages\Harvest;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 // Models
 use App\Models\Harvest;
 
-class HarvHarvestController extends Controller {
+class HarvestController extends Controller {
   public function harvests() {
     return view('content.pages.harv.harvest.list');
   }
@@ -17,30 +17,44 @@ class HarvHarvestController extends Controller {
     return view('content.pages.harv.harvest.create');
   }
   public function harvestCreateAction(Request $request) {
+    $user = auth()->user();
     $data = $request->only(['code', 'name', 'price_table', 'initial_dt', 'ending_dt', 'situation']);
 
     $harvest = new Harvest();
-    $harvest->code = strtoupper($data['code']);
-    $harvest->name = strtoupper($data['name']);
+    $harvest->code = mb_strtoupper($data['code'], 'UTF-8');
+    $harvest->name = mb_strtoupper($data['name'], 'UTF-8');
     $harvest->price_table = $data['price_table'];
     $harvest->initial_dt = $data['initial_dt'];
     $harvest->ending_dt = $data['ending_dt'];
     $harvest->situation = $data['situation'];
+    $harvest->creation_user = $user->id;
+    $harvest->client_id = $user->in_client;
     $harvest->save();
 
     return redirect()->route('harv-harvests');
   }
   public function harvestUpdate(int $id) {
-    $data['harvest'] = Harvest::find($id);
+    $user = auth()->user();
+    $data['harvest'] = Harvest::where('id', $id)->where('client_id', $user->in_client)->first();
+
+    if (!$data['harvest']) {
+      return redirect()->route('harv-harvests');
+    }
+
     return view('content.pages.harv.harvest.update', $data);
   }
 
   public function harvestUpdateAction(int $id, Request $request) {
+    $user = auth()->user();
     $update = $request->only(['code', 'name', 'price_table', 'initial_dt', 'ending_dt', 'situation']);
+    $harvestUpdate = Harvest::where('id', $id)->where('client_id', $user->in_client)->first();
 
-    $harvestUpdate = Harvest::find($id);
-    $harvestUpdate->code = strtoupper($update['code']);
-    $harvestUpdate->name = strtoupper($update['name']);
+    if (!$harvestUpdate) {
+      return redirect()->route('harv-harvests');
+    }
+
+    $harvestUpdate->code = mb_strtoupper($update['code'], 'UTF-8');
+    $harvestUpdate->name = mb_strtoupper($update['name'], 'UTF-8');
     $harvestUpdate->price_table = $update['price_table'];
     $harvestUpdate->initial_dt = $update['initial_dt'];
     $harvestUpdate->ending_dt = $update['ending_dt'];
@@ -51,7 +65,9 @@ class HarvHarvestController extends Controller {
   }
 
   public function harvestDelete(int $id) {
-    Harvest::where('id', $id)->delete();
+    $user = auth()->user();
+    Harvest::where('id', $id)->where('client_id', $user->in_client)->delete();
+
     return redirect()->route('harv-harvests');
   }
 

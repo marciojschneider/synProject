@@ -20,13 +20,16 @@ class SectorController extends Controller {
   }
 
   public function sectorCreateAction(Request $request) {
+    $user = auth()->user();
     $data = $request->only(['code', 'name', 'farm', 'situation']);
 
     $sector = new Sector();
-    $sector->code = strtoupper($data['code']);
-    $sector->name = strtoupper($data['name']);
+    $sector->code = mb_strtoupper($data['code'], 'UTF-8');
+    $sector->name = mb_strtoupper($data['name'], 'UTF-8');
     $sector->farm_id = $data['farm'];
     $sector->situation = $data['situation'];
+    $sector->creation_user = $user->id;
+    $sector->client_id = $user->in_client;
     $sector->save();
 
     return redirect()->route('structure-sectors');
@@ -54,8 +57,8 @@ class SectorController extends Controller {
       return redirect()->route('structure-sectors');
     }
 
-    $sectorUpdate->code = strtoupper($update['code']);
-    $sectorUpdate->name = strtoupper($update['name']);
+    $sectorUpdate->code = mb_strtoupper($update['code'], 'UTF-8');
+    $sectorUpdate->name = mb_strtoupper($update['name'], 'UTF-8');
     $sectorUpdate->farm_id = $update['farm'];
     $sectorUpdate->situation = $update['situation'];
     $sectorUpdate->save();

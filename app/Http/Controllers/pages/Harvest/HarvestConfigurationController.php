@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\pages;
+namespace App\Http\Controllers\pages\Harvest;
 
 use App\Http\Controllers\Controller;
 use App\Models\Culture;
@@ -13,24 +13,32 @@ use App\Models\Section;
 use App\Models\Variety;
 use Illuminate\Http\Request;
 
-class HarvHarvestConfigurationController extends Controller {
+class HarvestConfigurationController extends Controller {
   public function harvestConfigurations() {
     return view('content.pages.harv.harvest-configuration.list');
   }
 
+  public function getData() {
+    $user = auth()->user();
+    $data['harvests'] = Harvest::where('client_id', $user->in_client)->get();
+    $data['sections'] = Section::where('client_id', $user->in_client)->get();
+    $data['fields'] = Field::where('client_id', $user->in_client)->get();
+    $data['cultures'] = Culture::where('client_id', $user->in_client)->get();
+    $data['varieties'] = Variety::where('client_id', $user->in_client)->get();
+    $data['planting_methods'] = PlantingMethod::where('client_id', $user->in_client)->get();
+    $data['organizations'] = Organization::where('client_id', $user->in_client)->get();
+
+    return $data;
+  }
+
   public function harvestConfigurationCreate() {
-    $data['harvests'] = Harvest::all();
-    $data['sections'] = Section::all();
-    $data['fields'] = Field::all();
-    $data['cultures'] = Culture::all();
-    $data['varieties'] = Variety::all();
-    $data['planting_methods'] = PlantingMethod::all();
-    $data['organizations'] = Organization::all();
+    $data = $this->getData();
 
     return view('content.pages.harv.harvest-configuration.create', $data);
   }
 
   public function harvestConfigurationCreateAction(Request $request) {
+    $user = auth()->user();
     $data = $request->only(['harvest', 'section', 'field', 'culture', 'variety', 'planting_method', 'planting_area', 'situation', 'organization']);
 
     // TODO: Verificar necessidade de melhorar lógica, apenas aplicação provisória.
@@ -46,19 +54,15 @@ class HarvHarvestConfigurationController extends Controller {
     $harvestConfiguration->planting_area = number_format(floatval(implode('.', explode(',', $formatPlanting))), 2, '.', '');
     $harvestConfiguration->situation = $data['situation'];
     $harvestConfiguration->organization_id = $data['organization'];
+    $harvestConfiguration->creation_user = $user->id;
+    $harvestConfiguration->client_id = $user->in_client;
     $harvestConfiguration->save();
 
-    return redirect()->route('harv-harvest-configurations');
+    return redirect()->route('harv-configurations');
   }
 
   public function harvestConfigurationUpdate(int $id) {
-    $data['harvests'] = Harvest::all();
-    $data['sections'] = Section::all();
-    $data['fields'] = Field::all();
-    $data['cultures'] = Culture::all();
-    $data['varieties'] = Variety::all();
-    $data['planting_methods'] = PlantingMethod::all();
-    $data['organizations'] = Organization::all();
+    $data = $this->getData();
 
     $data['harvestConfiguration'] = HarvestConfiguration::find($id);
 
@@ -89,6 +93,6 @@ class HarvHarvestConfigurationController extends Controller {
   public function harvestConfigurationDelete(int $id) {
     HarvestConfiguration::where('id', $id)->delete();
 
-    return redirect()->route('harv-harvest-configurations');
+    return redirect()->route('harv-configurations');
   }
 }

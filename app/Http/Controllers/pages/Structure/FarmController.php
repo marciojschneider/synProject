@@ -16,14 +16,17 @@ class FarmController extends Controller {
   }
 
   public function farmCreateAction(Request $request) {
+    $user = auth()->user();
     $data = $request->only(['code', 'name', 'property', 'owner', 'situation']);
 
     $farm = new Farm();
-    $farm->code = strtoupper($data['code']);
-    $farm->name = strtoupper($data['name']);
+    $farm->code = mb_strtoupper($data['code'], 'UTF-8');
+    $farm->name = mb_strtoupper($data['name'], 'UTF-8');
     $farm->property = $data['property'];
     $farm->owner = $data['owner'];
     $farm->situation = $data['situation'];
+    $farm->creation_user = $user->id;
+    $farm->client_id = $user->in_client;
     $farm->save();
 
     return redirect()->route('structure-farms');
@@ -49,8 +52,8 @@ class FarmController extends Controller {
       return redirect()->route('structure-farms');
     }
 
-    $farmUpdate->code = strtoupper($update['code']);
-    $farmUpdate->name = strtoupper($update['name']);
+    $farmUpdate->code = mb_strtoupper($update['code'], 'UTF-8');
+    $farmUpdate->name = mb_strtoupper($update['name'], 'UTF-8');
     $farmUpdate->property = $update['property'];
     $farmUpdate->owner = $update['owner'];
     $farmUpdate->situation = $update['situation'];

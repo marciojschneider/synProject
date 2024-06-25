@@ -22,11 +22,13 @@ class ProfileController extends Controller {
   }
 
   public function profileCreateAction(Request $request) {
+    $user = auth()->user();
     $data = $request->only(['name', 'client', 'situation']);
 
     $profileCreate = new Profile();
-    $profileCreate->name = strtoupper($data['name']);
+    $profileCreate->name = mb_strtoupper($data['name'], 'UTF-8');
     $profileCreate->client_id = $data['client'];
+    $profileCreate->creation_user = $user->id;
     $profileCreate->situation = $data['situation'];
     $profileCreate->save();
 
@@ -55,7 +57,7 @@ class ProfileController extends Controller {
       return redirect()->route('sys-profiles');
     }
 
-    $profileUpdate->name = strtoupper($update['name']);
+    $profileUpdate->name = mb_strtoupper($update['name'], 'UTF-8');
     $profileUpdate->client_id = $update['client'];
     $profileUpdate->situation = $update['situation'];
     $profileUpdate->save();
