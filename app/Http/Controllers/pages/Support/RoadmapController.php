@@ -13,13 +13,15 @@ use App\Models\TaskDetail;
 class RoadmapController extends Controller {
   // Tasks
   public function tasks() {
-    $data['unapproveds'] = Task::orderBy('created_at', 'DESC')->where('situation', '<', 4)->get();
+    $user = auth()->user();
+    $data['unapproveds'] = Task::orderBy('created_at', 'DESC')->where('situation', '<', 4)->where('client_id', $user->in_client)->get();
 
     return view('content.pages.support.task.list', $data);
   }
   //         → Roadmap
   public function roadmap() {
-    $data['unapproveds'] = Task::orderBy('created_at', 'DESC')->where('situation', '<', 4)->get();
+    $user = auth()->user();
+    $data['unapproveds'] = Task::orderBy('created_at', 'DESC')->where('situation', '<', 4)->where('client_id', $user->in_client)->get();
 
     return view('content.pages.support.roadmap.list', $data);
   }

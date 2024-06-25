@@ -57,14 +57,7 @@ class TaskController extends Controller {
   }
 
   public function taskUpdate(int $id) {
-    $data['sidebars'] = Sidebar::where('icon', '!=', null)
-      ->where('name', '!=', 'Inicio')
-      ->where('client_id', 'REGEXP', '[[:<:]]' . auth()->user()->in_client . '[[:>:]]')
-      ->get();
-
-    $data['task'] = Task::find($id);
-
-    return view('content.pages.support.task.update', $data);
+    return view('content.pages.support.task.update', compact('id'));
   }
 
   public function taskUpdateAction(int $id, Request $request) {

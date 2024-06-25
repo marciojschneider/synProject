@@ -25,7 +25,9 @@ class TaskList extends Component {
   public $pPage = 5;
 
   public function mount() {
-    $this->sidebars = Sidebar::where('icon', null)->get();
+    $user = auth()->user();
+
+    $this->sidebars = Sidebar::where('icon', null)->where('sidebars.client_id', 'REGEXP', '[[:<:]]' . $user->in_client . '[[:>:]]')->get();
   }
 
   public function updated() {
@@ -33,9 +35,11 @@ class TaskList extends Component {
   }
 
   public function render() {
+    $user = auth()->user();
     $query = Task::query();
 
     $query->join('sidebars', 'sidebars.id', '=', 'tasks.sidebar_id')
+      ->where('tasks.client_id', $user->in_client)
       ->orderBy('situation', 'ASC')
       ->orderBy('created_at', 'DESC')
       ->select('tasks.*', 'sidebars.name as sName')
@@ -54,8 +58,6 @@ class TaskList extends Component {
     }
 
     $data['rows'] = $query->paginate($this->pPage);
-
-    $data['unapproveds'] = Task::orderBy('created_at', 'DESC')->where('situation', '!=', 4)->get();
 
     foreach ($data['rows'] as $kTask => $vTask) {
       $data['tasks'][] = $vTask;

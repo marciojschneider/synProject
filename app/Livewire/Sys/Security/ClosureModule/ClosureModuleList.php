@@ -29,9 +29,11 @@ class ClosureModuleList extends Component {
   }
 
   public function render() {
+    $user = auth()->user();
     $query = closureModule::query();
 
     $query->join('sidebars', 'sidebars.id', '=', 'closure_modules.sidebar_id')
+      ->where('sidebars.client_id', 'REGEXP', '[[:<:]]' . $user->in_client . '[[:>:]]')
       ->select('closure_modules.*', 'sidebars.name as sName')
       ->get();
 
