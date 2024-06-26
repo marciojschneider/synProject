@@ -19,7 +19,7 @@ return new class extends Migration {
       $table->timestamp('expected_dt')->nullable();
       $table->integer('creation_user')->nullable();
       $table->string('description');
-      $table->integer('situation');
+      $table->integer('situation')->default(1);
       $table->timestamps();
     });
   }

@@ -23,8 +23,8 @@ class ProfilesSeeder extends Seeder {
         "client_id" => 1,
         "creation_user" => 1,
         "created_at" => "2024-05-27 16:27:17",
-        "updated_at" => "2024-05-27 16:27:17",
-        "situation" => 1,
+        "updated_at" => "2024-06-20 17:45:56",
+        "situation" => 0,
       ),
       array(
         "name" => "USUÁRIO",
@@ -43,7 +43,6 @@ class ProfilesSeeder extends Seeder {
         "situation" => 1,
       ),
     );
-
 
     Profile::insert($profiles);
   }

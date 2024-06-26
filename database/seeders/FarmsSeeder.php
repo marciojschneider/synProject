@@ -18,7 +18,7 @@ class FarmsSeeder extends Seeder {
         "creation_user" => 1,
         "client_id" => 1,
         "created_at" => "2024-06-10 15:42:04",
-        "updated_at" => "2024-06-17 20:20:56",
+        "updated_at" => "2024-06-21 21:03:51",
       ),
       array(
         "code" => "03",

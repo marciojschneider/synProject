@@ -27,7 +27,7 @@ class OrganizationsSeeder extends Seeder {
         "creation_user" => 1,
         "client_id" => 1,
         "created_at" => "2024-06-04 18:22:15",
-        "updated_at" => "2024-06-17 20:22:32",
+        "updated_at" => "2024-06-20 21:26:12",
       ),
       array(
         "code" => "20",

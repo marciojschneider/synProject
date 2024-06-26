@@ -16,9 +16,9 @@ return new class extends Migration {
       $table->string('slug');
       $table->integer('affiliate_id');
       $table->string('url');
-      $table->string('client_id')->default(0); // 0 = Todos | ? = client_id
-      // $table->string('permission');
+      $table->string('client_id')->default(0); // ?,?,?
       $table->integer('order');
+      $table->integer('visibility')->default(1);
       $table->timestamps();
     });
   }

@@ -15,6 +15,7 @@ class ClientsSeeder extends Seeder {
         "name" => "SYNÉRGYA",
         "url" => NULL,
         "situation" => 1,
+        "creation_user" => 1,
         "created_at" => "2024-05-27 16:27:17",
         "updated_at" => "2024-06-17 18:31:00",
       ),
@@ -23,8 +24,9 @@ class ClientsSeeder extends Seeder {
         "name" => "KETTLOW",
         "url" => NULL,
         "situation" => 0,
+        "creation_user" => 1,
         "created_at" => "2024-05-27 16:27:17",
-        "updated_at" => "2024-06-17 18:31:13",
+        "updated_at" => "2024-06-20 17:45:01",
       ),
     );
 

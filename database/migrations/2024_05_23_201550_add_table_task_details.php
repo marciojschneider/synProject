@@ -17,7 +17,7 @@ return new class extends Migration {
       $table->string('commit_reference')->nullable();
       $table->string('description');
       $table->integer('type');
-      $table->integer('situation');
+      $table->integer('situation')->default(1);
       $table->integer('creation_user')->nullable();
       $table->timestamp('initial_dt')->nullable();
       $table->timestamp('ending_dt')->nullable();

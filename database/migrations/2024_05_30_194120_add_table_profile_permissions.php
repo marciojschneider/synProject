@@ -22,6 +22,7 @@ return new class extends Migration {
       $table->integer('delete')->default(0);
       $table->string('description')->nullable();
       $table->integer('creation_user')->nullable();
+      $table->integer('situation')->default(1);
       $table->timestamps();
     });
   }

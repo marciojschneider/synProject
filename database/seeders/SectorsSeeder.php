@@ -37,7 +37,7 @@ class SectorsSeeder extends Seeder {
         "creation_user" => 1,
         "client_id" => 1,
         "created_at" => "2024-06-14 05:12:39",
-        "updated_at" => "2024-06-17 20:22:12",
+        "updated_at" => "2024-06-24 17:19:48",
       ),
     );
 

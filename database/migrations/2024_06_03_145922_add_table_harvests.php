@@ -13,7 +13,7 @@ return new class extends Migration {
       $table->id();
       $table->string('code');
       $table->string('name');
-      $table->integer('situation')->default(1); // 1 Ativo - 0 Inativo - ?
+      $table->integer('situation')->default(1);
       $table->timestamp('initial_dt')->nullable();
       $table->timestamp('ending_dt')->nullable();
       $table->integer('creation_user')->nullable();

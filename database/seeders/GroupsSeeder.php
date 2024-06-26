@@ -12,6 +12,7 @@ class GroupsSeeder extends Seeder {
       array(
         "code" => "01",
         "name" => "CONVENCIONAL",
+        "situation" => 1,
         "creation_user" => 1,
         "client_id" => 1,
         "created_at" => "2024-06-17 17:31:02",
@@ -20,6 +21,7 @@ class GroupsSeeder extends Seeder {
       array(
         "code" => "02",
         "name" => "CL",
+        "situation" => 1,
         "creation_user" => 1,
         "client_id" => 1,
         "created_at" => "2024-06-17 17:31:18",
@@ -28,6 +30,7 @@ class GroupsSeeder extends Seeder {
       array(
         "code" => "03",
         "name" => "MIRTILO",
+        "situation" => 1,
         "creation_user" => 1,
         "client_id" => 1,
         "created_at" => "2024-06-17 17:32:26",
@@ -36,6 +39,7 @@ class GroupsSeeder extends Seeder {
       array(
         "code" => "04",
         "name" => "PASTAGEM",
+        "situation" => 1,
         "creation_user" => 1,
         "client_id" => 1,
         "created_at" => "2024-06-17 17:32:34",
@@ -44,6 +48,7 @@ class GroupsSeeder extends Seeder {
       array(
         "code" => "999",
         "name" => "A DEFINIR",
+        "situation" => 1,
         "creation_user" => 1,
         "client_id" => 1,
         "created_at" => "2024-06-17 17:32:41",
