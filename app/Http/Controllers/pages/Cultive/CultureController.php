@@ -21,31 +21,44 @@ class CultureController extends Controller {
     $data = $request->only(['code', 'name']);
 
     $culture = new Culture();
-    $culture->code = strtoupper($data['code']);
-    $culture->name = strtoupper($data['name']);
+    $culture->code = mb_strtoupper($data['code'], 'UTF-8');
+    $culture->name = mb_strtoupper($data['name'], 'UTF-8');
     $culture->save();
 
     return redirect()->route('cultive-cultures');
   }
 
   public function cultureUpdate(int $id) {
-    $data['culture'] = Culture::find($id);
+    $user = auth()->user();
+    $data['culture'] = Culture::where('id', $id)->where('client_id', $user->in_client)->first();
+
+    if (!$data['culture']) {
+      return redirect()->route('cultive-cultures');
+    }
+
     return view('content.pages.cultive.culture.update', $data);
   }
 
   public function cultureUpdateAction(int $id, Request $request) {
+    $user = auth()->user();
     $update = $request->only(['code', 'name']);
+    $cultureUpdate = Culture::where('id', $id)->where('client_id', $user->in_client)->first();
 
-    $cultureUpdate = Culture::find($id);
-    $cultureUpdate->code = strtoupper($update['code']);
-    $cultureUpdate->name = strtoupper($update['name']);
+    if (!$cultureUpdate) {
+      return redirect()->route('cultive-cultures');
+    }
+
+    $cultureUpdate->code = mb_strtoupper($update['code'], 'UTF-8');
+    $cultureUpdate->name = mb_strtoupper($update['name'], 'UTF-8');
     $cultureUpdate->save();
 
     return redirect()->route('cultive-cultures');
   }
 
   public function cultureDelete(int $id) {
-    Culture::where('id', $id)->delete();
+    $user = auth()->user();
+    Culture::where('id', $id)->where('client_id', $user->in_client)->delete();
+
     return redirect()->route('cultive-cultures');
   }
 }

@@ -37,8 +37,7 @@ class SectorController extends Controller {
 
   public function sectorUpdate(int $id) {
     $user = auth()->user();
-    $data['farms'] = Farm::where('client_id', $user->in_client)->get();
-
+    $data['farms'] = Farm::where('client_id', $user->in_client)->where('situation', 1)->get();
     $data['sector'] = Sector::where('id', $id)->where('client_id', $user->in_client)->first();
 
     if (!$data['sector']) {

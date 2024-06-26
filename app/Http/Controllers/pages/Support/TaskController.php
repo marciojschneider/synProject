@@ -24,6 +24,7 @@ class TaskController extends Controller {
     $data['sidebars'] = Sidebar::where('icon', '!=', null)
       ->where('name', '!=', 'Inicio')
       ->where('client_id', 'REGEXP', '[[:<:]]' . auth()->user()->in_client . '[[:>:]]')
+      ->where('visibility', 1)
       ->get();
 
     return view('content.pages.support.task.create', $data);
@@ -57,6 +58,13 @@ class TaskController extends Controller {
   }
 
   public function taskUpdate(int $id) {
+    $user = auth()->user();
+    $data['task'] = Task::where('id', $id)->where('client_id', $user->in_client)->first();
+
+    if (!$data['task']) {
+      return redirect()->route('sup-tasks');
+    }
+
     return view('content.pages.support.task.update', compact('id'));
   }
 
@@ -80,7 +88,8 @@ class TaskController extends Controller {
   }
 
   public function taskDelete(int $id) {
-    Task::where('id', $id)->delete();
+    $user = auth()->user();
+    Task::where('id', $id)->where('client_id', $user->in_client)->delete();
 
     return redirect()->route('sup-tasks');
   }
@@ -103,18 +112,24 @@ class TaskController extends Controller {
   }
 
   public function commentUpdate(Request $request) {
+    $user = auth()->user();
     $update = $request->only(['commentId', 'commentTask', 'commentDescription']);
+    $taskDetailUpdate = TaskDetail::where('id', $update['commentId'])->where('client_id', $user->in_client)->first();
 
-    $taskUpdate = TaskDetail::find($update['commentId']);
-    $taskUpdate->task_id = $update['commentTask'];
-    $taskUpdate->description = mb_strtoupper($update['commentDescription'], 'UTF-8');
-    $taskUpdate->save();
+    if (!$taskDetailUpdate) {
+      return redirect()->route('sup-tasks');
+    }
+
+    $taskDetailUpdate->task_id = $update['commentTask'];
+    $taskDetailUpdate->description = mb_strtoupper($update['commentDescription'], 'UTF-8');
+    $taskDetailUpdate->save();
 
     return redirect()->route('sup-tasks');
   }
 
   public function commentDelete(int $id) {
-    TaskDetail::where('id', $id)->delete();
+    $user = auth()->user();
+    TaskDetail::where('id', $id)->where('client_id', $user->in_client)->delete();
 
     return redirect()->route('sup-tasks');
   }

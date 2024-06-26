@@ -16,6 +16,7 @@ class HarvestController extends Controller {
   public function harvestCreate() {
     return view('content.pages.harvest.harvest.create');
   }
+
   public function harvestCreateAction(Request $request) {
     $user = auth()->user();
     $data = $request->only(['code', 'name', 'price_table', 'initial_dt', 'ending_dt', 'situation']);

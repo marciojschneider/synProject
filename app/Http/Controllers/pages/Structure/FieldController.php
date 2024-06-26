@@ -15,8 +15,8 @@ class FieldController extends Controller {
 
   public function fieldCreate() {
     $user = auth()->user();
-    $data['farms'] = Farm::where('client_id', $user->in_client)->get();
-    $data['localities'] = Locality::where('client_id', $user->in_client)->get();
+    $data['farms'] = Farm::where('client_id', $user->in_client)->where('situation', 1)->get();
+    $data['localities'] = Locality::where('client_id', $user->in_client)->where('situation', 1)->get();
 
     return view('content.pages.structure.field.create', $data);
   }
@@ -50,9 +50,8 @@ class FieldController extends Controller {
 
   public function fieldUpdate(int $id) {
     $user = auth()->user();
-    $data['farms'] = Farm::where('client_id', $user->in_client)->get();
-    $data['localities'] = Locality::where('client_id', $user->in_client)->get();
-
+    $data['farms'] = Farm::where('client_id', $user->in_client)->where('situation', 1)->get();
+    $data['localities'] = Locality::where('client_id', $user->in_client)->where('situation', 1)->get();
     $data['field'] = Field::where('id', $id)->where('client_id', $user->in_client)->first();
 
     if (!$data['field']) {

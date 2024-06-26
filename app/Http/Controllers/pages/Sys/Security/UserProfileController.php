@@ -25,7 +25,7 @@ class UserProfileController extends Controller {
       ->groupBy('users.id', 'users.name')
       ->get();
 
-    $data['profiles'] = Profile::where('client_id', $user->in_client)->get();
+    $data['profiles'] = Profile::where('client_id', $user->in_client)->where('situation', 1)->get();
 
     return view('content.pages.sys.security.user-profile.create', $data);
   }
@@ -59,7 +59,7 @@ class UserProfileController extends Controller {
       ->groupBy('users.id', 'users.name')
       ->get();
 
-    $data['profiles'] = Profile::where('client_id', $user->in_client)->get();
+    $data['profiles'] = Profile::where('client_id', $user->in_client)->where('situation', 1)->get();
 
     if (!$data['userProfile']) {
       return redirect()->route('sys-sec-u-ps');

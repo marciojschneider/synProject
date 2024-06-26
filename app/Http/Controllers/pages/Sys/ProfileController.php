@@ -16,7 +16,7 @@ class ProfileController extends Controller {
 
   public function profileCreate() {
     $user = auth()->user();
-    $data['clients'] = Client::where('id', $user->in_client)->get();
+    $data['clients'] = Client::where('id', $user->in_client)->where('situation', 1)->get();
 
     return view('content.pages.sys.profile.create', $data);
   }
@@ -38,8 +38,8 @@ class ProfileController extends Controller {
 
   public function profileUpdate(int $id) {
     $user = auth()->user();
+    $data['clients'] = Client::where('id', $user->in_client)->where('situation', 1)->get();
     $data['profile'] = Profile::where('id', $id)->where('client_id', $user->in_client)->first();
-    $data['clients'] = Client::where('id', $user->in_client)->get();
 
     if (!$data['profile']) {
       return redirect()->route('sys-profiles');

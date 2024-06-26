@@ -20,13 +20,13 @@ class HarvestConfigurationController extends Controller {
 
   public function getData() {
     $user = auth()->user();
-    $data['harvests'] = Harvest::where('client_id', $user->in_client)->get();
-    $data['sections'] = Section::where('client_id', $user->in_client)->get();
-    $data['fields'] = Field::where('client_id', $user->in_client)->get();
-    $data['cultures'] = Culture::where('client_id', $user->in_client)->get();
-    $data['varieties'] = Variety::where('client_id', $user->in_client)->get();
-    $data['planting_methods'] = PlantingMethod::where('client_id', $user->in_client)->get();
-    $data['organizations'] = Organization::where('client_id', $user->in_client)->get();
+    $data['harvests'] = Harvest::where('client_id', $user->in_client)->where('situation', 1)->get();
+    $data['sections'] = Section::where('client_id', $user->in_client)->where('situation', 1)->get();
+    $data['fields'] = Field::where('client_id', $user->in_client)->where('situation', 1)->get();
+    $data['cultures'] = Culture::where('client_id', $user->in_client)->where('situation', 1)->get();
+    $data['varieties'] = Variety::where('client_id', $user->in_client)->where('situation', 1)->get();
+    $data['planting_methods'] = PlantingMethod::where('client_id', $user->in_client)->where('situation', 1)->get();
+    $data['organizations'] = Organization::where('client_id', $user->in_client)->where('situation', 1)->get();
 
     return $data;
   }
@@ -62,20 +62,29 @@ class HarvestConfigurationController extends Controller {
   }
 
   public function harvestConfigurationUpdate(int $id) {
+    $user = auth()->user();
     $data = $this->getData();
+    $data['harvestConfiguration'] = HarvestConfiguration::where('id', $id)->where('client_id', $user->in_client)->first();
 
-    $data['harvestConfiguration'] = HarvestConfiguration::find($id);
+    if (!$data['harvestConfiguration']) {
+      return redirect()->route('harv-configurations');
+    }
 
     return view('content.pages.harvest.harvest-configuration.update', $data);
   }
 
   public function harvestConfigurationUpdateAction(int $id, Request $request) {
+    $user = auth()->user();
     $update = $request->only(['harvest', 'section', 'field', 'culture', 'variety', 'planting_method', 'planting_area', 'situation', 'organization']);
+    $harvestConfigurationUpdate = HarvestConfiguration::where('id', $id)->where('client_id', $user->in_client)->first();
+
+    if (!$harvestConfigurationUpdate) {
+      return redirect()->route('harv-configurations');
+    }
 
     // TODO: Verificar necessidade de melhorar lógica, apenas aplicação provisória.
     $formatPlanting = implode('', explode('.', $update['planting_area']));
 
-    $harvestConfigurationUpdate = HarvestConfiguration::find($id);
     $harvestConfigurationUpdate->harvest_id = $update['harvest'];
     $harvestConfigurationUpdate->section_id = $update['section'];
     $harvestConfigurationUpdate->field_id = $update['field'];
@@ -91,7 +100,8 @@ class HarvestConfigurationController extends Controller {
   }
 
   public function harvestConfigurationDelete(int $id) {
-    HarvestConfiguration::where('id', $id)->delete();
+    $user = auth()->user();
+    HarvestConfiguration::where('id', $id)->where('client_id', $user->in_client)->delete();
 
     return redirect()->route('harv-configurations');
   }

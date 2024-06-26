@@ -46,9 +46,14 @@ class RoadmapController extends Controller {
   }
 
   public function roadmapUpdate(Request $request) {
+    $user = auth()->user();
     $update = $request->only(['roadmapId', 'roadmapTask', 'roadmapCommit', 'roadmapDescription', 'roadmapDtSolicitation', 'roadmapDtFinal']);
+    $taskUpdate = TaskDetail::where('id', $update['roadmapId'])->where('client_id', $user->in_client)->first();
 
-    $taskUpdate = TaskDetail::find($update['roadmapId']);
+    if (!$taskUpdate) {
+      return redirect()->route('sup-tasks');
+    }
+
     $taskUpdate->task_id = $update['roadmapTask'];
     $taskUpdate->commit_reference = $update['roadmapCommit'];
     $taskUpdate->description = mb_strtoupper($update['roadmapDescription'], 'UTF-8');
@@ -60,7 +65,8 @@ class RoadmapController extends Controller {
   }
 
   public function roadmapDelete(int $id) {
-    TaskDetail::where('id', $id)->delete();
+    $user = auth()->user();
+    TaskDetail::where('id', $id)->where('client_id', $user->in_client)->delete();
 
     return redirect()->route('sup-roadmap');
   }

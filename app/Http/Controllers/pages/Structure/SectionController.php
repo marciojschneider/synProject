@@ -37,7 +37,7 @@ class SectionController extends Controller {
   }
   public function sectionUpdate(int $id) {
     $user = auth()->user();
-    $data['orgs'] = Organization::where('client_id', $user->in_client)->get();
+    $data['orgs'] = Organization::where('client_id', $user->in_client)->where('situation', 1)->get();
     $data['section'] = Section::where('id', $id)->where('client_id', $user->in_client)->first();
 
     if (!$data['section']) {

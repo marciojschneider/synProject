@@ -21,8 +21,8 @@ class PlantingMethodController extends Controller {
     $data = $request->only(['name', 'code', 'situation']);
 
     $plantingMethod = new PlantingMethod();
-    $plantingMethod->name = strtoupper($data['name']);
-    $plantingMethod->code = strtoupper($data['code']);
+    $plantingMethod->name = mb_strtoupper($data['name'], 'UTF-8');
+    $plantingMethod->code = mb_strtoupper($data['code'], 'UTF-8');
     $plantingMethod->situation = $data['situation'];
     $plantingMethod->save();
 
@@ -30,16 +30,26 @@ class PlantingMethodController extends Controller {
   }
 
   public function plantingMethodUpdate(int $id) {
-    $data['plantingMethod'] = PlantingMethod::find($id);
+    $user = auth()->user();
+    $data['plantingMethod'] = PlantingMethod::where('id', $id)->where('client_id', $user->in_client)->first();
+
+    if (!$data['plantingMethod']) {
+      return redirect()->route('cultive-methods');
+    }
 
     return view('content.pages.cultive.planting-method.update', $data);
   }
   public function plantingMethodUpdateAction(int $id, Request $request) {
+    $user = auth()->user();
     $update = $request->only(['name', 'code', 'situation']);
+    $plantingMethodUpdate = PlantingMethod::where('id', $id)->where('client_id', $user->in_client)->first();
 
-    $plantingMethodUpdate = PlantingMethod::find($id);
-    $plantingMethodUpdate->name = strtoupper($update['name']);
-    $plantingMethodUpdate->code = strtoupper($update['code']);
+    if (!$plantingMethodUpdate) {
+      return redirect()->route('cultive-methods');
+    }
+
+    $plantingMethodUpdate->name = mb_strtoupper($update['name'], 'UTF-8');
+    $plantingMethodUpdate->code = mb_strtoupper($update['code'], 'UTF-8');
     $plantingMethodUpdate->situation = $update['situation'];
     $plantingMethodUpdate->save();
 
@@ -47,7 +57,8 @@ class PlantingMethodController extends Controller {
   }
 
   public function plantingMethodDelete(int $id) {
-    PlantingMethod::where('id', $id)->delete();
+    $user = auth()->user();
+    PlantingMethod::where('id', $id)->where('client_id', $user->in_client)->delete();
 
     return redirect()->route('cultive-methods');
   }
