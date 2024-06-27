@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\pages\HarvHarvestConfigurationController;
+use App\Models\MachineHour;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
@@ -187,6 +188,12 @@ Route::middleware(['auth', 'canAccess'])->group(function () {
   Route::post('/cultive/varieties/update/{id}', [VarietyController::class, 'varietyUpdateAction']);
   Route::post('/cultive/varieties/delete/{id}', [VarietyController::class, 'varietyDelete'])->name('cultive-variety-delete');
   //       → Machine Hour
+  Route::get('/cultive/machine-hours', [MachineHour::class, 'machineHours'])->name('cultive-machine-hours');
+  Route::get('/cultive/machine-hours/create', [MachineHour::class, 'machineHourCreate'])->name('cultive-machine-hours-create');
+  Route::post('/cultive/machine-hours/create', [MachineHour::class, 'machineHourCreateAction']);
+  Route::get('/cultive/machine-hours/update/{id}', [MachineHour::class, 'machineHourUpdate'])->name('cultive-machine-hours-update');
+  Route::post('/cultive/machine-hours/update/{id}', [MachineHour::class, 'machineHourUpdateAction']);
+  Route::post('/cultive/machine-hours/delete/{id}', [MachineHour::class, 'machineHourDelete'])->name('cultive-machine-hours-delete');
 
   //Harvest
   //       → Harvest
