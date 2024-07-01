@@ -1,3 +1,117 @@
-<div>
-    {{-- If you look to others for fulfillment, you will never truly be fulfilled. --}}
+<div class="col-md">
+  <h4 class="mb-4">
+    <span class="text-muted fw-light">Cultivo / Hora Máquinas /</span> Cadastrar
+  </h4>
+  <div class="card mb-4">
+    {{-- <h5 class="card-header">Novo chamado</h5> --}}
+    <div class="card-body">
+      <form method="POST" action="{{ route('sys-sec-closure-create') }}">
+        @csrf
+
+        <div class="row mb-4">
+          <div class="col-md-2">
+            <label for="code" class="form-label">Boletim</label>
+            <input type="text" class="form-control" id="code" name="code" maxlength="50" />
+          </div>
+
+          <div class="col-md-2">
+            <label for="field" class="form-label">Talhão</label>
+            <select id="field" name="field" class="form-select" wire:model.live="field">
+              <option selected> Selecionar </option>
+              @foreach ($fields as $field)
+                <option value="{{ $field->id }}">{{ mb_strtoupper($field->code, 'UTF-8') }} -
+                  {{ mb_strtoupper($field->name, 'UTF-8') }}</option>
+              @endforeach
+            </select>
+          </div>
+
+          <div class="col-md-2">
+            <label for="organization" class="form-label">Estabelecimento</label>
+            <input type="text" class="form-control" id="organization" name="organization" value="{{ $organization }}"
+              disabled />
+          </div>
+
+          <div class="col-md-2">
+            <label for="harvest" class="form-label">Safra</label>
+            <input type="text" class="form-control" id="harvest" name="harvest" value="{{ $harvest }}"
+              disabled />
+          </div>
+
+          <div class="col-md-2">
+            <label for="section" class="form-label">Secção</label>
+            <input type="text" class="form-control" id="section" name="section" value="{{ $section }}"
+              disabled />
+          </div>
+
+          <div class="col-md-2">
+            <label for="culture" class="form-label">Cultura</label>
+            <input type="text" class="form-control" id="culture" name="culture" value="{{ $culture }}"
+              disabled />
+          </div>
+        </div>
+
+        <div class="row mb-4">
+          <div class="col-md-2">
+            <label for="transaction_type" class="form-label">Tipo</label>
+            <select id="transaction_type" name="transaction_type" class="form-select">
+              <option value="1" selected>Estorno</option>
+              <option value="2">Apropriação</option>
+            </select>
+          </div>
+
+          <div class="col-md-2">
+            <label for="transaction_dt" class="form-label">Data</label>
+            <input type="date" step="1" class="form-control" id="transaction_dt" name="transaction_dt"
+              value="{{ date('Y-m-d', strtotime(now('America/Sao_Paulo'))) }}" />
+          </div>
+
+          <div class="col-md-2">
+            <label for="operator" class="form-label">Operador</label>
+            <select id="operator" name="operator" class="form-select" wire:model.live="operator">
+              <option selected> Selecionar </option>
+              @foreach ($operators as $operator)
+                <option value="{{ $operator->id }}">{{ mb_strtoupper($operator->name, 'UTF-8') }}</option>
+              @endforeach
+            </select>
+          </div>
+
+          <div class="col-md-2">
+            <label for="process" class="form-label">Processo/Etapa</label>
+            <select id="process" name="process" class="form-select" wire:model.live="process">
+              <option selected> Selecionar </option>
+              @foreach ($processes as $process)
+                <option value="{{ $process->id }}">{{ mb_strtoupper($process->code, 'UTF-8') }} -
+                  {{ mb_strtoupper($process->name, 'UTF-8') }}</option>
+              @endforeach
+            </select>
+          </div>
+
+          <div class="col-md-2">
+            <label for="planting_method" class="form-label">Método Plantio</label>
+            <select id="planting_method" name="planting_method" class="form-select" wire:model.live="planting_method">
+              <option selected> Selecionar </option>
+              @foreach ($planting_methods as $planting_method)
+                <option value="{{ $planting_method->id }}">{{ mb_strtoupper($planting_method->code, 'UTF-8') }} -
+                  {{ mb_strtoupper($planting_method->name, 'UTF-8') }}</option>
+              @endforeach
+            </select>
+          </div>
+
+          <div class="col-md-2">
+            <label for="variety" class="form-label">Variedade</label>
+            <select id="variety" name="variety" class="form-select" wire:model.live="variety">
+              <option selected> Selecionar </option>
+              @foreach ($varieties as $variety)
+                <option value="{{ $variety->id }}">{{ mb_strtoupper($variety->code, 'UTF-8') }} -
+                  {{ mb_strtoupper($variety->name, 'UTF-8') }}</option>
+              @endforeach
+            </select>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Salvar</button>
+        <a href="{{ route('sys-sec-closures') }}" class="btn btn-secondary">Voltar</a>
+      </form>
+    </div>
+  </div>
 </div>

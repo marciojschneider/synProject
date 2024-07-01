@@ -11,7 +11,7 @@ class MachineHourController extends Controller {
   }
 
   public function machineHourCreate() {
-
+    return view('content.pages.cultive.machine-hour.create');
   }
 
   public function machineHourCreateAction(Request $request) {
