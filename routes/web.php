@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\pages\HarvHarvestConfigurationController;
-use App\Models\MachineHour;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
@@ -31,6 +29,7 @@ use App\Http\Controllers\pages\Cultive\PlantingMethodController;
 use App\Http\Controllers\pages\Cultive\ProcessController;
 use App\Http\Controllers\pages\Cultive\GroupController;
 use App\Http\Controllers\pages\Cultive\VarietyController;
+use App\Http\Controllers\pages\Cultive\MachineHourController;
 //       → Harvest
 use App\Http\Controllers\pages\Harvest\HarvestController;
 use App\Http\Controllers\pages\Harvest\HarvestConfigurationController;
@@ -188,12 +187,12 @@ Route::middleware(['auth', 'canAccess'])->group(function () {
   Route::post('/cultive/varieties/update/{id}', [VarietyController::class, 'varietyUpdateAction']);
   Route::post('/cultive/varieties/delete/{id}', [VarietyController::class, 'varietyDelete'])->name('cultive-variety-delete');
   //       → Machine Hour
-  Route::get('/cultive/machine-hours', [MachineHour::class, 'machineHours'])->name('cultive-machine-hours');
-  Route::get('/cultive/machine-hours/create', [MachineHour::class, 'machineHourCreate'])->name('cultive-machine-hours-create');
-  Route::post('/cultive/machine-hours/create', [MachineHour::class, 'machineHourCreateAction']);
-  Route::get('/cultive/machine-hours/update/{id}', [MachineHour::class, 'machineHourUpdate'])->name('cultive-machine-hours-update');
-  Route::post('/cultive/machine-hours/update/{id}', [MachineHour::class, 'machineHourUpdateAction']);
-  Route::post('/cultive/machine-hours/delete/{id}', [MachineHour::class, 'machineHourDelete'])->name('cultive-machine-hours-delete');
+  Route::get('/cultive/machine-hours', [MachineHourController::class, 'machineHours'])->name('cultive-machine-hours');
+  Route::get('/cultive/machine-hours/create', [MachineHourController::class, 'machineHourCreate'])->name('cultive-machine-hour-create');
+  Route::post('/cultive/machine-hours/create', [MachineHourController::class, 'machineHourCreateAction']);
+  Route::get('/cultive/machine-hours/update/{id}', [MachineHourController::class, 'machineHourUpdate'])->name('cultive-machine-hour-update');
+  Route::post('/cultive/machine-hours/update/{id}', [MachineHourController::class, 'machineHourUpdateAction']);
+  Route::post('/cultive/machine-hours/delete/{id}', [MachineHourController::class, 'machineHourDelete'])->name('cultive-machine-hour-delete');
 
   //Harvest
   //       → Harvest

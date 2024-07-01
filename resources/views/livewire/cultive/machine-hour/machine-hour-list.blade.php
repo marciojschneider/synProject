@@ -36,16 +36,16 @@
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th>Código</th>
-            <th>Nome</th>
+            <th>Boletim</th>
+            <th>Quantidade</th>
             <th>Ações</th>
           </tr>
         </thead>
         <tbody class="table-border-bottom-0">
           @foreach ($rows as $row)
             <tr>
-              <td>{{ $row->code }}</td>
-              <td>{{ $row->name }}</td>
+              <td>{{ $row->report }}</td>
+              <td>{{ number_format(floatval($row->quantity), 2, ',', '.') }}</td>
               <td>
                 <div class="dropdown">
                   <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i

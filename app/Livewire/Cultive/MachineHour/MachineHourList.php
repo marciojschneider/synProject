@@ -8,6 +8,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 
 // Models
+use App\Models\MachineHour;
 
 class MachineHourList extends Component {
   use WithPagination;
@@ -24,7 +25,12 @@ class MachineHourList extends Component {
   public function updated() {
     $this->resetPage();
   }
+
   public function render() {
-    return view('livewire.cultive.machine-hour.machine-hour-list');
+    $query = MachineHour::query();
+
+    $data['rows'] = $query->paginate($this->pPage);
+
+    return view('livewire.cultive.machine-hour.machine-hour-list', $data);
   }
 }
