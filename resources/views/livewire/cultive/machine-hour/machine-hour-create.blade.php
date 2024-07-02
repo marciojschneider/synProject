@@ -17,7 +17,7 @@
           <div class="col-md-2">
             <label for="field" class="form-label">Talhão</label>
             <select id="field" name="field" class="form-select" wire:model.live="field">
-              <option selected> Selecionar </option>
+              <option value="" selected> Selecionar </option>
               @foreach ($fields as $field)
                 <option value="{{ $field->id }}">{{ mb_strtoupper($field->code, 'UTF-8') }} -
                   {{ mb_strtoupper($field->name, 'UTF-8') }}</option>
@@ -107,6 +107,118 @@
               @endforeach
             </select>
           </div>
+        </div>
+
+        <div class="mb-4">
+          <div class="border-bottom">Equipamento</div>
+        </div>
+
+        <div class="row mb-4">
+          <div class="col-md-3">
+            <label for="equipament" class="form-label">Equipamento</label>
+            <select id="equipament" name="equipament" class="form-select">
+              <option value="" selected>SELECIONAR</option>
+              <option value="1">EQUIPAMENTO FICTICIO 01</option>
+              <option value="2">EQUIPAMENTO FICTICIO 02</option>
+            </select>
+          </div>
+
+          <div class="col-md-3">
+            <label for="implement" class="form-label">Implemento</label>
+            <select id="implement" name="implement" class="form-select">
+              <option value="" selected>SELECIONAR</option>
+              <option value="1">IMPLEMENTO FICTICIO 01</option>
+              <option value="2">IMPLEMENTO FICTICIO 02</option>
+            </select>
+          </div>
+
+          <div class="col-md-2">
+            <label for="hourmeter_start" class="form-label">Horimêtro Inicial</label>
+            <input type="text" class="form-control" id="hourmeter_start" name="hourmeter_start" />
+          </div>
+
+          <div class="col-md-2">
+            <label for="hourmeter_end" class="form-label">Horimêtro Final</label>
+            <input type="text" class="form-control" id="hourmeter_end" name="hourmeter_end" />
+          </div>
+
+          <div class="col-md-2">
+            <label for="quantity" class="form-label">Quantidade</label>
+            <input type="text" class="form-control" id="quantity" name="quantity" />
+          </div>
+        </div>
+
+        <div class="row mb-4">
+          <div class="col-md-4"></div>
+          <div class="col-md-2">
+            <label for="box_quantity" class="form-label">Quantidade Caixas</label>
+            <input type="text" class="form-control" id="box_quantity" name="box_quantity" />
+          </div>
+
+          <div class="col-md-2">
+            <label for="hourmeter_rotor_start" class="form-label">Rotor Inicial</label>
+            <input type="text" class="form-control" id="hourmeter_rotor_start" name="hourmeter_rotor_start" />
+          </div>
+
+          <div class="col-md-2">
+            <label for="hourmeter_rotor_end" class="form-label">Rotor Final</label>
+            <input type="text" class="form-control" id="hourmeter_rotor_end" name="hourmeter_rotor_end" />
+          </div>
+
+          <div class="col-md-2">
+            <label for="quantity" class="form-label">Quantidade</label>
+            <input type="text" class="form-control" id="quantity" name="quantity" />
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <div class="border-bottom">Operador</div>
+        </div>
+
+        <div class="row mb-4">
+          <div class="col-md-4">
+            <label for="operator_start" class="form-label">Inicio</label>
+            <input class="form-control" type="time" id="operator_start" name="operator_start">
+          </div>
+
+          <div class="col-md-4">
+            <label for="operator_end" class="form-label">Fim</label>
+            <input class="form-control" type="time" id="operator_end" name="operator_end">
+          </div>
+
+          <div class="col-md-4">
+            <label for="stop_reason" class="form-label">Motivo Parada</label>
+            <select id="stop_reason" name="stop_reason" class="form-select" wire:model.live="stop_reason">
+              <option value="" selected>SELECIONAR</option>
+              <option value="1">1 - Mecânico</option>
+              <option value="2">2 - Climático</option>
+              <option value="3">3 - Abastecimento</option>
+              <option value="4">4 - Refeição</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row mb-4">
+          @if ($showStopDetail)
+            <div class="col-md-4">
+              <label for="description" class="form-label">Descrição</label>
+              <input type="text" class="form-control" id="description" name="description" />
+            </div>
+            <div class="col-md-4">
+              <label for="stop_dt" class="form-label">Hora Parada</label>
+              <input class="form-control" type="time" id="stop_dt" name="stop_dt">
+            </div>
+          @endif
+          @if ($showStopDiesel)
+            <div class="col-md-2">
+              <label for="quantity_diesel" class="form-label">Quantidade Diesel</label>
+              <input type="text" class="form-control" id="quantity_diesel" name="quantity_diesel" />
+            </div>
+            <div class="col-md-2">
+              <label for="hourmeter_diesel" class="form-label">Horimetro Diesel</label>
+              <input type="text" class="form-control" id="hourmeter_diesel" name="hourmeter_diesel" />
+            </div>
+          @endif
         </div>
 
         <button type="submit" class="btn btn-primary">Salvar</button>

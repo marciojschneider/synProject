@@ -44,6 +44,11 @@ class MachineHourCreate extends Component {
   private $cultureId;
   public $culture;
 
+  public $stop_reason;
+
+  public $showStopDetail = false;
+  public $showStopDiesel = false;
+
   public function mount() {
     $user = auth()->user();
 
@@ -70,6 +75,15 @@ class MachineHourCreate extends Component {
   }
 
   public function updatedField() {
+    if (!$this->field) {
+      $this->organization = null;
+      $this->harvest = null;
+      $this->section = null;
+      $this->culture = null;
+
+      return;
+    }
+
     $harvestConfiguration = HarvestConfiguration::where('field_id', $this->field)->first();
     $this->organizationId = $harvestConfiguration->organization_id;
     $this->harvestId = $harvestConfiguration->harvest_id;
@@ -87,5 +101,20 @@ class MachineHourCreate extends Component {
 
     $this->culture = Culture::where('id', $this->cultureId)->first();
     $this->culture = $this->culture->name;
+  }
+
+  public function updatedStopReason() {
+    if ($this->stop_reason) {
+      $this->showStopDetail = true;
+      $this->showStopDiesel = false;
+
+      if ($this->stop_reason == 3) {
+        $this->showStopDiesel = true;
+      }
+
+      return;
+    }
+
+    $this->showStopDetail = false;
   }
 }
