@@ -45,7 +45,7 @@
           @foreach ($rows as $row)
             <tr>
               <td>{{ $row->report }}</td>
-              <td>{{ number_format(floatval($row->quantity), 2, ',', '.') }}</td>
+              <td>{{ number_format(floatval($row->hourmeter_quantity), 2, ',', '.') }}</td>
               <td>
                 <div class="dropdown">
                   <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i

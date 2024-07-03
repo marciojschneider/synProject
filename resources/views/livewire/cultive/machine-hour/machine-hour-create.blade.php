@@ -5,48 +5,69 @@
   <div class="card mb-4">
     {{-- <h5 class="card-header">Novo chamado</h5> --}}
     <div class="card-body">
-      <form method="POST" action="{{ route('sys-sec-closure-create') }}">
+      <form method="POST" action="{{ route('cultive-machine-hour-create') }}">
         @csrf
 
         <div class="row mb-4">
           <div class="col-md-2">
-            <label for="code" class="form-label">Boletim</label>
-            <input type="text" class="form-control" id="code" name="code" maxlength="50" />
+            <label for="report" class="form-label">Boletim</label>
+            <input type="text" class="form-control" id="report" name="report" required /> {{-- TODO: Adicionar required aos campos. --}}
           </div>
 
           <div class="col-md-2">
             <label for="field" class="form-label">Talhão</label>
-            <select id="field" name="field" class="form-select" wire:model.live="field">
+            <select id="field" name="field" class="form-select" wire:model.live="field" required>
               <option value="" selected> Selecionar </option>
               @foreach ($fields as $field)
-                <option value="{{ $field->id }}">{{ mb_strtoupper($field->code, 'UTF-8') }} -
-                  {{ mb_strtoupper($field->name, 'UTF-8') }}</option>
+                <option value="{{ $field->id }}">
+                  {{ mb_strtoupper($field->code, 'UTF-8') }} - {{ mb_strtoupper($field->name, 'UTF-8') }}
+                </option>
               @endforeach
             </select>
           </div>
 
           <div class="col-md-2">
             <label for="organization" class="form-label">Estabelecimento</label>
-            <input type="text" class="form-control" id="organization" name="organization" value="{{ $organization }}"
-              disabled />
+            <select class="form-control" id="organization" name="organization"
+              style="background: #444564; pointer-events: none; touch-action: none;">
+              <option> ... </option>
+              @if ($organization)
+                <option value="{{ $organization->id }}" selected> {{ $organization->name }} </option>
+              @endif
+            </select>
           </div>
 
           <div class="col-md-2">
             <label for="harvest" class="form-label">Safra</label>
-            <input type="text" class="form-control" id="harvest" name="harvest" value="{{ $harvest }}"
-              disabled />
+            <select class="form-control" id="harvest" name="harvest"
+              style="background: #444564; pointer-events: none; touch-action: none;">
+              <option> ... </option>
+              @if ($harvest)
+                <option value="{{ $harvest->id }}" selected> {{ $harvest->name }} </option>
+              @endif
+            </select>
           </div>
 
           <div class="col-md-2">
             <label for="section" class="form-label">Secção</label>
-            <input type="text" class="form-control" id="section" name="section" value="{{ $section }}"
-              disabled />
+            <select class="form-control" id="section" name="section"
+              style="background: #444564; pointer-events: none; touch-action: none;">
+              <option> ... </option>
+              @if ($section)
+                <option value="{{ $section->id }}" selected> {{ $section->name }} </option>
+              @endif
+            </select>
           </div>
 
           <div class="col-md-2">
             <label for="culture" class="form-label">Cultura</label>
-            <input type="text" class="form-control" id="culture" name="culture" value="{{ $culture }}"
-              disabled />
+            <select class="form-control" id="culture" name="culture"
+              style="background: #444564; pointer-events: none; touch-action: none;">
+              <option> ... </option>
+              @if ($culture)
+                <option value="{{ $culture->id }}" selected> {{ $culture->name }} </option>
+              @endif
+            </select>
           </div>
         </div>
 
@@ -143,8 +164,8 @@
           </div>
 
           <div class="col-md-2">
-            <label for="quantity" class="form-label">Quantidade</label>
-            <input type="text" class="form-control" id="quantity" name="quantity" />
+            <label for="hourmeter_quantity" class="form-label">Quantidade</label>
+            <input type="text" class="form-control" id="hourmeter_quantity" name="hourmeter_quantity" />
           </div>
         </div>
 
@@ -166,8 +187,9 @@
           </div>
 
           <div class="col-md-2">
-            <label for="quantity" class="form-label">Quantidade</label>
-            <input type="text" class="form-control" id="quantity" name="quantity" />
+            <label for="hourmeter_rotor_quantity" class="form-label">Quantidade</label>
+            <input type="text" class="form-control" id="hourmeter_rotor_quantity"
+              name="hourmeter_rotor_quantity" />
           </div>
         </div>
 
@@ -205,24 +227,24 @@
               <input type="text" class="form-control" id="description" name="description" />
             </div>
             <div class="col-md-4">
-              <label for="stop_dt" class="form-label">Hora Parada</label>
-              <input class="form-control" type="time" id="stop_dt" name="stop_dt">
+              <label for="stop_hour" class="form-label">Hora Parada</label>
+              <input class="form-control" type="time" id="stop_hour" name="stop_hour">
             </div>
           @endif
           @if ($showStopDiesel)
             <div class="col-md-2">
-              <label for="quantity_diesel" class="form-label">Quantidade Diesel</label>
-              <input type="text" class="form-control" id="quantity_diesel" name="quantity_diesel" />
-            </div>
-            <div class="col-md-2">
               <label for="hourmeter_diesel" class="form-label">Horimetro Diesel</label>
               <input type="text" class="form-control" id="hourmeter_diesel" name="hourmeter_diesel" />
+            </div>
+            <div class="col-md-2">
+              <label for="quantity_diesel" class="form-label">Quantidade Diesel</label>
+              <input type="text" class="form-control" id="quantity_diesel" name="quantity_diesel" />
             </div>
           @endif
         </div>
 
         <button type="submit" class="btn btn-primary">Salvar</button>
-        <a href="{{ route('sys-sec-closures') }}" class="btn btn-secondary">Voltar</a>
+        <a href="{{ route('cultive-machine-hours') }}" class="btn btn-secondary">Voltar</a>
       </form>
     </div>
   </div>

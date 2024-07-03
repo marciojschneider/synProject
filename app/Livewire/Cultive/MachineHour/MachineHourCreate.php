@@ -2,6 +2,10 @@
 
 namespace App\Livewire\Cultive\MachineHour;
 
+use Livewire\Component;
+
+// Models
+use App\Models\Field;
 use App\Models\Culture;
 use App\Models\Harvest;
 use App\Models\HarvestConfiguration;
@@ -11,10 +15,6 @@ use App\Models\Process;
 use App\Models\Section;
 use App\Models\User;
 use App\Models\Variety;
-use Livewire\Component;
-
-// Models
-use App\Models\Field;
 
 class MachineHourCreate extends Component {
   public $fields = [];
@@ -32,16 +32,12 @@ class MachineHourCreate extends Component {
   public $varieties = [];
   public $variety = null;
 
-  private $organizationId;
   public $organization;
 
-  private $harvestId;
   public $harvest;
 
-  private $sectionId;
   public $section;
 
-  private $cultureId;
   public $culture;
 
   public $stop_reason;
@@ -85,22 +81,11 @@ class MachineHourCreate extends Component {
     }
 
     $harvestConfiguration = HarvestConfiguration::where('field_id', $this->field)->first();
-    $this->organizationId = $harvestConfiguration->organization_id;
-    $this->harvestId = $harvestConfiguration->harvest_id;
-    $this->sectionId = $harvestConfiguration->section_id;
-    $this->cultureId = $harvestConfiguration->culture_id;
 
-    $this->organization = Organization::where('id', $this->organizationId)->first();
-    $this->organization = $this->organization->name;
-
-    $this->harvest = Harvest::where('id', $this->harvestId)->first();
-    $this->harvest = $this->harvest->name;
-
-    $this->section = Section::where('id', $this->sectionId)->first();
-    $this->section = $this->section->name;
-
-    $this->culture = Culture::where('id', $this->cultureId)->first();
-    $this->culture = $this->culture->name;
+    $this->organization = Organization::where('id', $harvestConfiguration->organization_id)->first();
+    $this->harvest = Harvest::where('id', $harvestConfiguration->harvest_id)->first();
+    $this->section = Section::where('id', $harvestConfiguration->section_id)->first();
+    $this->culture = Culture::where('id', $harvestConfiguration->culture_id)->first();
   }
 
   public function updatedStopReason() {

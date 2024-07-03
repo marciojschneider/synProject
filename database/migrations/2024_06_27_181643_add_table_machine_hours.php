@@ -34,18 +34,19 @@ return new class extends Migration {
       $table->integer('equipament_id'); // Provisório
       $table->integer('implement_id')->nullable(); // Provisório
       $table->foreignIdFor(User::class)->constrained(); // Pessoa|Operador
-      $table->decimal('quantity', 10, 2);
+      $table->decimal('hourmeter_quantity', 10, 2);
       $table->decimal('hourmeter_start', 10, 2);
       $table->decimal('hourmeter_end', 10, 2);
       $table->integer('stop_reason')->nullable(); // Provisório
       $table->string('stop_description')->nullable();
-      $table->timestamp('stop_dt')->nullable();
-      $table->timestamp('operator_start')->nullable();
-      $table->timestamp('operator_end')->nullable();
+      $table->time('stop_hour')->nullable();
+      $table->time('operator_start')->nullable();
+      $table->time('operator_end')->nullable();
       $table->decimal('quantity_box', 10, 2)->nullable();
       $table->decimal('quantity_diesel', 10, 2)->nullable();
       $table->decimal('hourmeter_rotor_start', 10, 2)->nullable();
       $table->decimal('hourmeter_rotor_end', 10, 2)->nullable();
+      $table->decimal('hourmeter_rotor_quantity', 10, 2)->nullable();
       $table->decimal('hourmeter_diesel', 10, 2)->nullable();
       $table->integer('situation')->default(1);
       $table->integer('creation_user')->nullable();
