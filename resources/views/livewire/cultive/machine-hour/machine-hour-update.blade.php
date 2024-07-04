@@ -11,13 +11,14 @@
         <div class="row mb-4">
           <div class="col-md-2">
             <label for="report" class="form-label">Boletim</label>
-            <input type="text" class="form-control" value="{{ $machine_hour->report }}" required />
+            <input type="text" class="form-control" id="report" name="report" value="{{ $machine_hour->report }}"
+              required />
             {{-- TODO: Adicionar required aos campos. --}}
           </div>
 
           <div class="col-md-2">
             <label for="field" class="form-label">Talhão</label>
-            <select class="form-select" wire:model.live="field" required>
+            <select class="form-select" id="field" name="field" wire:model.live="field" required>
               <option value=""> Selecionar </option>
               @foreach ($fields as $field)
                 <option value="{{ $field->id }}">
@@ -159,19 +160,19 @@
           <div class="col-md-2">
             <label for="hourmeter_start" class="form-label">Horimêtro Inicial</label>
             <input type="text" class="form-control" id="hourmeter_start" name="hourmeter_start"
-              value="{{ number_format(floatval($machine_hour->hourmeter_start), 2, ',', '.') }}" />
+              wire:model.live="hourmeter_start"" placeholder="0.000,00" />
           </div>
 
           <div class="col-md-2">
             <label for="hourmeter_end" class="form-label">Horimêtro Final</label>
             <input type="text" class="form-control" id="hourmeter_end" name="hourmeter_end"
-              value="{{ number_format(floatval($machine_hour->hourmeter_end), 2, ',', '.') }}" />
+              wire:model.live="hourmeter_end"" placeholder="0.000,00" />
           </div>
 
           <div class="col-md-2">
             <label for="hourmeter_quantity" class="form-label">Quantidade</label>
             <input type="text" class="form-control" id="hourmeter_quantity" name="hourmeter_quantity"
-              value="{{ number_format(floatval($machine_hour->hourmeter_quantity), 2, ',', '.') }}" />
+              wire:model.live="hourmeter_quantity"" placeholder="0.000,00" readonly />
           </div>
         </div>
 
@@ -180,25 +181,26 @@
           <div class="col-md-2">
             <label for="box_quantity" class="form-label">Quantidade Caixas</label>
             <input type="text" class="form-control" id="box_quantity" name="box_quantity"
-              value="{{ $machine_hour->quantity_box ? number_format(floatval($machine_hour->quantity_box), 2, ',', '.') : '' }}" />
+              value="{{ $machine_hour->quantity_box ? number_format(floatval($machine_hour->quantity_box), 2, ',', '.') : '' }}"
+              placeholder="0,00" />
           </div>
 
           <div class="col-md-2">
             <label for="hourmeter_rotor_start" class="form-label">Rotor Inicial</label>
             <input type="text" class="form-control" id="hourmeter_rotor_start" name="hourmeter_rotor_start"
-              value="{{ $machine_hour->hourmeter_rotor_start ? number_format(floatval($machine_hour->hourmeter_rotor_start), 2, ',', '.') : '' }}" />
+              wire:model.live="hourmeter_rotor_start"" placeholder="0.000,00" />
           </div>
 
           <div class="col-md-2">
             <label for="hourmeter_rotor_end" class="form-label">Rotor Final</label>
             <input type="text" class="form-control" id="hourmeter_rotor_end" name="hourmeter_rotor_end"
-              value="{{ $machine_hour->hourmeter_rotor_end ? number_format(floatval($machine_hour->hourmeter_rotor_end), 2, ',', '.') : '' }}" />
+              wire:model.live="hourmeter_rotor_end"" placeholder="0.000,00" />
           </div>
 
           <div class="col-md-2">
             <label for="hourmeter_rotor_quantity" class="form-label">Quantidade</label>
             <input type="text" class="form-control" id="hourmeter_rotor_quantity" name="hourmeter_rotor_quantity"
-              value="{{ $machine_hour->hourmeter_rotor_quantity ? number_format(floatval($machine_hour->hourmeter_rotor_quantity), 2, ',', '.') : '' }}" />
+              wire:model.live="hourmeter_rotor_quantity" placeholder="0.000,00" readonly />
           </div>
         </div>
 
@@ -249,12 +251,14 @@
             <div class="col-md-2">
               <label for="hourmeter_diesel" class="form-label">Horimetro Diesel</label>
               <input type="text" class="form-control" id="hourmeter_diesel" name="hourmeter_diesel"
-                value="{{ $machine_hour->hourmeter_diesel ? number_format(floatval($machine_hour->hourmeter_diesel), 2, ',', '.') : '' }}" />
+                value="{{ $machine_hour->hourmeter_diesel ? number_format(floatval($machine_hour->hourmeter_diesel), 2, ',', '.') : '' }}"
+                placeholder="0.000,00" />
             </div>
             <div class="col-md-2">
               <label for="quantity_diesel" class="form-label">Quantidade Diesel</label>
               <input type="text" class="form-control" id="quantity_diesel" name="quantity_diesel"
-                value="{{ $machine_hour->quantity_diesel ? number_format(floatval($machine_hour->quantity_diesel), 2, ',', '.') : '' }}" />
+                value="{{ $machine_hour->quantity_diesel ? number_format(floatval($machine_hour->quantity_diesel), 2, ',', '.') : '' }}"
+                placeholder="0,00" />
             </div>
           @endif
         </div>

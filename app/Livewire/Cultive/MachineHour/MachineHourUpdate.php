@@ -44,6 +44,15 @@ class MachineHourUpdate extends Component {
   public $showStopDetail = false;
   public $showStopDiesel = false;
 
+  //HourMeter
+  public $hourmeter_start;
+  public $hourmeter_end;
+  public $hourmeter_quantity;
+
+  public $hourmeter_rotor_start;
+  public $hourmeter_rotor_end;
+  public $hourmeter_rotor_quantity;
+
   public function mount() {
     $user = auth()->user();
 
@@ -80,6 +89,13 @@ class MachineHourUpdate extends Component {
     $this->planting_method = $this->machine_hour->planting_method_id;
     $this->variety = $this->machine_hour->variety_id;
     $this->stop_reason = $this->machine_hour->stop_reason;
+
+    $this->hourmeter_start = number_format(floatval($this->machine_hour->hourmeter_start), 2, ',', '.');
+    $this->hourmeter_end = number_format(floatval($this->machine_hour->hourmeter_end), 2, ',', '.');
+    $this->hourmeter_quantity = number_format(floatval($this->machine_hour->hourmeter_quantity), 2, ',', '.');
+    $this->hourmeter_rotor_start = number_format(floatval($this->machine_hour->hourmeter_rotor_start), 2, ',', '.');
+    $this->hourmeter_rotor_end = number_format(floatval($this->machine_hour->hourmeter_rotor_end), 2, ',', '.');
+    $this->hourmeter_rotor_quantity = number_format(floatval($this->machine_hour->hourmeter_rotor_quantity), 2, ',', '.');
 
     if ($this->stop_reason) {
       $this->showStopDetail = true;
@@ -121,5 +137,24 @@ class MachineHourUpdate extends Component {
     }
 
     $this->showStopDetail = false;
+  }
+
+  public function updatedHourMeterEnd() {
+    $formatStart = implode('', explode('.', $this->hourmeter_start));
+    $formatEnd = implode('', explode('.', $this->hourmeter_end));
+
+    $this->hourmeter_quantity =
+      number_format(floatval(implode('.', explode(',', $formatEnd))), 2, '.', '') - number_format(floatval(implode('.', explode(',', $formatStart))), 2, '.', '');
+
+    $this->hourmeter_quantity = number_format(floatval(implode('.', explode(',', $this->hourmeter_quantity))), 2, ',', '.');
+  }
+
+  public function updatedHourMeterRotorEnd() {
+    $formatStart = implode('', explode('.', $this->hourmeter_rotor_start));
+    $formatEnd = implode('', explode('.', $this->hourmeter_rotor_end));
+
+    $this->hourmeter_rotor_quantity = number_format(floatval(implode('.', explode(',', $formatEnd))), 2, '.', '') - number_format(floatval(implode('.', explode(',', $formatStart))), 2, '.', '');
+
+    $this->hourmeter_rotor_quantity = number_format(floatval(implode('.', explode(',', $this->hourmeter_rotor_quantity))), 2, ',', '.');
   }
 }

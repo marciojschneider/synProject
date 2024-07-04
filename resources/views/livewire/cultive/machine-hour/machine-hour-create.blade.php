@@ -155,17 +155,20 @@
 
           <div class="col-md-2">
             <label for="hourmeter_start" class="form-label">Horimêtro Inicial</label>
-            <input type="text" class="form-control" id="hourmeter_start" name="hourmeter_start" />
+            <input type="text" class="form-control" id="hourmeter_start" name="hourmeter_start"
+              wire:model.live="hourmeter_start" placeholder="0.000,00" />
           </div>
 
           <div class="col-md-2">
             <label for="hourmeter_end" class="form-label">Horimêtro Final</label>
-            <input type="text" class="form-control" id="hourmeter_end" name="hourmeter_end" />
+            <input type="text" class="form-control" id="hourmeter_end" name="hourmeter_end"
+              wire:model.live="hourmeter_end" placeholder="0.000,00" />
           </div>
 
           <div class="col-md-2">
             <label for="hourmeter_quantity" class="form-label">Quantidade</label>
-            <input type="text" class="form-control" id="hourmeter_quantity" name="hourmeter_quantity" />
+            <input type="text" class="form-control" id="hourmeter_quantity" name="hourmeter_quantity"
+              wire:model.live="hourmeter_quantity" placeholder="0.000,00" readonly />
           </div>
         </div>
 
@@ -173,23 +176,25 @@
           <div class="col-md-4"></div>
           <div class="col-md-2">
             <label for="box_quantity" class="form-label">Quantidade Caixas</label>
-            <input type="text" class="form-control" id="box_quantity" name="box_quantity" />
+            <input type="text" class="form-control" id="box_quantity" name="box_quantity" placeholder="0,00" />
           </div>
 
           <div class="col-md-2">
             <label for="hourmeter_rotor_start" class="form-label">Rotor Inicial</label>
-            <input type="text" class="form-control" id="hourmeter_rotor_start" name="hourmeter_rotor_start" />
+            <input type="text" class="form-control" id="hourmeter_rotor_start" name="hourmeter_rotor_start"
+              wire:model.live="hourmeter_rotor_start" placeholder="0.000,00" />
           </div>
 
           <div class="col-md-2">
             <label for="hourmeter_rotor_end" class="form-label">Rotor Final</label>
-            <input type="text" class="form-control" id="hourmeter_rotor_end" name="hourmeter_rotor_end" />
+            <input type="text" class="form-control" id="hourmeter_rotor_end" name="hourmeter_rotor_end"
+              wire:model.live="hourmeter_rotor_end" placeholder="0.000,00" />
           </div>
 
           <div class="col-md-2">
             <label for="hourmeter_rotor_quantity" class="form-label">Quantidade</label>
-            <input type="text" class="form-control" id="hourmeter_rotor_quantity"
-              name="hourmeter_rotor_quantity" />
+            <input type="text" class="form-control" id="hourmeter_rotor_quantity" name="hourmeter_rotor_quantity"
+              wire:model.live="hourmeter_rotor_quantity" placeholder="0.000,00" readonly />
           </div>
         </div>
 
@@ -234,11 +239,13 @@
           @if ($showStopDiesel)
             <div class="col-md-2">
               <label for="hourmeter_diesel" class="form-label">Horimetro Diesel</label>
-              <input type="text" class="form-control" id="hourmeter_diesel" name="hourmeter_diesel" />
+              <input type="text" class="form-control" id="hourmeter_diesel" name="hourmeter_diesel"
+                placeholder="0.000,00" />
             </div>
             <div class="col-md-2">
               <label for="quantity_diesel" class="form-label">Quantidade Diesel</label>
-              <input type="text" class="form-control" id="quantity_diesel" name="quantity_diesel" />
+              <input type="text" class="form-control" id="quantity_diesel" name="quantity_diesel"
+                placeholder="0,00" />
             </div>
           @endif
         </div>

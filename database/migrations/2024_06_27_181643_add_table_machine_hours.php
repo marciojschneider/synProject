@@ -34,9 +34,9 @@ return new class extends Migration {
       $table->integer('equipament_id'); // Provisório
       $table->integer('implement_id')->nullable(); // Provisório
       $table->foreignIdFor(User::class)->constrained(); // Pessoa|Operador
-      $table->decimal('hourmeter_quantity', 10, 2);
       $table->decimal('hourmeter_start', 10, 2);
       $table->decimal('hourmeter_end', 10, 2);
+      $table->decimal('hourmeter_quantity', 10, 2);
       $table->integer('stop_reason')->nullable(); // Provisório
       $table->string('stop_description')->nullable();
       $table->time('stop_hour')->nullable();
