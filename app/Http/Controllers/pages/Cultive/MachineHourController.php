@@ -23,17 +23,6 @@ class MachineHourController extends Controller {
       'hourmeter_rotor_start', 'hourmeter_rotor_end', 'hourmeter_rotor_quantity', 'operator_start', 'operator_end', 'stop_reason', 'description',
       'stop_hour', 'quantity_diesel', 'hourmeter_diesel']);
 
-    // TODO: Verificar necessidade de melhorar lógica, apenas aplicação provisória.
-    // Hourmeter
-    $formatHourmeterStart = implode('', explode('.', $data['hourmeter_start']));
-    $formatHourmeterEnd = implode('', explode('.', $data['hourmeter_end']));
-    $formatHourmeterQuantity = implode('', explode('.', $data['hourmeter_quantity']));
-
-    // Rotor
-    $formatHourmeterRotorStart = implode('', explode('.', $data['hourmeter_rotor_start']));
-    $formatHourmeterRotorEnd = implode('', explode('.', $data['hourmeter_rotor_end']));
-    $formatHourmeterRotorQuantity = implode('', explode('.', $data['hourmeter_rotor_quantity']));
-
     $machineHourCreate = new MachineHour();
     $machineHourCreate->report = $data['report'];
     $machineHourCreate->transaction_type = $data['transaction_type'];

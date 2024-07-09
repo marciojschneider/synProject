@@ -17,44 +17,57 @@ use App\Models\User;
 use App\Models\Variety;
 
 class MachineHourCreate extends Component {
+  // 1° Row
+  public $report;
   public $fields = [];
-  public $field = null;
-
-  public $operators = [];
-  public $operator = null;
-
-  public $processes = [];
-  public $process = null;
-
-  public $planting_methods = [];
-  public $planting_method = null;
-
-  public $varieties = [];
-  public $variety = null;
-
+  public $field;
   public $organization;
-
   public $harvest;
-
   public $section;
-
   public $culture;
 
-  public $stop_reason;
+  // 2° Row
+  public $transaction_type;
+  public $transaction_dt;
+  public $operators = [];
+  public $operator;
+  public $processes = [];
+  public $process;
+  public $planting_methods = [];
+  public $planting_method;
+  public $varieties = [];
+  public $variety;
 
-  public $showStopDetail = false;
-  public $showStopDiesel = false;
-
+  // 3° Row
+  public $equipament;
+  public $implement;
   public $hourmeter_start;
   public $hourmeter_end;
   public $hourmeter_quantity;
 
+  // 4° Row
+  public $box_quantity;
   public $hourmeter_rotor_start;
   public $hourmeter_rotor_end;
   public $hourmeter_rotor_quantity;
 
+  // 5° Row
+  public $operator_start;
+  public $operator_end;
+  public $stop_reason;
+
+  // Conditionals
+  public $showStopDetail = false;
+  public $description;
+  public $stop_hour;
+  public $showStopDiesel = false;
+  public $hourmeter_diesel;
+  public $quantity_diesel;
+
   public function mount() {
     $user = auth()->user();
+
+    $this->transaction_dt = date('Y-m-d', strtotime(now('America/Sao_Paulo')));
 
     $this->fields = Field::where('fields.situation', 1)
       ->where('fields.client_id', $user->in_client)
@@ -76,6 +89,29 @@ class MachineHourCreate extends Component {
     $this->planting_methods = PlantingMethod::where('client_id', $user->in_client)->where('situation', 1)->get();
 
     $this->varieties = Variety::where('client_id', $user->in_client)->where('situation', 1)->get();
+  }
+
+  protected $rules = [
+    'report' => 'required',
+    'field' => 'required',
+    'organization' => 'required',
+    'harvest' => 'required',
+    'section' => 'required',
+    'culture' => 'required',
+    'transaction_type' => 'required',
+    'transaction_dt' => 'required',
+    'operator' => 'required',
+    'process' => 'required',
+    'planting_method' => 'required',
+    'variety' => 'required',
+    'equipament' => 'required',
+    'hourmeter_start' => 'required',
+    'hourmeter_end' => 'required',
+    'hourmeter_quantity' => 'required'
+  ];
+
+  public function submit() {
+    dd($this->validate());
   }
 
   public function updatedField() {
