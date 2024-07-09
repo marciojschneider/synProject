@@ -32,11 +32,11 @@ class TaskController extends Controller {
 
   public function taskCreateAction(Request $request) {
     $user = auth()->user();
-    $data = $request->only(['title', 'sidebar', 'situation', 'solicitation', 'expectation', 'description']);
+    $data = $request->only(['title', 'screen', 'situation', 'solicitation', 'expectation', 'description']);
 
     $task = new Task();
     $task->title = mb_strtoupper($data['title'], 'UTF-8');
-    $task->sidebar_id = $data['sidebar'];
+    $task->sidebar_id = $data['screen'];
     $task->initial_dt = $data['solicitation'];
     $task->expected_dt = $data['expectation'];
     $task->description = mb_strtoupper($data['description'], 'UTF-8');
@@ -50,8 +50,8 @@ class TaskController extends Controller {
     $taskDetail->description = mb_strtoupper($data['description'], 'UTF-8');
     $taskDetail->type = 2;
     $taskDetail->situation = 1;
-    $task->creation_user = $user->id;
-    $task->client_id = $user->in_client;
+    $taskDetail->creation_user = $user->id;
+    $taskDetail->client_id = $user->in_client;
     $taskDetail->save();
 
     return redirect()->route('sup-tasks');
