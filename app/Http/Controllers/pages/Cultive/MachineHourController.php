@@ -126,10 +126,4 @@ class MachineHourController extends Controller {
 
     return redirect()->route('cultive-machine-hours');
   }
-
-  // AUX Functions
-  private function formatNumberValue($value) {
-    $formated = implode('', explode('.', $value));
-    return number_format(floatval(implode('.', explode(',', $formated))), 2, '.', '');
-  }
 }

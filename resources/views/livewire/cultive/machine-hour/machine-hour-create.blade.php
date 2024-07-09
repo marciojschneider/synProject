@@ -75,7 +75,8 @@
           <div class="col-md-2">
             <label for="transaction_type" class="form-label">Tipo</label>
             <select class="form-select" wire:model.live="transaction_type" required>
-              <option value="1" selected>Estorno</option>
+              <option value="" selected> Selecionar </option>
+              <option value="1">Estorno</option>
               <option value="2">Apropriação</option>
             </select>
           </div>

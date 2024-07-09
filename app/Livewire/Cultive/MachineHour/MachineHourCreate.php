@@ -15,6 +15,7 @@ use App\Models\Process;
 use App\Models\Section;
 use App\Models\User;
 use App\Models\Variety;
+use App\Models\MachineHour;
 
 class MachineHourCreate extends Component {
   // 1° Row
@@ -111,9 +112,51 @@ class MachineHourCreate extends Component {
   ];
 
   public function submit() {
-    dd($this->validate());
+    $user = auth()->user();
+
+    $this->validate();
+
+    $machineHourCreate = new MachineHour();
+    $machineHourCreate->report = mb_strtoupper($this->report, 'UTF-8');
+    $machineHourCreate->field_id = $this->field;
+    $machineHourCreate->organization_id = $this->organization['id'];
+    $machineHourCreate->harvest_id = $this->harvest['id'];
+    $machineHourCreate->section_id = $this->section['id'];
+    $machineHourCreate->culture_id = $this->culture['id'];
+    $machineHourCreate->transaction_type = $this->transaction_type;
+    $machineHourCreate->transaction_dt = $this->transaction_dt;
+    $machineHourCreate->variety_id = $this->variety;
+    $machineHourCreate->planting_method_id = $this->planting_method;
+    $machineHourCreate->process_id = $this->process;
+    $machineHourCreate->equipament_id = $this->equipament;
+    $machineHourCreate->implement_id = $this->implement;
+    $machineHourCreate->user_id = $this->operator;
+    $machineHourCreate->hourmeter_start = $this->formatNumberValue($this->hourmeter_start);
+    $machineHourCreate->hourmeter_end = $this->formatNumberValue($this->hourmeter_end);
+    $machineHourCreate->hourmeter_quantity = $this->formatNumberValue($this->hourmeter_quantity);
+    if ($this->stop_reason) {
+      $machineHourCreate->stop_reason = $this->stop_reason;
+      $machineHourCreate->stop_description = $this->description;
+      $machineHourCreate->stop_hour = $this->stop_hour;
+    }
+    if ($this->stop_reason == 3) {
+      $machineHourCreate->quantity_diesel = $this->formatNumberValue($this->quantity_diesel);
+      $machineHourCreate->hourmeter_diesel = $this->formatNumberValue($this->hourmeter_diesel);
+    }
+    $machineHourCreate->operator_start = $this->operator_start;
+    $machineHourCreate->operator_end = $this->operator_end;
+    $machineHourCreate->quantity_box = $this->formatNumberValue($this->box_quantity);
+    $machineHourCreate->hourmeter_rotor_start = $this->formatNumberValue($this->hourmeter_rotor_start);
+    $machineHourCreate->hourmeter_rotor_end = $this->formatNumberValue($this->hourmeter_rotor_end);
+    $machineHourCreate->hourmeter_rotor_quantity = $this->formatNumberValue($this->hourmeter_rotor_quantity);
+    $machineHourCreate->creation_user = $user->id;
+    $machineHourCreate->client_id = $user->in_client;
+    $machineHourCreate->save();
+
+    return redirect()->route('cultive-machine-hours');
   }
 
+  // UPDATED Functions
   public function updatedField() {
     if (!$this->field) {
       $this->organization = null;
@@ -164,5 +207,11 @@ class MachineHourCreate extends Component {
     $this->hourmeter_rotor_quantity = number_format(floatval(implode('.', explode(',', $formatEnd))), 2, '.', '') - number_format(floatval(implode('.', explode(',', $formatStart))), 2, '.', '');
 
     $this->hourmeter_rotor_quantity = number_format(floatval(implode('.', explode(',', $this->hourmeter_rotor_quantity))), 2, ',', '.');
+  }
+
+  // AUX Functions
+  private function formatNumberValue($value) {
+    $formated = implode('', explode('.', $value));
+    return number_format(floatval(implode('.', explode(',', $formated))), 2, '.', '');
   }
 }
