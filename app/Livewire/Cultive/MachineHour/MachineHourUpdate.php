@@ -35,73 +35,6 @@ class MachineHourUpdate extends Component {
   // Conditionals
   public $showStopDetail = false, $description, $stop_hour, $showStopDiesel = false, $hourmeter_diesel, $quantity_diesel;
 
-  protected $rules = [
-    'report' => 'required',
-    'field' => 'required',
-    'organization' => 'required',
-    'harvest' => 'required',
-    'section' => 'required',
-    'culture' => 'required',
-    'transaction_type' => 'required',
-    'transaction_dt' => 'required',
-    'operator' => 'required',
-    'process' => 'required',
-    'planting_method' => 'required',
-    'variety' => 'required',
-    'equipament' => 'required',
-    'hourmeter_start' => 'required',
-    'hourmeter_end' => 'required',
-    'hourmeter_quantity' => 'required'
-  ];
-
-  public function submit() {
-    $user = auth()->user();
-    $machineHourUpdate = MachineHour::where('id', $this->id)->where('client_id', $user->in_client)->first();
-    $this->validate();
-
-    if (!$machineHourUpdate) {
-      return redirect()->route('cultive-machine-hours');
-    }
-
-    $machineHourUpdate->report = mb_strtoupper($this->report, 'UTF-8');
-    $machineHourUpdate->field_id = $this->field;
-    $machineHourUpdate->organization_id = $this->organization['id'];
-    $machineHourUpdate->harvest_id = $this->harvest['id'];
-    $machineHourUpdate->section_id = $this->section['id'];
-    $machineHourUpdate->culture_id = $this->culture['id'];
-    $machineHourUpdate->transaction_type = $this->transaction_type;
-    $machineHourUpdate->transaction_dt = $this->transaction_dt;
-    $machineHourUpdate->variety_id = $this->variety;
-    $machineHourUpdate->planting_method_id = $this->planting_method;
-    $machineHourUpdate->process_id = $this->process;
-    $machineHourUpdate->equipament_id = $this->equipament;
-    $machineHourUpdate->implement_id = $this->implement;
-    $machineHourUpdate->user_id = $this->operator;
-    $machineHourUpdate->hourmeter_start = $this->formatNumberValue($this->hourmeter_start);
-    $machineHourUpdate->hourmeter_end = $this->formatNumberValue($this->hourmeter_end);
-    $machineHourUpdate->hourmeter_quantity = $this->formatNumberValue($this->hourmeter_quantity);
-    if ($this->stop_reason) {
-      $machineHourUpdate->stop_reason = $this->stop_reason;
-      $machineHourUpdate->stop_description = $this->description;
-      $machineHourUpdate->stop_hour = $this->stop_hour;
-    }
-    if ($this->stop_reason == 3) {
-      $machineHourUpdate->quantity_diesel = $this->formatNumberValue($this->quantity_diesel);
-      $machineHourUpdate->hourmeter_diesel = $this->formatNumberValue($this->hourmeter_diesel);
-    }
-    $machineHourUpdate->operator_start = $this->operator_start;
-    $machineHourUpdate->operator_end = $this->operator_end;
-    $machineHourUpdate->quantity_box = $this->box_quantity ? $this->formatNumberValue($this->box_quantity) : null;
-    $machineHourUpdate->hourmeter_rotor_start = $this->hourmeter_rotor_start ? $this->formatNumberValue($this->hourmeter_rotor_start) : null;
-    $machineHourUpdate->hourmeter_rotor_end = $this->hourmeter_rotor_end ? $this->formatNumberValue($this->hourmeter_rotor_end) : null;
-    $machineHourUpdate->hourmeter_rotor_quantity = $this->hourmeter_rotor_quantity ? $this->formatNumberValue($this->hourmeter_rotor_quantity) : null;
-    $machineHourUpdate->creation_user = $user->id;
-    $machineHourUpdate->client_id = $user->in_client;
-    $machineHourUpdate->save();
-
-    return redirect()->route('cultive-machine-hours');
-  }
-
   public function mount() {
     $user = auth()->user();
 
@@ -168,6 +101,73 @@ class MachineHourUpdate extends Component {
         $this->quantity_diesel = number_format(floatval($this->machine_hour->quantity_diesel), 2, ',', '.');
       }
     }
+  }
+
+  protected $rules = [
+    'report' => 'required',
+    'field' => 'required',
+    'organization' => 'required',
+    'harvest' => 'required',
+    'section' => 'required',
+    'culture' => 'required',
+    'transaction_type' => 'required',
+    'transaction_dt' => 'required',
+    'operator' => 'required',
+    'process' => 'required',
+    'planting_method' => 'required',
+    'variety' => 'required',
+    'equipament' => 'required',
+    'hourmeter_start' => 'required',
+    'hourmeter_end' => 'required',
+    'hourmeter_quantity' => 'required'
+  ];
+
+  public function submit() {
+    $user = auth()->user();
+    $machineHourUpdate = MachineHour::where('id', $this->id)->where('client_id', $user->in_client)->first();
+    $this->validate();
+
+    if (!$machineHourUpdate) {
+      return redirect()->route('cultive-machine-hours');
+    }
+
+    $machineHourUpdate->report = mb_strtoupper($this->report, 'UTF-8');
+    $machineHourUpdate->field_id = $this->field;
+    $machineHourUpdate->organization_id = $this->organization['id'];
+    $machineHourUpdate->harvest_id = $this->harvest['id'];
+    $machineHourUpdate->section_id = $this->section['id'];
+    $machineHourUpdate->culture_id = $this->culture['id'];
+    $machineHourUpdate->transaction_type = $this->transaction_type;
+    $machineHourUpdate->transaction_dt = $this->transaction_dt;
+    $machineHourUpdate->variety_id = $this->variety;
+    $machineHourUpdate->planting_method_id = $this->planting_method;
+    $machineHourUpdate->process_id = $this->process;
+    $machineHourUpdate->equipament_id = $this->equipament;
+    $machineHourUpdate->implement_id = $this->implement;
+    $machineHourUpdate->user_id = $this->operator;
+    $machineHourUpdate->hourmeter_start = $this->formatNumberValue($this->hourmeter_start);
+    $machineHourUpdate->hourmeter_end = $this->formatNumberValue($this->hourmeter_end);
+    $machineHourUpdate->hourmeter_quantity = $this->formatNumberValue($this->hourmeter_quantity);
+    if ($this->stop_reason) {
+      $machineHourUpdate->stop_reason = $this->stop_reason;
+      $machineHourUpdate->stop_description = $this->description;
+      $machineHourUpdate->stop_hour = $this->stop_hour;
+    }
+    if ($this->stop_reason == 3) {
+      $machineHourUpdate->quantity_diesel = $this->formatNumberValue($this->quantity_diesel);
+      $machineHourUpdate->hourmeter_diesel = $this->formatNumberValue($this->hourmeter_diesel);
+    }
+    $machineHourUpdate->operator_start = $this->operator_start;
+    $machineHourUpdate->operator_end = $this->operator_end;
+    $machineHourUpdate->quantity_box = $this->box_quantity ? $this->formatNumberValue($this->box_quantity) : null;
+    $machineHourUpdate->hourmeter_rotor_start = $this->hourmeter_rotor_start ? $this->formatNumberValue($this->hourmeter_rotor_start) : null;
+    $machineHourUpdate->hourmeter_rotor_end = $this->hourmeter_rotor_end ? $this->formatNumberValue($this->hourmeter_rotor_end) : null;
+    $machineHourUpdate->hourmeter_rotor_quantity = $this->hourmeter_rotor_quantity ? $this->formatNumberValue($this->hourmeter_rotor_quantity) : null;
+    $machineHourUpdate->creation_user = $user->id;
+    $machineHourUpdate->client_id = $user->in_client;
+    $machineHourUpdate->save();
+
+    return redirect()->route('cultive-machine-hours');
   }
 
   // UPDATED Functions

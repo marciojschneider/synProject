@@ -16,11 +16,7 @@ class VarietyController extends Controller {
   }
 
   public function varietyCreate() {
-    $user = auth()->user();
-    $data['cultures'] = Culture::where('client_id', $user->in_client)->where('situation', 1)->get();
-    $data['groups'] = Group::where('client_id', $user->in_client)->where('situation', 1)->get();
-
-    return view('content.pages.cultive.variety.create', $data);
+    return view('content.pages.cultive.variety.create');
   }
 
   public function varietyCreateAction(Request $request) {
