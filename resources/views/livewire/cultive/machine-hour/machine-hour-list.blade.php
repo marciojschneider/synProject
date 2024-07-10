@@ -56,10 +56,11 @@
 
                     <form method="POST" action="{{ route('cultive-machine-hour-delete', $row->id) }}"
                       id="machineHourDelete{{ $row->id }}" display="none">
-                      @csrf
+                      @csrf @method('DELETE')
                     </form>
-                    <button type="submit" class="dropdown-item" onclick="removeModal({{ $row->id }})"><i
-                        class="bx bx-trash me-1"></i> Remover</button>
+                    <button type="submit" class="dropdown-item" onclick="removeModal({{ $row->id }})">
+                      <i class="bx bx-trash me-1"></i> Remover
+                    </button>
                   </div>
                 </div>
               </td>

@@ -19,51 +19,18 @@ use App\Models\MachineHour;
 
 class MachineHourCreate extends Component {
   // 1° Row
-  public $report;
-  public $fields = [];
-  public $field;
-  public $organization;
-  public $harvest;
-  public $section;
-  public $culture;
-
+  public $report, $fields = [], $field, $organization, $harvest, $section, $culture;
   // 2° Row
-  public $transaction_type;
-  public $transaction_dt;
-  public $operators = [];
-  public $operator;
-  public $processes = [];
-  public $process;
-  public $planting_methods = [];
-  public $planting_method;
-  public $varieties = [];
-  public $variety;
-
+  public $transaction_type, $transaction_dt, $operators = [], $operator, $processes = [], $process, $planting_methods = [], $planting_method, $varieties = [], $variety;
   // 3° Row
-  public $equipament;
-  public $implement;
-  public $hourmeter_start;
-  public $hourmeter_end;
-  public $hourmeter_quantity;
-
+  public $equipament, $implement, $hourmeter_start, $hourmeter_end, $hourmeter_quantity;
   // 4° Row
-  public $box_quantity;
-  public $hourmeter_rotor_start;
-  public $hourmeter_rotor_end;
-  public $hourmeter_rotor_quantity;
-
+  public $box_quantity, $hourmeter_rotor_start, $hourmeter_rotor_end, $hourmeter_rotor_quantity;
   // 5° Row
-  public $operator_start;
-  public $operator_end;
-  public $stop_reason;
+  public $operator_start, $operator_end, $stop_reason;
 
   // Conditionals
-  public $showStopDetail = false;
-  public $description;
-  public $stop_hour;
-  public $showStopDiesel = false;
-  public $hourmeter_diesel;
-  public $quantity_diesel;
+  public $showStopDetail = false, $description, $stop_hour, $showStopDiesel = false, $hourmeter_diesel, $quantity_diesel;
 
   public function mount() {
     $user = auth()->user();
@@ -113,7 +80,6 @@ class MachineHourCreate extends Component {
 
   public function submit() {
     $user = auth()->user();
-
     $this->validate();
 
     $machineHourCreate = new MachineHour();
@@ -145,10 +111,10 @@ class MachineHourCreate extends Component {
     }
     $machineHourCreate->operator_start = $this->operator_start;
     $machineHourCreate->operator_end = $this->operator_end;
-    $machineHourCreate->quantity_box = $this->formatNumberValue($this->box_quantity);
-    $machineHourCreate->hourmeter_rotor_start = $this->formatNumberValue($this->hourmeter_rotor_start);
-    $machineHourCreate->hourmeter_rotor_end = $this->formatNumberValue($this->hourmeter_rotor_end);
-    $machineHourCreate->hourmeter_rotor_quantity = $this->formatNumberValue($this->hourmeter_rotor_quantity);
+    $machineHourCreate->quantity_box = $this->box_quantity ? $this->formatNumberValue($this->box_quantity) : null;
+    $machineHourCreate->hourmeter_rotor_start = $this->hourmeter_rotor_start ? $this->formatNumberValue($this->hourmeter_rotor_start) : null;
+    $machineHourCreate->hourmeter_rotor_end = $this->hourmeter_rotor_end ? $this->formatNumberValue($this->hourmeter_rotor_end) : null;
+    $machineHourCreate->hourmeter_rotor_quantity = $this->hourmeter_rotor_quantity ? $this->formatNumberValue($this->hourmeter_rotor_quantity) : null;
     $machineHourCreate->creation_user = $user->id;
     $machineHourCreate->client_id = $user->in_client;
     $machineHourCreate->save();

@@ -191,8 +191,8 @@ Route::middleware(['auth', 'canAccess'])->group(function () {
   Route::get('/cultive/machine-hours/create', [MachineHourController::class, 'machineHourCreate'])->name('cultive-machine-hour-create');
   // Route::post('/cultive/machine-hours/create', [MachineHourController::class, 'machineHourCreateAction']);
   Route::get('/cultive/machine-hours/update/{id}', [MachineHourController::class, 'machineHourUpdate'])->name('cultive-machine-hour-update');
-  Route::post('/cultive/machine-hours/update/{id}', [MachineHourController::class, 'machineHourUpdateAction']);
-  Route::post('/cultive/machine-hours/delete/{id}', [MachineHourController::class, 'machineHourDelete'])->name('cultive-machine-hour-delete');
+  // Route::post('/cultive/machine-hours/update/{id}', [MachineHourController::class, 'machineHourUpdateAction']);
+  Route::delete('/cultive/machine-hours/delete/{id}', [MachineHourController::class, 'machineHourDelete'])->name('cultive-machine-hour-delete');
 
   //Harvest
   //       → Harvest
