@@ -1,6 +1,6 @@
 <div class="col-md">
   <h4 class="mb-4">
-    <span class="text-muted fw-light">Variedade /</span> Cadastrar
+    <span class="text-muted fw-light">Cultivo / Variedade /</span> Cadastrar
   </h4>
   <div class="card mb-4">
     {{-- <h5 class="card-header">Novo chamado</h5> --}}

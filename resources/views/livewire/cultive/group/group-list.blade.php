@@ -38,6 +38,7 @@
           <tr>
             <th>Código</th>
             <th>Nome</th>
+            <th>Situação</th>
             <th>Ações</th>
           </tr>
         </thead>

@@ -1,5 +1,3 @@
-{{-- {{ dd($organization) }} --}}
-
 <div class="col-md">
   <h4 class="mb-4">
     <span class="text-muted fw-light">Cultivo / Hora Máquina /</span> Atualizar
