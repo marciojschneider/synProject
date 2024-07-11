@@ -175,9 +175,9 @@ Route::middleware(['auth', 'canAccess'])->group(function () {
   //       → Group
   Route::get('/cultive/groups', [GroupController::class, 'groups'])->name('cultive-groups');
   Route::get('/cultive/groups/create', [GroupController::class, 'groupCreate'])->name('cultive-group-create');
-  Route::post('/cultive/groups/create', [GroupController::class, 'groupCreateAction']);
+  // Route::post('/cultive/groups/create', [GroupController::class, 'groupCreateAction']);
   Route::get('/cultive/groups/update/{id}', [GroupController::class, 'groupUpdate'])->name('cultive-group-update');
-  Route::post('/cultive/groups/update/{id}', [GroupController::class, 'groupUpdateAction']);
+  // Route::post('/cultive/groups/update/{id}', [GroupController::class, 'groupUpdateAction']);
   Route::post('/cultive/groups/delete/{id}', [GroupController::class, 'groupDelete'])->name('cultive-group-delete');
   //       → Variety
   Route::get('/cultive/varieties', [VarietyController::class, 'varieties'])->name('cultive-varieties');

@@ -44,22 +44,14 @@ class VarietyUpdate extends Component {
   ];
 
   public function submit() {
-    $user = auth()->user();
-    $varietyUpdate = Variety::where('id', $this->id)->where('client_id', $user->in_client)->first();
     $this->validate();
 
-    if (!$varietyUpdate) {
-      return redirect()->route('cultive-varieties');
-    }
-
-    $varietyUpdate->code = mb_strtoupper($this->code, 'UTF-8');
-    $varietyUpdate->name = mb_strtoupper($this->name, 'UTF-8');
-    $varietyUpdate->culture_id = $this->culture;
-    $varietyUpdate->group_id = $this->group;
-    $varietyUpdate->situation = $this->situation;
-    $varietyUpdate->creation_user = $user->id;
-    $varietyUpdate->client_id = $user->in_client;
-    $varietyUpdate->save();
+    $this->variety->code = mb_strtoupper($this->code, 'UTF-8');
+    $this->variety->name = mb_strtoupper($this->name, 'UTF-8');
+    $this->variety->culture_id = $this->culture;
+    $this->variety->group_id = $this->group;
+    $this->variety->situation = $this->situation;
+    $this->variety->save();
 
     return redirect()->route('cultive-varieties');
   }

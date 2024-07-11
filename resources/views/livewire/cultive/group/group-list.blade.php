@@ -46,6 +46,9 @@
             <tr>
               <td>{{ $row->code }}</td>
               <td>{{ $row->name }}</td>
+              <td><span
+                  class="badge {{ $row->situation == 1 ? 'bg-label-primary' : 'bg-label-warning' }} me-1">{{ $row->situation == 1 ? 'Ativo' : 'Inativo' }}</span>
+              </td>
               <td>
                 <div class="dropdown">
                   <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i

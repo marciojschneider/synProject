@@ -126,49 +126,41 @@ class MachineHourUpdate extends Component {
   ];
 
   public function submit() {
-    $user = auth()->user();
-    $machineHourUpdate = MachineHour::where('id', $this->id)->where('client_id', $user->in_client)->first();
     $this->validate();
 
-    if (!$machineHourUpdate) {
-      return redirect()->route('cultive-machine-hours');
-    }
-
-    $machineHourUpdate->report = mb_strtoupper($this->report, 'UTF-8');
-    $machineHourUpdate->field_id = $this->field;
-    $machineHourUpdate->organization_id = $this->organization['id'];
-    $machineHourUpdate->harvest_id = $this->harvest['id'];
-    $machineHourUpdate->section_id = $this->section['id'];
-    $machineHourUpdate->culture_id = $this->culture['id'];
-    $machineHourUpdate->transaction_type = $this->transaction_type;
-    $machineHourUpdate->transaction_dt = $this->transaction_dt;
-    $machineHourUpdate->variety_id = $this->variety;
-    $machineHourUpdate->planting_method_id = $this->planting_method;
-    $machineHourUpdate->process_id = $this->process;
-    $machineHourUpdate->equipament_id = $this->equipament;
-    $machineHourUpdate->implement_id = $this->implement;
-    $machineHourUpdate->user_id = $this->operator;
-    $machineHourUpdate->hourmeter_start = $this->formatNumberValue($this->hourmeter_start);
-    $machineHourUpdate->hourmeter_end = $this->formatNumberValue($this->hourmeter_end);
-    $machineHourUpdate->hourmeter_quantity = $this->formatNumberValue($this->hourmeter_quantity);
+    $this->machine_hour->report = mb_strtoupper($this->report, 'UTF-8');
+    $this->machine_hour->field_id = $this->field;
+    $this->machine_hour->organization_id = $this->organization['id'];
+    $this->machine_hour->harvest_id = $this->harvest['id'];
+    $this->machine_hour->section_id = $this->section['id'];
+    $this->machine_hour->culture_id = $this->culture['id'];
+    $this->machine_hour->transaction_type = $this->transaction_type;
+    $this->machine_hour->transaction_dt = $this->transaction_dt;
+    $this->machine_hour->variety_id = $this->variety;
+    $this->machine_hour->planting_method_id = $this->planting_method;
+    $this->machine_hour->process_id = $this->process;
+    $this->machine_hour->equipament_id = $this->equipament;
+    $this->machine_hour->implement_id = $this->implement;
+    $this->machine_hour->user_id = $this->operator;
+    $this->machine_hour->hourmeter_start = $this->formatNumberValue($this->hourmeter_start);
+    $this->machine_hour->hourmeter_end = $this->formatNumberValue($this->hourmeter_end);
+    $this->machine_hour->hourmeter_quantity = $this->formatNumberValue($this->hourmeter_quantity);
     if ($this->stop_reason) {
-      $machineHourUpdate->stop_reason = $this->stop_reason;
-      $machineHourUpdate->stop_description = $this->description;
-      $machineHourUpdate->stop_hour = $this->stop_hour;
+      $this->machine_hour->stop_reason = $this->stop_reason;
+      $this->machine_hour->stop_description = $this->description;
+      $this->machine_hour->stop_hour = $this->stop_hour;
     }
     if ($this->stop_reason == 3) {
-      $machineHourUpdate->quantity_diesel = $this->formatNumberValue($this->quantity_diesel);
-      $machineHourUpdate->hourmeter_diesel = $this->formatNumberValue($this->hourmeter_diesel);
+      $this->machine_hour->quantity_diesel = $this->formatNumberValue($this->quantity_diesel);
+      $this->machine_hour->hourmeter_diesel = $this->formatNumberValue($this->hourmeter_diesel);
     }
-    $machineHourUpdate->operator_start = $this->operator_start;
-    $machineHourUpdate->operator_end = $this->operator_end;
-    $machineHourUpdate->quantity_box = $this->box_quantity ? $this->formatNumberValue($this->box_quantity) : null;
-    $machineHourUpdate->hourmeter_rotor_start = $this->hourmeter_rotor_start ? $this->formatNumberValue($this->hourmeter_rotor_start) : null;
-    $machineHourUpdate->hourmeter_rotor_end = $this->hourmeter_rotor_end ? $this->formatNumberValue($this->hourmeter_rotor_end) : null;
-    $machineHourUpdate->hourmeter_rotor_quantity = $this->hourmeter_rotor_quantity ? $this->formatNumberValue($this->hourmeter_rotor_quantity) : null;
-    $machineHourUpdate->creation_user = $user->id;
-    $machineHourUpdate->client_id = $user->in_client;
-    $machineHourUpdate->save();
+    $this->machine_hour->operator_start = $this->operator_start;
+    $this->machine_hour->operator_end = $this->operator_end;
+    $this->machine_hour->quantity_box = $this->box_quantity ? $this->formatNumberValue($this->box_quantity) : null;
+    $this->machine_hour->hourmeter_rotor_start = $this->hourmeter_rotor_start ? $this->formatNumberValue($this->hourmeter_rotor_start) : null;
+    $this->machine_hour->hourmeter_rotor_end = $this->hourmeter_rotor_end ? $this->formatNumberValue($this->hourmeter_rotor_end) : null;
+    $this->machine_hour->hourmeter_rotor_quantity = $this->hourmeter_rotor_quantity ? $this->formatNumberValue($this->hourmeter_rotor_quantity) : null;
+    $this->machine_hour->save();
 
     return redirect()->route('cultive-machine-hours');
   }
