@@ -24,5 +24,5 @@
 @endsection
 
 @section('content')
-  <livewire:cultive.variety.variety-update />
+  <livewire:cultive.variety.variety-update :id="$id" />
 @endsection

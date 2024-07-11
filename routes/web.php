@@ -181,11 +181,11 @@ Route::middleware(['auth', 'canAccess'])->group(function () {
   Route::post('/cultive/groups/delete/{id}', [GroupController::class, 'groupDelete'])->name('cultive-group-delete');
   //       → Variety
   Route::get('/cultive/varieties', [VarietyController::class, 'varieties'])->name('cultive-varieties');
-  // Route::get('/cultive/varieties/create', [VarietyController::class, 'varietyCreate'])->name('cultive-variety-create');
-  Route::post('/cultive/varieties/create', [VarietyController::class, 'varietyCreateAction']);
+  Route::get('/cultive/varieties/create', [VarietyController::class, 'varietyCreate'])->name('cultive-variety-create');
+  // Route::post('/cultive/varieties/create', [VarietyController::class, 'varietyCreateAction']);
   Route::get('/cultive/varieties/update/{id}', [VarietyController::class, 'varietyUpdate'])->name('cultive-variety-update');
-  Route::post('/cultive/varieties/update/{id}', [VarietyController::class, 'varietyUpdateAction']);
-  Route::post('/cultive/varieties/delete/{id}', [VarietyController::class, 'varietyDelete'])->name('cultive-variety-delete');
+  // Route::post('/cultive/varieties/update/{id}', [VarietyController::class, 'varietyUpdateAction']);
+  Route::delete('/cultive/varieties/delete/{id}', [VarietyController::class, 'varietyDelete'])->name('cultive-variety-delete');
   //       → Machine Hour
   Route::get('/cultive/machine-hours', [MachineHourController::class, 'machineHours'])->name('cultive-machine-hours');
   Route::get('/cultive/machine-hours/create', [MachineHourController::class, 'machineHourCreate'])->name('cultive-machine-hour-create');

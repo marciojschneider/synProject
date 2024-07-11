@@ -59,6 +59,9 @@ class MachineHourUpdate extends Component {
 
     // Values
     $this->machine_hour = MachineHour::where('id', $this->id)->where('client_id', $user->in_client)->first();
+    if (!$this->machine_hour) {
+      return redirect()->route('cultive-machine-hours');
+    }
     // 1° Row
     $this->report = $this->machine_hour->report;
     $this->field = $this->machine_hour->field_id;
