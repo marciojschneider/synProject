@@ -2,8 +2,9 @@
 
 namespace App\Livewire\Cultive\Group;
 
-use App\Models\Group;
 use Livewire\Component;
+// Models
+use App\Models\Group;
 
 class GroupUpdate extends Component {
   // Register

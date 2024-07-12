@@ -2,9 +2,7 @@
 
 namespace App\Livewire\Cultive\MachineHour;
 
-use App\Models\MachineHour;
 use Livewire\Component;
-
 // Models
 use App\Models\Field;
 use App\Models\Culture;
@@ -16,6 +14,7 @@ use App\Models\Process;
 use App\Models\Section;
 use App\Models\User;
 use App\Models\Variety;
+use App\Models\MachineHour;
 
 class MachineHourUpdate extends Component {
   // Register

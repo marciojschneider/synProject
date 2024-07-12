@@ -3,10 +3,8 @@
 namespace App\Livewire\Cultive\Process;
 
 use Livewire\Component;
-
 // Livewire Adicionais
 use Livewire\WithPagination;
-
 // Models
 use App\Models\Process;
 

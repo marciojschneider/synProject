@@ -3,7 +3,6 @@
 namespace App\Livewire\Cultive\MachineHour;
 
 use Livewire\Component;
-
 // Models
 use App\Models\Field;
 use App\Models\Culture;

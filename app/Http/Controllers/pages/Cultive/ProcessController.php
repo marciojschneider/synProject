@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\pages\Cultive;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
 // Models
 use App\Models\Process;
 

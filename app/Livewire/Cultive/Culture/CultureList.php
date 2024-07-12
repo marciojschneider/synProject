@@ -3,10 +3,8 @@
 namespace App\Livewire\Cultive\Culture;
 
 use Livewire\Component;
-
 // Livewire Adicionais
 use Livewire\WithPagination;
-
 // Models
 use App\Models\Culture;
 

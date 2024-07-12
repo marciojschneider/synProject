@@ -2,8 +2,9 @@
 
 namespace App\Livewire\Cultive\Process;
 
-use App\Models\Process;
 use Livewire\Component;
+// Models
+use App\Models\Process;
 
 class ProcessUpdate extends Component {
   // Register

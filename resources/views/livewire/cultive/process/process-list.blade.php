@@ -60,7 +60,7 @@
 
                     <form method="POST" action="{{ route('cultive-process-delete', $row->id) }}"
                       id="processesDelete{{ $row->id }}" display="none">
-                      @csrf
+                      @csrf @method('DELETE')
                     </form>
                     <button type="submit" class="dropdown-item" onclick="removeModal({{ $row->id }})"><i
                         class="bx bx-trash me-1"></i> Remover</button>

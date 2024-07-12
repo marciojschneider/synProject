@@ -3,7 +3,6 @@
 namespace App\Livewire\Cultive\Variety;
 
 use Livewire\Component;
-
 // Models
 use App\Models\Group;
 use App\Models\Culture;
