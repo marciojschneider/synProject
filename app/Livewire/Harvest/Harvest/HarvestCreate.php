@@ -2,8 +2,9 @@
 
 namespace App\Livewire\Harvest\Harvest;
 
-use App\Models\Harvest;
 use Livewire\Component;
+// Models
+use App\Models\Harvest;
 
 class HarvestCreate extends Component {
   // 1° Row

@@ -2,8 +2,9 @@
 
 namespace App\Livewire\Harvest\Harvest;
 
-use App\Models\Harvest;
 use Livewire\Component;
+// Models
+use App\Models\Harvest;
 
 class HarvestUpdate extends Component {
   // Register
@@ -13,12 +14,12 @@ class HarvestUpdate extends Component {
 
   public function mount() {
     $user = auth()->user();
+    // Values
     $this->harvest = Harvest::where('id', $this->id)->where('client_id', $user->in_client)->first();
-
     if (!$this->harvest) {
       return redirect()->route('harv-harvests');
     }
-
+    // 1° Row
     $this->code = $this->harvest->code;
     $this->name = $this->harvest->name;
     $this->price_table = $this->harvest->price_table;

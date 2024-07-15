@@ -22,8 +22,8 @@
           <div class="col-md-4">
             <label for="price_table" class="form-label">Preço</label>
             <select wire:model="price_table" class="form-select" required>
-              <option value="" selected> Selecionar </option>
-              <option value="0">Fictício</option>
+              <option value="" selected> SELECIONAR </option>
+              <option value="0">FICTÍCIO</option>
             </select>
           </div>
         </div>
