@@ -36,8 +36,7 @@
 
           <div class="col-md-4">
             <label for="ending_dt" class="form-label">Fim</label>
-            <input type="date" step="1" class="form-control" wire:model="ending_dt"
-              value="{{ date('Y-m-d', strtotime(now('America/Sao_Paulo'))) }}" required />
+            <input type="date" step="1" class="form-control" wire:model="ending_dt" required />
           </div>
 
           <div class="col-md-4">
