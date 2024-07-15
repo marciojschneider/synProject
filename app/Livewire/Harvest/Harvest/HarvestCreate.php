@@ -23,7 +23,6 @@ class HarvestCreate extends Component {
     $this->validate();
 
     $harvest = new Harvest();
-
     $harvest->code = mb_strtoupper($this->code, 'UTF-8');
     $harvest->name = mb_strtoupper($this->name, 'UTF-8');
     $harvest->price_table = $this->price_table;
