@@ -19,6 +19,10 @@ class CultureUpdate extends Component {
     if (!$this->culture) {
       return redirect()->route('cultive-cultures');
     }
+
+    $this->code = $this->culture->code;
+    $this->name = $this->culture->name;
+    $this->situation = $this->culture->situation;
   }
 
   protected $rules = [
@@ -27,14 +31,11 @@ class CultureUpdate extends Component {
   ];
 
   public function submit() {
-    $user = auth()->user();
     $this->validate();
 
     $this->culture->code = mb_strtoupper($this->code, 'UTF-8');
     $this->culture->name = mb_strtoupper($this->name, 'UTF-8');
     $this->culture->situation = $this->situation;
-    $this->culture->creation_user = $user->id;
-    $this->culture->client_id = $user->in_client;
     $this->culture->save();
 
     return redirect()->route('cultive-cultures');

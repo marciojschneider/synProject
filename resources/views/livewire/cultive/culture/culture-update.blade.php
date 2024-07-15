@@ -5,18 +5,18 @@
   <div class="card mb-4">
     {{-- <h5 class="card-header">Novo chamado</h5> --}}
     <div class="card-body">
-      <form method="POST" action="{{ route('cultive-culture-create') }}">
+      <form wire:submit.prevent="submit">
         @csrf
 
         <div class="row mb-4">
           <div class="col-md-4">
             <label for="code" class="form-label">Código</label>
-            <input type="text" class="form-control" wire:model="code" maxlength="50" />
+            <input type="text" class="form-control" wire:model="code" maxlength="50" required />
           </div>
 
           <div class="col-md-6">
             <label for="name" class="form-label">Nome</label>
-            <input type="text" class="form-control" wire:model="name" maxlength="50" />
+            <input type="text" class="form-control" wire:model="name" maxlength="50" required />
           </div>
           <div class="col-md-2">
             <label for="situation" class="form-label">Situação</label>

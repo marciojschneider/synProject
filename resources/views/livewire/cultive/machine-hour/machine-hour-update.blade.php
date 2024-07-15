@@ -17,7 +17,7 @@
           <div class="col-md-2">
             <label for="field" class="form-label">Talhão</label>
             <select class="form-select" wire:model.live="field" required>
-              <option value="" selected> Selecionar </option>
+              <option value="" selected> SELECIONAR </option>
               @foreach ($fields as $field)
                 <option value="{{ $field->id }}">
                   {{ mb_strtoupper($field->code, 'UTF-8') }} - {{ mb_strtoupper($field->name, 'UTF-8') }}
@@ -71,9 +71,9 @@
           <div class="col-md-2">
             <label for="transaction_type" class="form-label">Tipo</label>
             <select class="form-select" wire:model="transaction_type" required>
-              <option value="" selected> Selecionar </option>
-              <option value="1">Estorno</option>
-              <option value="2">Apropriação</option>
+              <option value="" selected> SELECIONAR </option>
+              <option value="1">ESTORNO</option>
+              <option value="2">APROPRIAÇÃO</option>
             </select>
           </div>
 
@@ -85,7 +85,7 @@
           <div class="col-md-2">
             <label for="operator" class="form-label">Operador</label>
             <select class="form-select" wire:model="operator" required>
-              <option value="" selected> Selecionar </option>
+              <option value="" selected> SELECIONAR </option>
               @foreach ($operators as $operator)
                 <option value="{{ $operator->id }}">{{ mb_strtoupper($operator->name, 'UTF-8') }}</option>
               @endforeach
@@ -95,7 +95,7 @@
           <div class="col-md-2">
             <label for="process" class="form-label">Processo/Etapa</label>
             <select class="form-select" wire:model="process" required>
-              <option value="" selected> Selecionar </option>
+              <option value="" selected> SELECIONAR </option>
               @foreach ($processes as $process)
                 <option value="{{ $process->id }}">{{ mb_strtoupper($process->code, 'UTF-8') }} -
                   {{ mb_strtoupper($process->name, 'UTF-8') }}</option>
@@ -106,7 +106,7 @@
           <div class="col-md-2">
             <label for="planting_method" class="form-label">Método Plantio</label>
             <select class="form-select" wire:model="planting_method" required>
-              <option value="" selected> Selecionar </option>
+              <option value="" selected> SELECIONAR </option>
               @foreach ($planting_methods as $planting_method)
                 <option value="{{ $planting_method->id }}">{{ mb_strtoupper($planting_method->code, 'UTF-8') }} -
                   {{ mb_strtoupper($planting_method->name, 'UTF-8') }}</option>
@@ -117,7 +117,7 @@
           <div class="col-md-2">
             <label for="variety" class="form-label">Variedade</label>
             <select class="form-select" wire:model="variety" required>
-              <option value="" selected> Selecionar </option>
+              <option value="" selected> SELECIONAR </option>
               @foreach ($varieties as $variety)
                 <option value="{{ $variety->id }}">{{ mb_strtoupper($variety->code, 'UTF-8') }} -
                   {{ mb_strtoupper($variety->name, 'UTF-8') }}</option>
@@ -212,10 +212,10 @@
             <label for="stop_reason" class="form-label">Motivo Parada</label>
             <select class="form-select" wire:model.live="stop_reason">
               <option value="" selected>SELECIONAR</option>
-              <option value="1">1 - Mecânico</option>
-              <option value="2">2 - Climático</option>
-              <option value="3">3 - Abastecimento</option>
-              <option value="4">4 - Refeição</option>
+              <option value="1">1 - MECÂNICO</option>
+              <option value="2">2 - CLIMÁTICO</option>
+              <option value="3">3 - ABASTECIMENTO</option>
+              <option value="4">4 - REFEIÇÃO</option>
             </select>
           </div>
         </div>

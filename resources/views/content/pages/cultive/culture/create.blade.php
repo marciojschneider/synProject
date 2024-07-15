@@ -7,5 +7,5 @@
 @section('title', 'Nova Cultura')
 
 @section('content')
-  <livewire:cultive.culture.culture-update />
+  <livewire:cultive.culture.culture-create />
 @endsection

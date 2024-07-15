@@ -17,32 +17,8 @@ class HarvestController extends Controller {
     return view('content.pages.harvest.harvest.create');
   }
 
-  public function harvestCreateAction(Request $request) {
-    $user = auth()->user();
-    $data = $request->only(['code', 'name', 'price_table', 'initial_dt', 'ending_dt', 'situation']);
-
-    $harvest = new Harvest();
-    $harvest->code = mb_strtoupper($data['code'], 'UTF-8');
-    $harvest->name = mb_strtoupper($data['name'], 'UTF-8');
-    $harvest->price_table = $data['price_table'];
-    $harvest->initial_dt = $data['initial_dt'];
-    $harvest->ending_dt = $data['ending_dt'];
-    $harvest->situation = $data['situation'];
-    $harvest->creation_user = $user->id;
-    $harvest->client_id = $user->in_client;
-    $harvest->save();
-
-    return redirect()->route('harv-harvests');
-  }
   public function harvestUpdate(int $id) {
-    $user = auth()->user();
-    $data['harvest'] = Harvest::where('id', $id)->where('client_id', $user->in_client)->first();
-
-    if (!$data['harvest']) {
-      return redirect()->route('harv-harvests');
-    }
-
-    return view('content.pages.harvest.harvest.update', $data);
+    return view('content.pages.harvest.harvest.update', compact('id'));
   }
 
   public function harvestUpdateAction(int $id, Request $request) {

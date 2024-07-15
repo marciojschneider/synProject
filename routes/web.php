@@ -186,9 +186,9 @@ Route::middleware(['auth', 'canAccess'])->group(function () {
   //       → Harvest
   Route::get('/harvest/harvests', [HarvestController::class, 'harvests'])->name('harv-harvests');
   Route::get('/harvest/harvests/create', [HarvestController::class, 'harvestCreate'])->name('harv-harvest-create');
-  Route::post('/harvest/harvests/create', [HarvestController::class, 'harvestCreateAction']);
+  // Route::post('/harvest/harvests/create', [HarvestController::class, 'harvestCreateAction']);
   Route::get('/harvest/harvests/update/{id}', [HarvestController::class, 'harvestUpdate'])->name('harv-harvest-update');
-  Route::post('/harvest/harvests/update/{id}', [HarvestController::class, 'harvestUpdateAction']);
+  // Route::post('/harvest/harvests/update/{id}', [HarvestController::class, 'harvestUpdateAction']);
   Route::post('/harvest/harvests/delete/{id}', [HarvestController::class, 'harvestDelete'])->name('harv-harvest-delete');
   //       → Harvest Configurations
   Route::get('/harvest/harvest-configurations', [HarvestConfigurationController::class, 'harvestConfigurations'])->name('harv-configurations');

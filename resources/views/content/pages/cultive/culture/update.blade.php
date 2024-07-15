@@ -7,5 +7,5 @@
 @section('title', 'Editar Cultura')
 
 @section('content')
-  <livewire:cultive.group.group-update :id="$id" />
+  <livewire:cultive.culture.culture-update :id="$id" />
 @endsection
