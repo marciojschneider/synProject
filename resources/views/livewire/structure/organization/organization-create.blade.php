@@ -1,6 +1,6 @@
 <div class="col-md">
   <h4 class="mb-4">
-    <span class="text-muted fw-light">Estrutura / Organizações /</span> Cadastrar
+    <span class="text-muted fw-light">Estrutura / Organização /</span> Cadastrar
   </h4>
   <div class="card mb-4">
     {{-- <h5 class="card-header">Novo chamado</h5> --}}
@@ -28,7 +28,7 @@
             <label for="situation" class="form-label">Situação</label>
             <select wire:model="situation" class="form-select" required>
               <option value="0">INATIVO</option>
-              <option value="1" selected>ATIVO</option>
+              <option value="1">ATIVO</option>
             </select>
           </div>
         </div>

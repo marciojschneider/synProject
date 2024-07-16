@@ -14,12 +14,12 @@ class OrganizationUpdate extends Component {
 
   public function mount() {
     $user = auth()->user();
+    // Values
     $this->organization = Organization::where('id', $this->id)->where('client_id', $user->in_client)->first();
-
     if (!$this->organization) {
       return redirect()->route('structure-organizations');
     }
-
+    // 1° Row
     $this->code = $this->organization->code;
     $this->external_code = $this->organization->external_code;
     $this->name = $this->organization->name;
@@ -36,7 +36,7 @@ class OrganizationUpdate extends Component {
     $this->validate();
 
     $this->organization->code = mb_strtoupper($this->code, 'UTF-8');
-    $this->organization->external_code = mb_strtoupper($this->organization, 'UTF-8');
+    $this->organization->external_code = mb_strtoupper($this->external_code, 'UTF-8');
     $this->organization->name = mb_strtoupper($this->name, 'UTF-8');
     $this->organization->situation = $this->situation;
     $this->organization->save();

@@ -7,52 +7,5 @@
 @section('title', 'Editar Setor')
 
 @section('content')
-  <div class="col-md">
-    <h4 class="mb-4">
-      <span class="text-muted fw-light">Setores /</span> Atualizar
-    </h4>
-    <div class="card mb-4">
-      {{-- <h5 class="card-header">Novo chamado</h5> --}}
-      <div class="card-body">
-        <form method="POST" action="{{ route('structure-sector-update', $sector->id) }}">
-          @csrf
-
-          <div class="row mb-4">
-            <div class="col-md-3">
-              <label for="code" class="form-label">Código</label>
-              <input type="text" class="form-control" id="code" name="code" maxlength="50"
-                value="{{ $sector->code }}" />
-            </div>
-
-            <div class="col-md-3">
-              <label for="name" class="form-label">Nome</label>
-              <input type="text" class="form-control" id="name" name="name" maxlength="50"
-                value="{{ $sector->name }}" />
-            </div>
-
-            <div class="col-md-3">
-              <label for="farm" class="form-label">Fazenda</label>
-              <select id="farm" name="farm" class="form-select">
-                @foreach ($farms as $farm)
-                  <option value="{{ $farm->id }}" {{ str_contains($sector->farm_id, $farm->id) ? 'selected' : '' }}>
-                    {{ $farm->code }} - {{ $farm->name }} </option>
-                @endforeach
-              </select>
-            </div>
-
-            <div class="col-md-3">
-              <label for="situation" class="form-label">Situação</label>
-              <select id="situation" name="situation" class="form-select">
-                <option value="0" {{ str_contains($sector->situation, 0) ? 'selected' : '' }}>INATIVO</option>
-                <option value="1" {{ str_contains($sector->situation, 1) ? 'selected' : '' }}>ATIVO</option>
-              </select>
-            </div>
-          </div>
-
-          <button type="submit" class="btn btn-primary">Salvar</button>
-          <a href="{{ route('structure-sectors') }}" class="btn btn-secondary">Voltar</a>
-        </form>
-      </div>
-    </div>
-  </div>
+  <livewire:structure.sector.sector-update :id="$id" />
 @endsection

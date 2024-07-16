@@ -23,7 +23,7 @@ class OrganizationCreate extends Component {
     $organization = new Organization();
 
     $organization->code = mb_strtoupper($this->code, 'UTF-8');
-    $organization->external_code = mb_strtoupper($this->organization, 'UTF-8');
+    $organization->external_code = mb_strtoupper($this->external_code, 'UTF-8');
     $organization->name = mb_strtoupper($this->name, 'UTF-8');
     $organization->situation = $this->situation;
     $organization->creation_user = $user->id;
