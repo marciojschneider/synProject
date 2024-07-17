@@ -73,9 +73,7 @@ Route::middleware(['auth', 'canAccess'])->group(function () {
   //       → Clients
   Route::get('/sys/clients', [ClientController::class, 'clients'])->name('sys-clients');
   Route::get('/sys/clients/create', [ClientController::class, 'clientCreate'])->name('sys-client-create');
-  Route::post('/sys/clients/create', [ClientController::class, 'clientCreateAction']);
   Route::get('/sys/clients/update/{id}', [ClientController::class, 'clientUpdate'])->name('sys-client-update');
-  Route::post('/sys/clients/update/{id}', [ClientController::class, 'clientUpdateAction']);
   Route::post('/sys/clients/delete/{id}', [ClientController::class, 'clientDelete'])->name('sys-client-delete');
   //       → Profiles
   Route::get('/sys/profiles', [ProfileController::class, 'profiles'])->name('sys-profiles');
@@ -131,16 +129,12 @@ Route::middleware(['auth', 'canAccess'])->group(function () {
   //       → Section
   Route::get('/structure/sections', [SectionController::class, 'sections'])->name('structure-sections');
   Route::get('/structure/sections/create', [SectionController::class, 'sectionCreate'])->name('structure-section-create');
-  Route::post('/structure/sections/create', [SectionController::class, 'sectionCreateAction']);
   Route::get('/structure/sections/update/{id}', [SectionController::class, 'sectionUpdate'])->name('structure-section-update');
-  Route::post('/structure/sections/update/{id}', [SectionController::class, 'sectionUpdateAction']);
   Route::post('/structure/sections/delete/{id}', [SectionController::class, 'sectionDelete'])->name('structure-section-delete');
   //       → Locality
   Route::get('/structure/localities', [LocalityController::class, 'localities'])->name('structure-localities');
   Route::get('/structure/localities/create', [LocalityController::class, 'localityCreate'])->name('structure-locality-create');
-  Route::post('/structure/localities/create', [LocalityController::class, 'localityCreateAction']);
   Route::get('/structure/localities/update/{id}', [LocalityController::class, 'localityUpdate'])->name('structure-locality-update');
-  Route::post('/structure/localities/update/{id}', [LocalityController::class, 'localityUpdateAction']);
   Route::post('/structure/localities/delete/{id}', [LocalityController::class, 'localityDelete'])->name('structure-locality-delete');
 
   // Cultive

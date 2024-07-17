@@ -50,15 +50,19 @@
             <th>Código</th>
             <th>Nome</th>
             <th>Estabelecimento</th>
+            <th>Situação</th>
             <th>Ações</th>
           </tr>
         </thead>
         <tbody class="table-border-bottom-0">
           @foreach ($rows as $row)
             <tr>
-              <td>{{ $row->id }}</td>
+              <td>{{ $row->code }}</td>
               <td>{{ $row->name }}</td>
               <td>{{ $row->cOrg }} - {{ $row->nOrg }}</td>
+              <td><span
+                  class="badge {{ $row->situation == 1 ? 'bg-label-primary' : 'bg-label-warning' }} me-1">{{ $row->situation == 1 ? 'ATIVO' : 'INATIVO' }}</span>
+              </td>
               <td>
                 <div class="dropdown">
                   <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i
