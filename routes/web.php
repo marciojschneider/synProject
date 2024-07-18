@@ -78,18 +78,9 @@ Route::middleware(['auth', 'canAccess'])->group(function () {
   //       → Profiles
   Route::get('/sys/profiles', [ProfileController::class, 'profiles'])->name('sys-profiles');
   Route::get('/sys/profiles/create', [ProfileController::class, 'profileCreate'])->name('sys-profile-create');
-  Route::post('/sys/profiles/create', [ProfileController::class, 'profileCreateAction']);
   Route::get('/sys/profiles/update/{id}', [ProfileController::class, 'profileUpdate'])->name('sys-profile-update');
-  Route::post('/sys/profiles/update/{id}', [ProfileController::class, 'profileUpdateAction']);
   Route::post('/sys/profiles/delete/{id}', [ProfileController::class, 'profileDelete'])->name('sys-profile-delete');
   //       → Security
-  //                  → Closure Modules
-  Route::get('/sys/closure-modules', [ClosureModuleController::class, 'closureModules'])->name('sys-sec-closures');
-  Route::get('/sys/closure-modules/create', [ClosureModuleController::class, 'closureModuleCreate'])->name('sys-sec-closure-create');
-  Route::post('/sys/closure-modules/create', [ClosureModuleController::class, 'closureModuleCreateAction']);
-  Route::get('/sys/closure-modules/update/{id}', [ClosureModuleController::class, 'closureModuleUpdate'])->name('sys-sec-closure-update');
-  Route::post('/sys/closure-modules/update/{id}', [ClosureModuleController::class, 'closureModuleUpdateAction']);
-  Route::post('/sys/closure-modules/delete/{id}', [ClosureModuleController::class, 'closureModuleDelete'])->name('sys-sec-closure-delete');
   //                  → Permissions
   Route::get('/sys/p-permissions', [ProfillePermissionController::class, 'profilePermissions'])->name('sys-sec-permissions');
   Route::get('/sys/p-permissions/create', [ProfillePermissionController::class, 'profilePermissionCreate'])->name('sys-sec-permission-create');
@@ -100,10 +91,15 @@ Route::middleware(['auth', 'canAccess'])->group(function () {
   //                  → User Profiles
   Route::get('/sys/u-profiles', [UserProfileController::class, 'userProfiles'])->name('sys-sec-u-ps');
   Route::get('/sys/u-profiles/create', [UserProfileController::class, 'userProfileCreate'])->name('sys-sec-u-p-create');
-  Route::post('/sys/u-profiles/create', [UserProfileController::class, 'userProfileCreateAction']);
   Route::get('/sys/u-profiles/update/{id}', [UserProfileController::class, 'userProfileUpdate'])->name('sys-sec-u-p-update');
-  Route::post('/sys/u-profiles/update/{id}', [UserProfileController::class, 'userProfileUpdateAction']);
   Route::post('/sys/u-profiles/delete/{id}', [UserProfileController::class, 'userProfileDelete'])->name('sys-sec-u-p-delete');
+  //                  → Closure Modules
+  Route::get('/sys/closure-modules', [ClosureModuleController::class, 'closureModules'])->name('sys-sec-closures');
+  Route::get('/sys/closure-modules/create', [ClosureModuleController::class, 'closureModuleCreate'])->name('sys-sec-closure-create');
+  Route::post('/sys/closure-modules/create', [ClosureModuleController::class, 'closureModuleCreateAction']);
+  Route::get('/sys/closure-modules/update/{id}', [ClosureModuleController::class, 'closureModuleUpdate'])->name('sys-sec-closure-update');
+  Route::post('/sys/closure-modules/update/{id}', [ClosureModuleController::class, 'closureModuleUpdateAction']);
+  Route::post('/sys/closure-modules/delete/{id}', [ClosureModuleController::class, 'closureModuleDelete'])->name('sys-sec-closure-delete');
 
   // Structure
   //       → Organization

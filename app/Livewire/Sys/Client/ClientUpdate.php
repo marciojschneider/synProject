@@ -9,6 +9,7 @@ use App\Models\Client;
 class ClientUpdate extends Component {
   // Register
   public $id, $client;
+
   // 1° Row
   public $code, $name, $url, $situation;
 

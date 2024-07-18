@@ -9,10 +9,9 @@ use Livewire\Component;
 class SectionUpdate extends Component {
   // Register
   public $id, $section;
-  // Selects
-  public $organizations;
+
   // 1° Row
-  public $code, $name, $organization, $responsible, $situation;
+  public $code, $name, $organizations = [], $organization, $responsible, $situation;
 
   public function mount() {
     $user = auth()->user();

@@ -9,6 +9,7 @@ use App\Models\Locality;
 class LocalityUpdate extends Component {
   // Register
   public $id, $locality;
+
   // 1° Row
   public $code, $name, $situation = 1;
 

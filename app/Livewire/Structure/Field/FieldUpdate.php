@@ -11,10 +11,9 @@ use App\Models\Locality;
 class FieldUpdate extends Component {
   // Register
   public $id, $field;
-  // Selects
-  public $farms, $localities;
+
   // 1° Row
-  public $code, $name, $farm, $locality;
+  public $code, $name, $farms = [], $farm, $localities = [], $locality;
   // 2° Row
   public $total_area, $productive_area, $property_registration, $local_group, $situation;
 

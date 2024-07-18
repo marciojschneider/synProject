@@ -9,6 +9,7 @@ use App\Models\Organization;
 class OrganizationUpdate extends Component {
   // Register
   public $id, $organization;
+
   // 1° Row
   public $code, $external_code, $name, $situation;
 

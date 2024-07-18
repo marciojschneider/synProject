@@ -10,10 +10,9 @@ use App\Models\Sector;
 class SectorUpdate extends Component {
   // Register
   public $id, $sector;
-  // Selects
-  public $farms;
+
   // 1° Row
-  public $code, $name, $farm, $situation;
+  public $code, $name, $farms = [], $farm, $situation;
 
   public function mount() {
     $user = auth()->user();

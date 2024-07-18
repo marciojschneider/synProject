@@ -3,60 +3,83 @@
 namespace App\Livewire\Sys\Security\ProfilePermission;
 
 use Livewire\Component;
-
 // Models
+use App\Models\profilePermission;
 use App\Models\Sidebar;
 use App\Models\Profile;
-use App\Models\profilePermission;
 
 class ProfilePermissionUpdate extends Component {
-  public $id;
-  public $modules = [];
-  public $module = null;
+  // Register
+  public $id, $profile_permission;
 
-  public $profile_permission;
-
-  public $screens = [];
-  public $screen = null;
-
-  public $profiles = [];
-  public $profile = null;
+  // 1° Row
+  public $modules = [], $module, $screens = [], $screen, $profiles = [], $profile, $situation;
+  // 2° Row
+  public $description;
+  // 3° Row
+  public $viewCheck = true, $createCheck = false, $updateCheck = false, $deleteCheck = false;
 
   public function mount() {
     $user = auth()->user();
+    // Values
     $this->profile_permission = profilePermission::where('id', $this->id)->where('client_id', $user->in_client)->first();
-
     if (!$this->profile_permission) {
       return redirect()->route('sys-sec-permissions');
     }
-    // abort(404);
-
-    $affiliate = Sidebar::where('id', $this->profile_permission->sidebar_id)->first();
-    $module = Sidebar::where('id', $affiliate->affiliate_id)->first();
-
-    if (!$module) {
-      return redirect()->route('sys-sec-permissions');
-    }
-
-    $this->module = $module->id;
-
+    // Selects
     $this->modules = Sidebar::where('icon', '!=', null)
       ->where('name', '!=', 'Inicio')
       ->where('client_id', 'REGEXP', '[[:<:]]' . auth()->user()->in_client . '[[:>:]]')
       ->get();
 
-    $this->screens = Sidebar::where('icon', null)
-      ->where('client_id', 'REGEXP', '[[:<:]]' . auth()->user()->in_client . '[[:>:]]')
-      ->where('affiliate_id', $affiliate->affiliate_id)
-      ->get();
-
     $this->profiles = Profile::where('client_id', $user->in_client)->get();
-  }
+    // 1° Row
+    $affiliate = Sidebar::where('id', $this->profile_permission->sidebar_id)->first();
+    $module = Sidebar::where('id', $affiliate->affiliate_id)->first();
+    $this->module = $module->id;
 
-  public function updatedModule() {
+    // Select Screen with module
     $this->screens = Sidebar::where('icon', null)
       ->where('client_id', 'REGEXP', '[[:<:]]' . auth()->user()->in_client . '[[:>:]]')
       ->where('affiliate_id', $this->module)
       ->get();
+
+    $this->screen = $this->profile_permission->sidebar_id;
+    $this->profile = $this->profile_permission->profile_id;
+    $this->situation = $this->profile_permission->situation;
+    // 2° Row
+    $this->description = $this->profile_permission->description;
+    // 3° Row
+    $this->viewCheck = $this->profile_permission->view == 1 ? true : false;
+    $this->createCheck = $this->profile_permission->create == 1 ? true : false;
+    $this->updateCheck = $this->profile_permission->update == 1 ? true : false;
+    $this->deleteCheck = $this->profile_permission->delete == 1 ? true : false;
+  }
+
+  protected $rules = [
+    'module' => 'required',
+    'screen' => 'required',
+    'profile' => 'required',
+  ];
+
+  public function submit() {
+    $this->validate();
+
+    $verifyUniqueScreen = profilePermission::where('sidebar_id', $this->screen)->where('profile_id', $this->profile)->where('id', '!=', $this->id)->first();
+    if ($verifyUniqueScreen) {
+      return redirect()->route('sys-sec-permissions');
+    }
+
+    $this->profile_permission->sidebar_id = $this->screen;
+    $this->profile_permission->profile_id = $this->profile;
+    $this->profile_permission->view = $this->viewCheck ? 1 : 0;
+    $this->profile_permission->create = $this->createCheck ? 1 : 0;
+    $this->profile_permission->update = $this->updateCheck ? 1 : 0;
+    $this->profile_permission->delete = $this->deleteCheck ? 1 : 0;
+    $this->profile_permission->description = mb_strtoupper($this->description, 'UTF-8');
+    $this->profile_permission->situation = $this->situation;
+    $this->profile_permission->save();
+
+    return redirect()->route('sys-sec-permissions');
   }
 }

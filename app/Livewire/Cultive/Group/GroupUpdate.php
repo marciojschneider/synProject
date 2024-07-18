@@ -9,6 +9,7 @@ use App\Models\Group;
 class GroupUpdate extends Component {
   // Register
   public $id, $group;
+
   // 1° Row
   public $code, $name, $situation;
 

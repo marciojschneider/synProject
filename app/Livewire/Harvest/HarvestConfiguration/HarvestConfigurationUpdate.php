@@ -16,12 +16,11 @@ use App\Models\HarvestConfiguration;
 class HarvestConfigurationUpdate extends Component {
   // Register
   public $id, $harvest_configuration;
-  // Selects
-  public $harvests, $sections, $fields, $cultures, $varieties, $planting_methods, $organizations;
+
   // 1° Row
-  public $harvest, $section, $field, $culture, $variety, $planting_method;
+  public $harvests = [], $harvest, $sections = [], $section, $fields = [], $field, $cultures = [], $culture, $varieties = [], $variety, $planting_methods = [], $planting_method;
   // 2° Row
-  public $planting_area, $situation, $organization;
+  public $planting_area, $situation, $organizations = [], $organization;
 
   public function mount() {
     $user = auth()->user();

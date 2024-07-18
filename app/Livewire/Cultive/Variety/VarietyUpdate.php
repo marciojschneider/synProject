@@ -11,6 +11,7 @@ use App\Models\Variety;
 class VarietyUpdate extends Component {
   // Register
   public $id, $variety;
+
   // 1° Row
   public $code, $name, $cultures = [], $culture, $groups = [], $group, $situation;
 

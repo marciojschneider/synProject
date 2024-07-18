@@ -9,6 +9,7 @@ use App\Models\Harvest;
 class HarvestUpdate extends Component {
   // Register
   public $id, $harvest;
+
   // 1° Row
   public $code, $name, $price_table, $initial_dt, $ending_dt, $situation;
 

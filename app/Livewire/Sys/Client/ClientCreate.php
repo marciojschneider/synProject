@@ -26,7 +26,6 @@ class ClientCreate extends Component {
     $client->url = $this->url;
     $client->situation = $this->situation;
     $client->creation_user = $user->id;
-    $client->client_id = $user->in_client;
     $client->save();
 
     return redirect()->route('sys-clients');

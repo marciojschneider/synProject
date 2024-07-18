@@ -9,6 +9,7 @@ use App\Models\Culture;
 class CultureUpdate extends Component {
   // Register
   public $id, $culture;
+
   // 1° Row
   public $code, $name, $situation;
 

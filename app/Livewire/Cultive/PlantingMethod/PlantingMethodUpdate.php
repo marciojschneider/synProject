@@ -9,6 +9,7 @@ use App\Models\PlantingMethod;
 class PlantingMethodUpdate extends Component {
   // Register
   public $id, $planting_method;
+
   // 1° Row
   public $code, $name, $situation = 1;
 

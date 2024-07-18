@@ -9,6 +9,7 @@ use App\Models\Process;
 class ProcessUpdate extends Component {
   // Register
   public $id, $process;
+
   // 1° Row
   public $code, $name, $type, $situation;
 

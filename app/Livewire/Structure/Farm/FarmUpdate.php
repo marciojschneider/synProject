@@ -8,6 +8,7 @@ use Livewire\Component;
 class FarmUpdate extends Component {
   // Register
   public $id, $farm;
+
   // 1° Row
   public $code, $name, $property, $owner, $situation;
 
