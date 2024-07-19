@@ -22,7 +22,7 @@ return new class extends Migration {
       $table->id();
       $table->string('report');
       $table->integer('transaction_type');
-      $table->timestamp('transaction_dt')->nullable();
+      $table->date('transaction_dt')->nullable();
       $table->foreignIdFor(Harvest::class)->constrained();
       $table->foreignIdFor(Organization::class)->constrained();
       $table->foreignIdFor(Section::class)->constrained();

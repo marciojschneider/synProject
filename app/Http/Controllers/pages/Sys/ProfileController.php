@@ -4,7 +4,6 @@ namespace App\Http\Controllers\pages\Sys;
 
 use App\Http\Controllers\Controller;
 // Models
-use App\Models\Client;
 use App\Models\Profile;
 
 class ProfileController extends Controller {

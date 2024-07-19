@@ -34,6 +34,7 @@ class ClosureModuleList extends Component {
 
     $query->join('sidebars', 'sidebars.id', '=', 'closure_modules.sidebar_id')
       ->where('sidebars.client_id', 'REGEXP', '[[:<:]]' . $user->in_client . '[[:>:]]')
+      ->where('closure_modules.client_id', $user->in_client)
       ->select('closure_modules.*', 'sidebars.name as sName')
       ->get();
 

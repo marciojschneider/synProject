@@ -20,8 +20,7 @@ class ClientController extends Controller {
   }
 
   public function clientDelete(int $id) {
-    $user = auth()->user();
-    Client::where('id', $id)->where('client_id', $user->in_client)->delete();
+    Client::where('id', $id)->delete();
 
     return redirect()->route('sys-clients');
   }
