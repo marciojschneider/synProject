@@ -53,7 +53,7 @@ class ClosureModuleUpdate extends Component {
     $user = auth()->user();
     $this->validate();
 
-    $verifyUniqueClosure = closureModule::where('sidebar_id', $this->screen)->where('client_id', $user->in_client)->first();
+    $verifyUniqueClosure = closureModule::where('sidebar_id', $this->screen)->where('client_id', $user->in_client)->where('id', '!=', $this->id)->first();
     if ($verifyUniqueClosure) {
       return redirect()->route('sys-sec-closures');
     }

@@ -13,7 +13,6 @@
             <label for="module" class="form-label">Módulo</label>
             <select class="form-select" wire:model.live="module"
               style="background: #444564; pointer-events: none; touch-action: none;" required>
-              <option value="">SELECIONAR</option>
               @foreach ($modules as $module)
                 <option value="{{ $module->id }}">{{ mb_strtoupper($module->name, 'UTF-8') }}</option>
               @endforeach
@@ -23,7 +22,6 @@
           <div class="col-md-3">
             <label for="screen" class="form-label">Tela</label>
             <select wire:model="screen" class="form-select" required>
-              <option value="">SELECIONAR</option>
               @foreach ($screens as $screen)
                 <option value="{{ $screen->id }}">{{ mb_strtoupper($screen->name, 'UTF-8') }}</option>
               @endforeach

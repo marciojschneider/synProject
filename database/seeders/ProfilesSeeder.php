@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\Profile;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+//Models
+use App\Models\Profile;
 
 class ProfilesSeeder extends Seeder {
 
@@ -24,24 +24,8 @@ class ProfilesSeeder extends Seeder {
         "creation_user" => 1,
         "created_at" => "2024-05-27 16:27:17",
         "updated_at" => "2024-06-20 17:45:56",
-        "situation" => 0,
-      ),
-      array(
-        "name" => "USUÁRIO",
-        "client_id" => 2,
-        "creation_user" => 1,
-        "created_at" => "2024-05-27 16:27:17",
-        "updated_at" => "2024-05-27 16:27:17",
         "situation" => 1,
-      ),
-      array(
-        "name" => "ADMINISTRADOR",
-        "client_id" => 2,
-        "creation_user" => 1,
-        "created_at" => "2024-05-27 16:27:17",
-        "updated_at" => "2024-05-27 16:27:17",
-        "situation" => 1,
-      ),
+      )
     );
 
     Profile::insert($profiles);
