@@ -13,6 +13,8 @@ class DatabaseSeeder extends Seeder {
     $this->call(ProfilesSeeder::class);
     $this->call(UserProfilesSeeder::class);
     $this->call(ProfilePermissionsSeeder::class);
+    $this->call(TasksSeeder::class);
+    $this->call(TaskDetailsSeeder::class);
     // $this->call(OrganizationsSeeder::class);
     // $this->call(CulturesSeeder::class);
     // $this->call(FarmsSeeder::class);
@@ -26,8 +28,6 @@ class DatabaseSeeder extends Seeder {
     // $this->call(CulturesSeeder::class);
     // $this->call(PlantingMethodsSeeder::class);
     // $this->call(ProcessSeeder::class);
-    // $this->call(TasksSeeder::class);
-    // $this->call(TaskDetailsSeeder::class);
     // $this->call(ClosureModulesSeeder::class);
     // $this->call(HarvestConfigurationsSeeder::class);
   }

@@ -11,8 +11,8 @@ class ClientsSeeder extends Seeder {
   public function run(): void {
     $clients = array(
       array(
-        "code" => "SYN",
-        "name" => "SYNÉRGYA",
+        "code" => "KET",
+        "name" => "KETTLOW",
         "url" => NULL,
         "situation" => 1,
         "creation_user" => 1,

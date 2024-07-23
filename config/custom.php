@@ -22,9 +22,9 @@ return [
     'headerType' => 'fixed', // options[String]: 'static', 'fixed' (for horizontal layout only)
     'showDropdownOnHover' => true, // true, false (for horizontal layout only)
     'customizerControls' => [
-      'rtl',
+      // 'rtl',
       'style',
-      'headerType',
+      // 'headerType',
       'contentLayout',
       'layoutCollapsed',
       'layoutNavbarOptions',

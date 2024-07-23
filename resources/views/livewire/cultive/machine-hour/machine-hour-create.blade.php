@@ -32,7 +32,8 @@
               style="background: #444564; pointer-events: none; touch-action: none;" required>
               <option> ... </option>
               @if ($organization)
-                <option value="{{ $organization->id }}" selected> {{ $organization->name }} </option>
+                <option value="{{ $organization->id }}" selected> {{ $organization->code }} - {{ $organization->name }}
+                </option>
               @endif
             </select>
           </div>
@@ -43,7 +44,7 @@
               style="background: #444564; pointer-events: none; touch-action: none;" required>
               <option> ... </option>
               @if ($harvest)
-                <option value="{{ $harvest->id }}" selected> {{ $harvest->name }} </option>
+                <option value="{{ $harvest->id }}" selected> {{ $harvest->code }} - {{ $harvest->name }} </option>
               @endif
             </select>
           </div>
@@ -54,7 +55,7 @@
               style="background: #444564; pointer-events: none; touch-action: none;" required>
               <option> ... </option>
               @if ($section)
-                <option value="{{ $section->id }}" selected> {{ $section->name }} </option>
+                <option value="{{ $section->id }}" selected> {{ $section->code }} - {{ $section->name }} </option>
               @endif
             </select>
           </div>
@@ -65,7 +66,7 @@
               style="background: #444564; pointer-events: none; touch-action: none;" required>
               <option> ... </option>
               @if ($culture)
-                <option value="{{ $culture->id }}" selected> {{ $culture->name }} </option>
+                <option value="{{ $culture->id }}" selected> {{ $culture->code }} - {{ $culture->name }} </option>
               @endif
             </select>
           </div>

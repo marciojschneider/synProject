@@ -22,8 +22,9 @@
           <div class="col-md-3">
             <label for="farm" class="form-label">Fazenda</label>
             <select wire:model="farm" class="form-select" required>
+              <option value="">SELECIONAR</option>
               @foreach ($farms as $farm)
-                <option value="{{ $farm->id }}"> {{ $farm->name }} </option>
+                <option value="{{ $farm->id }}"> {{ $farm->code }} - {{ $farm->name }} </option>
               @endforeach
             </select>
           </div>
@@ -31,8 +32,9 @@
           <div class="col-md-3">
             <label for="locality" class="form-label">Localidade</label>
             <select wire:model="locality" class="form-select" required>
+              <option value="">SELECIONAR</option>
               @foreach ($localities as $locality)
-                <option value="{{ $locality->id }}"> {{ $locality->name }} </option>
+                <option value="{{ $locality->id }}"> {{ $locality->code }} - {{ $locality->name }} </option>
               @endforeach
             </select>
           </div>

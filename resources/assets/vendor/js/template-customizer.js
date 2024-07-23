@@ -552,7 +552,7 @@ class TemplateCustomizer {
     // Customizer visibility condition
     //
     const customizerW = this.container
-    if (this.settings.displayCustomizer) customizerW.setAttribute('style', 'visibility: hidden') //visible SHOW CUSTOMIZER (cog)
+    if (this.settings.displayCustomizer) customizerW.setAttribute('style', 'visibility: visible') //visible SHOW CUSTOMIZER (cog)
     else customizerW.setAttribute('style', 'visibility: hidden')
 
     // Open btn
@@ -1216,11 +1216,11 @@ TemplateCustomizer.STYLES = [
 TemplateCustomizer.THEMES = [
   {
     name: 'theme-default',
-    title: 'Default'
+    title: 'Padrão'
   },
   {
     name: 'theme-bordered',
-    title: 'Bordered'
+    title: 'Delimitado'
   },
   {
     name: 'theme-semi-dark',
@@ -1232,11 +1232,11 @@ TemplateCustomizer.THEMES = [
 TemplateCustomizer.LAYOUTS = [
   {
     name: 'expanded',
-    title: 'Expanded'
+    title: 'Expandido'
   },
   {
     name: 'collapsed',
-    title: 'Collapsed'
+    title: 'Minimizado'
   }
 ]
 
@@ -1244,15 +1244,15 @@ TemplateCustomizer.LAYOUTS = [
 TemplateCustomizer.NAVBAR_OPTIONS = [
   {
     name: 'sticky',
-    title: 'Sticky'
+    title: 'Móvel'
   },
   {
     name: 'static',
-    title: 'Static'
+    title: 'Fixo'
   },
   {
     name: 'hidden',
-    title: 'Hidden'
+    title: 'Oculto'
   }
 ]
 
@@ -1272,11 +1272,11 @@ TemplateCustomizer.HEADER_TYPES = [
 TemplateCustomizer.CONTENT = [
   {
     name: 'compact',
-    title: 'Compact'
+    title: 'Compacto'
   },
   {
     name: 'wide',
-    title: 'Wide'
+    title: 'Inteiro'
   }
 ]
 
@@ -1306,6 +1306,19 @@ TemplateCustomizer.LANGUAGES = {
     content_label: 'Content',
     layout_navbar_label: 'Navbar Type',
     direction_label: 'Direction'
+  },
+  pt_BR: {
+    panel_header: 'Customização de Estilos',
+    panel_sub_header: 'Customize e visualize em tempo real',
+    theming_header: 'Tema',
+    style_label: 'Cor',
+    theme_label: 'Estilização',
+    layout_header: 'Sistema',
+    layout_label: 'Menu',
+    layout_header_label: '',
+    content_label: 'Conteúdo',
+    layout_navbar_label: 'Cabeçalho',
+    direction_label: 'Direção'
   },
   fr: {
     panel_header: 'Modèle De Personnalisation',

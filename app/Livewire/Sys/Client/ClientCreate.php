@@ -45,7 +45,7 @@ class ClientCreate extends Component {
     foreach ($arr_profiles as $arr_profile) {
       $profile = new Profile();
       $profile->name = $arr_profile;
-      $profile->situation = $this->situation;
+      $profile->situation = 1;
       $profile->creation_user = $user->id;
       $profile->client_id = $client_id;
       $profile->save();

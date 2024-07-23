@@ -3,17 +3,9 @@
     <div class="col-md-2">
       <h5>Hora Máquinas</h5>
     </div>
-    <div class="col-md-10" bis_skin_checked="1">
+    <div class="col-md-10 mb-2" bis_skin_checked="1">
       <div
         class="dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-end flex-md-row flex-column mb-3 mb-md-0">
-        {{-- Select registros por página --}}
-        <div class="dataTables_length" style="margin-right: 5px;">
-          <select wire:model.live.click="pPage" class="form-select">
-            <option value="10">10</option>
-            <option value="15">15</option>
-            <option value="20">20</option>
-          </select>
-        </div>
 
         {{-- Caixa de pesquisa --}}
         <div id="DataTables_Table_0_filter" class="dataTables_filter" bis_skin_checked="1" style="margin-right: 5px;">
@@ -30,6 +22,92 @@
         </div>
       </div>
     </div>
+
+    <div class="col-md-12" bis_skin_checked="1">
+      <div
+        class="dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-end  flex-md-row flex-column">
+        {{-- Busca por organização --}}
+        <div id="DataTables_Table_0_filter" class="dataTables_filter" bis_skin_checked="1" style="margin-right: 5px;">
+          <select wire:model.live.click="organization" class="form-select">
+            <option value="" selected> ORGANIZAÇÃO </option>
+            @foreach ($organizations as $organization)
+              <option value="{{ $organization->id }}">{{ $organization->code }} -
+                {{ mb_strtoupper($organization->name, 'UTF-8') }}</option>
+            @endforeach
+          </select>
+        </div>
+
+        {{-- Busca por Safra --}}
+        <div id="DataTables_Table_0_filter" class="dataTables_filter" bis_skin_checked="1" style="margin-right: 5px;">
+          <select wire:model.live.click="harvest" class="form-select">
+            <option value="" selected> SAFRA </option>
+            @foreach ($harvests as $harvest)
+              <option value="{{ $harvest->id }}">{{ $harvest->code }} -
+                {{ mb_strtoupper($harvest->name, 'UTF-8') }}</option>
+            @endforeach
+          </select>
+        </div>
+
+        {{-- Busca por organização --}}
+        <div id="DataTables_Table_0_filter" class="dataTables_filter" bis_skin_checked="1" style="margin-right: 5px;">
+          <select wire:model.live.click="section" class="form-select">
+            <option value="" selected> SECÇÃO </option>
+            @foreach ($sections as $section)
+              <option value="{{ $section->id }}">{{ $section->code }} -
+                {{ mb_strtoupper($section->name, 'UTF-8') }}</option>
+            @endforeach
+          </select>
+        </div>
+
+        {{-- Select registros por página --}}
+        <div class="dataTables_length" style="margin-right: 5px;">
+          <select wire:model.live.click="pPage" class="form-select">
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+          </select>
+        </div>
+        {{-- Busca por organização --}}
+        <div id="DataTables_Table_0_filter" class="dataTables_filter" bis_skin_checked="1" style="margin-right: 5px;">
+          <select wire:model.live.click="organization" class="form-select">
+            <option value="" selected> TALHÃO </option>
+            @foreach ($fields as $field)
+              <option value="{{ $field->id }}">{{ $field->code }} -
+                {{ mb_strtoupper($field->name, 'UTF-8') }}</option>
+            @endforeach
+          </select>
+        </div>
+
+        {{-- Busca por Processo --}}
+        <div id="DataTables_Table_0_filter" class="dataTables_filter" bis_skin_checked="1" style="margin-right: 5px;">
+          <select wire:model.live.click="organization" class="form-select">
+            <option value="" selected> PROCESSO </option>
+            @foreach ($processes as $process)
+              <option value="{{ $process->id }}">{{ $process->code }} -
+                {{ mb_strtoupper($process->name, 'UTF-8') }}</option>
+            @endforeach
+          </select>
+        </div>
+
+        {{-- Busca por Equipamento --}}
+        <div id="DataTables_Table_0_filter" class="dataTables_filter" bis_skin_checked="1" style="margin-right: 5px;">
+          <select wire:model.live.click="equipament" class="form-select">
+            <option value="" selected> EQUIPAMENTO </option>
+            <option value="1">EQUIPAMENTO FICTICIO 01</option>
+            <option value="2">EQUIPAMENTO FICTICIO 02</option>
+          </select>
+        </div>
+
+        {{-- Busca por Implemento --}}
+        <div id="DataTables_Table_0_filter" class="dataTables_filter" bis_skin_checked="1">
+          <select wire:model.live.click="implement" class="form-select">
+            <option value="" selected> IMPLEMENTO </option>
+            <option value="1">IMPLEMENTO FICTICIO 01</option>
+            <option value="2">IMPLEMENTO FICTICIO 02</option>
+          </select>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="card-body">
     <div class="table-responsive text-nowrap">
@@ -37,7 +115,22 @@
         <thead>
           <tr>
             <th>Boletim</th>
+            <th>Org</th>
+            <th>Safra</th>
+            <th>Secção</th>
+            <th>Talhão</th>
+            <th>Processo</th>
+            <th>Equipamento</th>
+            <th>Implemento</th>
+            <th>Data</th>
+            <th>Inicial</th>
+            <th>Final</th>
             <th>Quantidade</th>
+            <th>R. Inicial</th>
+            <th>R. Final</th>
+            <th>Qt. Caixa</th>
+            <th>Qt. Diesel</th>
+            <th>Hr. Diesel</th>
             <th>Ações</th>
           </tr>
         </thead>
@@ -45,7 +138,22 @@
           @foreach ($rows as $row)
             <tr>
               <td>{{ $row->report }}</td>
+              <td>{{ $row->cOrganization }}</td>
+              <td>{{ $row->cHarvest }}</td>
+              <td>{{ $row->cSection }} - {{ $row->nSection }}</td>
+              <td>{{ $row->cField }}</td>
+              <td>{{ $row->cProcess }} - {{ $row->nSection }}</td>
+              <td>{{ $row->equipament_id }}</td>
+              <td>{{ $row->implement_id }}</td>
+              <td>{{ date('d/m/Y', strtotime($row->transaction_dt)) }}</td>
+              <td>{{ number_format(floatval($row->hourmeter_start), 2, ',', '.') }}</td>
+              <td>{{ number_format(floatval($row->hourmeter_end), 2, ',', '.') }}</td>
               <td>{{ number_format(floatval($row->hourmeter_quantity), 2, ',', '.') }}</td>
+              <td>{{ number_format(floatval($row->hourmeter_rotor_start), 2, ',', '.') }}</td>
+              <td>{{ number_format(floatval($row->hourmeter_rotor_end), 2, ',', '.') }}</td>
+              <td>{{ number_format(floatval($row->quantity_box), 2, ',', '.') }}</td>
+              <td>{{ number_format(floatval($row->quantity_diesel), 2, ',', '.') }}</td>
+              <td>{{ number_format(floatval($row->hourmeter_diesel), 2, ',', '.') }}</td>
               <td>
                 <div class="dropdown">
                   <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i

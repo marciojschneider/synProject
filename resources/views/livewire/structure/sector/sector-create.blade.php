@@ -22,6 +22,7 @@
           <div class="col-md-3">
             <label for="farm" class="form-label">Fazenda</label>
             <select wire:model="farm" class="form-select" required>
+              <option value="">SELECIONAR</option>
               @foreach ($farms as $farm)
                 <option value="{{ $farm->id }}"> {{ $farm->code }} - {{ $farm->name }} </option>
               @endforeach

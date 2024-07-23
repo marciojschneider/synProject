@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\AuthController;
 
 // Controllers
@@ -66,9 +65,7 @@ Route::middleware(['auth', 'canAccess'])->group(function () {
   //       → Users
   Route::get('/sys/users', [UserController::class, 'users'])->name('sys-users');
   Route::get('/sys/users/create', [UserController::class, 'userCreate'])->name('sys-user-create');
-  Route::post('/sys/users/create', [UserController::class, 'userCreateAction']);
   Route::get('/sys/users/update/{id}', [UserController::class, 'userUpdate'])->name('sys-user-update');
-  Route::post('/sys/users/update/{id}', [UserController::class, 'userUpdateAction']);
   Route::post('/sys/users/delete/{id}', [UserController::class, 'userDelete'])->name('sys-user-delete');
   //       → Clients
   Route::get('/sys/clients', [ClientController::class, 'clients'])->name('sys-clients');

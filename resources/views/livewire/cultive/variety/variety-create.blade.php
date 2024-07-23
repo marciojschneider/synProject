@@ -22,8 +22,9 @@
           <div class="col-md-2">
             <label for="culture" class="form-label">Cultura</label>
             <select wire:model="culture" class="form-select" required>
+              <option value="">SELECIONAR</option>
               @foreach ($cultures as $culture)
-                <option value="{{ $culture->id }}"> {{ $culture->name }} </option>
+                <option value="{{ $culture->id }}"> {{ $culture->code }} - {{ $culture->name }} </option>
               @endforeach
             </select>
           </div>
@@ -31,8 +32,9 @@
           <div class="col-md-2">
             <label for="group" class="form-label">Grupo</label>
             <select wire:model="group" class="form-select" required>
+              <option value="">SELECIONAR</option>
               @foreach ($groups as $group)
-                <option value="{{ $group->id }}"> {{ $group->name }} </option>
+                <option value="{{ $group->id }}"> {{ $group->code }} - {{ $group->name }} </option>
               @endforeach
             </select>
           </div>
