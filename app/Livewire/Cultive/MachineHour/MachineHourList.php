@@ -41,6 +41,10 @@ class MachineHourList extends Component {
   public $processes = [];
   #[Session] public $process = null;
 
+  // Filters
+  #[Session] public $advanced_filters = false;
+
+
   public function mount() {
     $user = auth()->user();
 
@@ -68,21 +72,7 @@ class MachineHourList extends Component {
       $query->where('machine_hours.report', 'like', '%' . $this->searchText . '%');
     }
 
-    if ($this->organization) {
-      $query->where('machine_hours.organization_id', $this->organization);
-    }
-    if ($this->harvest) {
-      $query->where('machine_hours.harvest_id', $this->harvest);
-    }
-    if ($this->section) {
-      $query->where('machine_hours.section_id', $this->section);
-    }
-    if ($this->field) {
-      $query->where('machine_hours.field_id', $this->field);
-    }
-    if ($this->process) {
-      $query->where('machine_hours.process_id', $this->process);
-    }
+    $this->addAdvancedFilters($query);
 
     $query->select('machine_hours.*', 'harvests.code as cHarvest', 'organizations.code as cOrganization', 'sections.code as cSection', 'sections.name as nSection',
       'fields.code as cField', 'processes.code as cProcess', 'processes.name as nProcess');
@@ -90,5 +80,38 @@ class MachineHourList extends Component {
     $data['rows'] = $query->paginate($this->pPage);
 
     return view('livewire.cultive.machine-hour.machine-hour-list', $data);
+  }
+
+  public function search() {
+    $this->advanced_filters = true;
+  }
+
+  public function clean() {
+    $this->organization = null;
+    $this->harvest = null;
+    $this->section = null;
+    $this->field = null;
+    $this->process = null;
+    $this->advanced_filters = false;
+  }
+
+  public function addAdvancedFilters($query) {
+    if ($this->advanced_filters) {
+      if ($this->organization) {
+        $query->where('machine_hours.organization_id', $this->organization);
+      }
+      if ($this->harvest) {
+        $query->where('machine_hours.harvest_id', $this->harvest);
+      }
+      if ($this->section) {
+        $query->where('machine_hours.section_id', $this->section);
+      }
+      if ($this->field) {
+        $query->where('machine_hours.field_id', $this->field);
+      }
+      if ($this->process) {
+        $query->where('machine_hours.process_id', $this->process);
+      }
+    }
   }
 }

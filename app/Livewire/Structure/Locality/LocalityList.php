@@ -33,7 +33,7 @@ class LocalityList extends Component {
     $query->where('client_id', $user->in_client);
 
     if ($this->searchText) {
-      $query->where('localities.name', 'like', '%' . $this->searchText . '%');
+      $query->where('localities.code', 'like', '%' . $this->searchText . '%');
     }
 
     $data['rows'] = $query->paginate($this->pPage);

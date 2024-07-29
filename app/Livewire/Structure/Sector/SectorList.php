@@ -22,6 +22,9 @@ class SectorList extends Component {
   public $farms = [];
   #[Session] public $farm = null;
 
+  // Filters
+  #[Session] public $advanced_filters = false;
+
   public function mount() {
     $user = auth()->user();
 
@@ -44,14 +47,29 @@ class SectorList extends Component {
       $query->where('sectors.name', 'like', '%' . $this->searchText . '%');
     }
 
-    if ($this->farm) {
-      $query->where('farms.id', $this->farm);
-    }
+    $this->addAdvancedFilters($query);
 
     $query->select('sectors.*', 'farms.code as cFarm', 'farms.name as nFarm');
 
     $data['rows'] = $query->paginate($this->pPage);
 
     return view('livewire.structure.sector.sector-list', $data);
+  }
+
+  public function search() {
+    $this->advanced_filters = true;
+  }
+
+  public function clean() {
+    $this->farm = null;
+    $this->advanced_filters = false;
+  }
+
+  public function addAdvancedFilters($query) {
+    if ($this->advanced_filters) {
+      if ($this->farm) {
+        $query->where('farms.id', $this->farm);
+      }
+    }
   }
 }

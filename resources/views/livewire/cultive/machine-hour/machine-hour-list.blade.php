@@ -3,62 +3,8 @@
     <div class="col-md-2">
       <h5>Hora Máquinas</h5>
     </div>
-    <div class="col-md-10 mb-2" bis_skin_checked="1">
-      <div
-        class="dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-end flex-md-row flex-column mb-3 mb-md-0">
-
-        {{-- Caixa de pesquisa --}}
-        <div id="DataTables_Table_0_filter" class="dataTables_filter" bis_skin_checked="1" style="margin-right: 5px;">
-          <label><input wire:model.live.debounce.500ms="searchText" type="search" class="form-control"
-              placeholder="Buscar..." aria-controls="DataTables_Table_0"></label>
-        </div>
-
-        {{-- Botão de novo usuário --}}
-        <div class="dt-buttons" bis_skin_checked="1">
-          <a class="dt-button add-new btn btn-primary" href="{{ route('cultive-machine-hour-create') }}"><span> <i
-                class="bx bx-plus me-0 me-sm-1"></i> <span class="d-none d-sm-inline-block">Novo</span>
-            </span>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-12" bis_skin_checked="1">
-      <div
-        class="dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-end  flex-md-row flex-column">
-        {{-- Busca por organização --}}
-        <div id="DataTables_Table_0_filter" class="dataTables_filter" bis_skin_checked="1" style="margin-right: 5px;">
-          <select wire:model.live.click="organization" class="form-select">
-            <option value="" selected> ORGANIZAÇÃO </option>
-            @foreach ($organizations as $organization)
-              <option value="{{ $organization->id }}">{{ $organization->code }} -
-                {{ mb_strtoupper($organization->name, 'UTF-8') }}</option>
-            @endforeach
-          </select>
-        </div>
-
-        {{-- Busca por Safra --}}
-        <div id="DataTables_Table_0_filter" class="dataTables_filter" bis_skin_checked="1" style="margin-right: 5px;">
-          <select wire:model.live.click="harvest" class="form-select">
-            <option value="" selected> SAFRA </option>
-            @foreach ($harvests as $harvest)
-              <option value="{{ $harvest->id }}">{{ $harvest->code }} -
-                {{ mb_strtoupper($harvest->name, 'UTF-8') }}</option>
-            @endforeach
-          </select>
-        </div>
-
-        {{-- Busca por organização --}}
-        <div id="DataTables_Table_0_filter" class="dataTables_filter" bis_skin_checked="1" style="margin-right: 5px;">
-          <select wire:model.live.click="section" class="form-select">
-            <option value="" selected> SECÇÃO </option>
-            @foreach ($sections as $section)
-              <option value="{{ $section->id }}">{{ $section->code }} -
-                {{ mb_strtoupper($section->name, 'UTF-8') }}</option>
-            @endforeach
-          </select>
-        </div>
-
+    <div class="col-md-10" bis_skin_checked="1">
+      <div class="d-flex justify-content-end">
         {{-- Select registros por página --}}
         <div class="dataTables_length" style="margin-right: 5px;">
           <select wire:model.live.click="pPage" class="form-select">
@@ -67,48 +13,117 @@
             <option value="20">20</option>
           </select>
         </div>
-        {{-- Busca por organização --}}
-        <div id="DataTables_Table_0_filter" class="dataTables_filter" bis_skin_checked="1" style="margin-right: 5px;">
-          <select wire:model.live.click="organization" class="form-select">
-            <option value="" selected> TALHÃO </option>
-            @foreach ($fields as $field)
-              <option value="{{ $field->id }}">{{ $field->code }} -
-                {{ mb_strtoupper($field->name, 'UTF-8') }}</option>
-            @endforeach
-          </select>
+
+        {{-- Caixa de pesquisa --}}
+        <div class="dataTables_filter" bis_skin_checked="1">
+          <label><input wire:model.live.debounce.500ms="searchText" type="search" class="form-control"
+              placeholder="Buscar..." aria-controls="DataTables_Table_0"></label>
         </div>
 
-        {{-- Busca por Processo --}}
-        <div id="DataTables_Table_0_filter" class="dataTables_filter" bis_skin_checked="1" style="margin-right: 5px;">
-          <select wire:model.live.click="organization" class="form-select">
-            <option value="" selected> PROCESSO </option>
-            @foreach ($processes as $process)
-              <option value="{{ $process->id }}">{{ $process->code }} -
-                {{ mb_strtoupper($process->name, 'UTF-8') }}</option>
-            @endforeach
-          </select>
+        {{-- Botões --}}
+        <div class="dt-buttons" bis_skin_checked="1" style="margin-left: 5px; margin-right: 5px; color:#fff">
+          <a class="dt-button btn btn-success" data-bs-toggle="offcanvas" data-bs-target="#filters"><span> <i
+                class='bx bx-search-alt-2'></i> <span class="d-none d-sm-inline-block">Busca avançada</span>
+            </span>
+          </a>
+          <a class="dt-button add-new btn btn-primary" href="{{ route('cultive-machine-hour-create') }}"><span> <i
+                class="bx bx-plus me-0 me-sm-1"></i> <span class="d-none d-sm-inline-block">Novo</span>
+            </span>
+          </a>
         </div>
 
-        {{-- Busca por Equipamento --}}
-        <div id="DataTables_Table_0_filter" class="dataTables_filter" bis_skin_checked="1" style="margin-right: 5px;">
-          <select wire:model.live.click="equipament" class="form-select">
-            <option value="" selected> EQUIPAMENTO </option>
-            <option value="1">EQUIPAMENTO FICTICIO 01</option>
-            <option value="2">EQUIPAMENTO FICTICIO 02</option>
-          </select>
-        </div>
-
-        {{-- Busca por Implemento --}}
-        <div id="DataTables_Table_0_filter" class="dataTables_filter" bis_skin_checked="1">
-          <select wire:model.live.click="implement" class="form-select">
-            <option value="" selected> IMPLEMENTO </option>
-            <option value="1">IMPLEMENTO FICTICIO 01</option>
-            <option value="2">IMPLEMENTO FICTICIO 02</option>
-          </select>
-        </div>
       </div>
     </div>
   </div>
+
+  <!-- Offcanvas Busca Avançada -->
+  <div class="offcanvas offcanvas-end" data-bs-backdrop="false" tabindex="-1" id="filters"
+    aria-labelledby="filtersLabel" wire:ignore.self>
+    <div class="offcanvas-header">
+      <h5 id="filtersLabel" class="offcanvas-title">Filtrar</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body mx-0 flex-grow-0">
+      {{-- Busca por Organização --}}
+      <div class="dataTables_filter mb-4" bis_skin_checked="1">
+        <select wire:model="organization" class="form-select">
+          <option value="" selected> ORGANIZAÇÃO </option>
+          @foreach ($organizations as $organization)
+            <option value="{{ $organization->id }}">{{ $organization->code }} -
+              {{ mb_strtoupper($organization->name, 'UTF-8') }}</option>
+          @endforeach
+        </select>
+      </div>
+
+      {{-- Busca por Safra --}}
+      <div class="dataTables_filter mb-4" bis_skin_checked="1">
+        <select wire:model="harvest" class="form-select">
+          <option value="" selected> SAFRA </option>
+          @foreach ($harvests as $harvest)
+            <option value="{{ $harvest->id }}">{{ $harvest->code }} -
+              {{ mb_strtoupper($harvest->name, 'UTF-8') }}</option>
+          @endforeach
+        </select>
+      </div>
+
+      {{-- Busca por organização --}}
+      <div class="dataTables_filter mb-4" bis_skin_checked="1">
+        <select wire:model="section" class="form-select">
+          <option value="" selected> SECÇÃO </option>
+          @foreach ($sections as $section)
+            <option value="{{ $section->id }}">{{ $section->code }} -
+              {{ mb_strtoupper($section->name, 'UTF-8') }}</option>
+          @endforeach
+        </select>
+      </div>
+      {{-- Busca por organização --}}
+      <div class="dataTables_filter mb-4" bis_skin_checked="1">
+        <select wire:model="field" class="form-select">
+          <option value="" selected> TALHÃO </option>
+          @foreach ($fields as $field)
+            <option value="{{ $field->id }}">{{ $field->code }} -
+              {{ mb_strtoupper($field->name, 'UTF-8') }}</option>
+          @endforeach
+        </select>
+      </div>
+
+      {{-- Busca por Processo --}}
+      <div class="dataTables_filter mb-4" bis_skin_checked="1">
+        <select wire:model="process" class="form-select">
+          <option value="" selected> PROCESSO </option>
+          @foreach ($processes as $process)
+            <option value="{{ $process->id }}">{{ $process->code }} -
+              {{ mb_strtoupper($process->name, 'UTF-8') }}</option>
+          @endforeach
+        </select>
+      </div>
+
+      {{-- Busca por Equipamento --}}
+      <div class="dataTables_filter mb-4" bis_skin_checked="1">
+        <select wire:model="equipament" class="form-select">
+          <option value="" selected> EQUIPAMENTO </option>
+          <option value="1">EQUIPAMENTO FICTICIO 01</option>
+          <option value="2">EQUIPAMENTO FICTICIO 02</option>
+        </select>
+      </div>
+
+      {{-- Busca por Implemento --}}
+      <div class="dataTables_filter mb-4" bis_skin_checked="1">
+        <select wire:model="implement" class="form-select">
+          <option value="" selected> IMPLEMENTO </option>
+          <option value="1">IMPLEMENTO FICTICIO 01</option>
+          <option value="2">IMPLEMENTO FICTICIO 02</option>
+        </select>
+      </div>
+
+      <div class="d-flex justify-content-between">
+        <button wire:click="search" class="btn btn-success">Buscar</button>
+        <button wire:click="clean" class="btn btn-danger">Limpar</button>
+        <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="offcanvas">Fechar</button>
+      </div>
+    </div>
+  </div>
+
   <div class="card-body">
     <div class="table-responsive text-nowrap">
       <table class="table table-bordered">
@@ -142,7 +157,7 @@
               <td>{{ $row->cHarvest }}</td>
               <td>{{ $row->cSection }} - {{ $row->nSection }}</td>
               <td>{{ $row->cField }}</td>
-              <td>{{ $row->cProcess }} - {{ $row->nSection }}</td>
+              <td>{{ $row->cProcess }} - {{ $row->nProcess }}</td>
               <td>{{ $row->equipament_id }}</td>
               <td>{{ $row->implement_id }}</td>
               <td>{{ date('d/m/Y', strtotime($row->transaction_dt)) }}</td>

@@ -20,6 +20,9 @@ class SectionList extends Component {
   public $orgs = [];
   #[Session] public $org = null;
 
+  // Filters
+  #[Session] public $advanced_filters = false;
+
   public function mount() {
     $user = auth()->user();
 
@@ -38,18 +41,33 @@ class SectionList extends Component {
 
     $query->where('organizations.client_id', $user->in_client);
 
-    if ($this->org) {
-      $query->where('sections.organization_id', $this->org);
+    if ($this->searchText) {
+      $query->where('sections.code', 'like', '%' . $this->searchText . '%');
     }
 
-    if ($this->searchText) {
-      $query->where('sections.name', 'like', '%' . $this->searchText . '%');
-    }
+    $this->addAdvancedFilters($query);
 
     $query->select('sections.*', 'organizations.code as cOrg', 'organizations.name as nOrg');
 
     $data['rows'] = $query->paginate($this->pPage);
 
     return view('livewire.structure.section.section-list', $data);
+  }
+
+  public function search() {
+    $this->advanced_filters = true;
+  }
+
+  public function clean() {
+    $this->org = null;
+    $this->advanced_filters = false;
+  }
+
+  public function addAdvancedFilters($query) {
+    if ($this->advanced_filters) {
+      if ($this->org) {
+        $query->where('sections.organization_id', $this->org);
+      }
+    }
   }
 }

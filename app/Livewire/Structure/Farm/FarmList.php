@@ -21,6 +21,9 @@ class FarmList extends Component {
   #[Session] public $situation = null;
   #[Session] public $property = null;
 
+  // Filters
+  #[Session] public $advanced_filters = false;
+
   public function mount() {
     // Caso precise pré carregar selects, declare a váriavel e faça a busca por aqui!
   }
@@ -39,15 +42,31 @@ class FarmList extends Component {
       $query->where('name', 'like', '%' . $this->searchText . '%');
     }
 
-    if ($this->situation) {
-      $query->where('situation', $this->situation);
-    }
-    if ($this->property) {
-      $query->where('property', $this->property);
-    }
+    $this->addAdvancedFilters($query);
 
     $data['rows'] = $query->paginate($this->pPage);
 
     return view('livewire.structure.farm.farm-list', $data);
+  }
+
+  public function search() {
+    $this->advanced_filters = true;
+  }
+
+  public function clean() {
+    $this->situation = null;
+    $this->property = null;
+    $this->advanced_filters = false;
+  }
+
+  public function addAdvancedFilters($query) {
+    if ($this->advanced_filters) {
+      if ($this->situation) {
+        $query->where('situation', $this->situation);
+      }
+      if ($this->property) {
+        $query->where('property', $this->property);
+      }
+    }
   }
 }

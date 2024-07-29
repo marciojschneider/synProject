@@ -15,32 +15,18 @@
           </select>
         </div>
 
-        {{-- Busca por Propriedade --}}
-        <div id="DataTables_Table_0_filter" class="dataTables_filter" bis_skin_checked="1" style="margin-right: 5px;">
-          <select wire:model.live.click="property" id="property" name="property" class="form-select">
-            <option value="" selected> PROPRIEDADE </option>
-            <option value="1">PRÓPRIO</option>
-            <option value="2">TERCEIRO</option>
-          </select>
-        </div>
-
-        {{-- Busca por Situação --}}
-        <div id="DataTables_Table_0_filter" class="dataTables_filter" bis_skin_checked="1" style="margin-right: 5px;">
-          <select wire:model.live.click="situation" id="situation" name="situation" class="form-select">
-            <option value="" selected> SITUAÇÃO </option>
-            <option value="1">ATIVO</option>
-            <option value="2">INATIVO</option>
-          </select>
-        </div>
-
         {{-- Caixa de pesquisa --}}
-        <div id="DataTables_Table_0_filter" class="dataTables_filter" bis_skin_checked="1" style="margin-right: 5px;">
+        <div id="DataTables_Table_0_filter" class="dataTables_filter" bis_skin_checked="1">
           <label><input wire:model.live.debounce.500ms="searchText" type="search" class="form-control"
               placeholder="Buscar..." aria-controls="DataTables_Table_0"></label>
         </div>
 
-        {{-- Botão de novo usuário --}}
-        <div class="dt-buttons" bis_skin_checked="1">
+        {{-- Botões --}}
+        <div class="dt-buttons" bis_skin_checked="1" style="margin-left: 5px; margin-right: 5px; color:#fff">
+          <a class="dt-button btn btn-success" data-bs-toggle="offcanvas" data-bs-target="#filters"><span> <i
+                class='bx bx-search-alt-2'></i> <span class="d-none d-sm-inline-block">Busca avançada</span>
+            </span>
+          </a>
           <a class="dt-button add-new btn btn-primary" href="{{ route('structure-farm-create') }}"><span> <i
                 class="bx bx-plus me-0 me-sm-1"></i> <span class="d-none d-sm-inline-block">Novo</span>
             </span>
@@ -49,6 +35,42 @@
       </div>
     </div>
   </div>
+
+  <!-- Offcanvas Busca Avançada -->
+  <div class="offcanvas offcanvas-end" data-bs-backdrop="false" tabindex="-1" id="filters"
+    aria-labelledby="filtersLabel" wire:ignore.self>
+    <div class="offcanvas-header">
+      <h5 id="filtersLabel" class="offcanvas-title">Filtrar</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body mx-0 flex-grow-0">
+
+      {{-- Busca por Propriedade --}}
+      <div id="DataTables_Table_0_filter" class="dataTables_filter mb-4" bis_skin_checked="1">
+        <select wire:model="property" id="property" name="property" class="form-select">
+          <option value="" selected> PROPRIEDADE </option>
+          <option value="1">PRÓPRIO</option>
+          <option value="2">TERCEIRO</option>
+        </select>
+      </div>
+
+      {{-- Busca por Situação --}}
+      <div id="DataTables_Table_0_filter" class="dataTables_filter mb-4" bis_skin_checked="1">
+        <select wire:model="situation" id="situation" name="situation" class="form-select">
+          <option value="" selected> SITUAÇÃO </option>
+          <option value="1">ATIVO</option>
+          <option value="2">INATIVO</option>
+        </select>
+      </div>
+
+      <div class="d-flex justify-content-between">
+        <button wire:click="search" class="btn btn-success">Buscar</button>
+        <button wire:click="clean" class="btn btn-danger">Limpar</button>
+        <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="offcanvas">Fechar</button>
+      </div>
+    </div>
+  </div>
+
   <div class="card-body">
     <div class="table-responsive text-nowrap">
       <table class="table table-bordered">

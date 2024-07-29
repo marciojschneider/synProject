@@ -27,7 +27,7 @@
           </div>
 
           <div class="col-md-2">
-            <label for="organization" class="form-label">Estabelecimento</label>
+            <label for="organization" class="form-label">Organização</label>
             <select class="form-control" wire:model="organization"
               style="background: #444564; pointer-events: none; touch-action: none;" required>
               <option> ... </option>
