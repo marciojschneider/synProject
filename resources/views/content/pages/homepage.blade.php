@@ -9,10 +9,10 @@
 @section('content')
   <h4>Inicio</h4>
 
-  <p>Precisa de referencia? Busque aqui:
+  {{-- <p>Precisa de referencia? Busque aqui:
     <a href="{{ config('variables.documentation') ? config('variables.documentation') . '/laravel-introduction.html' : '#' }}"
       target="_blank" rel="noopener noreferrer">documentação
     </a>
     .
-  </p>
+  </p> --}}
 @endsection

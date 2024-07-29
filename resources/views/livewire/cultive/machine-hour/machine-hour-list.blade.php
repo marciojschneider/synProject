@@ -43,11 +43,11 @@
       <h5 id="filtersLabel" class="offcanvas-title">Filtrar</h5>
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-    <div class="offcanvas-body mx-0 flex-grow-0">
+    <div class="offcanvas-body mx-0 flex-grow-0" style="height: 87%">
       {{-- Busca por Organização --}}
-      <div class="dataTables_filter mb-4" bis_skin_checked="1">
-        <select wire:model="organization" class="form-select">
-          <option value="" selected> ORGANIZAÇÃO </option>
+      <div class="mb-4" bis_skin_checked="1">
+        <select wire:model="organization" class="select2 form-select">
+          <option> ORGANIZAÇÃO </option>
           @foreach ($organizations as $organization)
             <option value="{{ $organization->id }}">{{ $organization->code }} -
               {{ mb_strtoupper($organization->name, 'UTF-8') }}</option>
@@ -56,9 +56,9 @@
       </div>
 
       {{-- Busca por Safra --}}
-      <div class="dataTables_filter mb-4" bis_skin_checked="1">
-        <select wire:model="harvest" class="form-select">
-          <option value="" selected> SAFRA </option>
+      <div class="mb-4" bis_skin_checked="1">
+        <select wire:model="harvest" class="select2 form-select">
+          <option> SAFRA </option>
           @foreach ($harvests as $harvest)
             <option value="{{ $harvest->id }}">{{ $harvest->code }} -
               {{ mb_strtoupper($harvest->name, 'UTF-8') }}</option>
@@ -67,9 +67,9 @@
       </div>
 
       {{-- Busca por organização --}}
-      <div class="dataTables_filter mb-4" bis_skin_checked="1">
-        <select wire:model="section" class="form-select">
-          <option value="" selected> SECÇÃO </option>
+      <div class="mb-4" bis_skin_checked="1">
+        <select wire:model="section" class="select2 form-select">
+          <option> SECÇÃO </option>
           @foreach ($sections as $section)
             <option value="{{ $section->id }}">{{ $section->code }} -
               {{ mb_strtoupper($section->name, 'UTF-8') }}</option>
@@ -77,9 +77,9 @@
         </select>
       </div>
       {{-- Busca por organização --}}
-      <div class="dataTables_filter mb-4" bis_skin_checked="1">
-        <select wire:model="field" class="form-select">
-          <option value="" selected> TALHÃO </option>
+      <div class="mb-4" bis_skin_checked="1">
+        <select wire:model="field" class="select2 form-select">
+          <option> TALHÃO </option>
           @foreach ($fields as $field)
             <option value="{{ $field->id }}">{{ $field->code }} -
               {{ mb_strtoupper($field->name, 'UTF-8') }}</option>
@@ -88,9 +88,9 @@
       </div>
 
       {{-- Busca por Processo --}}
-      <div class="dataTables_filter mb-4" bis_skin_checked="1">
-        <select wire:model="process" class="form-select">
-          <option value="" selected> PROCESSO </option>
+      <div class="mb-4" bis_skin_checked="1">
+        <select wire:model="process" class="select2 form-select">
+          <option> PROCESSO </option>
           @foreach ($processes as $process)
             <option value="{{ $process->id }}">{{ $process->code }} -
               {{ mb_strtoupper($process->name, 'UTF-8') }}</option>
@@ -99,23 +99,25 @@
       </div>
 
       {{-- Busca por Equipamento --}}
-      <div class="dataTables_filter mb-4" bis_skin_checked="1">
-        <select wire:model="equipament" class="form-select">
-          <option value="" selected> EQUIPAMENTO </option>
+      <div class="mb-4" bis_skin_checked="1">
+        <select wire:model="equipament" class="select2 form-select">
+          <option> EQUIPAMENTO </option>
           <option value="1">EQUIPAMENTO FICTICIO 01</option>
           <option value="2">EQUIPAMENTO FICTICIO 02</option>
         </select>
       </div>
 
       {{-- Busca por Implemento --}}
-      <div class="dataTables_filter mb-4" bis_skin_checked="1">
-        <select wire:model="implement" class="form-select">
-          <option value="" selected> IMPLEMENTO </option>
+      <div class="mb-4" bis_skin_checked="1">
+        <select wire:model="implement" class="select2 form-select">
+          <option> IMPLEMENTO </option>
           <option value="1">IMPLEMENTO FICTICIO 01</option>
           <option value="2">IMPLEMENTO FICTICIO 02</option>
         </select>
       </div>
+    </div>
 
+    <div class="offcanvas-body">
       <div class="d-flex justify-content-between">
         <button wire:click="search" class="btn btn-success">Buscar</button>
         <button wire:click="clean" class="btn btn-danger">Limpar</button>

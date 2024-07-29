@@ -43,12 +43,11 @@
       <h5 id="filtersLabel" class="offcanvas-title">Filtrar</h5>
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-    <div class="offcanvas-body mx-0 flex-grow-0">
-
+    <div class="offcanvas-body mx-0 flex-grow-0" style="height: 87%">
       {{-- Busca por Propriedade --}}
       <div id="DataTables_Table_0_filter" class="dataTables_filter mb-4" bis_skin_checked="1">
-        <select wire:model="property" id="property" name="property" class="form-select">
-          <option value="" selected> PROPRIEDADE </option>
+        <select wire:model="property" class="select2 form-select">
+          <option> PROPRIEDADE </option>
           <option value="1">PRÓPRIO</option>
           <option value="2">TERCEIRO</option>
         </select>
@@ -56,13 +55,15 @@
 
       {{-- Busca por Situação --}}
       <div id="DataTables_Table_0_filter" class="dataTables_filter mb-4" bis_skin_checked="1">
-        <select wire:model="situation" id="situation" name="situation" class="form-select">
-          <option value="" selected> SITUAÇÃO </option>
+        <select wire:model="situation" class="select2 form-select">
+          <option> SITUAÇÃO </option>
           <option value="1">ATIVO</option>
           <option value="2">INATIVO</option>
         </select>
       </div>
+    </div>
 
+    <div class="offcanvas-body">
       <div class="d-flex justify-content-between">
         <button wire:click="search" class="btn btn-success">Buscar</button>
         <button wire:click="clean" class="btn btn-danger">Limpar</button>

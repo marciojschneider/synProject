@@ -43,7 +43,7 @@
       <h5 id="filtersLabel" class="offcanvas-title">Filtrar</h5>
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-    <div class="offcanvas-body mx-0 flex-grow-0">
+    <div class="offcanvas-body mx-0 flex-grow-0" style="height: 87%">
       {{-- Busca por Fazenda --}}
       <div id="DataTables_Table_0_filter" class="dataTables_filter mb-4" bis_skin_checked="1">
         <select wire:model="farm" id="farm" name="farm" class="form-select">
@@ -53,7 +53,9 @@
           @endforeach
         </select>
       </div>
+    </div>
 
+    <div class="offcanvas-body">
       <div class="d-flex justify-content-between">
         <button wire:click="search" class="btn btn-success">Buscar</button>
         <button wire:click="clean" class="btn btn-danger">Limpar</button>

@@ -43,11 +43,11 @@
       <h5 id="filtersLabel" class="offcanvas-title">Filtrar</h5>
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-    <div class="offcanvas-body mx-0 flex-grow-0">
+    <div class="offcanvas-body mx-0 flex-grow-0" style="height: 87%">
       {{-- Busca por Fazenda --}}
       <div id="DataTables_Table_0_filter" class="dataTables_filter mb-4" bis_skin_checked="1">
-        <select wire:model="farm" class="form-select">
-          <option value="" selected> FAZENDA </option>
+        <select wire:model="farm" class="select2 form-select">
+          <option> FAZENDA </option>
           @foreach ($farms as $farm)
             <option value="{{ $farm->id }}"> {{ $farm->code }} - {{ mb_strtoupper($farm->name, 'UTF-8') }}
             </option>
@@ -57,15 +57,17 @@
 
       {{-- Busca por Localidade --}}
       <div id="DataTables_Table_0_filter" class="dataTables_filter mb-4" bis_skin_checked="1">
-        <select wire:model="locality" class="form-select">
-          <option value="" selected> LOCALIDADE </option>
+        <select wire:model="locality" class="select2 form-select">
+          <option> LOCALIDADE </option>
           @foreach ($localities as $locality)
             <option value="{{ $locality->id }}">{{ $locality->code }} - {{ mb_strtoupper($locality->name, 'UTF-8') }}
             </option>
           @endforeach
         </select>
       </div>
+    </div>
 
+    <div class="offcanvas-body">
       <div class="d-flex justify-content-between">
         <button wire:click="search" class="btn btn-success">Buscar</button>
         <button wire:click="clean" class="btn btn-danger">Limpar</button>
