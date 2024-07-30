@@ -54,9 +54,13 @@ class ClosureModuleCreate extends Component {
 
   // UPDATED Functions
   public function updatedModule() {
-    $this->screens = Sidebar::where('icon', null)
-      ->where('client_id', 'REGEXP', '[[:<:]]' . auth()->user()->in_client . '[[:>:]]')
-      ->where('affiliate_id', $this->module)
-      ->get();
+    if ($this->module) {
+      $this->screens = Sidebar::where('icon', null)
+        ->where('client_id', 'REGEXP', '[[:<:]]' . auth()->user()->in_client . '[[:>:]]')
+        ->where('affiliate_id', $this->module)
+        ->get();
+    } else {
+      $this->screen = null;
+    }
   }
 }

@@ -7,7 +7,7 @@
       <div
         class="dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-end flex-md-row flex-column mb-3 mb-md-0">
         {{-- Select registros por página --}}
-        <div class="dataTables_length" style="margin-right: 5px;">
+        <div class="dataTables_length">
           <select wire:model.live.click="pPage" class="form-select">
             <option value="10">10</option>
             <option value="15">15</option>
@@ -15,38 +15,12 @@
           </select>
         </div>
 
-        {{-- Busca por módulo --}}
-        {{-- <div id="DataTables_Table_0_filter" class="dataTables_filter" bis_skin_checked="1" style="margin-right: 5px;">
-          <select wire:model.live.click="module" id="module" name="module" class="form-select">
-            <option value="" selected> MÓDULO </option>
-            @foreach ($modules as $module)
-              <option value="{{ $module->id }}">{{ mb_strtoupper($module->name, 'UTF-8') }}</option>
-            @endforeach
-          </select>
-        </div> --}}
-
-        {{-- Busca por Tela --}}
-        <div id="DataTables_Table_0_filter" class="dataTables_filter" bis_skin_checked="1" style="margin-right: 5px;">
-          <select wire:model.live.click="screen" id="screen" name="screen" class="form-select">
-            <option value="" selected> TELA </option>
-            @foreach ($screens as $screen)
-              <option value="{{ $screen->id }}">{{ mb_strtoupper($screen->name, 'UTF-8') }}</option>
-            @endforeach
-          </select>
-        </div>
-
-        {{-- Busca por Perfil --}}
-        <div id="DataTables_Table_0_filter" class="dataTables_filter" bis_skin_checked="1" style="margin-right: 5px;">
-          <select wire:model.live.click="profile" id="profile" name="profile" class="form-select">
-            <option value="" selected> PERFIL </option>
-            @foreach ($profiles as $profile)
-              <option value="{{ $profile->id }}">{{ mb_strtoupper($profile->name, 'UTF-8') }}</option>
-            @endforeach
-          </select>
-        </div>
-
-        {{-- Botão de nova permissão --}}
-        <div class="dt-buttons" bis_skin_checked="1">
+        {{-- Botões --}}
+        <div class="dt-buttons" bis_skin_checked="1" style="margin-left: 5px; margin-right: 5px; color:#fff">
+          <a class="dt-button btn btn-success" data-bs-toggle="offcanvas" data-bs-target="#filters"><span> <i
+                class='bx bx-search-alt-2'></i> <span class="d-none d-sm-inline-block">Busca avançada</span>
+            </span>
+          </a>
           <a class="dt-button add-new btn btn-primary" href="{{ route('sys-sec-permission-create') }}"><span> <i
                 class="bx bx-plus me-0 me-sm-1"></i><span class="d-none d-sm-inline-block">NOVO</span>
             </span>
@@ -55,6 +29,55 @@
       </div>
     </div>
   </div>
+
+  <!-- Offcanvas Busca Avançada -->
+  <div class="offcanvas offcanvas-end" tabindex="-1" data-bs-backdrop="false" id="filters"
+    aria-labelledby="filtersLabel" wire:ignore.self>
+    <div class="offcanvas-header">
+      <h5 id="filtersLabel" class="offcanvas-title">Filtrar</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body mx-0 flex-grow-0" style="height: 87%">
+      {{-- Busca por módulo --}}
+      <div id="DataTables_Table_0_filter" class="dataTables_filter mb-4" bis_skin_checked="1">
+        <select wire:model.live.click="module" class="select2 form-select">
+          <option> MÓDULO </option>
+          @foreach ($modules as $module)
+            <option value="{{ $module->id }}">{{ mb_strtoupper($module->name, 'UTF-8') }}</option>
+          @endforeach
+        </select>
+      </div>
+
+      {{-- Busca por Tela --}}
+      <div id="DataTables_Table_0_filter" class="dataTables_filter mb-4" bis_skin_checked="1">
+        <select wire:model="screen" class="select2 form-select">
+          <option> TELA </option>
+          @foreach ($screens as $screen)
+            <option value="{{ $screen->id }}">{{ mb_strtoupper($screen->name, 'UTF-8') }}</option>
+          @endforeach
+        </select>
+      </div>
+
+      {{-- Busca por Perfil --}}
+      <div id="DataTables_Table_0_filter" class="dataTables_filter mb-4" bis_skin_checked="1">
+        <select wire:model="profile" class="select2 form-select">
+          <option> PERFIL </option>
+          @foreach ($profiles as $profile)
+            <option value="{{ $profile->id }}">{{ mb_strtoupper($profile->name, 'UTF-8') }}</option>
+          @endforeach
+        </select>
+      </div>
+    </div>
+
+    <div class="offcanvas-body">
+      <div class="d-flex justify-content-between">
+        <button wire:click="search" class="btn btn-success">Buscar</button>
+        <button wire:click="clean" class="btn btn-danger">Limpar</button>
+        <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="offcanvas">Fechar</button>
+      </div>
+    </div>
+  </div>
+
   <div class="card-body">
     <div class="table-responsive text-nowrap">
       <table class="table table-bordered">

@@ -6,7 +6,6 @@
 
 @section('title', 'Clientes')
 
-{{-- Verificar estilizações necessárias para o funcionamento da pagina --}}
 @section('vendor-style')
   @vite(['resources/assets/vendor/libs/animate-css/animate.scss', 'resources/assets/vendor/libs/sweetalert2/sweetalert2.scss', 'resources/assets/vendor/libs/plyr/plyr.scss'])
 @endsection

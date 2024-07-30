@@ -23,18 +23,21 @@ class ProfilePermissionList extends Component {
 
   public $screens = [];
   #[Session] public $screen = null;
-  // public $modules = [];
-  // #[Session] public $module = null;
+  public $modules = [];
+  #[Session] public $module = null;
   public $profiles = [];
   #[Session] public $profile = null;
+
+  // Filters
+  #[Session] public $advanced_filters = false;
 
   public function mount() {
     $user = auth()->user();
 
-    // $this->modules = Sidebar::where('icon', '!=', null)
-    //   ->where('name', '!=', 'Inicio')
-    //   ->where('client_id', 'REGEXP', '[[:<:]]' . auth()->user()->in_client . '[[:>:]]')
-    //   ->get();
+    $this->modules = Sidebar::where('icon', '!=', null)
+      ->where('name', '!=', 'Inicio')
+      ->where('client_id', 'REGEXP', '[[:<:]]' . auth()->user()->in_client . '[[:>:]]')
+      ->get();
 
     $this->screens = Sidebar::where('icon', null)
       ->where('client_id', 'REGEXP', '[[:<:]]' . auth()->user()->in_client . '[[:>:]]')
@@ -49,12 +52,16 @@ class ProfilePermissionList extends Component {
     $this->resetPage();
   }
 
-  // public function updatedModule() {
-  //   $this->screens = Sidebar::where('icon', null)
-  //     ->where('client_id', 'REGEXP', '[[:<:]]' . auth()->user()->in_client . '[[:>:]]')
-  //     ->where('affiliate_id', $this->module)
-  //     ->get();
-  // }
+  public function updatedModule() {
+    if ($this->module) {
+      $this->screens = Sidebar::where('icon', null)
+        ->where('client_id', 'REGEXP', '[[:<:]]' . auth()->user()->in_client . '[[:>:]]')
+        ->where('affiliate_id', $this->module)
+        ->get();
+    } else {
+      $this->screen = null;
+    }
+  }
 
   public function render() {
     $user = auth()->user();
@@ -69,18 +76,35 @@ class ProfilePermissionList extends Component {
       $query->where('name', 'like', '%' . $this->searchText . '%');
     }
 
-    if ($this->profile) {
-      $query->where('profile_id', $this->profile);
-    }
-
-    if ($this->screen) {
-      $query->where('sidebar_id', $this->screen);
-    }
+    $this->addAdvancedFilters($query);
 
     $query->select('profile_permissions.*', 'sidebars.name as sName', 'profiles.name as pName')->get();
 
     $data['rows'] = $query->paginate($this->pPage);
 
     return view('livewire.sys.security.profile-permission.profile-permission-list', $data);
+  }
+
+  public function search() {
+    $this->advanced_filters = true;
+  }
+
+  public function clean() {
+    $this->module = null;
+    $this->screen = null;
+    $this->profile = null;
+    $this->advanced_filters = false;
+  }
+
+  public function addAdvancedFilters($query) {
+    if ($this->advanced_filters) {
+      if ($this->screen) {
+        $query->where('sidebar_id', $this->screen);
+      }
+
+      if ($this->profile) {
+        $query->where('profile_id', $this->profile);
+      }
+    }
   }
 }

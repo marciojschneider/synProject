@@ -7,7 +7,7 @@
       <div
         class="dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-end flex-md-row flex-column mb-3 mb-md-0">
         {{-- Select registros por página --}}
-        <div class="dataTables_length" style="margin-right: 5px;">
+        <div class="dataTables_length">
           <select wire:model.live.click="pPage" class="form-select">
             <option value="10">10</option>
             <option value="15">15</option>
@@ -15,48 +15,12 @@
           </select>
         </div>
 
-        {{-- Busca por safras --}}
-        <div id="DataTables_Table_0_filter" class="dataTables_filter" bis_skin_checked="1" style="margin-right: 5px;">
-          <select wire:model.live.click="harvest" id="harvest" name="harvest" class="form-select">
-            <option value="" selected> Safra </option>
-            @foreach ($harvests as $harvest)
-              <option value="{{ $harvest->id }}">{{ $harvest->name }}</option>
-            @endforeach
-          </select>
-        </div>
-
-        {{-- Busca por secções --}}
-        <div id="DataTables_Table_0_filter" class="dataTables_filter" bis_skin_checked="1" style="margin-right: 5px;">
-          <select wire:model.live.click="section" id="section" name="section" class="form-select">
-            <option value="" selected> Secções </option>
-            @foreach ($sections as $section)
-              <option value="{{ $section->id }}">{{ $section->name }}</option>
-            @endforeach
-          </select>
-        </div>
-
-        {{-- Busca por talhões --}}
-        <div id="DataTables_Table_0_filter" class="dataTables_filter" bis_skin_checked="1" style="margin-right: 5px;">
-          <select wire:model.live.click="field" id="field" name="field" class="form-select">
-            <option value="" selected> Talhões </option>
-            @foreach ($fields as $field)
-              <option value="{{ $field->id }}">{{ $field->name }}</option>
-            @endforeach
-          </select>
-        </div>
-
-        {{-- Busca por culturas --}}
-        <div id="DataTables_Table_0_filter" class="dataTables_filter" bis_skin_checked="1" style="margin-right: 5px;">
-          <select wire:model.live.click="culture" id="culture" name="culture" class="form-select">
-            <option value="" selected> Culturas </option>
-            @foreach ($cultures as $culture)
-              <option value="{{ $culture->id }}">{{ $culture->name }}</option>
-            @endforeach
-          </select>
-        </div>
-
-        {{-- Botão de novo usuário --}}
-        <div class="dt-buttons" bis_skin_checked="1">
+        {{-- Botões --}}
+        <div class="dt-buttons" bis_skin_checked="1" style="margin-left: 5px; margin-right: 5px; color:#fff">
+          <a class="dt-button btn btn-success" data-bs-toggle="offcanvas" data-bs-target="#filters"><span> <i
+                class='bx bx-search-alt-2'></i> <span class="d-none d-sm-inline-block">Busca avançada</span>
+            </span>
+          </a>
           <a class="dt-button add-new btn btn-primary" href="{{ route('harv-configuration-create') }}"><span> <i
                 class="bx bx-plus me-0 me-sm-1"></i> <span class="d-none d-sm-inline-block">Novo</span>
             </span>
@@ -65,6 +29,65 @@
       </div>
     </div>
   </div>
+
+  <!-- Offcanvas Busca Avançada -->
+  <div class="offcanvas offcanvas-end" data-bs-backdrop="false" tabindex="-1" id="filters"
+    aria-labelledby="filtersLabel" wire:ignore.self>
+    <div class="offcanvas-header">
+      <h5 id="filtersLabel" class="offcanvas-title">Filtrar</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body mx-0 flex-grow-0" style="height: 87%">
+      {{-- Busca por safras --}}
+      <div id="DataTables_Table_0_filter" class="dataTables_filter mb-4" bis_skin_checked="1">
+        <select wire:model="harvest" class="select2 form-select">
+          <option> SAFRA </option>
+          @foreach ($harvests as $harvest)
+            <option value="{{ $harvest->id }}">{{ $harvest->code }} - {{ $harvest->name }}</option>
+          @endforeach
+        </select>
+      </div>
+
+      {{-- Busca por secções --}}
+      <div id="DataTables_Table_0_filter" class="dataTables_filter mb-4" bis_skin_checked="1">
+        <select wire:model="section" class="select2 form-select">
+          <option> SECÇÕES </option>
+          @foreach ($sections as $section)
+            <option value="{{ $section->id }}">{{ $section->code }} - {{ $section->name }}</option>
+          @endforeach
+        </select>
+      </div>
+
+      {{-- Busca por talhões --}}
+      <div id="DataTables_Table_0_filter" class="dataTables_filter mb-4" bis_skin_checked="1">
+        <select wire:model="field" class="select2 form-select">
+          <option> TALHÕES </option>
+          @foreach ($fields as $field)
+            <option value="{{ $field->id }}">{{ $field->code }} - {{ $field->name }}</option>
+          @endforeach
+        </select>
+      </div>
+
+      {{-- Busca por culturas --}}
+      <div id="DataTables_Table_0_filter" class="dataTables_filter mb-4" bis_skin_checked="1">
+        <select wire:model="culture" class="select2 form-select">
+          <option> CULTURAS </option>
+          @foreach ($cultures as $culture)
+            <option value="{{ $culture->id }}">{{ $culture->code }} - {{ $culture->name }}</option>
+          @endforeach
+        </select>
+      </div>
+    </div>
+
+    <div class="offcanvas-body">
+      <div class="d-flex justify-content-between">
+        <button wire:click="search" class="btn btn-success">Buscar</button>
+        <button wire:click="clean" class="btn btn-danger">Limpar</button>
+        <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="offcanvas">Fechar</button>
+      </div>
+    </div>
+  </div>
+
   <div class="card-body">
     <div class="table-responsive text-nowrap">
       <table class="table table-bordered">
@@ -76,7 +99,7 @@
             <th>Cultura</th>
             <th>Variedade</th>
             <th>Método</th>
-            <th>Estabelecimento</th>
+            <th>Organização</th>
             <th>Área Plantio</th>
             <th>Situação</th>
             <th>Ações</th>
@@ -87,11 +110,11 @@
             <tr>
               <td>{{ $row->cHarvest }}</td>
               <td>{{ $row->nSection }}</td>
-              <td>{{ $row->nField }}</td>
-              <td>{{ $row->nCulture }}</td>
-              <td>{{ $row->nVariety }}</td>
-              <td>{{ $row->nPlantingMethod }}</td>
-              <td>{{ $row->nOrganization }}</td>
+              <td>{{ $row->cField }} - {{ $row->nField }}</td>
+              <td>{{ $row->cCulture }} - {{ $row->nCulture }}</td>
+              <td>{{ $row->cVariety }} - {{ $row->nVariety }}</td>
+              <td>{{ $row->cPlantingMethod }} - {{ $row->nPlantingMethod }}</td>
+              <td>{{ $row->cOrganization }}</td>
               <td>{{ number_format(floatval($row->planting_area), 0, ',', '.') }}</td>
               <td><span
                   class="badge {{ $row->situation == 1 ? 'bg-label-primary' : 'bg-label-danger' }} me-1">{{ $row->situation == 1 ? 'Aberto' : 'Fechado' }}</span>

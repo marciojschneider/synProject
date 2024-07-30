@@ -86,7 +86,7 @@
           </div>
 
           <div class="col-md-4">
-            <label for="organization" class="form-label">Estabelecimento</label>
+            <label for="organization" class="form-label">Organização</label>
             <select wire:model="organization" class="form-select" required>
               <option value="" selected> SELECIONAR </option>
               @foreach ($organizations as $organization)

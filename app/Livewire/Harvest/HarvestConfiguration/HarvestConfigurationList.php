@@ -35,6 +35,9 @@ class HarvestConfigurationList extends Component {
   public $cultures = [];
   #[Session] public $culture = null;
 
+  // Filters
+  #[Session] public $advanced_filters = false;
+
   public function mount() {
     $user = auth()->user();
     $this->harvests = Harvest::where('client_id', $user->in_client)->get();
@@ -59,27 +62,46 @@ class HarvestConfigurationList extends Component {
       ->join('planting_methods', 'planting_methods.id', '=', 'harvest_configurations.planting_method_id')
       ->join('organizations', 'organizations.id', '=', 'harvest_configurations.organization_id')
       ->where('harvest_configurations.client_id', $user->in_client)
-      ->select('harvest_configurations.*', 'harvests.code as cHarvest', 'sections.name as nSection', 'fields.name as nField',
-        'cultures.name as nCulture', 'varieties.name as nVariety', 'planting_methods.name as nPlantingMethod', 'organizations.name as nOrganization')
+      ->select('harvest_configurations.*', 'harvests.code as cHarvest', 'sections.code as cSection', 'sections.name as nSection', 'fields.code as cField', 'fields.name as nField',
+        'cultures.code as cCulture', 'cultures.name as nCulture', 'varieties.code as cVariety', 'varieties.name as nVariety', 'planting_methods.code as cPlantingMethod', 'planting_methods.name as nPlantingMethod',
+        'organizations.code as cOrganization')
       ->get();
 
-    if ($this->harvest) {
-      $query->where('harvest_configurations.harvest_id', $this->harvest);
-    }
-
-    if ($this->section) {
-      $query->where('harvest_configurations.section_id', $this->section);
-    }
-
-    if ($this->field) {
-      $query->where('harvest_configurations.field_id', $this->field);
-    }
-
-    if ($this->culture) {
-      $query->where('harvest_configurations.culture_id', $this->culture);
-    }
+    $this->addAdvancedFilters($query);
 
     $data['rows'] = $query->paginate($this->pPage);
     return view('livewire.harvest.harvest-configuration.harvest-configuration-list', $data);
+  }
+
+  public function search() {
+    $this->advanced_filters = true;
+  }
+
+  public function clean() {
+    $this->harvest = null;
+    $this->section = null;
+    $this->field = null;
+    $this->culture = null;
+    $this->advanced_filters = false;
+  }
+
+  public function addAdvancedFilters($query) {
+    if ($this->advanced_filters) {
+      if ($this->harvest) {
+        $query->where('harvest_configurations.harvest_id', $this->harvest);
+      }
+
+      if ($this->section) {
+        $query->where('harvest_configurations.section_id', $this->section);
+      }
+
+      if ($this->field) {
+        $query->where('harvest_configurations.field_id', $this->field);
+      }
+
+      if ($this->culture) {
+        $query->where('harvest_configurations.culture_id', $this->culture);
+      }
+    }
   }
 }

@@ -36,7 +36,7 @@
           <div class="col-md-3">
             <label for="situation" class="form-label">Situação</label>
             <select wire:model="situation" class="form-select">
-              <option value="0">INATIVO</option>
+              <option value="2">INATIVO</option>
               <option value="1">ATIVO</option>
             </select>
           </div>

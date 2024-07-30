@@ -24,22 +24,20 @@ class MachineHourList extends Component {
   public $searchText;
   public $pPage = 10;
 
-  public $filters;
-
   public $organizations = [];
-  #[Session] public $organization = null;
+  #[Session] public $organization;
 
   public $harvests = [];
-  #[Session] public $harvest = null;
+  #[Session] public $harvest;
 
   public $sections = [];
-  #[Session] public $section = null;
+  #[Session] public $section;
 
   public $fields = [];
-  #[Session] public $field = null;
+  #[Session] public $field;
 
   public $processes = [];
-  #[Session] public $process = null;
+  #[Session] public $process;
 
   // Filters
   #[Session] public $advanced_filters = false;

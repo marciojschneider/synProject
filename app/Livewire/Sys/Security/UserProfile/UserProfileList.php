@@ -23,6 +23,9 @@ class UserProfileList extends Component {
   public $profiles = [];
   #[Session] public $profile = null;
 
+  // Filters
+  #[Session] public $advanced_filters = false;
+
   public function mount() {
     $user = auth()->user();
     $this->profiles = Profile::where('client_id', $user->in_client)->get();
@@ -45,13 +48,28 @@ class UserProfileList extends Component {
       $query->where('users.name', 'like', '%' . $this->searchText . '%');
     }
 
-    if ($this->profile) {
-      $query->where('user_profiles.profile_id', $this->profile);
-    }
+    $this->addAdvancedFilters($query);
 
     $query->select('user_profiles.*', 'users.name as uName', 'profiles.name as pName')->get();
 
     $data['rows'] = $query->paginate($this->pPage);
     return view('livewire.sys.security.user-profile.user-profile-list', $data);
+  }
+
+  public function search() {
+    $this->advanced_filters = true;
+  }
+
+  public function clean() {
+    $this->profile = null;
+    $this->advanced_filters = false;
+  }
+
+  public function addAdvancedFilters($query) {
+    if ($this->advanced_filters) {
+      if ($this->profile) {
+        $query->where('user_profiles.profile_id', $this->profile);
+      }
+    }
   }
 }
