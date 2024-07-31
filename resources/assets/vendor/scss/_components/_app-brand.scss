@@ -43,7 +43,7 @@
 // App brand with vertical menu
 .menu-vertical .app-brand {
   padding-right: $menu-vertical-link-padding-x + $menu-vertical-link-margin-x;
-  padding-left: $menu-vertical-link-padding-x + $menu-vertical-link-margin-x;
+  padding-left: $menu-vertical-link-padding-x + $menu-vertical-link-margin-x - 0.3;
 }
 
 // App brand with vertical menu

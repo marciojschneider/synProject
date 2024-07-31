@@ -8,10 +8,11 @@
     <div class="app-brand demo">
       <a href="{{ url('/') }}" class="app-brand-link">
         <span class="app-brand-logo demo pb-2">
-          @include('_partials.macros', ['width' => 25, 'withbg' => 'var(--bs-primary)'])
+          {{-- @include('_partials.macros', ['width' => 25, 'withbg' => 'var(--bs-primary)']) --}}
+          <img src="{{ asset('assets/img/synergya/sidebar.png') }}" style="width: 30px" />
         </span>
-        <span class="app-brand-text demo menu-text fw-bold ms-2"
-          style="text-transform: uppercase !important">{{ config('variables.templateName') }}</span>
+        <span class="app-brand-text demo menu-text fw-bold ms-2 pb-1"
+          style="text-transform: uppercase !important; padding-left: 5%">{{ config('variables.templateName') }}</span>
       </a>
 
       <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">

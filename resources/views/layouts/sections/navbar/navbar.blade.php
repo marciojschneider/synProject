@@ -19,7 +19,8 @@
 @if (isset($navbarFull))
   <div class="navbar-brand app-brand demo d-none d-xl-flex py-0 me-4">
     <a href="{{ url('/') }}" class="app-brand-link gap-2">
-      <span class="app-brand-logo demo">@include('_partials.macros', ['width' => 25, 'withbg' => 'var(--bs-primary)'])</span>
+      {{-- <span class="app-brand-logo demo">@include('_partials.macros', ['width' => 25, 'withbg' => 'var(--bs-primary)'])</span> --}}
+      <span class="app-brand-logo demo"><img src="{{ asset('assets/img/synergya/sidebar.png') }}" /></span>
       <span class="app-brand-text demo menu-text fw-bold">{{ config('variables.templateName') }}</span>
     </a>
 
@@ -86,114 +87,54 @@
           <a class="dropdown-item"
             href="{{ Route::has('profile.show') ? route('profile.show') : 'javascript:void(0);' }}">
             <div class="d-flex">
-              <div class="flex-shrink-0 me-3">
+              <div class="flex-shrink-0 me-3" style="padding-top: 8%">
                 <div class="avatar avatar-online">
                   <img src="{{ asset('assets/img/avatars/1.png') }}" alt class="w-px-40 h-auto rounded-circle">
                 </div>
               </div>
               <div class="flex-grow-1">
-                <span class="fw-medium d-block">
-                  @if (Auth::check())
-                    {{ Auth::user()->name }}
-                  @else
-                    John Doe
-                  @endif
-                </span>
-                <small class="text-muted">Admin</small>
+                @if (Auth::check())
+                  <span class="fw-medium d-block">{{ Auth::user()->name }}</span>
+                  <span class="fw-small">{{ Auth::user()->client->name }}</span></br>
+                  <small class="text-muted">{{ Auth::user()->profile->name }}</small>
+                @else
+                  {{ Auth::logout() }}
+                  {{ redirect()->route('login') }}
+                @endif
               </div>
             </div>
           </a>
         </li>
+        @if (count(Auth::user()->cClients) >= 2 || count(Auth::user()->cProfiles) >= 2)
+          <li>
+            <div class="dropdown-divider"></div>
+          </li>
+        @endif
+        @if (count(Auth::user()->cClients) >= 2)
+          <li>
+            <a class="dropdown-item" href="{{ route('select-client') }}">
+              <i class="bx bx-buildings me-2"></i>
+              <span class="align-middle">Trocar Organização</span>
+            </a>
+          </li>
+        @endif
+        @if (count(Auth::user()->cProfiles) >= 2)
+          <li>
+            <a class="dropdown-item" href="{{ route('select-profile') }}">
+              <i class='bx bx-briefcase-alt-2 me-2'></i>
+              <span class="align-middle">Trocar Perfil</span>
+            </a>
+          </li>
+        @endif
         <li>
           <div class="dropdown-divider"></div>
         </li>
         <li>
-          <a class="dropdown-item"
-            href="{{ Route::has('profile.show') ? route('profile.show') : 'javascript:void(0);' }}">
-            <i class="bx bx-user me-2"></i>
-            <span class="align-middle">My Profile</span>
+          <a class="dropdown-item" href="{{ route('logout') }}">
+            <i class='bx bx-power-off me-2'></i>
+            <span class="align-middle">Sair</span>
           </a>
         </li>
-        @if (Auth::check() && Laravel\Jetstream\Jetstream::hasApiFeatures())
-          <li>
-            <a class="dropdown-item" href="{{ route('api-tokens.index') }}">
-              <i class='bx bx-key me-2'></i>
-              <span class="align-middle">API Tokens</span>
-            </a>
-          </li>
-        @endif
-        <li>
-          <a class="dropdown-item" href="javascript:void(0);">
-            <i class="bx bx-credit-card me-2"></i>
-            <span class="align-middle">Billing</span>
-          </a>
-        </li>
-        @if (Auth::User() && Laravel\Jetstream\Jetstream::hasTeamFeatures())
-          <li>
-            <div class="dropdown-divider"></div>
-          </li>
-          <li>
-            <h6 class="dropdown-header">Manage Team</h6>
-          </li>
-          <li>
-            <div class="dropdown-divider"></div>
-          </li>
-          <li>
-            <a class="dropdown-item"
-              href="{{ Auth::user() ? route('teams.show', Auth::user()->currentTeam->id) : 'javascript:void(0)' }}">
-              <i class='bx bx-cog me-2'></i>
-              <span class="align-middle">Team Settings</span>
-            </a>
-          </li>
-          @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
-            <li>
-              <a class="dropdown-item" href="{{ route('teams.create') }}">
-                <i class='bx bx-user me-2'></i>
-                <span class="align-middle">Create New Team</span>
-              </a>
-            </li>
-          @endcan
-          @if (Auth::user()->allTeams()->count() > 1)
-            <li>
-              <div class="dropdown-divider"></div>
-            </li>
-            <li>
-              <h6 class="dropdown-header">Switch Teams</h6>
-            </li>
-            <li>
-              <div class="dropdown-divider"></div>
-            </li>
-          @endif
-          @if (Auth::user())
-            @foreach (Auth::user()->allTeams() as $team)
-              {{-- Below commented code read by artisan command while installing jetstream. !! Do not remove if you want to use jetstream. --}}
-
-              {{-- <x-switchable-team :team="$team" /> --}}
-            @endforeach
-          @endif
-        @endif
-        <li>
-          <div class="dropdown-divider"></div>
-        </li>
-        @if (Auth::check())
-          <li>
-            <a class="dropdown-item" href="{{ route('logout') }}"
-              onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-              <i class='bx bx-power-off me-2'></i>
-              <span class="align-middle">Logout</span>
-            </a>
-          </li>
-          <form method="POST" id="logout-form" action="{{ route('logout') }}">
-            @csrf
-          </form>
-        @else
-          <li>
-            <a class="dropdown-item" href="{{ route('login') }}">
-              <i class='bx bx-log-in me-2'></i>
-              <span class="align-middle">Login</span>
-            </a>
-          </li>
-        @endif
       </ul>
     </li>
     <!--/ User -->

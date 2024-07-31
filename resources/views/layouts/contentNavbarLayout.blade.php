@@ -9,7 +9,7 @@
 @php
   /* Display elements */
   $contentNavbar = $contentNavbar ?? true;
-  $containerNav = $containerNav ?? 'container-xxl';
+  $containerNav = $containerNav ?? 'container-fluid';
   $isNavbar = $isNavbar ?? true;
   $isMenu = $isMenu ?? true;
   $isFlex = $isFlex ?? false;
