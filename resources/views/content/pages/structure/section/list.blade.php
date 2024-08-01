@@ -7,7 +7,7 @@
 @section('title', 'Fazenda')
 
 @section('vendor-style')
-  @vite(['resources/assets/vendor/libs/select2/select2.scss', 'resources/assets/vendor/libs/animate-css/animate.scss', 'resources/assets/vendor/libs/sweetalert2/sweetalert2.scss', 'resources/assets/vendor/libs/plyr/plyr.scss'])
+  @vite(['resources/assets/vendor/libs/bootstrap-select/bootstrap-select.scss', 'resources/assets/vendor/libs/animate-css/animate.scss', 'resources/assets/vendor/libs/sweetalert2/sweetalert2.scss', 'resources/assets/vendor/libs/plyr/plyr.scss'])
 @endsection
 
 @section('page-style')
@@ -15,7 +15,7 @@
 @endsection
 
 @section('vendor-script')
-  @vite(['resources/assets/vendor/libs/select2/select2.js', 'resources/assets/vendor/libs/sweetalert2/sweetalert2.js', 'resources/assets/vendor/libs/plyr/plyr.js'])
+  @vite(['resources/assets/vendor/libs/bootstrap-select/bootstrap-select.js', 'resources/assets/vendor/libs/sweetalert2/sweetalert2.js', 'resources/assets/vendor/libs/plyr/plyr.js'])
 @endsection
 
 @section('page-script')
@@ -25,3 +25,42 @@
 @section('content')
   <livewire:structure.section.section-list />
 @endsection
+
+<script>
+  function cleanFilters() {
+    $('.selectpicker').selectpicker('val', null);
+  }
+
+  function removeModal(id) {
+    Swal.fire({
+      title: 'Você tem certeza?',
+      text: "Essa ação não será revertida!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sim, deletar isso!',
+      cancelButtonText: 'Cancelar',
+      customClass: {
+        confirmButton: 'btn btn-primary me-3',
+        cancelButton: 'btn btn-label-secondary'
+      },
+      buttonsStyling: false
+    }).then(function(result) {
+      if (result.value) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Deletado!',
+          text: 'O registro foi removido do sistema.',
+          customClass: {
+            confirmButton: 'btn btn-success'
+          }
+        }).then(function(result) {
+          sendDelete(id)
+        });
+      }
+    });
+  }
+
+  function sendDelete(id) {
+    document.getElementById('sectionDelete' + id).submit();
+  }
+</script>

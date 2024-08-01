@@ -45,9 +45,9 @@
     </div>
     <div class="offcanvas-body mx-0 flex-grow-0" style="height: 87%">
       {{-- Busca por Fazenda --}}
-      <div id="DataTables_Table_0_filter" class="dataTables_filter mb-4" bis_skin_checked="1">
-        <select wire:model="farm" class="select2 form-select">
-          <option> FAZENDA </option>
+      <div id="farmContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
+        <select wire:model="farm" class="selectpicker col-sm-12" data-style="btn-default" data-live-search="true"
+          placeholder="FAZENDA" data-container="#farmContainer">
           @foreach ($farms as $farm)
             <option value="{{ $farm->id }}"> {{ $farm->code }} - {{ mb_strtoupper($farm->name, 'UTF-8') }}
             </option>
@@ -56,9 +56,9 @@
       </div>
 
       {{-- Busca por Localidade --}}
-      <div id="DataTables_Table_0_filter" class="dataTables_filter mb-4" bis_skin_checked="1">
-        <select wire:model="locality" class="select2 form-select">
-          <option> LOCALIDADE </option>
+      <div id="localityContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
+        <select wire:model="locality" class="selectpicker col-sm-12" data-style="btn-default" data-live-search="true"
+          placeholder="LOCALIDADE" data-container="#localityContainer">
           @foreach ($localities as $locality)
             <option value="{{ $locality->id }}">{{ $locality->code }} - {{ mb_strtoupper($locality->name, 'UTF-8') }}
             </option>
@@ -70,7 +70,7 @@
     <div class="offcanvas-body">
       <div class="d-flex justify-content-between">
         <button wire:click="search" class="btn btn-success">Buscar</button>
-        <button wire:click="clean" class="btn btn-danger">Limpar</button>
+        <button wire:click="clean" onclick="cleanFilters()" class="btn btn-danger">Limpar</button>
         <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="offcanvas">Fechar</button>
       </div>
     </div>
@@ -130,38 +130,3 @@
     </div>
   </div>
 </div>
-
-<script>
-  function removeModal(id) {
-    Swal.fire({
-      title: 'Você tem certeza?',
-      text: "Essa ação não será revertida!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Sim, deletar isso!',
-      cancelButtonText: 'Cancelar',
-      customClass: {
-        confirmButton: 'btn btn-primary me-3',
-        cancelButton: 'btn btn-label-secondary'
-      },
-      buttonsStyling: false
-    }).then(function(result) {
-      if (result.value) {
-        Swal.fire({
-          icon: 'success',
-          title: 'Deletado!',
-          text: 'O registro foi removido do sistema.',
-          customClass: {
-            confirmButton: 'btn btn-success'
-          }
-        }).then(function(result) {
-          sendDelete(id)
-        });
-      }
-    });
-  }
-
-  function sendDelete(id) {
-    document.getElementById('fieldDelete' + id).submit();
-  }
-</script>
