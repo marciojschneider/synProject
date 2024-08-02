@@ -46,8 +46,8 @@
     <div class="offcanvas-body mx-0 flex-grow-0" style="height: 87%">
       {{-- Busca por Fazenda --}}
       <div id="farmContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
-        <select wire:model="farm" class="selectpicker col-sm-12" data-style="btn-default" data-live-search="true"
-          placeholder="FAZENDA" data-container="#farmContainer">
+        <select wire:model="farm" id="farm" class="selectpicker col-sm-12" data-style="btn-default"
+          data-live-search="true" placeholder="FAZENDA" data-container="#farmContainer">
           @foreach ($farms as $farm)
             <option value="{{ $farm->id }}">{{ $farm->code }} - {{ mb_strtoupper($farm->name, 'UTF-8') }}</option>
           @endforeach

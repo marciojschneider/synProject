@@ -17,8 +17,8 @@ class SectionList extends Component {
   // Variaveis
   #[Session] public $searchText;
   public $pPage = 10;
-  public $orgs = [];
-  #[Session] public $org = null;
+  public $organizations = [];
+  #[Session] public $organization = null;
 
   // Filters
   #[Session] public $advanced_filters = false;
@@ -26,7 +26,7 @@ class SectionList extends Component {
   public function mount() {
     $user = auth()->user();
 
-    $this->orgs = Organization::where('client_id', $user->in_client)->get();
+    $this->organizations = Organization::where('client_id', $user->in_client)->get();
   }
 
   public function updated() {
@@ -34,6 +34,9 @@ class SectionList extends Component {
   }
 
   public function render() {
+    // Caso haja dados selecionados, envia para a tela.
+    $this->dispatch('loadDataSelect', ['organization' => $this->organization]);
+
     $user = auth()->user();
     $query = Section::query();
 
@@ -59,14 +62,14 @@ class SectionList extends Component {
   }
 
   public function clean() {
-    $this->org = null;
+    $this->organization = null;
     $this->advanced_filters = false;
   }
 
   public function addAdvancedFilters($query) {
     if ($this->advanced_filters) {
-      if ($this->org) {
-        $query->where('sections.organization_id', $this->org);
+      if ($this->organization) {
+        $query->where('sections.organization_id', $this->organization);
       }
     }
   }

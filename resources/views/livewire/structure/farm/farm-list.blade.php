@@ -46,8 +46,8 @@
     <div class="offcanvas-body mx-0 flex-grow-0" style="height: 87%">
       {{-- Busca por Propriedade --}}
       <div id="propertyContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
-        <select wire:model="property" class="selectpicker col-sm-12" data-style="btn-default" data-live-search="true"
-          placeholder="PROPRIEDADE" data-container="#propertyContainer">
+        <select wire:model="property" id="property" class="selectpicker col-sm-12" data-style="btn-default"
+          data-live-search="true" placeholder="PROPRIEDADE" data-container="#propertyContainer">
           <option value="1">PRÓPRIO</option>
           <option value="2">TERCEIRO</option>
         </select>
@@ -55,8 +55,8 @@
 
       {{-- Busca por Situação --}}
       <div id="situationContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
-        <select wire:model="situation" class="selectpicker col-sm-12" data-style="btn-default" data-live-search="true"
-          placeholder="SITUAÇÃO" data-container="#situationContainer">
+        <select wire:model="situation" id="situation" class="selectpicker col-sm-12" data-style="btn-default"
+          data-live-search="true" placeholder="SITUAÇÃO" data-container="#situationContainer">
           <option value="1">ATIVO</option>
           <option value="2">INATIVO</option>
         </select>

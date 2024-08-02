@@ -39,9 +39,9 @@
     </div>
     <div class="offcanvas-body mx-0 flex-grow-0" style="height: 87%">
       {{-- Busca por safras --}}
-      <div id="DataTables_Table_0_filter" class="dataTables_filter mb-4" bis_skin_checked="1">
-        <select wire:model="harvest" class="select2 form-select">
-          <option> SAFRA </option>
+      <div id="harvestContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
+        <select wire:model="harvest" id="harvest" class="selectpicker col-sm-12" data-style="btn-default"
+          data-live-search="true" placeholder="SAFRA" data-container="#harvestContainer">
           @foreach ($harvests as $harvest)
             <option value="{{ $harvest->id }}">{{ $harvest->code }} - {{ $harvest->name }}</option>
           @endforeach
@@ -49,19 +49,19 @@
       </div>
 
       {{-- Busca por secções --}}
-      <div id="DataTables_Table_0_filter" class="dataTables_filter mb-4" bis_skin_checked="1">
-        <select wire:model="section" class="select2 form-select">
-          <option> SECÇÕES </option>
+      <div id="sectionContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
+        <select wire:model="section" id="section" class="selectpicker col-sm-12" data-style="btn-default"
+          data-live-search="true" placeholder="SECÇÃO" data-container="#sectionContainer">
           @foreach ($sections as $section)
-            <option value="{{ $section->id }}">{{ $section->code }} - {{ $section->name }}</option>
+            <option value="{{ $section->id }}">{{ $section->code }} - {{ $section->name }} </option>
           @endforeach
         </select>
       </div>
 
       {{-- Busca por talhões --}}
-      <div id="DataTables_Table_0_filter" class="dataTables_filter mb-4" bis_skin_checked="1">
-        <select wire:model="field" class="select2 form-select">
-          <option> TALHÕES </option>
+      <div id="fieldContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
+        <select wire:model="field" id="field" class="selectpicker col-sm-12" data-style="btn-default"
+          data-live-search="true" placeholder="TALHÃO" data-container="#fieldContainer">
           @foreach ($fields as $field)
             <option value="{{ $field->id }}">{{ $field->code }} - {{ $field->name }}</option>
           @endforeach
@@ -69,9 +69,9 @@
       </div>
 
       {{-- Busca por culturas --}}
-      <div id="DataTables_Table_0_filter" class="dataTables_filter mb-4" bis_skin_checked="1">
-        <select wire:model="culture" class="select2 form-select">
-          <option> CULTURAS </option>
+      <div id="cultureContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
+        <select wire:model="culture" id="culture" class="selectpicker col-sm-12" data-style="btn-default"
+          data-live-search="true" placeholder="CULTURA" data-container="#cultureContainer">
           @foreach ($cultures as $culture)
             <option value="{{ $culture->id }}">{{ $culture->code }} - {{ $culture->name }}</option>
           @endforeach
@@ -82,7 +82,7 @@
     <div class="offcanvas-body">
       <div class="d-flex justify-content-between">
         <button wire:click="search" class="btn btn-success">Buscar</button>
-        <button wire:click="clean" class="btn btn-danger">Limpar</button>
+        <button wire:click="clean" onclick="cleanFilters()" class="btn btn-danger">Limpar</button>
         <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="offcanvas">Fechar</button>
       </div>
     </div>
@@ -144,38 +144,3 @@
     </div>
   </div>
 </div>
-
-<script>
-  function removeModal(id) {
-    Swal.fire({
-      title: 'Você tem certeza?',
-      text: "Essa ação não será revertida!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Sim, deletar isso!',
-      cancelButtonText: 'Cancelar',
-      customClass: {
-        confirmButton: 'btn btn-primary me-3',
-        cancelButton: 'btn btn-label-secondary'
-      },
-      buttonsStyling: false
-    }).then(function(result) {
-      if (result.value) {
-        Swal.fire({
-          icon: 'success',
-          title: 'Deletado!',
-          text: 'O registro foi removido do sistema.',
-          customClass: {
-            confirmButton: 'btn btn-success'
-          }
-        }).then(function(result) {
-          sendDelete(id)
-        });
-      }
-    });
-  }
-
-  function sendDelete(id) {
-    document.getElementById('harvestConfigurationDelete' + id).submit();
-  }
-</script>

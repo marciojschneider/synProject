@@ -42,6 +42,9 @@ class FieldList extends Component {
   }
 
   public function render() {
+    // Caso haja dados selecionados, envia para a tela.
+    $this->dispatch('loadDataSelect', ['farm' => $this->farm, 'locality' => $this->locality]);
+
     $query = Field::query();
 
     $query->join('farms', 'farms.id', '=', 'fields.farm_id');

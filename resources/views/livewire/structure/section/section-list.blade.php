@@ -45,12 +45,12 @@
     </div>
     <div class="offcanvas-body mx-0 flex-grow-0" style="height: 87%">
       {{-- Busca por Organização --}}
-      <div id="orgContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
-        <select wire:model="org" class="selectpicker col-sm-12" data-style="btn-default" data-live-search="true"
-          placeholder="ORGANIZAÇÃO" data-container="#orgContainer">
-          @foreach ($orgs as $org)
-            <option value="{{ $org->id }}">{{ mb_strtoupper($org->code, 'UTF-8') }} -
-              {{ mb_strtoupper($org->name, 'UTF-8') }}</option>
+      <div id="organizationContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
+        <select wire:model="organization" id="organization" class="selectpicker col-sm-12" data-style="btn-default"
+          data-live-search="true" placeholder="ORGANIZAÇÃO" data-container="#organizationContainer">
+          @foreach ($organizations as $organization)
+            <option value="{{ $organization->id }}">{{ $organization->code }} -
+              {{ mb_strtoupper($organization->name, 'UTF-8') }}</option>
           @endforeach
         </select>
       </div>

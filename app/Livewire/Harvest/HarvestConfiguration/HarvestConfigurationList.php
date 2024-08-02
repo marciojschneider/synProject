@@ -51,6 +51,9 @@ class HarvestConfigurationList extends Component {
   }
 
   public function render() {
+    // Caso haja dados selecionados, envia para a tela.
+    $this->dispatch('loadDataSelect', ['harvest' => $this->harvest, 'section' => $this->section, 'field' => $this->field, 'culture' => $this->culture]);
+
     $user = auth()->user();
     $query = HarvestConfiguration::query();
 

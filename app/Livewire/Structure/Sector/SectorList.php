@@ -36,6 +36,9 @@ class SectorList extends Component {
   }
 
   public function render() {
+    // Caso haja dados selecionados, envia para a tela.
+    $this->dispatch('loadDataSelect', ['farm' => $this->farm]);
+
     $user = auth()->user();
     $query = Sector::query();
 

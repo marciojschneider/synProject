@@ -46,8 +46,8 @@
     <div class="offcanvas-body mx-0 flex-grow-0" style="height: 87%">
       {{-- Busca por Fazenda --}}
       <div id="farmContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
-        <select wire:model="farm" class="selectpicker col-sm-12" data-style="btn-default" data-live-search="true"
-          placeholder="FAZENDA" data-container="#farmContainer">
+        <select wire:model="farm" id="farm" class="selectpicker col-sm-12" data-style="btn-default"
+          data-live-search="true" placeholder="FAZENDA" data-container="#farmContainer">
           @foreach ($farms as $farm)
             <option value="{{ $farm->id }}"> {{ $farm->code }} - {{ mb_strtoupper($farm->name, 'UTF-8') }}
             </option>
@@ -57,8 +57,8 @@
 
       {{-- Busca por Localidade --}}
       <div id="localityContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
-        <select wire:model="locality" class="selectpicker col-sm-12" data-style="btn-default" data-live-search="true"
-          placeholder="LOCALIDADE" data-container="#localityContainer">
+        <select wire:model="locality" id="locality" class="selectpicker col-sm-12" data-style="btn-default"
+          data-live-search="true" placeholder="LOCALIDADE" data-container="#localityContainer">
           @foreach ($localities as $locality)
             <option value="{{ $locality->id }}">{{ $locality->code }} - {{ mb_strtoupper($locality->name, 'UTF-8') }}
             </option>

@@ -7,19 +7,15 @@
 @section('title', 'Setores')
 
 @section('vendor-style')
-  @vite(['resources/assets/vendor/libs/bootstrap-select/bootstrap-select.scss', 'resources/assets/vendor/libs/animate-css/animate.scss', 'resources/assets/vendor/libs/sweetalert2/sweetalert2.scss', 'resources/assets/vendor/libs/plyr/plyr.scss'])
-@endsection
-
-@section('page-style')
-  @vite('resources/assets/vendor/scss/pages/app-academy-details.scss')
+  @vite(['resources/assets/vendor/libs/bootstrap-select/bootstrap-select.scss', 'resources/assets/vendor/libs/animate-css/animate.scss', 'resources/assets/vendor/libs/sweetalert2/sweetalert2.scss'])
 @endsection
 
 @section('vendor-script')
-  @vite(['resources/assets/vendor/libs/bootstrap-select/bootstrap-select.js', 'resources/assets/vendor/libs/sweetalert2/sweetalert2.js', 'resources/assets/vendor/libs/plyr/plyr.js'])
+  @vite(['resources/assets/vendor/libs/bootstrap-select/bootstrap-select.js', 'resources/assets/vendor/libs/sweetalert2/sweetalert2.js'])
 @endsection
 
 @section('page-script')
-  @vite(['resources/assets/js/forms-selects.js', 'resources/assets/js/extended-ui-sweetalert2.js', 'resources/assets/js/app-academy-course-details.js'])
+  @vite(['resources/assets/js/forms-selects.js', 'resources/assets/js/extended-ui-sweetalert2.js'])
 @endsection
 
 @section('content')
@@ -27,6 +23,10 @@
 @endsection
 
 <script>
+  window.addEventListener('loadDataSelect', event => {
+    $('#farm').selectpicker('val', event.detail[0].farm)
+  })
+
   function cleanFilters() {
     $('.selectpicker').selectpicker('val', null);
   }

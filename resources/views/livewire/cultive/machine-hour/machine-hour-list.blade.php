@@ -45,9 +45,9 @@
     </div>
     <div class="offcanvas-body mx-0 flex-grow-0" style="height: 87%">
       {{-- Busca por Organização --}}
-      <div class="mb-4" bis_skin_checked="1">
-        <select wire:model="organization" class="select2 form-select">
-          <option> ORGANIZAÇÃO </option>
+      <div id="organizationContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
+        <select wire:model="organization" class="selectpicker col-sm-12" data-style="btn-default"
+          data-live-search="true" placeholder="ORGANIZAÇÃO" data-container="#organizationContainer">
           @foreach ($organizations as $organization)
             <option value="{{ $organization->id }}">{{ $organization->code }} -
               {{ mb_strtoupper($organization->name, 'UTF-8') }}</option>
@@ -56,9 +56,9 @@
       </div>
 
       {{-- Busca por Safra --}}
-      <div class="mb-4" bis_skin_checked="1">
-        <select wire:model="harvest" class="select2 form-select">
-          <option> SAFRA </option>
+      <div id="harvestContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
+        <select wire:model="harvest" class="selectpicker col-sm-12" data-style="btn-default" data-live-search="true"
+          placeholder="SAFRA" data-container="#harvestContainer">
           @foreach ($harvests as $harvest)
             <option value="{{ $harvest->id }}">{{ $harvest->code }} -
               {{ mb_strtoupper($harvest->name, 'UTF-8') }}</option>
@@ -67,9 +67,9 @@
       </div>
 
       {{-- Busca por organização --}}
-      <div class="mb-4" bis_skin_checked="1">
-        <select wire:model="section" class="select2 form-select">
-          <option> SECÇÃO </option>
+      <div id="sectionContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
+        <select wire:model="section" class="selectpicker col-sm-12" data-style="btn-default" data-live-search="true"
+          placeholder="SECÇÃO" data-container="#sectionContainer">
           @foreach ($sections as $section)
             <option value="{{ $section->id }}">{{ $section->code }} -
               {{ mb_strtoupper($section->name, 'UTF-8') }}</option>
@@ -77,9 +77,9 @@
         </select>
       </div>
       {{-- Busca por organização --}}
-      <div class="mb-4" bis_skin_checked="1">
-        <select wire:model="field" class="select2 form-select">
-          <option> TALHÃO </option>
+      <div id="fieldContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
+        <select wire:model="field" class="selectpicker col-sm-12" data-style="btn-default" data-live-search="true"
+          placeholder="TALHÃO" data-container="#fieldContainer">
           @foreach ($fields as $field)
             <option value="{{ $field->id }}">{{ $field->code }} -
               {{ mb_strtoupper($field->name, 'UTF-8') }}</option>
@@ -88,9 +88,9 @@
       </div>
 
       {{-- Busca por Processo --}}
-      <div class="mb-4" bis_skin_checked="1">
-        <select wire:model="process" class="select2 form-select">
-          <option> PROCESSO </option>
+      <div id="processContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
+        <select wire:model="process" class="selectpicker col-sm-12" data-style="btn-default" data-live-search="true"
+          placeholder="PROCESSO" data-container="#processContainer">
           @foreach ($processes as $process)
             <option value="{{ $process->id }}">{{ $process->code }} -
               {{ mb_strtoupper($process->name, 'UTF-8') }}</option>
@@ -99,18 +99,18 @@
       </div>
 
       {{-- Busca por Equipamento --}}
-      <div class="mb-4" bis_skin_checked="1">
-        <select wire:model="equipament" class="select2 form-select">
-          <option> EQUIPAMENTO </option>
+      <div id="equipamentContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
+        <select wire:model="equipament" class="selectpicker col-sm-12" data-style="btn-default"
+          data-live-search="true" placeholder="EQUIPAMENTO" data-container="#equipamentContainer">
           <option value="1">EQUIPAMENTO FICTICIO 01</option>
           <option value="2">EQUIPAMENTO FICTICIO 02</option>
         </select>
       </div>
 
       {{-- Busca por Implemento --}}
-      <div class="mb-4" bis_skin_checked="1">
-        <select wire:model="implement" class="select2 form-select">
-          <option> IMPLEMENTO </option>
+      <div id="implementContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
+        <select wire:model="implement" class="selectpicker col-sm-12" data-style="btn-default"
+          data-live-search="true" placeholder="IMPLEMENTO" data-container="#implementContainer">
           <option value="1">IMPLEMENTO FICTICIO 01</option>
           <option value="2">IMPLEMENTO FICTICIO 02</option>
         </select>
@@ -120,7 +120,7 @@
     <div class="offcanvas-body">
       <div class="d-flex justify-content-between">
         <button wire:click="search" class="btn btn-success">Buscar</button>
-        <button wire:click="clean" class="btn btn-danger">Limpar</button>
+        <button wire:click="clean" onclick="cleanFilters()" class="btn btn-danger">Limpar</button>
         <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="offcanvas">Fechar</button>
       </div>
     </div>
@@ -197,38 +197,3 @@
     </div>
   </div>
 </div>
-
-<script>
-  function removeModal(id) {
-    Swal.fire({
-      title: 'Você tem certeza?',
-      text: "Essa ação não será revertida!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Sim, deletar isso!',
-      cancelButtonText: 'Cancelar',
-      customClass: {
-        confirmButton: 'btn btn-primary me-3',
-        cancelButton: 'btn btn-label-secondary'
-      },
-      buttonsStyling: false
-    }).then(function(result) {
-      if (result.value) {
-        Swal.fire({
-          icon: 'success',
-          title: 'Deletado!',
-          text: 'O registro foi removido do sistema.',
-          customClass: {
-            confirmButton: 'btn btn-success'
-          }
-        }).then(function(result) {
-          sendDelete(id)
-        });
-      }
-    });
-  }
-
-  function sendDelete(id) {
-    document.getElementById('machineHourDelete' + id).submit();
-  }
-</script>

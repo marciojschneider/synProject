@@ -33,6 +33,9 @@ class FarmList extends Component {
   }
 
   public function render() {
+    // Caso haja dados selecionados, envia para a tela.
+    $this->dispatch('loadDataSelect', ['situation' => $this->situation, 'property' => $this->property]);
+
     $user = auth()->user();
     $query = Farm::query();
 
