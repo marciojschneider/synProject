@@ -4,6 +4,7 @@ namespace App\Livewire\Cultive\Group;
 
 use Livewire\Component;
 // Livewire Adicionais
+use Livewire\Attributes\Session;
 use Livewire\WithPagination;
 // Models
 use App\Models\Group;
@@ -13,7 +14,7 @@ class GroupList extends Component {
   protected $paginationTheme = 'bootstrap';
 
   // Variaveis
-  public $searchText;
+  #[Session] public $searchText;
   public $pPage = 10;
 
   public function mount() {

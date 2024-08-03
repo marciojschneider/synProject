@@ -75,38 +75,3 @@
     </div>
   </div>
 </div>
-
-<script>
-  function removeModal(id) {
-    Swal.fire({
-      title: 'Você tem certeza?',
-      text: "Essa ação não será revertida!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Sim, deletar isso!',
-      cancelButtonText: 'Cancelar',
-      customClass: {
-        confirmButton: 'btn btn-primary me-3',
-        cancelButton: 'btn btn-label-secondary'
-      },
-      buttonsStyling: false
-    }).then(function(result) {
-      if (result.value) {
-        Swal.fire({
-          icon: 'success',
-          title: 'Deletado!',
-          text: 'O registro foi removido do sistema.',
-          customClass: {
-            confirmButton: 'btn btn-success'
-          }
-        }).then(function(result) {
-          sendDelete(id)
-        });
-      }
-    });
-  }
-
-  function sendDelete(id) {
-    document.getElementById('localityDelete' + id).submit();
-  }
-</script>

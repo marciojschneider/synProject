@@ -21,7 +21,7 @@ class MachineHourList extends Component {
   protected $paginationTheme = 'bootstrap';
 
   // Variaveis
-  public $searchText;
+  #[Session] public $searchText;
   public $pPage = 10;
 
   public $organizations = [];
@@ -58,6 +58,15 @@ class MachineHourList extends Component {
   }
 
   public function render() {
+    // Caso haja dados selecionados, envia para a tela.
+    $this->dispatch('loadDataSelect', [
+      'organization' => $this->organization,
+      'harvest' => $this->harvest,
+      'section' => $this->sections,
+      'field' => $this->field,
+      'process' => $this->process]
+    );
+
     $query = MachineHour::query();
 
     $query->join('organizations', 'organizations.id', '=', 'machine_hours.organization_id');

@@ -4,6 +4,7 @@ namespace App\Livewire\Cultive\Variety;
 
 use Livewire\Component;
 // Livewire Adicionais
+use Livewire\Attributes\Session;
 use Livewire\WithPagination;
 // Models
 use App\Models\Variety;
@@ -13,7 +14,7 @@ class VarietyList extends Component {
   protected $paginationTheme = 'bootstrap';
 
   // Variaveis
-  public $searchText;
+  #[Session] public $searchText;
   public $pPage = 10;
 
   public function mount() {

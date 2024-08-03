@@ -5,6 +5,7 @@ namespace App\Livewire\Support\Roadmap;
 use Livewire\Component;
 
 // Livewire adicionais
+use Livewire\Attributes\Session;
 use Livewire\WithPagination;
 
 // Models
@@ -18,7 +19,7 @@ class RoadmapList extends Component {
   public $sidebars;
 
   // Variaveis
-  public $searchText;
+  #[Session] public $searchText;
   public $sidebar;
   public $situation;
   public $pPage = 5;

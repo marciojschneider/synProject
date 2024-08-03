@@ -36,6 +36,9 @@ class UserProfileList extends Component {
   }
 
   public function render() {
+    // Caso haja dados selecionados, envia para a tela.
+    $this->dispatch('loadDataSelect', ['profile' => $this->profile]);
+
     $user = auth()->user();
 
     $query = UserProfile::query();

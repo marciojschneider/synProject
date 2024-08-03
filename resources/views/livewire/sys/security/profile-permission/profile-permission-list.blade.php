@@ -39,9 +39,9 @@
     </div>
     <div class="offcanvas-body mx-0 flex-grow-0" style="height: 87%">
       {{-- Busca por módulo --}}
-      <div id="DataTables_Table_0_filter" class="dataTables_filter mb-4" bis_skin_checked="1">
-        <select wire:model.live.click="module" class="select2 form-select">
-          <option> MÓDULO </option>
+      <div id="moduleContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
+        <select wire:model.live.click="module" id="module" class="selectpicker col-sm-12" data-style="btn-default"
+          data-live-search="true" placeholder="MÓDULO" data-container="#moduleContainer">
           @foreach ($modules as $module)
             <option value="{{ $module->id }}">{{ mb_strtoupper($module->name, 'UTF-8') }}</option>
           @endforeach
@@ -49,9 +49,13 @@
       </div>
 
       {{-- Busca por Tela --}}
-      <div id="DataTables_Table_0_filter" class="dataTables_filter mb-4" bis_skin_checked="1">
-        <select wire:model="screen" class="select2 form-select">
-          <option> TELA </option>
+      <div id="screenContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
+        <select wire:model="screen" id="screen" class="selectpicker col-sm-12" data-style="btn-default"
+          data-live-search="true" placeholder="TELA" data-container="#screenContainer">
+          @if (!$screens)
+            <option> SEM REGISTROS </option>
+          @endif
+
           @foreach ($screens as $screen)
             <option value="{{ $screen->id }}">{{ mb_strtoupper($screen->name, 'UTF-8') }}</option>
           @endforeach
@@ -59,9 +63,9 @@
       </div>
 
       {{-- Busca por Perfil --}}
-      <div id="DataTables_Table_0_filter" class="dataTables_filter mb-4" bis_skin_checked="1">
-        <select wire:model="profile" class="select2 form-select">
-          <option> PERFIL </option>
+      <div id="profileContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
+        <select wire:model="profile" id="profile" class="selectpicker col-sm-12" data-style="btn-default"
+          data-live-search="true" placeholder="PERFIL" data-container="#profileContainer">
           @foreach ($profiles as $profile)
             <option value="{{ $profile->id }}">{{ mb_strtoupper($profile->name, 'UTF-8') }}</option>
           @endforeach
@@ -72,7 +76,7 @@
     <div class="offcanvas-body">
       <div class="d-flex justify-content-between">
         <button wire:click="search" class="btn btn-success">Buscar</button>
-        <button wire:click="clean" class="btn btn-danger">Limpar</button>
+        <button wire:click="clean" onclick="cleanFilters()" class="btn btn-danger">Limpar</button>
         <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="offcanvas">Fechar</button>
       </div>
     </div>
@@ -135,38 +139,3 @@
     </div>
   </div>
 </div>
-
-<script>
-  function removeModal(id) {
-    Swal.fire({
-      title: 'Você tem certeza?',
-      text: "Essa ação não será revertida!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Sim, deletar isso!',
-      cancelButtonText: 'Cancelar',
-      customClass: {
-        confirmButton: 'btn btn-primary me-3',
-        cancelButton: 'btn btn-label-secondary'
-      },
-      buttonsStyling: false
-    }).then(function(result) {
-      if (result.value) {
-        Swal.fire({
-          icon: 'success',
-          title: 'Deletado!',
-          text: 'O registro foi removido do sistema.',
-          customClass: {
-            confirmButton: 'btn btn-success'
-          }
-        }).then(function(result) {
-          sendDelete(id)
-        });
-      }
-    });
-  }
-
-  function sendDelete(id) {
-    document.getElementById('permissionDelete' + id).submit();
-  }
-</script>

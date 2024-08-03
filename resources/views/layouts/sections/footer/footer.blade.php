@@ -14,7 +14,8 @@
         document.write(new Date().getFullYear())
       </script>, desenvolvido por <a
         href="{{ !empty(config('variables.creatorUrl')) ? config('variables.creatorUrl') : '' }}" target="_blank"
-        class="footer-link fw-medium">{{ !empty(config('variables.creatorName')) ? config('variables.creatorName') : '' }}</a>
+        class="footer-link fw-medium">{{ !empty(config('variables.creatorName')) ? config('variables.creatorName') : '' }}
+      </a> e <a href="https://www.instagram.com/kettlow/" target="_blank" class="footer-link fw-medium"> Kettlow </a>
     </div>
     <div class="d-none d-lg-inline-block">
       {{-- <a href="{{ config('variables.licenseUrl') ? config('variables.licenseUrl') : '#' }}" class="footer-link me-4" target="_blank">License</a>

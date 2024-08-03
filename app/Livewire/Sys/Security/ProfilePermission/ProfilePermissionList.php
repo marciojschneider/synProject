@@ -18,7 +18,7 @@ class ProfilePermissionList extends Component {
   protected $paginationTheme = 'bootstrap';
 
   // Variáveis de busca/paginação
-  public $searchText;
+  #[Session] public $searchText;
   public $pPage = 10;
 
   public $screens = [];
@@ -39,9 +39,12 @@ class ProfilePermissionList extends Component {
       ->where('client_id', 'REGEXP', '[[:<:]]' . auth()->user()->in_client . '[[:>:]]')
       ->get();
 
-    $this->screens = Sidebar::where('icon', null)
-      ->where('client_id', 'REGEXP', '[[:<:]]' . auth()->user()->in_client . '[[:>:]]')
-      ->get();
+    if ($this->module) {
+      $this->screens = Sidebar::where('icon', null)
+        ->where('client_id', 'REGEXP', '[[:<:]]' . auth()->user()->in_client . '[[:>:]]')
+        ->where('affiliate_id', $this->module)
+        ->get();
+    }
 
     $this->profiles = Profile::where('client_id', $user->in_client)->get();
   }
@@ -53,17 +56,23 @@ class ProfilePermissionList extends Component {
   }
 
   public function updatedModule() {
+    $this->screen = null;
+
     if ($this->module) {
       $this->screens = Sidebar::where('icon', null)
         ->where('client_id', 'REGEXP', '[[:<:]]' . auth()->user()->in_client . '[[:>:]]')
         ->where('affiliate_id', $this->module)
         ->get();
-    } else {
-      $this->screen = null;
     }
+
+    // Dispara para tela a chamada necessária para atualizar o selectpicker.
+    $this->dispatch('screens', $this->screens);
   }
 
   public function render() {
+    // Caso haja dados selecionados, envia para a tela.
+    $this->dispatch('loadDataSelect', ['screen' => $this->screen, 'module' => $this->module, 'profile' => $this->profile]);
+
     $user = auth()->user();
     $query = profilePermission::query();
 
