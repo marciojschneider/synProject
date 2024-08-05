@@ -54,6 +54,9 @@ class ProfilePermissionUpdate extends Component {
     $this->createCheck = $this->profile_permission->create == 1 ? true : false;
     $this->updateCheck = $this->profile_permission->update == 1 ? true : false;
     $this->deleteCheck = $this->profile_permission->delete == 1 ? true : false;
+
+    // Ajuste para o funcionamento correto do SelectPicker
+    $this->dispatch('loadDataSelect', ['screen' => $this->screen, 'module' => $this->module, 'profile' => $this->profile, 'situation' => $this->situation]);
   }
 
   protected $rules = [

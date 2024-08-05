@@ -54,13 +54,16 @@ class ClosureModuleCreate extends Component {
 
   // UPDATED Functions
   public function updatedModule() {
+    $this->screen = null;
+
     if ($this->module) {
       $this->screens = Sidebar::where('icon', null)
         ->where('client_id', 'REGEXP', '[[:<:]]' . auth()->user()->in_client . '[[:>:]]')
         ->where('affiliate_id', $this->module)
         ->get();
-    } else {
-      $this->screen = null;
     }
+
+    // Dispara para tela a chamada necessária para atualizar o selectpicker.
+    $this->dispatch('screens', $this->screens);
   }
 }

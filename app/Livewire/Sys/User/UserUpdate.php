@@ -27,6 +27,9 @@ class UserUpdate extends Component {
     $this->name = $this->user_update->name;
     $this->email = $this->user_update->email;
     $this->situation = $this->user_update->situation;
+
+    // Ajuste para o funcionamento correto do SelectPicker
+    $this->dispatch('loadDataSelect', ['situation' => $this->situation]);
   }
 
   protected $rules = [

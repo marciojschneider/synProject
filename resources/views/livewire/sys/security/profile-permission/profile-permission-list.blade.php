@@ -40,8 +40,8 @@
     <div class="offcanvas-body mx-0 flex-grow-0" style="height: 87%">
       {{-- Busca por módulo --}}
       <div id="moduleContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
-        <select wire:model.live.click="module" id="module" class="selectpicker col-sm-12" data-style="btn-default"
-          data-live-search="true" placeholder="MÓDULO" data-container="#moduleContainer">
+        <select wire:model.live.click="module" id="module" name="module" class="selectpicker col-sm-12"
+          data-style="btn-default" data-live-search="true" placeholder="MÓDULO" data-container="#moduleContainer">
           @foreach ($modules as $module)
             <option value="{{ $module->id }}">{{ mb_strtoupper($module->name, 'UTF-8') }}</option>
           @endforeach
@@ -50,10 +50,10 @@
 
       {{-- Busca por Tela --}}
       <div id="screenContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
-        <select wire:model="screen" id="screen" class="selectpicker col-sm-12" data-style="btn-default"
-          data-live-search="true" placeholder="TELA" data-container="#screenContainer">
+        <select wire:model="screen" id="screen" name="screen" class="selectpicker col-sm-12"
+          data-style="btn-default" data-live-search="true" placeholder="TELA" data-container="#screenContainer">
           @if (!$screens)
-            <option> SEM REGISTROS </option>
+            <option disabled> SEM REGISTROS </option>
           @endif
 
           @foreach ($screens as $screen)
@@ -64,8 +64,8 @@
 
       {{-- Busca por Perfil --}}
       <div id="profileContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
-        <select wire:model="profile" id="profile" class="selectpicker col-sm-12" data-style="btn-default"
-          data-live-search="true" placeholder="PERFIL" data-container="#profileContainer">
+        <select wire:model="profile" id="profile" name="profile" class="selectpicker col-sm-12"
+          data-style="btn-default" data-live-search="true" placeholder="PERFIL" data-container="#profileContainer">
           @foreach ($profiles as $profile)
             <option value="{{ $profile->id }}">{{ mb_strtoupper($profile->name, 'UTF-8') }}</option>
           @endforeach
@@ -97,42 +97,46 @@
           </tr>
         </thead>
         <tbody class="table-border-bottom-0">
-          @foreach ($rows as $row)
-            <tr>
-              <td>{{ mb_strtoupper($row->sName, 'UTF-8') }} </td>
-              <td>{{ $row->pName }}</td>
-              {{-- <td>{{ $row->description }}</td> --}}
-              <td><span
-                  class="badge {{ $row->view == 1 ? 'bg-label-primary' : 'bg-label-danger' }} me-1">{{ $row->view == 1 ? 'Permitido' : 'Não permitido' }}</span>
-              </td>
-              <td><span
-                  class="badge {{ $row->create == 1 ? 'bg-label-primary' : 'bg-label-danger' }} me-1">{{ $row->create == 1 ? 'Permitido' : 'Não permitido' }}</span>
-              </td>
-              <td><span
-                  class="badge {{ $row->update == 1 ? 'bg-label-primary' : 'bg-label-danger' }} me-1">{{ $row->update == 1 ? 'Permitido' : 'Não permitido' }}</span>
-              </td>
-              <td><span
-                  class="badge {{ $row->delete == 1 ? 'bg-label-primary' : 'bg-label-danger' }} me-1">{{ $row->delete == 1 ? 'Permitido' : 'Não permitido' }}</span>
-              </td>
-              <td>
-                <div class="dropdown">
-                  <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i
-                      class="bx bx-dots-vertical-rounded"></i></button>
-                  <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{{ route('sys-sec-permission-update', $row->id) }}"><i
-                        class="bx bx-edit-alt me-1"></i> Editar</a>
+          @if (count($rows) > 0)
+            @foreach ($rows as $row)
+              <tr>
+                <td>{{ mb_strtoupper($row->sName, 'UTF-8') }} </td>
+                <td>{{ $row->pName }}</td>
+                {{-- <td>{{ $row->description }}</td> --}}
+                <td><span
+                    class="badge {{ $row->view == 1 ? 'bg-label-primary' : 'bg-label-danger' }} me-1">{{ $row->view == 1 ? 'Permitido' : 'Não permitido' }}</span>
+                </td>
+                <td><span
+                    class="badge {{ $row->create == 1 ? 'bg-label-primary' : 'bg-label-danger' }} me-1">{{ $row->create == 1 ? 'Permitido' : 'Não permitido' }}</span>
+                </td>
+                <td><span
+                    class="badge {{ $row->update == 1 ? 'bg-label-primary' : 'bg-label-danger' }} me-1">{{ $row->update == 1 ? 'Permitido' : 'Não permitido' }}</span>
+                </td>
+                <td><span
+                    class="badge {{ $row->delete == 1 ? 'bg-label-primary' : 'bg-label-danger' }} me-1">{{ $row->delete == 1 ? 'Permitido' : 'Não permitido' }}</span>
+                </td>
+                <td>
+                  <div class="dropdown">
+                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i
+                        class="bx bx-dots-vertical-rounded"></i></button>
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="{{ route('sys-sec-permission-update', $row->id) }}"><i
+                          class="bx bx-edit-alt me-1"></i> Editar</a>
 
-                    <form method="POST" action="{{ route('sys-sec-permission-delete', $row->id) }}"
-                      id="permissionDelete{{ $row->id }}" display="none">
-                      @csrf
-                    </form>
-                    <button type="submit" class="dropdown-item" onclick="removeModal({{ $row->id }})"><i
-                        class="bx bx-trash me-1"></i> Remover</button>
+                      <form method="POST" action="{{ route('sys-sec-permission-delete', $row->id) }}"
+                        id="permissionDelete{{ $row->id }}" display="none">
+                        @csrf
+                      </form>
+                      <button type="submit" class="dropdown-item" onclick="removeModal({{ $row->id }})"><i
+                          class="bx bx-trash me-1"></i> Remover</button>
+                    </div>
                   </div>
-                </div>
-              </td>
-            </tr>
-          @endforeach
+                </td>
+              </tr>
+            @endforeach
+          @else
+            <span>Não hà registros</span>
+          @endif
         </tbody>
       </table>
       <div class="mt-4"> {{ $rows->links() }} </div>

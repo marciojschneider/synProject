@@ -6,6 +6,18 @@
 
 @section('title', 'Novo Perfil')
 
+@section('vendor-style')
+  @vite(['resources/assets/vendor/libs/bootstrap-select/bootstrap-select.scss'])
+@endsection
+
+@section('vendor-script')
+  @vite(['resources/assets/vendor/libs/bootstrap-select/bootstrap-select.js'])
+@endsection
+
+@section('page-script')
+  @vite(['resources/assets/js/forms-selects.js'])
+@endsection
+
 @section('content')
   <livewire:sys.profile.profile-create />
 @endsection

@@ -27,6 +27,9 @@ class ProfileUpdate extends Component {
     $this->name = $this->profile->name;
     $this->client = $this->profile->client_id;
     $this->situation = $this->profile->situation;
+
+    // Ajuste para o funcionamento correto do SelectPicker
+    $this->dispatch('loadDataSelect', ['client' => $this->situation, 'situation' => $this->situation]);
   }
 
   protected $rules = [

@@ -11,30 +11,40 @@
         <div class="row mb-4">
           <div class="col-md-4">
             <label for="user" class="form-label">Usuário</label>
-            <select wire:model="user" class="form-select" required>
-              <option value=""> SELECIONAR </option>
-              @foreach ($users as $user)
-                <option value="{{ $user->id }}">{{ $user->name }}</option>
-              @endforeach
-            </select>
+            <div id="userContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
+              <select wire:model.live.click="user" id="user" name="user" class="selectpicker col-sm-12"
+                data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
+                data-container="#userContainer">
+                @foreach ($users as $user)
+                  <option value="{{ $user->id }}">{{ $user->name }}</option>
+                @endforeach
+              </select>
+            </div>
           </div>
 
           <div class="col-md-4">
             <label for="profile" class="form-label">Perfil</label>
-            <select wire:model="profile" class="form-select" required>
-              <option value=""> SELECIONAR </option>
-              @foreach ($profiles as $profile)
-                <option value="{{ $profile->id }}">{{ $profile->name }}</option>
-              @endforeach
-            </select>
+            <div id="profileContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
+              <select wire:model.live.click="profile" id="profile" name="profile" class="selectpicker col-sm-12"
+                data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
+                data-container="#profileContainer">
+                @foreach ($profiles as $profile)
+                  <option value="{{ $profile->id }}">{{ $profile->name }}</option>
+                @endforeach
+              </select>
+            </div>
           </div>
 
           <div class="col-md-4">
-            <label for="situation" class="form-label">Situação</label>
-            <select wire:model="situation" class="form-select">
-              <option value="2">INATIVO</option>
-              <option value="1">ATIVO</option>
-            </select>
+            <label for="module" class="form-label">Situação</label>
+            <div id="situationContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
+              <select wire:model="situation" id="situation" name="situation" class="selectpicker col-sm-12"
+                data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
+                data-container="#situationContainer">
+                <option value="1">ATIVO</option>
+                <option value="2">INATIVO</option>
+              </select>
+            </div>
           </div>
         </div>
 

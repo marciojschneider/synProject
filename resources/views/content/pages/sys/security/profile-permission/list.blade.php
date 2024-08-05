@@ -30,9 +30,9 @@
 
   // Responsável por carregar os dados da busca salva.
   window.addEventListener('loadDataSelect', event => {
-    $('#module').selectpicker('val', event.detail[0].module)
-    $('#screen').selectpicker('val', event.detail[0].screen)
-    $('#profile').selectpicker('val', event.detail[0].profile)
+    $('select[name=module]').val(event.detail[0].module);
+    $('select[name=screen]').val(event.detail[0].screen);
+    $('select[name=profile]').val(event.detail[0].profile);
   })
 
   // Responsável por atualizar os dados do select (telas) após selecionar o módulo.

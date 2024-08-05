@@ -16,19 +16,27 @@
 
           <div class="col-md-4">
             <label for="client" class="form-label">Cliente</label>
-            <select wire:model="client" class="form-select" required>
-              @foreach ($clients as $client)
-                <option value="{{ $client->id }}">{{ $client->name }}</option>
-              @endforeach
-            </select>
+            <div id="clientContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
+              <select wire:model="client" id="client" name="client" class="selectpicker col-sm-12"
+                data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
+                data-container="#clientContainer">
+                @foreach ($clients as $client)
+                  <option value="{{ $client->id }}">{{ $client->name }}</option>
+                @endforeach
+              </select>
+            </div>
           </div>
 
           <div class="col-md-4">
-            <label for="situation" class="form-label">Situação</label>
-            <select wire:model="situation" class="form-select">
-              <option value="2">INATIVO</option>
-              <option value="1">ATIVO</option>
-            </select>
+            <label for="module" class="form-label">Situação</label>
+            <div id="situationContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
+              <select wire:model="situation" id="situation" name="situation" class="selectpicker col-sm-12"
+                data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
+                data-container="#situationContainer">
+                <option value="1">ATIVO</option>
+                <option value="2">INATIVO</option>
+              </select>
+            </div>
           </div>
         </div>
 

@@ -24,6 +24,9 @@ class ClientUpdate extends Component {
     $this->name = $this->client->name;
     $this->url = $this->client->url;
     $this->situation = $this->client->situation;
+
+    // Ajuste para o funcionamento correto do SelectPicker
+    $this->dispatch('loadDataSelect', ['situation' => $this->situation]);
   }
 
   protected $rules = [

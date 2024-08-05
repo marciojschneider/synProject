@@ -35,6 +35,9 @@ class UserProfileUpdate extends Component {
     $this->user = $this->user_profile->user_id;
     $this->profile = $this->user_profile->profile_id;
     $this->situation = $this->user_profile->situation;
+
+    // Ajuste para o funcionamento correto do SelectPicker
+    $this->dispatch('loadDataSelect', ['screen' => $this->screen, 'module' => $this->module, 'situation' => $this->situation]);
   }
 
   protected $rules = [

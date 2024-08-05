@@ -52,7 +52,7 @@ Route::middleware(['auth'])->group(function () {
     return view('content.pages.errors.no-permission');
   })->name('no-permission');
 
-  route::post('/logout', function () {
+  route::get('/logout', function () {
     return redirect()->route('login');
   })->name('logout');
 });

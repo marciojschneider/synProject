@@ -13,7 +13,7 @@
             <label for="name" class="form-label">Nome</label>
             <input type="text" class="form-control" wire:model="name" required />
             @error('name')
-              <span class="error"> {{ $message }} </span>
+              <div class="invalid-feedback"> {{ $message }} </div>
             @enderror
           </div>
 
@@ -21,24 +21,28 @@
             <label for="email" class="form-label">Email</label>
             <input type="text" class="form-control" wire:model="email" required />
             @error('email')
-              <span class="error"> {{ $message }} </span>
+              <div class="invalid-feedback"> {{ $message }} </div>
             @enderror
           </div>
 
           <div class="col-md-3">
             <label for="password" class="form-label">Senha</label>
-            <input type="text" class="form-control" wire:model="password" />
+            <input type="password" class="form-control" wire:model="password" />
             @error('password')
               <span class="error"> {{ $message }} </span>
             @enderror
           </div>
 
           <div class="col-md-3">
-            <label for="situation" class="form-label">Situação</label>
-            <select wire:model="situation" class="form-select">
-              <option value="2">INATIVO</option>
-              <option value="1">ATIVO</option>
-            </select>
+            <label for="module" class="form-label">Situação</label>
+            <div id="situationContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
+              <select wire:model="situation" id="situation" name="situation" class="selectpicker col-sm-12"
+                data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
+                data-container="#situationContainer">
+                <option value="1">ATIVO</option>
+                <option value="2">INATIVO</option>
+              </select>
+            </div>
           </div>
         </div>
 
