@@ -24,7 +24,7 @@
 
 <script>
   window.addEventListener('loadDataSelect', event => {
-    $('#organization').selectpicker('val', event.detail[0].organization)
+    $('select[name=organization]').val(event.detail[0].organization);
   })
 
   function cleanFilters() {

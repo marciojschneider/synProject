@@ -106,38 +106,44 @@
           </tr>
         </thead>
         <tbody class="table-border-bottom-0">
-          @foreach ($rows as $row)
-            <tr>
-              <td>{{ $row->cHarvest }}</td>
-              <td>{{ $row->nSection }}</td>
-              <td>{{ $row->cField }} - {{ $row->nField }}</td>
-              <td>{{ $row->cCulture }} - {{ $row->nCulture }}</td>
-              <td>{{ $row->cVariety }} - {{ $row->nVariety }}</td>
-              <td>{{ $row->cPlantingMethod }} - {{ $row->nPlantingMethod }}</td>
-              <td>{{ $row->cOrganization }}</td>
-              <td>{{ number_format(floatval($row->planting_area), 0, ',', '.') }}</td>
-              <td><span
-                  class="badge {{ $row->situation == 1 ? 'bg-label-primary' : 'bg-label-danger' }} me-1">{{ $row->situation == 1 ? 'Aberto' : 'Fechado' }}</span>
-              </td>
-              <td>
-                <div class="dropdown">
-                  <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i
-                      class="bx bx-dots-vertical-rounded"></i></button>
-                  <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{{ route('harv-configuration-update', $row->id) }}"><i
-                        class="bx bx-edit-alt me-1"></i> Editar</a>
+          @if (count($rows) > 0)
+            @foreach ($rows as $row)
+              <tr>
+                <td>{{ $row->cHarvest }}</td>
+                <td>{{ $row->nSection }}</td>
+                <td>{{ $row->cField }} - {{ $row->nField }}</td>
+                <td>{{ $row->cCulture }} - {{ $row->nCulture }}</td>
+                <td>{{ $row->cVariety }} - {{ $row->nVariety }}</td>
+                <td>{{ $row->cPlantingMethod }} - {{ $row->nPlantingMethod }}</td>
+                <td>{{ $row->cOrganization }}</td>
+                <td>{{ number_format(floatval($row->planting_area), 0, ',', '.') }}</td>
+                <td><span
+                    class="badge {{ $row->situation == 1 ? 'bg-label-primary' : 'bg-label-danger' }} me-1">{{ $row->situation == 1 ? 'Aberto' : 'Fechado' }}</span>
+                </td>
+                <td>
+                  <div class="dropdown">
+                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i
+                        class="bx bx-dots-vertical-rounded"></i></button>
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="{{ route('harv-configuration-update', $row->id) }}"><i
+                          class="bx bx-edit-alt me-1"></i> Editar</a>
 
-                    <form method="POST" action="{{ route('harv-configuration-delete', $row->id) }}"
-                      id="harvestConfigurationDelete{{ $row->id }}" display="none">
-                      @csrf
-                    </form>
-                    <button type="submit" class="dropdown-item" onclick="removeModal({{ $row->id }})"><i
-                        class="bx bx-trash me-1"></i> Remover</button>
+                      <form method="POST" action="{{ route('harv-configuration-delete', $row->id) }}"
+                        id="harvestConfigurationDelete{{ $row->id }}" display="none">
+                        @csrf
+                      </form>
+                      <button type="submit" class="dropdown-item" onclick="removeModal({{ $row->id }})"><i
+                          class="bx bx-trash me-1"></i> Remover</button>
+                    </div>
                   </div>
-                </div>
-              </td>
+                </td>
+              </tr>
+            @endforeach
+          @else
+            <tr>
+              <td colspan="10">Não hà registros</td>
             </tr>
-          @endforeach
+          @endif
         </tbody>
       </table>
       <div class="mt-4"> {{ $rows->links() }} </div>

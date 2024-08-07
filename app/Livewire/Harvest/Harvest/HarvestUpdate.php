@@ -27,6 +27,9 @@ class HarvestUpdate extends Component {
     $this->initial_dt = date('Y-m-d', strtotime($this->harvest->initial_dt));
     $this->ending_dt = date('Y-m-d', strtotime($this->harvest->ending_dt));
     $this->situation = $this->harvest->situation;
+
+    // Ajuste para o funcionamento correto do SelectPicker
+    $this->dispatch('loadDataSelect', ['price_table' => $this->price_table, 'situation' => $this->situation]);
   }
 
   protected $rules = [

@@ -24,8 +24,8 @@
 
 <script>
   window.addEventListener('loadDataSelect', event => {
-    $('#situation').selectpicker('val', event.detail[0].situation)
-    $('#property').selectpicker('val', event.detail[0].property)
+    $('select[name=property]').val(event.detail[0].property);
+    $('select[name=situation]').val(event.detail[0].situation);
   })
 
   function cleanFilters() {

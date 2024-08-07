@@ -135,7 +135,9 @@
               </tr>
             @endforeach
           @else
-            <span>Não hà registros</span>
+            <tr>
+              <td colspan="7">Não hà registros</td>
+            </tr>
           @endif
         </tbody>
       </table>

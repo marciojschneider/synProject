@@ -28,6 +28,9 @@ class SectorUpdate extends Component {
     $this->name = $this->sector->name;
     $this->farm = $this->sector->farm_id;
     $this->situation = $this->sector->situation;
+
+    // Ajuste para o funcionamento correto do SelectPicker
+    $this->dispatch('loadDataSelect', ['farm' => $this->farm, 'situation' => $this->situation]);
   }
 
   protected $rules = [

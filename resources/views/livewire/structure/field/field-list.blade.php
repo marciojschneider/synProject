@@ -46,7 +46,7 @@
     <div class="offcanvas-body mx-0 flex-grow-0" style="height: 87%">
       {{-- Busca por Fazenda --}}
       <div id="farmContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
-        <select wire:model="farm" id="farm" class="selectpicker col-sm-12" data-style="btn-default"
+        <select wire:model="farm" id="farm" name="farm" class="selectpicker col-sm-12" data-style="btn-default"
           data-live-search="true" placeholder="FAZENDA" data-container="#farmContainer">
           @foreach ($farms as $farm)
             <option value="{{ $farm->id }}"> {{ $farm->code }} - {{ mb_strtoupper($farm->name, 'UTF-8') }}
@@ -57,8 +57,8 @@
 
       {{-- Busca por Localidade --}}
       <div id="localityContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
-        <select wire:model="locality" id="locality" class="selectpicker col-sm-12" data-style="btn-default"
-          data-live-search="true" placeholder="LOCALIDADE" data-container="#localityContainer">
+        <select wire:model="locality" id="locality" name="locality" class="selectpicker col-sm-12"
+          data-style="btn-default" data-live-search="true" placeholder="LOCALIDADE" data-container="#localityContainer">
           @foreach ($localities as $locality)
             <option value="{{ $locality->id }}">{{ $locality->code }} - {{ mb_strtoupper($locality->name, 'UTF-8') }}
             </option>
@@ -93,37 +93,43 @@
           </tr>
         </thead>
         <tbody class="table-border-bottom-0">
-          @foreach ($rows as $row)
-            <tr>
-              <td>{{ $row->code }}</td>
-              <td>{{ $row->name }}</td>
-              <td>{{ $row->cFarm }} - {{ $row->nFarm }} </td>
-              <td>{{ $row->total_area }}</td>
-              <td>{{ $row->productive_area }}</td>
-              <td>{{ $row->local_group }}</td>
-              <td>{{ $row->cLocality }} - {{ $row->nLocality }} </td>
-              <td><span
-                  class="badge {{ $row->situation == 1 ? 'bg-label-primary' : 'bg-label-warning' }} me-1">{{ $row->situation == 1 ? 'ATIVO' : 'INATIVO' }}</span>
-              </td>
-              <td>
-                <div class="dropdown">
-                  <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i
-                      class="bx bx-dots-vertical-rounded"></i></button>
-                  <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{{ route('structure-field-update', $row->id) }}"><i
-                        class="bx bx-edit-alt me-1"></i> Editar</a>
+          @if (count($rows) > 0)
+            @foreach ($rows as $row)
+              <tr>
+                <td>{{ $row->code }}</td>
+                <td>{{ $row->name }}</td>
+                <td>{{ $row->cFarm }} - {{ $row->nFarm }} </td>
+                <td>{{ $row->total_area }}</td>
+                <td>{{ $row->productive_area }}</td>
+                <td>{{ $row->local_group }}</td>
+                <td>{{ $row->cLocality }} - {{ $row->nLocality }} </td>
+                <td><span
+                    class="badge {{ $row->situation == 1 ? 'bg-label-primary' : 'bg-label-warning' }} me-1">{{ $row->situation == 1 ? 'ATIVO' : 'INATIVO' }}</span>
+                </td>
+                <td>
+                  <div class="dropdown">
+                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i
+                        class="bx bx-dots-vertical-rounded"></i></button>
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="{{ route('structure-field-update', $row->id) }}"><i
+                          class="bx bx-edit-alt me-1"></i> Editar</a>
 
-                    <form method="POST" action="{{ route('structure-field-delete', $row->id) }}"
-                      id="fieldDelete{{ $row->id }}" display="none">
-                      @csrf
-                    </form>
-                    <button type="submit" class="dropdown-item" onclick="removeModal({{ $row->id }})"><i
-                        class="bx bx-trash me-1"></i> Remover</button>
+                      <form method="POST" action="{{ route('structure-field-delete', $row->id) }}"
+                        id="fieldDelete{{ $row->id }}" display="none">
+                        @csrf
+                      </form>
+                      <button type="submit" class="dropdown-item" onclick="removeModal({{ $row->id }})"><i
+                          class="bx bx-trash me-1"></i> Remover</button>
+                    </div>
                   </div>
-                </div>
-              </td>
+                </td>
+              </tr>
+            @endforeach
+          @else
+            <tr>
+              <td colspan="9">Não hà registros</td>
             </tr>
-          @endforeach
+          @endif
         </tbody>
       </table>
       <div class="mt-4"> {{ $rows->links() }} </div>

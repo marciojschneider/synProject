@@ -10,64 +10,82 @@
 
         <div class="row mb-4">
           <div class="col-md-2">
-            <label for="harvest" class="form-label">Safra</label>
-            <select wire:model="harvest" class="form-select" required>
-              <option value="" selected> SELECIONAR </option>
-              @foreach ($harvests as $harvest)
-                <option value="{{ $harvest->id }}">{{ $harvest->code }} - {{ $harvest->name }}</option>
-              @endforeach
-            </select>
+            <label for="module" class="form-label">Safra</label>
+            <div id="harvestContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
+              <select wire:model="harvest" id="harvest" name="harvest" class="selectpicker col-sm-12"
+                data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
+                data-container="#harvestContainer">
+                @foreach ($harvests as $harvest)
+                  <option value="{{ $harvest->id }}">{{ $harvest->code }} - {{ $harvest->name }}</option>
+                @endforeach
+              </select>
+            </div>
           </div>
 
           <div class="col-md-2">
-            <label for="section" class="form-label">Secção</label>
-            <select wire:model="section" class="form-select" required>
-              <option value="" selected> SELECIONAR </option>
-              @foreach ($sections as $section)
-                <option value="{{ $section->id }}">{{ $section->code }} - {{ $section->name }}</option>
-              @endforeach
-            </select>
+            <label for="module" class="form-label">Secção</label>
+            <div id="sectionContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
+              <select wire:model="section" id="section" name="section" class="selectpicker col-sm-12"
+                data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
+                data-container="#sectionContainer">
+                @foreach ($sections as $section)
+                  <option value="{{ $section->id }}">{{ $section->code }} - {{ $section->name }}</option>
+                @endforeach
+              </select>
+            </div>
           </div>
 
           <div class="col-md-2">
             <label for="field" class="form-label">Talhão</label>
-            <select wire:model="field" class="form-select" required>
-              <option value="" selected> SELECIONAR </option>
-              @foreach ($fields as $field)
-                <option value="{{ $field->id }}">{{ $field->code }} - {{ $field->name }}</option>
-              @endforeach
-            </select>
+            <div id="fieldContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
+              <select wire:model="field" id="field" name="field" class="selectpicker col-sm-12"
+                data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
+                data-container="#fieldContainer">
+                @foreach ($fields as $field)
+                  <option value="{{ $field->id }}">{{ $field->code }} - {{ $field->name }}</option>
+                @endforeach
+              </select>
+            </div>
           </div>
 
           <div class="col-md-2">
             <label for="culture" class="form-label">Cultura</label>
-            <select wire:model="culture" class="form-select" required>
-              <option value="" selected> SELECIONAR </option>
-              @foreach ($cultures as $culture)
-                <option value="{{ $culture->id }}">{{ $culture->code }} - {{ $culture->name }}</option>
-              @endforeach
-            </select>
+            <div id="cultureContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
+              <select wire:model="culture" id="culture" name="culture" class="selectpicker col-sm-12"
+                data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
+                data-container="#cultureContainer">
+                @foreach ($cultures as $culture)
+                  <option value="{{ $culture->id }}">{{ $culture->code }} - {{ $culture->name }}</option>
+                @endforeach
+              </select>
+            </div>
           </div>
 
           <div class="col-md-2">
             <label for="variety" class="form-label">Variedade</label>
-            <select wire:model="variety" class="form-select" required>
-              <option value="" selected> SELECIONAR </option>
-              @foreach ($varieties as $variety)
-                <option value="{{ $variety->id }}">{{ $variety->code }} - {{ $variety->name }}</option>
-              @endforeach
-            </select>
+            <div id="varietyContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
+              <select wire:model="variety" id="variety" name="variety" class="selectpicker col-sm-12"
+                data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
+                data-container="#varietyContainer">
+                @foreach ($varieties as $variety)
+                  <option value="{{ $variety->id }}">{{ $variety->code }} - {{ $variety->name }}</option>
+                @endforeach
+              </select>
+            </div>
           </div>
 
           <div class="col-md-2">
             <label for="planting_method" class="form-label">Método Plantio</label>
-            <select wire:model="planting_method" class="form-select" required>
-              <option value="" selected> SELECIONAR </option>
-              @foreach ($planting_methods as $planting_method)
-                <option value="{{ $planting_method->id }}">{{ $planting_method->code }} -
-                  {{ $planting_method->name }}</option>
-              @endforeach
-            </select>
+            <div id="planting_methodContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
+              <select wire:model="planting_method" id="planting_method" name="planting_method"
+                class="selectpicker col-sm-12" data-style="btn-default" data-live-search="true" placeholder="SELECIONAR"
+                required data-container="#planting_methodContainer">
+                @foreach ($planting_methods as $planting_method)
+                  <option value="{{ $planting_method->id }}">{{ $planting_method->code }} -
+                    {{ $planting_method->name }}</option>
+                @endforeach
+              </select>
+            </div>
           </div>
         </div>
 

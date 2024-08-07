@@ -25,6 +25,9 @@ class FarmUpdate extends Component {
     $this->property = $this->farm->property;
     $this->owner = $this->farm->owner;
     $this->situation = $this->farm->situation;
+
+    // Ajuste para o funcionamento correto do SelectPicker
+    $this->dispatch('loadDataSelect', ['property' => $this->property, 'owner' => $this->owner, 'situation' => $this->situation]);
   }
 
   protected $rules = [

@@ -25,6 +25,9 @@ class OrganizationUpdate extends Component {
     $this->external_code = $this->organization->external_code;
     $this->name = $this->organization->name;
     $this->situation = $this->organization->situation;
+
+    // Ajuste para o funcionamento correto do SelectPicker
+    $this->dispatch('loadDataSelect', ['situation' => $this->situation]);
   }
 
   protected $rules = [

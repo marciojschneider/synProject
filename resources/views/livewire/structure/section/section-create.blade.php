@@ -22,32 +22,43 @@
 
         <div class="row mb-4">
           <div class="col-md-4">
-            <label for="organization" class="form-label">Organização</label>
-            <select wire:model="organization" class="form-select" required>
-              <option value="">SELECIONAR</option>
-              @foreach ($organizations as $organization)
-                <option value="{{ $organization->id }}"> {{ $organization->code }} - {{ $organization->name }} </option>
-              @endforeach
-            </select>
+            <label for="module" class="form-label">Organização</label>
+            <div id="organizationContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
+              <select wire:model="organization" id="organization" name="organization" class="selectpicker col-sm-12"
+                data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
+                data-container="#organizationContainer">
+                @foreach ($organizations as $organization)
+                  <option value="{{ $organization->id }}"> {{ $organization->code }} - {{ $organization->name }}
+                  </option>
+                @endforeach
+              </select>
+            </div>
           </div>
 
           <div class="col-md-4">
-            <label for="responsible" class="form-label">Responsável</label>
-            <select wire:model="responsible" class="form-select" required>
-              <option value="">SELECIONAR</option>
-              <option value="8">2 - GRANJA BRETANHAS S.A.</option>
-              <option value="130">6157 - ADELSON CESAR PORTO CARDOSO</option>
-              <option value="154">6082 - JAQUES LAGES DUTRA</option>
-              <option value="158">6044 - JOSE PAULO LIMA</option>
-            </select>
+            <label for="module" class="form-label">Responsável</label>
+            <div id="responsibleContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
+              <select wire:model="responsible" id="responsible" name="responsible" class="selectpicker col-sm-12"
+                data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
+                data-container="#responsibleContainer">
+                <option value="8">2 - GRANJA BRETANHAS S.A.</option>
+                <option value="130">6157 - ADELSON CESAR PORTO CARDOSO</option>
+                <option value="154">6082 - JAQUES LAGES DUTRA</option>
+                <option value="158">6044 - JOSE PAULO LIMA</option>
+              </select>
+            </div>
           </div>
 
           <div class="col-md-4">
-            <label for="situation" class="form-label">Situação</label>
-            <select wire:model="situation" class="form-select">
-              <option value="2">INATIVO</option>
-              <option value="1">ATIVO</option>
-            </select>
+            <label for="module" class="form-label">Situação</label>
+            <div id="situationContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
+              <select wire:model="situation" id="situation" name="situation" class="selectpicker col-sm-12"
+                data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
+                data-container="#situationContainer">
+                <option value="1">ATIVO</option>
+                <option value="2">INATIVO</option>
+              </select>
+            </div>
           </div>
         </div>
 

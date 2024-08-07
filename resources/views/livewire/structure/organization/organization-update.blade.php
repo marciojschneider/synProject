@@ -25,11 +25,15 @@
           </div>
 
           <div class="col-md-3">
-            <label for="situation" class="form-label">Situação</label>
-            <select wire:model="situation" class="form-select" required>
-              <option value="2">INATIVO</option>
-              <option value="1" selected>ATIVO</option>
-            </select>
+            <label for="module" class="form-label">Situação</label>
+            <div id="situationContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
+              <select wire:model="situation" id="situation" name="situation" class="selectpicker col-sm-12"
+                data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
+                data-container="#situationContainer">
+                <option value="1">ATIVO</option>
+                <option value="2">INATIVO</option>
+              </select>
+            </div>
           </div>
         </div>
 

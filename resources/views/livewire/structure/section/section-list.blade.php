@@ -46,8 +46,9 @@
     <div class="offcanvas-body mx-0 flex-grow-0" style="height: 87%">
       {{-- Busca por Organização --}}
       <div id="organizationContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
-        <select wire:model="organization" id="organization" class="selectpicker col-sm-12" data-style="btn-default"
-          data-live-search="true" placeholder="ORGANIZAÇÃO" data-container="#organizationContainer">
+        <select wire:model="organization" id="organization" name="organization" class="selectpicker col-sm-12"
+          data-style="btn-default" data-live-search="true" placeholder="ORGANIZAÇÃO"
+          data-container="#organizationContainer">
           @foreach ($organizations as $organization)
             <option value="{{ $organization->id }}">{{ $organization->code }} -
               {{ mb_strtoupper($organization->name, 'UTF-8') }}</option>
@@ -78,33 +79,39 @@
           </tr>
         </thead>
         <tbody class="table-border-bottom-0">
-          @foreach ($rows as $row)
-            <tr>
-              <td>{{ $row->code }}</td>
-              <td>{{ $row->name }}</td>
-              <td>{{ $row->cOrg }} - {{ $row->nOrg }}</td>
-              <td><span
-                  class="badge {{ $row->situation == 1 ? 'bg-label-primary' : 'bg-label-warning' }} me-1">{{ $row->situation == 1 ? 'ATIVO' : 'INATIVO' }}</span>
-              </td>
-              <td>
-                <div class="dropdown">
-                  <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i
-                      class="bx bx-dots-vertical-rounded"></i></button>
-                  <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{{ route('structure-section-update', $row->id) }}"><i
-                        class="bx bx-edit-alt me-1"></i> Editar</a>
+          @if (count($rows) > 0)
+            @foreach ($rows as $row)
+              <tr>
+                <td>{{ $row->code }}</td>
+                <td>{{ $row->name }}</td>
+                <td>{{ $row->cOrg }} - {{ $row->nOrg }}</td>
+                <td><span
+                    class="badge {{ $row->situation == 1 ? 'bg-label-primary' : 'bg-label-warning' }} me-1">{{ $row->situation == 1 ? 'ATIVO' : 'INATIVO' }}</span>
+                </td>
+                <td>
+                  <div class="dropdown">
+                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i
+                        class="bx bx-dots-vertical-rounded"></i></button>
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="{{ route('structure-section-update', $row->id) }}"><i
+                          class="bx bx-edit-alt me-1"></i> Editar</a>
 
-                    <form method="POST" action="{{ route('structure-section-delete', $row->id) }}"
-                      id="sectionDelete{{ $row->id }}" display="none">
-                      @csrf
-                    </form>
-                    <button type="submit" class="dropdown-item" onclick="removeModal({{ $row->id }})"><i
-                        class="bx bx-trash me-1"></i> Remover</button>
+                      <form method="POST" action="{{ route('structure-section-delete', $row->id) }}"
+                        id="sectionDelete{{ $row->id }}" display="none">
+                        @csrf
+                      </form>
+                      <button type="submit" class="dropdown-item" onclick="removeModal({{ $row->id }})"><i
+                          class="bx bx-trash me-1"></i> Remover</button>
+                    </div>
                   </div>
-                </div>
-              </td>
+                </td>
+              </tr>
+            @endforeach
+          @else
+            <tr>
+              <td colspan="5">Não hà registros</td>
             </tr>
-          @endforeach
+          @endif
         </tbody>
       </table>
       <div class="mt-4"> {{ $rows->links() }} </div>

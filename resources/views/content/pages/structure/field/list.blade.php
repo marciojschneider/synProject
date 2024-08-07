@@ -24,8 +24,9 @@
 
 <script>
   window.addEventListener('loadDataSelect', event => {
-    $('#farm').selectpicker('val', event.detail[0].farm)
-    $('#locality').selectpicker('val', event.detail[0].locality)
+    $('select[name=locality]').val(event.detail[0].locality);
+    $('select[name=farm]').val(event.detail[0].farm);
+    $('select[name=situation]').val(event.detail[0].situation);
   })
 
   function cleanFilters() {

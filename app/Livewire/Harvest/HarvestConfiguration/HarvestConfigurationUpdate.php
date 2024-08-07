@@ -48,6 +48,9 @@ class HarvestConfigurationUpdate extends Component {
     $this->planting_area = number_format(floatval($this->harvest_configuration->planting_area), 2, ',', '.');
     $this->situation = $this->harvest_configuration->situation;
     $this->organization = $this->harvest_configuration->organization_id;
+
+    // Ajuste para o funcionamento correto do SelectPicker
+    $this->dispatch('loadDataSelect', ['harvest' => $this->harvest, 'section' => $this->section, 'field' => $this->field, 'culture' => $this->culture, 'variety' => $this->variety, 'planting_method' => $this->planting_method, 'situation' => $this->situation, 'organization' => $this->organization]);
   }
 
   protected $rules = [

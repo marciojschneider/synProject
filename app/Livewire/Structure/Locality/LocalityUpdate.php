@@ -24,6 +24,9 @@ class LocalityUpdate extends Component {
     $this->code = $this->locality->code;
     $this->name = $this->locality->name;
     $this->situation = $this->locality->situation;
+
+    // Ajuste para o funcionamento correto do SelectPicker
+    $this->dispatch('loadDataSelect', ['situation' => $this->situation]);
   }
 
   protected $rules = [

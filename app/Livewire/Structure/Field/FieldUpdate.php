@@ -38,6 +38,9 @@ class FieldUpdate extends Component {
     $this->property_registration = $this->field->property_registration;
     $this->local_group = $this->field->local_group;
     $this->situation = $this->field->situation;
+
+    // Ajuste para o funcionamento correto do SelectPicker
+    $this->dispatch('loadDataSelect', ['farm' => $this->farm, 'locality' => $this->locality, 'situation' => $this->situation]);
   }
 
   protected $rules = [

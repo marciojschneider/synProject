@@ -28,6 +28,9 @@ class SectionUpdate extends Component {
     $this->organization = $this->section->organization_id;
     $this->responsible = $this->section->responsible;
     $this->situation = $this->section->situation;
+
+    // Ajuste para o funcionamento correto do SelectPicker
+    $this->dispatch('loadDataSelect', ['organization' => $this->organization, 'responsible' => $this->responsible, 'situation' => $this->situation]);
   }
 
   protected $rules = [
