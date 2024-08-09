@@ -42,6 +42,7 @@ class ProfilePermissionCreate extends Component {
       $moduleCreate = new profilePermission();
       $moduleCreate->profile_id = $this->profile;
       $moduleCreate->sidebar_id = $this->module;
+      $moduleCreate->affiliate_id = $this->module;
       $moduleCreate->view = 1;
       $moduleCreate->creation_user = $user->id;
       $moduleCreate->client_id = $user->in_client;
@@ -56,6 +57,7 @@ class ProfilePermissionCreate extends Component {
     $profile_permission = new profilePermission();
     $profile_permission->profile_id = $this->profile;
     $profile_permission->sidebar_id = $this->screen;
+    $profile_permission->affiliate_id = $this->module;
     $profile_permission->view = $this->viewCheck ? 1 : 0;
     $profile_permission->create = $this->createCheck ? 1 : 0;
     $profile_permission->update = $this->updateCheck ? 1 : 0;

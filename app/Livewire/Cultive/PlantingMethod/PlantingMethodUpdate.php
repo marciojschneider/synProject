@@ -24,6 +24,9 @@ class PlantingMethodUpdate extends Component {
     $this->code = $this->planting_method->code;
     $this->name = $this->planting_method->name;
     $this->situation = $this->planting_method->situation;
+
+    // Ajuste para o funcionamento correto do SelectPicker
+    $this->dispatch('loadDataSelect', ['situation' => $this->situation]);
   }
 
   protected $rules = [

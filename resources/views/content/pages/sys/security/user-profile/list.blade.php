@@ -7,15 +7,15 @@
 @section('title', 'Perfis de Usuário')
 
 @section('vendor-style')
-  @vite(['resources/assets/vendor/libs/bootstrap-select/bootstrap-select.scss', 'resources/assets/vendor/libs/animate-css/animate.scss', 'resources/assets/vendor/libs/sweetalert2/sweetalert2.scss'])
+  @vite(['resources/assets/vendor/libs/animate-css/animate.scss', 'resources/assets/vendor/libs/sweetalert2/sweetalert2.scss'])
 @endsection
 
 @section('vendor-script')
-  @vite(['resources/assets/vendor/libs/bootstrap-select/bootstrap-select.js', 'resources/assets/vendor/libs/sweetalert2/sweetalert2.js'])
+  @vite(['resources/assets/vendor/libs/sweetalert2/sweetalert2.js'])
 @endsection
 
 @section('page-script')
-  @vite(['resources/assets/js/forms-selects.js', 'resources/assets/js/extended-ui-sweetalert2.js'])
+  @vite(['resources/assets/js/extended-ui-sweetalert2.js'])
 @endsection
 
 @section('content')
@@ -25,7 +25,7 @@
 <script>
   // Responsável por carregar os dados da busca salva.
   window.addEventListener('loadDataSelect', event => {
-    $('#profile').selectpicker('val', event.detail[0].profile)
+    $('select[name=profile]').val(event.detail[0].profile);
   })
 
   function cleanFilters() {

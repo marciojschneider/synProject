@@ -24,6 +24,9 @@ class GroupUpdate extends Component {
     $this->code = $this->group->code;
     $this->name = $this->group->name;
     $this->situation = $this->group->situation;
+
+    // Ajuste para o funcionamento correto do SelectPicker
+    $this->dispatch('loadDataSelect', ['situation' => $this->situation]);
   }
 
   protected $rules = [

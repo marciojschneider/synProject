@@ -46,8 +46,8 @@
     <div class="offcanvas-body mx-0 flex-grow-0" style="height: 87%">
       {{-- Busca por Perfil --}}
       <div id="profileContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
-        <select wire:model="profile" class="selectpicker col-sm-12" data-style="btn-default" data-live-search="true"
-          placeholder="PERFIL" data-container="#profileContainer">
+        <select wire:model="profile" id="profile" name="profile" class="selectpicker col-sm-12"
+          data-style="btn-default" data-live-search="true" placeholder="PERFIL" data-container="#profileContainer">
           @foreach ($profiles as $profile)
             <option value="{{ $profile->id }}">{{ mb_strtoupper($profile->name, 'UTF-8') }}</option>
           @endforeach

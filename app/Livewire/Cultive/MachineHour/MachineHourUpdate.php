@@ -103,6 +103,19 @@ class MachineHourUpdate extends Component {
         $this->quantity_diesel = number_format(floatval($this->machine_hour->quantity_diesel), 2, ',', '.');
       }
     }
+
+    // Ajuste para o funcionamento correto do SelectPicker
+    $this->dispatch('loadDataSelect', [
+      'field' => $this->field,
+      'transaction_type' => $this->transaction_type,
+      'operator' => $this->operator,
+      'process' => $this->process,
+      'planting_method' => $this->planting_method,
+      'variety' => $this->variety,
+      'equipament' => $this->equipament,
+      'implement' => $this->implement,
+      'stop_reason' => $this->stop_reason
+    ]);
   }
 
   protected $rules = [

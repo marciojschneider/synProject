@@ -34,6 +34,9 @@ class VarietyUpdate extends Component {
     $this->culture = $this->variety->culture_id;
     $this->group = $this->variety->group_id;
     $this->situation = $this->variety->situation;
+
+    // Ajuste para o funcionamento correto do SelectPicker
+    $this->dispatch('loadDataSelect', ['culture' => $this->culture, 'group' => $this->group, 'situation' => $this->situation]);
   }
 
   protected $rules = [

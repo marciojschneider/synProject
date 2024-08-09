@@ -18,12 +18,17 @@
             <label for="name" class="form-label">Nome</label>
             <input type="text" class="form-control" wire:model="name" maxlength="50" required />
           </div>
+
           <div class="col-md-2">
             <label for="situation" class="form-label">Situação</label>
-            <select wire:model="situation" class="form-select" required>
-              <option value="2">INATIVO</option>
-              <option value="1">ATIVO</option>
-            </select>
+            <div id="situationContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
+              <select wire:model="situation" id="situation" name="situation" class="selectpicker col-sm-12"
+                data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
+                data-container="#situationContainer">
+                <option value="1">ATIVO</option>
+                <option value="2">INATIVO</option>
+              </select>
+            </div>
           </div>
         </div>
         <button type="submit" class="btn btn-primary">Salvar</button>

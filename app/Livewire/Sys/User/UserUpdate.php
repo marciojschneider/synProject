@@ -18,7 +18,9 @@ class UserUpdate extends Component {
     $user = auth()->user();
     $this->user_update = User::join('user_profiles', 'user_profiles.user_id', '=', 'users.id')
       ->where('users.id', $this->id)
-      ->where('user_profiles.client_id', $user->in_client)->first();
+      ->where('user_profiles.client_id', $user->in_client)
+      ->select('users.*')
+      ->first();
 
     if (!$this->user_update) {
       return redirect()->route('sys-users');
@@ -33,8 +35,7 @@ class UserUpdate extends Component {
   }
 
   protected $rules = [
-    'name' => 'required',
-    'email' => ''
+    'name' => 'required'
   ];
 
   public function submit() {

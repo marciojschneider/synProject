@@ -10,7 +10,7 @@
 
         <div class="row mb-4">
           <div class="col-md-2">
-            <label for="module" class="form-label">Safra</label>
+            <label for="harvest" class="form-label">Safra</label>
             <div id="harvestContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
               <select wire:model="harvest" id="harvest" name="harvest" class="selectpicker col-sm-12"
                 data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
@@ -23,7 +23,7 @@
           </div>
 
           <div class="col-md-2">
-            <label for="module" class="form-label">Secção</label>
+            <label for="section" class="form-label">Secção</label>
             <div id="sectionContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
               <select wire:model="section" id="section" name="section" class="selectpicker col-sm-12"
                 data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
@@ -96,7 +96,7 @@
           </div>
 
           <div class="col-md-4">
-            <label for="module" class="form-label">Situação</label>
+            <label for="situation" class="form-label">Situação</label>
             <div id="situationContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
               <select wire:model="situation" id="situation" name="situation" class="selectpicker col-sm-12"
                 data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
@@ -108,7 +108,7 @@
           </div>
 
           <div class="col-md-4">
-            <label for="module" class="form-label">Organização</label>
+            <label for="organization" class="form-label">Organização</label>
             <div id="organizationContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
               <select wire:model="organization" id="organization" name="organization" class="selectpicker col-sm-12"
                 data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required

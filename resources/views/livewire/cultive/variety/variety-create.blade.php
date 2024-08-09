@@ -21,30 +21,40 @@
 
           <div class="col-md-2">
             <label for="culture" class="form-label">Cultura</label>
-            <select wire:model="culture" class="form-select" required>
-              <option value="">SELECIONAR</option>
-              @foreach ($cultures as $culture)
-                <option value="{{ $culture->id }}"> {{ $culture->code }} - {{ $culture->name }} </option>
-              @endforeach
-            </select>
+            <div id="cultureContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
+              <select wire:model="culture" id="culture" name="culture" class="selectpicker col-sm-12"
+                data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
+                data-container="#cultureContainer">
+                @foreach ($cultures as $culture)
+                  <option value="{{ $culture->id }}"> {{ $culture->code }} - {{ $culture->name }} </option>
+                @endforeach
+              </select>
+            </div>
           </div>
 
           <div class="col-md-2">
             <label for="group" class="form-label">Grupo</label>
-            <select wire:model="group" class="form-select" required>
-              <option value="">SELECIONAR</option>
-              @foreach ($groups as $group)
-                <option value="{{ $group->id }}"> {{ $group->code }} - {{ $group->name }} </option>
-              @endforeach
-            </select>
+            <div id="groupContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
+              <select wire:model="group" id="group" name="group" class="selectpicker col-sm-12"
+                data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
+                data-container="#groupContainer">
+                @foreach ($groups as $group)
+                  <option value="{{ $group->id }}"> {{ $group->code }} - {{ $group->name }} </option>
+                @endforeach
+              </select>
+            </div>
           </div>
 
           <div class="col-md-2">
             <label for="situation" class="form-label">Situação</label>
-            <select wire:model="situation" class="form-select" required>
-              <option value="2">INATIVO</option>
-              <option value="1">ATIVO</option>
-            </select>
+            <div id="situationContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
+              <select wire:model="situation" id="situation" name="situation" class="selectpicker col-sm-12"
+                data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
+                data-container="#situationContainer">
+                <option value="1">ATIVO</option>
+                <option value="2">INATIVO</option>
+              </select>
+            </div>
           </div>
         </div>
 

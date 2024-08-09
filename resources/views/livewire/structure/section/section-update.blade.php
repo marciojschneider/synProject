@@ -23,7 +23,7 @@
         <div class="row mb-4">
 
           <div class="col-md-4">
-            <label for="module" class="form-label">Organização</label>
+            <label for="organization" class="form-label">Organização</label>
             <div id="organizationContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
               <select wire:model="organization" id="organization" name="organization" class="selectpicker col-sm-12"
                 data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
@@ -37,7 +37,7 @@
           </div>
 
           <div class="col-md-4">
-            <label for="module" class="form-label">Responsável</label>
+            <label for="responsible" class="form-label">Responsável</label>
             <div id="responsibleContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
               <select wire:model="responsible" id="responsible" name="responsible" class="selectpicker col-sm-12"
                 data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
@@ -51,7 +51,7 @@
           </div>
 
           <div class="col-md-4">
-            <label for="module" class="form-label">Situação</label>
+            <label for="situation" class="form-label">Situação</label>
             <div id="situationContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
               <select wire:model="situation" id="situation" name="situation" class="selectpicker col-sm-12"
                 data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required

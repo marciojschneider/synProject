@@ -10,7 +10,7 @@
 
         <div class="row mb-4">
           <div class="col-md-2">
-            <label for="module" class="form-label">Safra</label>
+            <label for="harvest" class="form-label">Safra</label>
             <div id="harvestContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
               <select wire:model="harvest" id="harvest" name="harvest" class="selectpicker col-sm-12"
                 data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
@@ -23,7 +23,7 @@
           </div>
 
           <div class="col-md-2">
-            <label for="module" class="form-label">Secção</label>
+            <label for="section" class="form-label">Secção</label>
             <div id="sectionContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
               <select wire:model="section" id="section" name="section" class="selectpicker col-sm-12"
                 data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
@@ -97,21 +97,28 @@
 
           <div class="col-md-4">
             <label for="situation" class="form-label">Situação</label>
-            <select wire:model="situation" class="form-select" required>
-              <option value="0">FECHADO</option>
-              <option value="1" selected>ABERTO</option>
-            </select>
+            <div id="situationContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
+              <select wire:model="situation" id="situation" name="situation" class="selectpicker col-sm-12"
+                data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
+                data-container="#situationContainer">
+                <option value="1">ATIVO</option>
+                <option value="2">INATIVO</option>
+              </select>
+            </div>
           </div>
 
           <div class="col-md-4">
             <label for="organization" class="form-label">Organização</label>
-            <select wire:model="organization" class="form-select" required>
-              <option value="" selected> SELECIONAR </option>
-              @foreach ($organizations as $organization)
-                <option value="{{ $organization->id }}">{{ $organization->code }} - {{ $organization->name }}
-                </option>
-              @endforeach
-            </select>
+            <div id="organizationContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
+              <select wire:model="organization" id="organization" name="organization" class="selectpicker col-sm-12"
+                data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
+                data-container="#organizationContainer">
+                @foreach ($organizations as $organization)
+                  <option value="{{ $organization->id }}">{{ $organization->code }} - {{ $organization->name }}
+                  </option>
+                @endforeach
+              </select>
+            </div>
           </div>
         </div>
 

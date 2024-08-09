@@ -210,13 +210,16 @@
 
           <div class="col-md-4">
             <label for="stop_reason" class="form-label">Motivo Parada</label>
-            <select class="form-select" wire:model.live="stop_reason">
-              <option value="" selected>SELECIONAR</option>
-              <option value="1">1 - MECÂNICO</option>
-              <option value="2">2 - CLIMÁTICO</option>
-              <option value="3">3 - ABASTECIMENTO</option>
-              <option value="4">4 - REFEIÇÃO</option>
-            </select>
+            <div id="stop_reasonContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
+              <select wire:model.live.click="stop_reason" id="stop_reason" name="stop_reason"
+                class="selectpicker col-sm-12" data-style="btn-default" data-live-search="true"
+                placeholder="SELECIONAR" data-container="#stop_reasonContainer">
+                <option value="1">1 - MECÂNICO</option>
+                <option value="2">2 - CLIMÁTICO</option>
+                <option value="3">3 - ABASTECIMENTO</option>
+                <option value="4">4 - REFEIÇÃO</option>
+              </select>
+            </div>
           </div>
         </div>
 

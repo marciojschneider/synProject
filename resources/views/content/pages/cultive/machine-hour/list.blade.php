@@ -7,15 +7,15 @@
 @section('title', 'Hora Máquinas')
 
 @section('vendor-style')
-  @vite(['resources/assets/vendor/libs/bootstrap-select/bootstrap-select.scss', 'resources/assets/vendor/libs/animate-css/animate.scss', 'resources/assets/vendor/libs/sweetalert2/sweetalert2.scss'])
+  @vite(['resources/assets/vendor/libs/animate-css/animate.scss', 'resources/assets/vendor/libs/sweetalert2/sweetalert2.scss'])
 @endsection
 
 @section('vendor-script')
-  @vite(['resources/assets/vendor/libs/bootstrap-select/bootstrap-select.js', 'resources/assets/vendor/libs/sweetalert2/sweetalert2.js'])
+  @vite(['resources/assets/vendor/libs/sweetalert2/sweetalert2.js'])
 @endsection
 
 @section('page-script')
-  @vite(['resources/assets/js/forms-selects.js', 'resources/assets/js/extended-ui-sweetalert2.js'])
+  @vite(['resources/assets/js/extended-ui-sweetalert2.js'])
 @endsection
 
 @section('content')
@@ -24,13 +24,13 @@
 
 <script>
   window.addEventListener('loadDataSelect', event => {
-    $('#organization').selectpicker('val', event.detail[0].organization)
-    $('#harvest').selectpicker('val', event.detail[0].harvest)
-    $('#section').selectpicker('val', event.detail[0].section)
-    $('#field').selectpicker('val', event.detail[0].field)
-    $('#process').selectpicker('val', event.detail[0].process)
-    // $('#equipament').selectpicker('val', event.detail[0].equipament)
-    // $('#implement').selectpicker('val', event.detail[0].implement)
+    $('select[name=organization]').val(event.detail[0].organization);
+    $('select[name=harvest]').val(event.detail[0].harvest);
+    $('select[name=section]').val(event.detail[0].section);
+    $('select[name=field]').val(event.detail[0].field);
+    $('select[name=process]').val(event.detail[0].process);
+    // $('select[name=equipament]').val(event.detail[0].equipament);
+    // $('select[name=implement]').val(event.detail[0].implement);
   })
 
   function cleanFilters() {

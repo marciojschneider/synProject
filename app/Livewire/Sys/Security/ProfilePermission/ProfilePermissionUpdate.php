@@ -83,6 +83,22 @@ class ProfilePermissionUpdate extends Component {
     $this->profile_permission->situation = $this->situation;
     $this->profile_permission->save();
 
+    $needRemove = profilePermission::where('affiliate_id', $this->module)->where('profile_id', $this->profile)->where('view', 1)->get();
+    if (count($needRemove) === 1) {
+      switch ($needRemove[0]->sidebar_id) {
+        case $this->module:
+          $needRemove[0]->view = 0;
+          $needRemove[0]->save();
+          break;
+
+        default:
+          $needAdd = profilePermission::where('sidebar_id', $this->module)->where('profile_id', $this->profile)->get();
+          $needAdd[0]->view = 1;
+          $needAdd[0]->save();
+          break;
+      }
+    }
+
     return redirect()->route('sys-sec-permissions');
   }
 }

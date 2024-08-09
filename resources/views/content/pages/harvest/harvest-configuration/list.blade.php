@@ -7,15 +7,15 @@
 @section('title', 'Configurações Safra')
 
 @section('vendor-style')
-  @vite(['resources/assets/vendor/libs/bootstrap-select/bootstrap-select.scss', 'resources/assets/vendor/libs/animate-css/animate.scss', 'resources/assets/vendor/libs/sweetalert2/sweetalert2.scss'])
+  @vite(['resources/assets/vendor/libs/animate-css/animate.scss', 'resources/assets/vendor/libs/sweetalert2/sweetalert2.scss'])
 @endsection
 
 @section('vendor-script')
-  @vite(['resources/assets/vendor/libs/bootstrap-select/bootstrap-select.js', 'resources/assets/vendor/libs/sweetalert2/sweetalert2.js'])
+  @vite(['resources/assets/vendor/libs/sweetalert2/sweetalert2.js'])
 @endsection
 
 @section('page-script')
-  @vite(['resources/assets/js/forms-selects.js', 'resources/assets/js/extended-ui-sweetalert2.js'])
+  @vite(['resources/assets/js/extended-ui-sweetalert2.js'])
 @endsection
 
 @section('content')
@@ -24,10 +24,10 @@
 
 <script>
   window.addEventListener('loadDataSelect', event => {
-    $('#harvest').selectpicker('val', event.detail[0].harvest)
-    $('#section').selectpicker('val', event.detail[0].section)
-    $('#field').selectpicker('val', event.detail[0].field)
-    $('#culture').selectpicker('val', event.detail[0].culture)
+    $('select[name=harvest]').val(event.detail[0].harvest);
+    $('select[name=section]').val(event.detail[0].section);
+    $('select[name=field]').val(event.detail[0].field);
+    $('select[name=culture]').val(event.detail[0].culture);
   })
 
   function cleanFilters() {

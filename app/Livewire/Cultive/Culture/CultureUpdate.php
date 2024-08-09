@@ -24,6 +24,9 @@ class CultureUpdate extends Component {
     $this->code = $this->culture->code;
     $this->name = $this->culture->name;
     $this->situation = $this->culture->situation;
+
+    // Ajuste para o funcionamento correto do SelectPicker
+    $this->dispatch('loadDataSelect', ['situation' => $this->situation]);
   }
 
   protected $rules = [

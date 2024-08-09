@@ -28,7 +28,7 @@
           </div>
 
           <div class="col-md-4">
-            <label for="module" class="form-label">Situação</label>
+            <label for="situation" class="form-label">Situação</label>
             <div id="situationContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
               <select wire:model="situation" id="situation" name="situation" class="selectpicker col-sm-12"
                 data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required

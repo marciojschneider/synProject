@@ -25,6 +25,9 @@ class ProcessUpdate extends Component {
     $this->name = $this->process->name;
     $this->type = $this->process->type;
     $this->situation = $this->process->situation;
+
+    // Ajuste para o funcionamento correto do SelectPicker
+    $this->dispatch('loadDataSelect', ['type' => $this->type, 'situation' => $this->situation]);
   }
 
   protected $rules = [

@@ -6,18 +6,6 @@
 
 @section('title', 'Editar Permissão')
 
-@section('vendor-style')
-  @vite(['resources/assets/vendor/libs/bootstrap-select/bootstrap-select.scss'])
-@endsection
-
-@section('vendor-script')
-  @vite(['resources/assets/vendor/libs/bootstrap-select/bootstrap-select.js'])
-@endsection
-
-@section('page-script')
-  @vite(['resources/assets/js/forms-selects.js'])
-@endsection
-
 @section('content')
   <livewire:sys.security.profile-permission.profile-permission-update :id="$id" />
 @endsection
@@ -25,7 +13,6 @@
 <script>
   // Inicio das implementações para o funcionamento do selectpicker.
   // 1° Sem estas implementações o mesmo deixa de renderizar após a atualização da seleção primária.
-  //  2° Além disso, o mesmo não mantém os filtros no select após a troca da página, apenas na listagem.
   var option = '';
 
   // Responsável por carregar os dados da busca salva.

@@ -23,7 +23,7 @@ class Sidebar extends Component {
       ->where('profile_permissions.situation', 1)
       ->where('sidebars.visibility', 1)
       ->join('sidebars', 'sidebars.id', '=', 'profile_permissions.sidebar_id')
-      ->orderBy('order')->orderBy('affiliate_id')->get();
+      ->orderBy('order')->orderBy('sidebars.affiliate_id')->get();
 
     $array = [];
 

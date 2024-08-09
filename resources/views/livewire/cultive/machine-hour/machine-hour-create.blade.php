@@ -16,14 +16,17 @@
 
           <div class="col-md-2">
             <label for="field" class="form-label">Talhão</label>
-            <select class="form-select" wire:model.live="field" required>
-              <option value="" selected> SELECIONAR </option>
-              @foreach ($fields as $field)
-                <option value="{{ $field->id }}">
-                  {{ mb_strtoupper($field->code, 'UTF-8') }} - {{ mb_strtoupper($field->name, 'UTF-8') }}
-                </option>
-              @endforeach
-            </select>
+            <div id="fieldContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
+              <select wire:model.live.click="field" id="field" name="field" class="selectpicker col-sm-12"
+                data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
+                data-container="#fieldContainer">
+                @foreach ($fields as $field)
+                  <option value="{{ $field->id }}">
+                    {{ mb_strtoupper($field->code, 'UTF-8') }} - {{ mb_strtoupper($field->name, 'UTF-8') }}
+                  </option>
+                @endforeach
+              </select>
+            </div>
           </div>
 
           <div class="col-md-2">
@@ -75,11 +78,14 @@
         <div class="row mb-4">
           <div class="col-md-2">
             <label for="transaction_type" class="form-label">Tipo</label>
-            <select class="form-select" wire:model="transaction_type" required>
-              <option value="" selected> SELECIONAR </option>
-              <option value="1">ESTORNO</option>
-              <option value="2">APROPRIAÇÃO</option>
-            </select>
+            <div id="transaction_typeContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
+              <select wire:model="transaction_type" id="transaction_type" name="transaction_type"
+                class="selectpicker col-sm-12" data-style="btn-default" data-live-search="true" placeholder="SELECIONAR"
+                required data-container="#transaction_typeContainer">
+                <option value="1">ESTORNO</option>
+                <option value="2">APROPRIAÇÃO</option>
+              </select>
+            </div>
           </div>
 
           <div class="col-md-2">
@@ -89,45 +95,57 @@
 
           <div class="col-md-2">
             <label for="operator" class="form-label">Operador</label>
-            <select class="form-select" wire:model="operator" required>
-              <option value="" selected> SELECIONAR </option>
-              @foreach ($operators as $operator)
-                <option value="{{ $operator->id }}">{{ mb_strtoupper($operator->name, 'UTF-8') }}</option>
-              @endforeach
-            </select>
+            <div id="operatorContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
+              <select wire:model="operator" id="operator" name="operator" class="selectpicker col-sm-12"
+                data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
+                data-container="#operatorContainer">
+                @foreach ($operators as $operator)
+                  <option value="{{ $operator->id }}">{{ mb_strtoupper($operator->name, 'UTF-8') }}</option>
+                @endforeach
+              </select>
+            </div>
           </div>
 
           <div class="col-md-2">
             <label for="process" class="form-label">Processo/Etapa</label>
-            <select class="form-select" wire:model="process" required>
-              <option value="" selected> SELECIONAR </option>
-              @foreach ($processes as $process)
-                <option value="{{ $process->id }}">{{ mb_strtoupper($process->code, 'UTF-8') }} -
-                  {{ mb_strtoupper($process->name, 'UTF-8') }}</option>
-              @endforeach
-            </select>
+            <div id="processContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
+              <select wire:model="process" id="process" name="process" class="selectpicker col-sm-12"
+                data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
+                data-container="#processContainer">
+                @foreach ($processes as $process)
+                  <option value="{{ $process->id }}">{{ mb_strtoupper($process->code, 'UTF-8') }} -
+                    {{ mb_strtoupper($process->name, 'UTF-8') }}</option>
+                @endforeach
+              </select>
+            </div>
           </div>
 
           <div class="col-md-2">
             <label for="planting_method" class="form-label">Método Plantio</label>
-            <select class="form-select" wire:model="planting_method" required>
-              <option value="" selected> SELECIONAR </option>
-              @foreach ($planting_methods as $planting_method)
-                <option value="{{ $planting_method->id }}">{{ mb_strtoupper($planting_method->code, 'UTF-8') }} -
-                  {{ mb_strtoupper($planting_method->name, 'UTF-8') }}</option>
-              @endforeach
-            </select>
+            <div id="planting_methodContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
+              <select wire:model="planting_method" id="planting_method" name="planting_method"
+                class="selectpicker col-sm-12" data-style="btn-default" data-live-search="true"
+                placeholder="SELECIONAR" required data-container="#planting_methodContainer">
+                @foreach ($planting_methods as $planting_method)
+                  <option value="{{ $planting_method->id }}">{{ mb_strtoupper($planting_method->code, 'UTF-8') }} -
+                    {{ mb_strtoupper($planting_method->name, 'UTF-8') }}</option>
+                @endforeach
+              </select>
+            </div>
           </div>
 
           <div class="col-md-2">
             <label for="variety" class="form-label">Variedade</label>
-            <select class="form-select" wire:model="variety" required>
-              <option value="" selected> SELECIONAR </option>
-              @foreach ($varieties as $variety)
-                <option value="{{ $variety->id }}">{{ mb_strtoupper($variety->code, 'UTF-8') }} -
-                  {{ mb_strtoupper($variety->name, 'UTF-8') }}</option>
-              @endforeach
-            </select>
+            <div id="varietyContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
+              <select wire:model="variety" id="variety" name="variety" class="selectpicker col-sm-12"
+                data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
+                data-container="#varietyContainer">
+                @foreach ($varieties as $variety)
+                  <option value="{{ $variety->id }}">{{ mb_strtoupper($variety->code, 'UTF-8') }} -
+                    {{ mb_strtoupper($variety->name, 'UTF-8') }}</option>
+                @endforeach
+              </select>
+            </div>
           </div>
         </div>
 
@@ -138,20 +156,26 @@
         <div class="row mb-4">
           <div class="col-md-3">
             <label for="equipament" class="form-label">Equipamento</label>
-            <select class="form-select" wire:model="equipament" required>
-              <option value="" selected>SELECIONAR</option>
-              <option value="1">EQUIPAMENTO FICTICIO 01</option>
-              <option value="2">EQUIPAMENTO FICTICIO 02</option>
-            </select>
+            <div id="equipamentContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
+              <select wire:model="equipament" id="equipament" name="equipament" class="selectpicker col-sm-12"
+                data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
+                data-container="#equipamentContainer">
+                <option value="1">EQUIPAMENTO FICTICIO 01</option>
+                <option value="2">EQUIPAMENTO FICTICIO 02</option>
+              </select>
+            </div>
           </div>
 
           <div class="col-md-3">
             <label for="implement" class="form-label">Implemento</label>
-            <select class="form-select" wire:model="implement">
-              <option value="" selected>SELECIONAR</option>
-              <option value="1">IMPLEMENTO FICTICIO 01</option>
-              <option value="2">IMPLEMENTO FICTICIO 02</option>
-            </select>
+            <div id="implementContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
+              <select wire:model="implement" id="implement" name="implement" class="selectpicker col-sm-12"
+                data-style="btn-default" data-live-search="true" placeholder="SELECIONAR"
+                data-container="#implementContainer">
+                <option value="1">IMPLEMENTO FICTICIO 01</option>
+                <option value="2">IMPLEMENTO FICTICIO 02</option>
+              </select>
+            </div>
           </div>
 
           <div class="col-md-2">
@@ -215,13 +239,16 @@
 
           <div class="col-md-4">
             <label for="stop_reason" class="form-label">Motivo Parada</label>
-            <select class="form-select" wire:model.live="stop_reason">
-              <option value="" selected>SELECIONAR</option>
-              <option value="1">1 - MECÂNICO</option>
-              <option value="2">2 - CLIMÁTICO</option>
-              <option value="3">3 - ABASTECIMENTO</option>
-              <option value="4">4 - REFEIÇÃO</option>
-            </select>
+            <div id="stop_reasonContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
+              <select wire:model.live.click="stop_reason" id="stop_reason" name="stop_reason"
+                class="selectpicker col-sm-12" data-style="btn-default" data-live-search="true"
+                placeholder="SELECIONAR" data-container="#stop_reasonContainer">
+                <option value="1">1 - MECÂNICO</option>
+                <option value="2">2 - CLIMÁTICO</option>
+                <option value="3">3 - ABASTECIMENTO</option>
+                <option value="4">4 - REFEIÇÃO</option>
+              </select>
+            </div>
           </div>
         </div>
 
