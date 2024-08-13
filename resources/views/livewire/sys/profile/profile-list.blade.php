@@ -49,7 +49,7 @@
                 <td>{{ $row->name }}</td>
                 <td>{{ $row->cName }}</td>
                 <td><span
-                    class="badge {{ $row->situation == 1 ? 'bg-label-primary' : 'bg-label-warning' }} me-1">{{ $row->situation == 1 ? 'Ativo' : 'Inativo' }}</span>
+                    class="badge {{ $row->situation == 1 ? 'bg-label-primary' : 'bg-label-warning' }} me-1">{{ $row->situation == 1 ? 'ATIVO' : 'INATIVO' }}</span>
                 </td>
                 <td>
                   <div class="dropdown">

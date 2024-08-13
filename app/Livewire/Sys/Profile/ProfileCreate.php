@@ -39,10 +39,11 @@ class ProfileCreate extends Component {
     $profile_permission->profile_id = $profile->id;
     $profile_permission->sidebar_id = 1;
     $profile_permission->client_id = $user->in_client;
+    $profile_permission->affiliate_id = 1;
     $profile_permission->view = 1;
-    $profile_permission->create = 1;
-    $profile_permission->update = 1;
-    $profile_permission->delete = 1;
+    $profile_permission->create = 0;
+    $profile_permission->update = 0;
+    $profile_permission->delete = 0;
     $profile_permission->situation = 1;
     $profile_permission->creation_user = $user->id;
     $profile_permission->client_id = $user->in_client;

@@ -18,11 +18,11 @@
         {{-- Botões --}}
         <div class="dt-buttons" bis_skin_checked="1" style="margin-left: 5px; margin-right: 5px; color:#fff">
           <a class="dt-button btn btn-success" data-bs-toggle="offcanvas" data-bs-target="#filters"><span> <i
-                class='bx bx-search-alt-2'></i> <span class="d-none d-sm-inline-block">Busca avançada</span>
+                class='bx bx-search-alt-2'></i> <span class="d-none d-sm-inline-block">Busca Avançada</span>
             </span>
           </a>
           <a class="dt-button add-new btn btn-primary" href="{{ route('sys-sec-permission-create') }}"><span> <i
-                class="bx bx-plus me-0 me-sm-1"></i><span class="d-none d-sm-inline-block">NOVO</span>
+                class="bx bx-plus me-0 me-sm-1"></i><span class="d-none d-sm-inline-block">Novo</span>
             </span>
           </a>
         </div>
@@ -41,7 +41,7 @@
       {{-- Busca por módulo --}}
       <div id="moduleContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
         <select wire:model.live.click="module" id="module" name="module" class="selectpicker col-sm-12"
-          data-style="btn-default" data-live-search="true" placeholder="MÓDULO" data-container="#moduleContainer">
+          data-style="btn-default" data-live-search="true" placeholder="Módulo" data-container="#moduleContainer">
           @foreach ($modules as $module)
             <option value="{{ $module->id }}">{{ mb_strtoupper($module->name, 'UTF-8') }}</option>
           @endforeach
@@ -51,7 +51,7 @@
       {{-- Busca por Tela --}}
       <div id="screenContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
         <select wire:model="screen" id="screen" name="screen" class="selectpicker col-sm-12"
-          data-style="btn-default" data-live-search="true" placeholder="TELA" data-container="#screenContainer">
+          data-style="btn-default" data-live-search="true" placeholder="Tela" data-container="#screenContainer">
           @if (!$screens)
             <option disabled> SEM REGISTROS </option>
           @endif
@@ -65,7 +65,7 @@
       {{-- Busca por Perfil --}}
       <div id="profileContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
         <select wire:model="profile" id="profile" name="profile" class="selectpicker col-sm-12"
-          data-style="btn-default" data-live-search="true" placeholder="PERFIL" data-container="#profileContainer">
+          data-style="btn-default" data-live-search="true" placeholder="Perfil" data-container="#profileContainer">
           @foreach ($profiles as $profile)
             <option value="{{ $profile->id }}">{{ mb_strtoupper($profile->name, 'UTF-8') }}</option>
           @endforeach

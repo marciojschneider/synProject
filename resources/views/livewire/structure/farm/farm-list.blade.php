@@ -24,7 +24,7 @@
         {{-- Botões --}}
         <div class="dt-buttons" bis_skin_checked="1" style="margin-left: 5px; margin-right: 5px; color:#fff">
           <a class="dt-button btn btn-success" data-bs-toggle="offcanvas" data-bs-target="#filters"><span> <i
-                class='bx bx-search-alt-2'></i> <span class="d-none d-sm-inline-block">Busca avançada</span>
+                class='bx bx-search-alt-2'></i> <span class="d-none d-sm-inline-block">Busca Avançada</span>
             </span>
           </a>
           <a class="dt-button add-new btn btn-primary" href="{{ route('structure-farm-create') }}"><span> <i
@@ -40,14 +40,14 @@
   <div class="offcanvas offcanvas-end" data-bs-backdrop="false" tabindex="-1" id="filters"
     aria-labelledby="filtersLabel" wire:ignore.self>
     <div class="offcanvas-header">
-      <h5 id="filtersLabel" class="offcanvas-title">Buscar</h5>
+      <h5 id="filtersLabel" class="offcanvas-title">Filtrar</h5>
       {{-- <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button> --}}
     </div>
     <div class="offcanvas-body mx-0 flex-grow-0" style="height: 87%">
       {{-- Busca por Propriedade --}}
       <div id="propertyContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
         <select wire:model="property" id="property" name="property" class="selectpicker col-sm-12"
-          data-style="btn-default" data-live-search="true" placeholder="PROPRIEDADE"
+          data-style="btn-default" data-live-search="true" placeholder="Propriedade"
           data-container="#propertyContainer">
           <option value="1">PRÓPRIO</option>
           <option value="2">TERCEIRO</option>
@@ -57,7 +57,7 @@
       {{-- Busca por Situação --}}
       <div id="situationContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
         <select wire:model="situation" id="situation" name="situation" class="selectpicker col-sm-12"
-          data-style="btn-default" data-live-search="true" placeholder="SITUAÇÃO" data-container="#situationContainer">
+          data-style="btn-default" data-live-search="true" placeholder="Situação" data-container="#situationContainer">
           <option value="1">ATIVO</option>
           <option value="2">INATIVO</option>
         </select>

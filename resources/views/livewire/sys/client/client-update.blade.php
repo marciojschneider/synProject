@@ -1,6 +1,6 @@
 <div class="col-md">
   <h4 class="mb-4">
-    <span class="text-muted fw-light">Sistema / Cliente /</span> Cadastrar
+    <span class="text-muted fw-light">Sistema / Cliente /</span> Atualizar
   </h4>
   <div class="card mb-4">
     {{-- <h5 class="card-header">Novo chamado</h5> --}}
@@ -28,7 +28,7 @@
             <label for="situation" class="form-label">Situação</label>
             <div id="situationContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
               <select wire:model="situation" id="situation" name="situation" class="selectpicker col-sm-12"
-                data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
+                data-style="btn-default" data-live-search="true" placeholder="Selecionar" required
                 data-container="#situationContainer">
                 <option value="1">ATIVO</option>
                 <option value="2">INATIVO</option>

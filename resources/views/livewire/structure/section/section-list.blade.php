@@ -24,7 +24,7 @@
         {{-- Botões --}}
         <div class="dt-buttons" bis_skin_checked="1" style="margin-left: 5px; margin-right: 5px; color:#fff">
           <a class="dt-button btn btn-success" data-bs-toggle="offcanvas" data-bs-target="#filters"><span> <i
-                class='bx bx-search-alt-2'></i> <span class="d-none d-sm-inline-block">Busca avançada</span>
+                class='bx bx-search-alt-2'></i> <span class="d-none d-sm-inline-block">Busca Avançada</span>
             </span>
           </a>
           <a class="dt-button add-new btn btn-primary" href="{{ route('structure-section-create') }}"><span> <i
@@ -47,7 +47,7 @@
       {{-- Busca por Organização --}}
       <div id="organizationContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
         <select wire:model="organization" id="organization" name="organization" class="selectpicker col-sm-12"
-          data-style="btn-default" data-live-search="true" placeholder="ORGANIZAÇÃO"
+          data-style="btn-default" data-live-search="true" placeholder="Organização"
           data-container="#organizationContainer">
           @foreach ($organizations as $organization)
             <option value="{{ $organization->id }}">{{ $organization->code }} -

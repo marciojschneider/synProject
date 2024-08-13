@@ -49,7 +49,7 @@
                 <td>{{ mb_strtoupper($row->sName, 'UTF-8') }}</td>
                 <td>{{ date('d/m/Y', strtotime($row->dt_closure)) }}</td>
                 <td><span
-                    class="badge {{ $row->situation == 1 ? 'bg-label-primary' : 'bg-label-warning' }} me-1">{{ $row->situation == 1 ? 'Ativo' : 'Inativo' }}</span>
+                    class="badge {{ $row->situation == 1 ? 'bg-label-primary' : 'bg-label-warning' }} me-1">{{ $row->situation == 1 ? 'ATIVO' : 'INATIVO' }}</span>
                 </td>
                 <td>
                   <div class="dropdown">

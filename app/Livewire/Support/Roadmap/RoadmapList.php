@@ -85,7 +85,7 @@ class RoadmapList extends Component {
 
         default:
           $data['tasks'][$kTask]['cSituation'] = 'secondary';
-          $data['tasks'][$kTask]['nSituation'] = 'Inativo';
+          $data['tasks'][$kTask]['nSituation'] = 'INATIVO';
           break;
       }
 

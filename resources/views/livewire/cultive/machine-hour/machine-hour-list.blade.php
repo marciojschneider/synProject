@@ -23,7 +23,7 @@
         {{-- Botões --}}
         <div class="dt-buttons" bis_skin_checked="1" style="margin-left: 5px; margin-right: 5px; color:#fff">
           <a class="dt-button btn btn-success" data-bs-toggle="offcanvas" data-bs-target="#filters"><span> <i
-                class='bx bx-search-alt-2'></i> <span class="d-none d-sm-inline-block">Busca avançada</span>
+                class='bx bx-search-alt-2'></i> <span class="d-none d-sm-inline-block">Busca Avançada</span>
             </span>
           </a>
           <a class="dt-button add-new btn btn-primary" href="{{ route('cultive-machine-hour-create') }}"><span> <i
@@ -47,7 +47,7 @@
       {{-- Busca por Organização --}}
       <div id="organizationContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
         <select wire:model="organization" id="organization" name="organization" class="selectpicker col-sm-12"
-          data-style="btn-default" data-live-search="true" placeholder="ORGANIZAÇÃO"
+          data-style="btn-default" data-live-search="true" placeholder="Organização"
           data-container="#organizationContainer">
           @foreach ($organizations as $organization)
             <option value="{{ $organization->id }}">{{ $organization->code }} -
@@ -59,7 +59,7 @@
       {{-- Busca por Safra --}}
       <div id="harvestContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
         <select wire:model="harvest" id="harvest" name="harvest" class="selectpicker col-sm-12"
-          data-style="btn-default" data-live-search="true" placeholder="SAFRA" data-container="#harvestContainer">
+          data-style="btn-default" data-live-search="true" placeholder="Safra" data-container="#harvestContainer">
           @foreach ($harvests as $harvest)
             <option value="{{ $harvest->id }}">{{ $harvest->code }} -
               {{ mb_strtoupper($harvest->name, 'UTF-8') }}</option>
@@ -70,7 +70,7 @@
       {{-- Busca por organização --}}
       <div id="sectionContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
         <select wire:model="section" id="section" name="section" class="selectpicker col-sm-12"
-          data-style="btn-default" data-live-search="true" placeholder="SECÇÃO" data-container="#sectionContainer">
+          data-style="btn-default" data-live-search="true" placeholder="Secção" data-container="#sectionContainer">
           @foreach ($sections as $section)
             <option value="{{ $section->id }}">{{ $section->code }} -
               {{ mb_strtoupper($section->name, 'UTF-8') }}</option>
@@ -80,7 +80,7 @@
       {{-- Busca por organização --}}
       <div id="fieldContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
         <select wire:model="field" id="field" name="field" class="selectpicker col-sm-12" data-style="btn-default"
-          data-live-search="true" placeholder="TALHÃO" data-container="#fieldContainer">
+          data-live-search="true" placeholder="Talhão" data-container="#fieldContainer">
           @foreach ($fields as $field)
             <option value="{{ $field->id }}">{{ $field->code }} -
               {{ mb_strtoupper($field->name, 'UTF-8') }}</option>
@@ -91,7 +91,7 @@
       {{-- Busca por Processo --}}
       <div id="processContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
         <select wire:model="process" id="process" name="process" class="selectpicker col-sm-12"
-          data-style="btn-default" data-live-search="true" placeholder="PROCESSO"
+          data-style="btn-default" data-live-search="true" placeholder="Processo"
           data-container="#processContainer">
           @foreach ($processes as $process)
             <option value="{{ $process->id }}">{{ $process->code }} -
@@ -103,7 +103,7 @@
       {{-- Busca por Equipamento --}}
       <div id="equipamentContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
         <select wire:model="equipament" id="equipament" name="equipament" class="selectpicker col-sm-12"
-          data-style="btn-default" data-live-search="true" placeholder="EQUIPAMENTO"
+          data-style="btn-default" data-live-search="true" placeholder="Equipamento"
           data-container="#equipamentContainer">
           <option value="1">EQUIPAMENTO FICTICIO 01</option>
           <option value="2">EQUIPAMENTO FICTICIO 02</option>
@@ -113,7 +113,7 @@
       {{-- Busca por Implemento --}}
       <div id="implementContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
         <select wire:model="implement" id="implement" name="implement" class="selectpicker col-sm-12"
-          data-style="btn-default" data-live-search="true" placeholder="IMPLEMENTO"
+          data-style="btn-default" data-live-search="true" placeholder="Implemento"
           data-container="#implementContainer">
           <option value="1">IMPLEMENTO FICTICIO 01</option>
           <option value="2">IMPLEMENTO FICTICIO 02</option>

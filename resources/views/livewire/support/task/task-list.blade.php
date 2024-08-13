@@ -34,7 +34,7 @@
             <option value="2">Em desenvolvimento</option>
             <option value="3">Pendente</option>
             <option value="4">Aprovado</option>
-            <option value="5">Inativo</option>
+            <option value="5">INATIVO</option>
           </select>
         </div>
 

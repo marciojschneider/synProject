@@ -23,7 +23,7 @@
             <label for="farm" class="form-label">Fazenda</label>
             <div id="farmContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
               <select wire:model="farm" id="farm" name="farm" class="selectpicker col-sm-12"
-                data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
+                data-style="btn-default" data-live-search="true" placeholder="Selecionar" required
                 data-container="#farmContainer">
                 @foreach ($farms as $farm)
                   <option value="{{ $farm->id }}"> {{ $farm->code }} - {{ $farm->name }} </option>
@@ -36,7 +36,7 @@
             <label for="situation" class="form-label">Situação</label>
             <div id="situationContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
               <select wire:model="situation" id="situation" name="situation" class="selectpicker col-sm-12"
-                data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
+                data-style="btn-default" data-live-search="true" placeholder="Selecionar" required
                 data-container="#situationContainer">
                 <option value="1">ATIVO</option>
                 <option value="2">INATIVO</option>

@@ -18,7 +18,7 @@
             <label for="field" class="form-label">Talhão</label>
             <div id="fieldContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
               <select wire:model.live.click="field" id="field" name="field" class="selectpicker col-sm-12"
-                data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
+                data-style="btn-default" data-live-search="true" placeholder="Selecionar" required
                 data-container="#fieldContainer">
                 @foreach ($fields as $field)
                   <option value="{{ $field->id }}">
@@ -80,7 +80,7 @@
             <label for="transaction_type" class="form-label">Tipo</label>
             <div id="transaction_typeContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
               <select wire:model="transaction_type" id="transaction_type" name="transaction_type"
-                class="selectpicker col-sm-12" data-style="btn-default" data-live-search="true" placeholder="SELECIONAR"
+                class="selectpicker col-sm-12" data-style="btn-default" data-live-search="true" placeholder="Selecionar"
                 required data-container="#transaction_typeContainer">
                 <option value="1">ESTORNO</option>
                 <option value="2">APROPRIAÇÃO</option>
@@ -97,7 +97,7 @@
             <label for="operator" class="form-label">Operador</label>
             <div id="operatorContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
               <select wire:model="operator" id="operator" name="operator" class="selectpicker col-sm-12"
-                data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
+                data-style="btn-default" data-live-search="true" placeholder="Selecionar" required
                 data-container="#operatorContainer">
                 @foreach ($operators as $operator)
                   <option value="{{ $operator->id }}">{{ mb_strtoupper($operator->name, 'UTF-8') }}</option>
@@ -110,7 +110,7 @@
             <label for="process" class="form-label">Processo/Etapa</label>
             <div id="processContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
               <select wire:model="process" id="process" name="process" class="selectpicker col-sm-12"
-                data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
+                data-style="btn-default" data-live-search="true" placeholder="Selecionar" required
                 data-container="#processContainer">
                 @foreach ($processes as $process)
                   <option value="{{ $process->id }}">{{ mb_strtoupper($process->code, 'UTF-8') }} -
@@ -125,7 +125,7 @@
             <div id="planting_methodContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
               <select wire:model="planting_method" id="planting_method" name="planting_method"
                 class="selectpicker col-sm-12" data-style="btn-default" data-live-search="true"
-                placeholder="SELECIONAR" required data-container="#planting_methodContainer">
+                placeholder="Selecionar" required data-container="#planting_methodContainer">
                 @foreach ($planting_methods as $planting_method)
                   <option value="{{ $planting_method->id }}">{{ mb_strtoupper($planting_method->code, 'UTF-8') }} -
                     {{ mb_strtoupper($planting_method->name, 'UTF-8') }}</option>
@@ -138,7 +138,7 @@
             <label for="variety" class="form-label">Variedade</label>
             <div id="varietyContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
               <select wire:model="variety" id="variety" name="variety" class="selectpicker col-sm-12"
-                data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
+                data-style="btn-default" data-live-search="true" placeholder="Selecionar" required
                 data-container="#varietyContainer">
                 @foreach ($varieties as $variety)
                   <option value="{{ $variety->id }}">{{ mb_strtoupper($variety->code, 'UTF-8') }} -
@@ -158,7 +158,7 @@
             <label for="equipament" class="form-label">Equipamento</label>
             <div id="equipamentContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
               <select wire:model="equipament" id="equipament" name="equipament" class="selectpicker col-sm-12"
-                data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
+                data-style="btn-default" data-live-search="true" placeholder="Selecionar" required
                 data-container="#equipamentContainer">
                 <option value="1">EQUIPAMENTO FICTICIO 01</option>
                 <option value="2">EQUIPAMENTO FICTICIO 02</option>
@@ -170,7 +170,7 @@
             <label for="implement" class="form-label">Implemento</label>
             <div id="implementContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
               <select wire:model="implement" id="implement" name="implement" class="selectpicker col-sm-12"
-                data-style="btn-default" data-live-search="true" placeholder="SELECIONAR"
+                data-style="btn-default" data-live-search="true" placeholder="Selecionar"
                 data-container="#implementContainer">
                 <option value="1">IMPLEMENTO FICTICIO 01</option>
                 <option value="2">IMPLEMENTO FICTICIO 02</option>
@@ -242,7 +242,7 @@
             <div id="stop_reasonContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
               <select wire:model.live.click="stop_reason" id="stop_reason" name="stop_reason"
                 class="selectpicker col-sm-12" data-style="btn-default" data-live-search="true"
-                placeholder="SELECIONAR" data-container="#stop_reasonContainer">
+                placeholder="Selecionar" data-container="#stop_reasonContainer">
                 <option value="1">1 - MECÂNICO</option>
                 <option value="2">2 - CLIMÁTICO</option>
                 <option value="3">3 - ABASTECIMENTO</option>

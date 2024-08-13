@@ -24,7 +24,7 @@
         {{-- Botões --}}
         <div class="dt-buttons" bis_skin_checked="1" style="margin-left: 5px; margin-right: 5px; color:#fff">
           <a class="dt-button btn btn-success" data-bs-toggle="offcanvas" data-bs-target="#filters"><span> <i
-                class='bx bx-search-alt-2'></i> <span class="d-none d-sm-inline-block">Busca avançada</span>
+                class='bx bx-search-alt-2'></i> <span class="d-none d-sm-inline-block">Busca Avançada</span>
             </span>
           </a>
           <a class="dt-button add-new btn btn-primary" href="{{ route('structure-sector-create') }}"><span> <i
@@ -47,7 +47,7 @@
       {{-- Busca por Fazenda --}}
       <div id="farmContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
         <select wire:model="farm" id="farm" name="farm" class="selectpicker col-sm-12" data-style="btn-default"
-          data-live-search="true" placeholder="FAZENDA" data-container="#farmContainer">
+          data-live-search="true" placeholder="Fazenda" data-container="#farmContainer">
           @foreach ($farms as $farm)
             <option value="{{ $farm->id }}">{{ $farm->code }} - {{ mb_strtoupper($farm->name, 'UTF-8') }}</option>
           @endforeach

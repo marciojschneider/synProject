@@ -30,11 +30,11 @@
         <div id="DataTables_Table_0_filter" class="dataTables_filter" bis_skin_checked="1" style="margin-right: 5px;">
           <select wire:model.live.click="situation" id="situation" name="situation" class="form-select">
             <option value="" selected> Situação </option>
-            <option value="1">Solicitado</option>
-            <option value="2">Em desenvolvimento</option>
-            <option value="3">Pendente</option>
-            <option value="4">Aprovado</option>
-            <option value="5">Inativo</option>
+            <option value="1">SOLICITADO</option>
+            <option value="2">EM DESENVOLVIMENTO</option>
+            <option value="3">PENDENTE</option>
+            <option value="4">APROVADO</option>
+            <option value="5">INATIVO</option>
           </select>
         </div>
 

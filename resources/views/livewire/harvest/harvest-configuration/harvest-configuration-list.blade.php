@@ -18,7 +18,7 @@
         {{-- Botões --}}
         <div class="dt-buttons" bis_skin_checked="1" style="margin-left: 5px; margin-right: 5px; color:#fff">
           <a class="dt-button btn btn-success" data-bs-toggle="offcanvas" data-bs-target="#filters"><span> <i
-                class='bx bx-search-alt-2'></i> <span class="d-none d-sm-inline-block">Busca avançada</span>
+                class='bx bx-search-alt-2'></i> <span class="d-none d-sm-inline-block">Busca Avançada</span>
             </span>
           </a>
           <a class="dt-button add-new btn btn-primary" href="{{ route('harv-configuration-create') }}"><span> <i
@@ -41,7 +41,7 @@
       {{-- Busca por safras --}}
       <div id="harvestContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
         <select wire:model="harvest" id="harvest" name="harvest" class="selectpicker col-sm-12"
-          data-style="btn-default" data-live-search="true" placeholder="SAFRA" data-container="#harvestContainer">
+          data-style="btn-default" data-live-search="true" placeholder="Safra" data-container="#harvestContainer">
           @foreach ($harvests as $harvest)
             <option value="{{ $harvest->id }}">{{ $harvest->code }} - {{ $harvest->name }}</option>
           @endforeach
@@ -51,7 +51,7 @@
       {{-- Busca por secções --}}
       <div id="sectionContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
         <select wire:model="section" id="section" name="section" class="selectpicker col-sm-12"
-          data-style="btn-default" data-live-search="true" placeholder="SECÇÃO" data-container="#sectionContainer">
+          data-style="btn-default" data-live-search="true" placeholder="Secção" data-container="#sectionContainer">
           @foreach ($sections as $section)
             <option value="{{ $section->id }}">{{ $section->code }} - {{ $section->name }} </option>
           @endforeach
@@ -61,7 +61,7 @@
       {{-- Busca por talhões --}}
       <div id="fieldContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
         <select wire:model="field" id="field" name="field" class="selectpicker col-sm-12" data-style="btn-default"
-          data-live-search="true" placeholder="TALHÃO" data-container="#fieldContainer">
+          data-live-search="true" placeholder="Talhão" data-container="#fieldContainer">
           @foreach ($fields as $field)
             <option value="{{ $field->id }}">{{ $field->code }} - {{ $field->name }}</option>
           @endforeach
@@ -71,7 +71,7 @@
       {{-- Busca por culturas --}}
       <div id="cultureContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
         <select wire:model="culture" id="culture" name="culture" class="selectpicker col-sm-12"
-          data-style="btn-default" data-live-search="true" placeholder="CULTURA" data-container="#cultureContainer">
+          data-style="btn-default" data-live-search="true" placeholder="Cultura" data-container="#cultureContainer">
           @foreach ($cultures as $culture)
             <option value="{{ $culture->id }}">{{ $culture->code }} - {{ $culture->name }}</option>
           @endforeach

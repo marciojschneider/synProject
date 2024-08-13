@@ -40,7 +40,7 @@ class ClientCreate extends Component {
     $user = auth()->user();
 
     $arr_profiles = ['USUÁRIO', 'ADMINISTRADOR'];
-    $arr_permissions = [1, 2, 6, 28];
+    $arr_permissions = [['module' => 1, 'screen' => 1], ['module' => 2, 'screen' => 2], ['module' => 2, 'screen' => 28], ['module' => 28, 'screen' => 6]];
 
     foreach ($arr_profiles as $arr_profile) {
       $profile = new Profile();
@@ -55,7 +55,8 @@ class ClientCreate extends Component {
           foreach ($arr_permissions as $arr_permission) {
             $profile_permission = new profilePermission();
             $profile_permission->profile_id = $profile->id;
-            $profile_permission->sidebar_id = $arr_permission;
+            $profile_permission->sidebar_id = $arr_permission['screen'];
+            $profile_permission->affiliate_id = $arr_permission['module'];
             $profile_permission->client_id = $client_id;
             $profile_permission->view = 1;
             $profile_permission->create = 1;
@@ -71,6 +72,7 @@ class ClientCreate extends Component {
           $profile_permission = new profilePermission();
           $profile_permission->profile_id = $profile->id;
           $profile_permission->sidebar_id = 1;
+          $profile_permission->affiliate_id = 1;
           $profile_permission->client_id = $client_id;
           $profile_permission->view = 1;
           $profile_permission->create = 1;

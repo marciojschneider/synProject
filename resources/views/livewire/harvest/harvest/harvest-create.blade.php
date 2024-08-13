@@ -23,7 +23,7 @@
             <label for="price_table" class="form-label">Preço</label>
             <div id="price_tableContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
               <select wire:model="price_table" id="price_table" name="price_table" class="selectpicker col-sm-12"
-                data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
+                data-style="btn-default" data-live-search="true" placeholder="Selecionar" required
                 data-container="#price_tableContainer">
                 <option value="0">FICTÍCIO</option>
               </select>
@@ -47,7 +47,7 @@
             <label for="situation" class="form-label">Situação</label>
             <div id="situationContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
               <select wire:model="situation" id="situation" name="situation" class="selectpicker col-sm-12"
-                data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
+                data-style="btn-default" data-live-search="true" placeholder="Selecionar" required
                 data-container="#situationContainer">
                 <option value="1">ATIVO</option>
                 <option value="2">INATIVO</option>

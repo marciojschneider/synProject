@@ -13,7 +13,7 @@
             <label for="module" class="form-label">Módulo</label>
             <div id="moduleContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
               <select wire:model.live.click="module" id="module" name="module" class="selectpicker col-sm-12"
-                disabled data-style="btn-default" data-live-search="true" placeholder="SELECIONAR"
+                disabled data-style="btn-default" data-live-search="true" placeholder="Selecionar"
                 data-container="#moduleContainer">
                 @foreach ($modules as $module)
                   <option value="{{ $module->id }}">{{ mb_strtoupper($module->name, 'UTF-8') }}</option>
@@ -26,7 +26,7 @@
             <label for="screen" class="form-label">Tela</label>
             <div id="screenContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
               <select wire:model="screen" id="screen" name="screen" class="selectpicker col-sm-12"
-                data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
+                data-style="btn-default" data-live-search="true" placeholder="Selecionar" required
                 data-container="#screenContainer">
                 @if (!$screens)
                   <option disabled> SEM REGISTROS </option>
@@ -43,7 +43,7 @@
             <label for="profile" class="form-label">Perfil</label>
             <div id="profileContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
               <select wire:model="profile" id="profile" name="profile" class="selectpicker col-sm-12"
-                data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
+                data-style="btn-default" data-live-search="true" placeholder="Selecionar" required
                 data-container="#profileContainer">
                 @foreach ($profiles as $profile)
                   <option value="{{ $profile->id }}">{{ mb_strtoupper($profile->name, 'UTF-8') }}</option>
@@ -56,7 +56,7 @@
             <label for="situation" class="form-label">Situação</label>
             <div id="situationContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
               <select wire:model="situation" id="situation" name="situation" class="selectpicker col-sm-12"
-                data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
+                data-style="btn-default" data-live-search="true" placeholder="Selecionar" required
                 data-container="#situationContainer">
                 <option value="1">ATIVO</option>
                 <option value="2">INATIVO</option>
@@ -78,7 +78,7 @@
         <div class="row mb-4">
           <div class="d-flex justify-content-between">
             <span class="text-nowrap fw-medium">Permissões <i class="bx bx-info-circle bx-xs" data-bs-toggle="tooltip"
-                data-bs-placement="top" title="Selecione as permissões do perfil diante ao módulo"></i>
+                data-bs-placement="top" title="Selecione as permissões de perfil diante a tela"></i>
             </span>
 
             <div class="form-check ">

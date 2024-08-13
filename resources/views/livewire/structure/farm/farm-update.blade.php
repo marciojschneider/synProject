@@ -23,7 +23,7 @@
             <label for="property" class="form-label">Propriedade</label>
             <div id="propertyContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
               <select wire:model="property" id="property" name="property" class="selectpicker col-sm-12"
-                data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
+                data-style="btn-default" data-live-search="true" placeholder="Selecionar" required
                 data-container="#propertyContainer">
                 <option value="2">TERCEIRO</option>
                 <option value="1" selected>PRÓPRIO</option>
@@ -35,7 +35,7 @@
             <label for="owner" class="form-label">Proprietário</label>
             <div id="ownerContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
               <select wire:model="owner" id="owner" name="owner" class="selectpicker col-sm-12"
-                data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
+                data-style="btn-default" data-live-search="true" placeholder="Selecionar" required
                 data-container="#ownerContainer">
                 <option value="1" selected>2 - GRANJAS BRETANHAS S.A.</option>
               </select>
@@ -46,7 +46,7 @@
             <label for="situation" class="form-label">Situação</label>
             <div id="situationContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
               <select wire:model="situation" id="situation" name="situation" class="selectpicker col-sm-12"
-                data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
+                data-style="btn-default" data-live-search="true" placeholder="Selecionar" required
                 data-container="#situationContainer">
                 <option value="1">ATIVO</option>
                 <option value="2">INATIVO</option>

@@ -24,7 +24,7 @@ class ProfilePermissionCreate extends Component {
       ->where('client_id', 'REGEXP', '[[:<:]]' . auth()->user()->in_client . '[[:>:]]')
       ->get();
 
-    $this->profiles = Profile::where('client_id', $user->in_client)->get();
+    $this->profiles = Profile::where('client_id', $user->in_client)->where('situation', 1)->get();
   }
 
   protected $rules = [

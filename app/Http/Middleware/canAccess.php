@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Sidebar;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -48,24 +49,32 @@ class canAccess {
     if (Route::currentRouteName() === 'homepage') {
       return $next($request);
     }
-
     // dd($stringRoute);
 
     $sqlPermission = profilePermission::join('sidebars', 'sidebars.id', '=', 'profile_permissions.sidebar_id')
       ->where('profile_permissions.profile_id', $user->in_profile)
       ->where('sidebars.url', 'like', '%' . $stringRoute . '%')
+      ->where('sidebars.client_id', 'REGEXP', '[[:<:]]' . $user->in_client . '[[:>:]]')
       ->where('profile_permissions.view', 1)
       ->get();
-
     // dd(count($sqlPermission));
 
+    $sqlClientPermission = Sidebar::where('sidebars.client_id', 'REGEXP', '[[:<:]]' . $user->in_client . '[[:>:]]')
+      ->where('id', $sqlPermission[0]->affiliate_id)
+      ->get();
+    // dd(count($sqlClientPermission));
+
     if (isset($arrRoute[2])) {
-      if ($sqlPermission[0][$arrRoute[2]] !== 1) {
+      if ($sqlPermission[0][$arrRoute[2]] === 0) {
         return redirect()->route('no-permission');
       }
     }
 
-    if (count($sqlPermission) !== 1) {
+    if (count($sqlPermission) === 0) {
+      return redirect()->route('no-permission');
+    }
+
+    if (count($sqlClientPermission) === 0) {
       return redirect()->route('no-permission');
     }
 

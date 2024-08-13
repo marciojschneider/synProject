@@ -34,11 +34,11 @@
           <div class="col-md-2">
             <label for="situation" class="form-label">Situação</label>
             <select id="situation" name="situation" class="form-select">
-              <option value="1">Solicitado</option>
-              <option value="2">Em desenvolvimento</option>
-              <option value="3">Pendente</option>
-              <option value="4">Aprovado</option>
-              <option value="5">Inativo</option>
+              <option value="1">SOLICITADO</option>
+              <option value="2">EM DESENVOLVIMENTO</option>
+              <option value="3">PENDENTE</option>
+              <option value="4">APROVADO</option>
+              <option value="5">INATIVO</option>
             </select>
           </div>
 

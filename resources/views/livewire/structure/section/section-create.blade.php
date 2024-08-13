@@ -25,7 +25,7 @@
             <label for="organization" class="form-label">Organização</label>
             <div id="organizationContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
               <select wire:model="organization" id="organization" name="organization" class="selectpicker col-sm-12"
-                data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
+                data-style="btn-default" data-live-search="true" placeholder="Selecionar" required
                 data-container="#organizationContainer">
                 @foreach ($organizations as $organization)
                   <option value="{{ $organization->id }}"> {{ $organization->code }} - {{ $organization->name }}
@@ -39,7 +39,7 @@
             <label for="responsible" class="form-label">Responsável</label>
             <div id="responsibleContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
               <select wire:model="responsible" id="responsible" name="responsible" class="selectpicker col-sm-12"
-                data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
+                data-style="btn-default" data-live-search="true" placeholder="Selecionar" required
                 data-container="#responsibleContainer">
                 <option value="8">2 - GRANJA BRETANHAS S.A.</option>
                 <option value="130">6157 - ADELSON CESAR PORTO CARDOSO</option>
@@ -53,7 +53,7 @@
             <label for="situation" class="form-label">Situação</label>
             <div id="situationContainer" class="dataTables_filter" bis_skin_checked="1" wire:ignore>
               <select wire:model="situation" id="situation" name="situation" class="selectpicker col-sm-12"
-                data-style="btn-default" data-live-search="true" placeholder="SELECIONAR" required
+                data-style="btn-default" data-live-search="true" placeholder="Selecionar" required
                 data-container="#situationContainer">
                 <option value="1">ATIVO</option>
                 <option value="2">INATIVO</option>
