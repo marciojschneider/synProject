@@ -62,10 +62,11 @@
 
                       <form method="POST" action="{{ route('sys-user-delete', $row->id) }}"
                         id="userDelete{{ $row->id }}" display="none">
-                        @csrf
+                        @csrf @method('DELETE')
                       </form>
-                      <button type="submit" class="dropdown-item" onclick="removeModal({{ $row->id }})"><i
-                          class="bx bx-trash me-1"></i> Remover</button>
+                      <button type="submit" class="dropdown-item"
+                        wire:click="removeRegister('/sys/users', {{ $row->id }})"><i class="bx bx-trash me-1"></i>
+                        Remover</button>
                     </div>
                   </div>
                 </td>

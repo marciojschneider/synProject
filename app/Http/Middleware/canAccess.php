@@ -57,25 +57,15 @@ class canAccess {
       ->where('sidebars.client_id', 'REGEXP', '[[:<:]]' . $user->in_client . '[[:>:]]')
       ->where('profile_permissions.view', 1)
       ->get();
-    // dd(count($sqlPermission));
 
-    $sqlClientPermission = Sidebar::where('sidebars.client_id', 'REGEXP', '[[:<:]]' . $user->in_client . '[[:>:]]')
-      ->where('id', $sqlPermission[0]->affiliate_id)
-      ->get();
-    // dd(count($sqlClientPermission));
+    if (!isset($sqlPermission[0]) || count($sqlPermission) === 0) {
+      return redirect()->route('no-permission');
+    }
 
     if (isset($arrRoute[2])) {
       if ($sqlPermission[0][$arrRoute[2]] === 0) {
         return redirect()->route('no-permission');
       }
-    }
-
-    if (count($sqlPermission) === 0) {
-      return redirect()->route('no-permission');
-    }
-
-    if (count($sqlClientPermission) === 0) {
-      return redirect()->route('no-permission');
     }
 
     return $next($request);

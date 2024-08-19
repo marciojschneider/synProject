@@ -125,10 +125,12 @@
 
                       <form method="POST" action="{{ route('sys-sec-permission-delete', $row->id) }}"
                         id="permissionDelete{{ $row->id }}" display="none">
-                        @csrf
+                        @csrf @method('DELETE')
                       </form>
-                      <button type="submit" class="dropdown-item" onclick="removeModal({{ $row->id }})"><i
-                          class="bx bx-trash me-1"></i> Remover</button>
+                      <button type="submit" class="dropdown-item"
+                        wire:click="removeRegister('/sys/p-permissions', {{ $row->id }})"><i
+                          class="bx bx-trash me-1"></i>
+                        Remover</button>
                     </div>
                   </div>
                 </td>

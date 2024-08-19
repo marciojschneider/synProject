@@ -10,6 +10,7 @@ use Livewire\Attributes\Session;
 
 // Models
 use App\Models\Client;
+use App\Models\profilePermission;
 
 class ClientList extends Component {
   use WithPagination;
@@ -41,5 +42,29 @@ class ClientList extends Component {
     $data['rows'] = $query->paginate($this->pPage);
 
     return view('livewire.sys.client.client-list', $data);
+  }
+
+  public function removeRegister(string $rName, int $id) {
+    $user = auth()->user();
+
+    $sqlPermission = profilePermission::join('sidebars', 'sidebars.id', '=', 'profile_permissions.sidebar_id')
+      ->where('profile_permissions.profile_id', $user->in_profile)
+      ->where('sidebars.url', 'like', '%' . $rName . '%')
+      ->where('sidebars.client_id', 'REGEXP', '[[:<:]]' . $user->in_client . '[[:>:]]')
+      ->where('profile_permissions.delete', 1)
+      ->get();
+
+    if (!isset($sqlPermission[0]) || count($sqlPermission) === 0) {
+      $this->dispatch('swal', [
+        'title' => 'Sem Permissão',
+        'icon' => 'error',
+      ]);
+
+      return;
+    }
+
+    $this->dispatch('swal', [
+      'id' => $id
+    ]);
   }
 }

@@ -66,65 +66,65 @@ Route::middleware(['auth', 'canAccess'])->group(function () {
   Route::get('/sys/users', [UserController::class, 'users'])->name('sys-users');
   Route::get('/sys/users/create', [UserController::class, 'userCreate'])->name('sys-user-create');
   Route::get('/sys/users/update/{id}', [UserController::class, 'userUpdate'])->name('sys-user-update');
-  Route::post('/sys/users/delete/{id}', [UserController::class, 'userDelete'])->name('sys-user-delete');
+  Route::delete('/sys/users/delete/{id}', [UserController::class, 'userDelete'])->name('sys-user-delete');
   //       → Clients
   Route::get('/sys/clients', [ClientController::class, 'clients'])->name('sys-clients');
   Route::get('/sys/clients/create', [ClientController::class, 'clientCreate'])->name('sys-client-create');
   Route::get('/sys/clients/update/{id}', [ClientController::class, 'clientUpdate'])->name('sys-client-update');
-  Route::post('/sys/clients/delete/{id}', [ClientController::class, 'clientDelete'])->name('sys-client-delete');
+  Route::delete('/sys/clients/delete/{id}', [ClientController::class, 'clientDelete'])->name('sys-client-delete');
   //       → Profiles
   Route::get('/sys/profiles', [ProfileController::class, 'profiles'])->name('sys-profiles');
   Route::get('/sys/profiles/create', [ProfileController::class, 'profileCreate'])->name('sys-profile-create');
   Route::get('/sys/profiles/update/{id}', [ProfileController::class, 'profileUpdate'])->name('sys-profile-update');
-  Route::post('/sys/profiles/delete/{id}', [ProfileController::class, 'profileDelete'])->name('sys-profile-delete');
+  Route::delete('/sys/profiles/delete/{id}', [ProfileController::class, 'profileDelete'])->name('sys-profile-delete');
   //       → Security
   //                  → Permissions
   Route::get('/sys/p-permissions', [ProfillePermissionController::class, 'profilePermissions'])->name('sys-sec-permissions');
   Route::get('/sys/p-permissions/create', [ProfillePermissionController::class, 'profilePermissionCreate'])->name('sys-sec-permission-create');
   Route::get('/sys/p-permissions/update/{id}', [ProfillePermissionController::class, 'profilePermissionUpdate'])->name('sys-sec-permission-update');
-  Route::post('/sys/p-permissions/delete/{id}', [ProfillePermissionController::class, 'profilePermissionDelete'])->name('sys-sec-permission-delete');
+  Route::delete('/sys/p-permissions/delete/{id}', [ProfillePermissionController::class, 'profilePermissionDelete'])->name('sys-sec-permission-delete');
   //                  → User Profiles
   Route::get('/sys/u-profiles', [UserProfileController::class, 'userProfiles'])->name('sys-sec-u-ps');
   Route::get('/sys/u-profiles/create', [UserProfileController::class, 'userProfileCreate'])->name('sys-sec-u-p-create');
   Route::get('/sys/u-profiles/update/{id}', [UserProfileController::class, 'userProfileUpdate'])->name('sys-sec-u-p-update');
-  Route::post('/sys/u-profiles/delete/{id}', [UserProfileController::class, 'userProfileDelete'])->name('sys-sec-u-p-delete');
+  Route::delete('/sys/u-profiles/delete/{id}', [UserProfileController::class, 'userProfileDelete'])->name('sys-sec-u-p-delete');
   //                  → Closure Modules
   Route::get('/sys/closure-modules', [ClosureModuleController::class, 'closureModules'])->name('sys-sec-closures');
   Route::get('/sys/closure-modules/create', [ClosureModuleController::class, 'closureModuleCreate'])->name('sys-sec-closure-create');
   Route::get('/sys/closure-modules/update/{id}', [ClosureModuleController::class, 'closureModuleUpdate'])->name('sys-sec-closure-update');
-  Route::post('/sys/closure-modules/delete/{id}', [ClosureModuleController::class, 'closureModuleDelete'])->name('sys-sec-closure-delete');
+  Route::delete('/sys/closure-modules/delete/{id}', [ClosureModuleController::class, 'closureModuleDelete'])->name('sys-sec-closure-delete');
 
   // Structure
   //       → Organization
   Route::get('/structure/organizations', [OrganizationController::class, 'organizations'])->name('structure-organizations');
   Route::get('/structure/organizations/create', [OrganizationController::class, 'organizationCreate'])->name('structure-organization-create');
   Route::get('/structure/organizations/update/{id}', [OrganizationController::class, 'organizationUpdate'])->name('structure-organization-update');
-  Route::post('/structure/organizations/delete/{id}', [OrganizationController::class, 'organizationDelete'])->name('structure-organization-delete');
+  Route::delete('/structure/organizations/delete/{id}', [OrganizationController::class, 'organizationDelete'])->name('structure-organization-delete');
   //       → Farm
   Route::get('/structure/farms', [FarmController::class, 'farms'])->name('structure-farms');
   Route::get('/structure/farms/create', [FarmController::class, 'farmCreate'])->name('structure-farm-create');
   Route::get('/structure/farms/update/{id}', [FarmController::class, 'farmUpdate'])->name('structure-farm-update');
-  Route::post('/structure/farms/delete/{id}', [FarmController::class, 'farmDelete'])->name('structure-farm-delete');
+  Route::delete('/structure/farms/delete/{id}', [FarmController::class, 'farmDelete'])->name('structure-farm-delete');
   //       → Sector
   Route::get('/structure/sectors', [SectorController::class, 'sectors'])->name('structure-sectors');
   Route::get('/structure/sectors/create', [SectorController::class, 'sectorCreate'])->name('structure-sector-create');
   Route::get('/structure/sectors/update/{id}', [SectorController::class, 'sectorUpdate'])->name('structure-sector-update');
-  Route::post('/structure/sectors/delete/{id}', [SectorController::class, 'sectorDelete'])->name('structure-sector-delete');
+  Route::delete('/structure/sectors/delete/{id}', [SectorController::class, 'sectorDelete'])->name('structure-sector-delete');
   //       → Field
   Route::get('/structure/fields', [FieldController::class, 'fields'])->name('structure-fields');
   Route::get('/structure/fields/create', [FieldController::class, 'fieldCreate'])->name('structure-field-create');
   Route::get('/structure/fields/update/{id}', [FieldController::class, 'fieldUpdate'])->name('structure-field-update');
-  Route::post('/structure/fields/delete/{id}', [FieldController::class, 'fieldDelete'])->name('structure-field-delete');
+  Route::delete('/structure/fields/delete/{id}', [FieldController::class, 'fieldDelete'])->name('structure-field-delete');
   //       → Section
   Route::get('/structure/sections', [SectionController::class, 'sections'])->name('structure-sections');
   Route::get('/structure/sections/create', [SectionController::class, 'sectionCreate'])->name('structure-section-create');
   Route::get('/structure/sections/update/{id}', [SectionController::class, 'sectionUpdate'])->name('structure-section-update');
-  Route::post('/structure/sections/delete/{id}', [SectionController::class, 'sectionDelete'])->name('structure-section-delete');
+  Route::delete('/structure/sections/delete/{id}', [SectionController::class, 'sectionDelete'])->name('structure-section-delete');
   //       → Locality
   Route::get('/structure/localities', [LocalityController::class, 'localities'])->name('structure-localities');
   Route::get('/structure/localities/create', [LocalityController::class, 'localityCreate'])->name('structure-locality-create');
   Route::get('/structure/localities/update/{id}', [LocalityController::class, 'localityUpdate'])->name('structure-locality-update');
-  Route::post('/structure/localities/delete/{id}', [LocalityController::class, 'localityDelete'])->name('structure-locality-delete');
+  Route::delete('/structure/localities/delete/{id}', [LocalityController::class, 'localityDelete'])->name('structure-locality-delete');
 
   // Cultive
   //       → Group
@@ -163,12 +163,12 @@ Route::middleware(['auth', 'canAccess'])->group(function () {
   Route::get('/harvest/harvests', [HarvestController::class, 'harvests'])->name('harv-harvests');
   Route::get('/harvest/harvests/create', [HarvestController::class, 'harvestCreate'])->name('harv-harvest-create');
   Route::get('/harvest/harvests/update/{id}', [HarvestController::class, 'harvestUpdate'])->name('harv-harvest-update');
-  Route::post('/harvest/harvests/delete/{id}', [HarvestController::class, 'harvestDelete'])->name('harv-harvest-delete');
+  Route::delete('/harvest/harvests/delete/{id}', [HarvestController::class, 'harvestDelete'])->name('harv-harvest-delete');
   //       → Harvest Configurations
   Route::get('/harvest/harvest-configurations', [HarvestConfigurationController::class, 'harvestConfigurations'])->name('harv-configurations');
   Route::get('/harvest/harvest-configurations/create', [HarvestConfigurationController::class, 'harvestConfigurationCreate'])->name('harv-configuration-create');
   Route::get('/harvest/harvest-configurations/update/{id}', [HarvestConfigurationController::class, 'harvestConfigurationUpdate'])->name('harv-configuration-update');
-  Route::post('/harvest/harvest-configurations/delete/{id}', [HarvestConfigurationController::class, 'harvestConfigurationDelete'])->name('harv-configuration-delete');
+  Route::delete('/harvest/harvest-configurations/delete/{id}', [HarvestConfigurationController::class, 'harvestConfigurationDelete'])->name('harv-configuration-delete');
 
   // Support
   //       → Tasks

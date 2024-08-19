@@ -63,8 +63,10 @@
                         id="groupDelete{{ $row->id }}" display="none">
                         @csrf @method('DELETE')
                       </form>
-                      <button type="submit" class="dropdown-item" onclick="removeModal({{ $row->id }})"><i
-                          class="bx bx-trash me-1"></i> Remover</button>
+                      <button type="submit" class="dropdown-item"
+                        wire:click="removeRegister('/cultive/groups', {{ $row->id }})"><i
+                          class="bx bx-trash me-1"></i>
+                        Remover</button>
                     </div>
                   </div>
                 </td>

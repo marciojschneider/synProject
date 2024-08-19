@@ -65,10 +65,12 @@
 
                       <form method="POST" action="{{ route('harv-harvest-delete', $row->id) }}"
                         id="harvestDelete{{ $row->id }}" display="none">
-                        @csrf
+                        @csrf @method('DELETE')
                       </form>
-                      <button type="submit" class="dropdown-item" onclick="removeModal({{ $row->id }})"><i
-                          class="bx bx-trash me-1"></i> Remover</button>
+                      <button type="submit" class="dropdown-item"
+                        wire:click="removeRegister('/harvest/harvests', {{ $row->id }})"><i
+                          class="bx bx-trash me-1"></i>
+                        Remover</button>
                     </div>
                   </div>
                 </td>

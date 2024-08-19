@@ -31,7 +31,16 @@
     $('.selectpicker').selectpicker('val', null);
   }
 
-  function removeModal(id) {
+  window.addEventListener('swal', function(e) {
+    if (e.detail[0].title === 'Sem Permissão') {
+      Swal.fire({
+        title: e.detail[0].title,
+        icon: e.detail[0].icon,
+      });
+
+      return;
+    }
+
     Swal.fire({
       title: 'Você tem certeza?',
       text: "Essa ação não será revertida!",
@@ -54,11 +63,11 @@
             confirmButton: 'btn btn-success'
           }
         }).then(function(result) {
-          sendDelete(id)
+          sendDelete(e.detail[0].id)
         });
       }
     });
-  }
+  });
 
   function sendDelete(id) {
     document.getElementById('sectionDelete' + id).submit();
