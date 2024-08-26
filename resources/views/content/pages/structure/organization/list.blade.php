@@ -54,13 +54,11 @@
             confirmButton: 'btn btn-success'
           }
         }).then(function(result) {
-          sendDelete(e.detail[0].id)
+          Livewire.dispatch('removeAction', {
+            id: e.detail[0].id
+          });
         });
       }
     });
   });
-
-  function sendDelete(id) {
-    document.getElementById('cultureDelete' + id).submit();
-  }
 </script>

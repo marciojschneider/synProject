@@ -4,7 +4,7 @@ namespace App\Livewire\Sys\Security\ProfilePermission;
 
 use Livewire\Component;
 // Models
-use App\Models\profilePermission;
+use App\Models\ProfilePermission;
 use App\Models\Sidebar;
 use App\Models\Profile;
 
@@ -22,7 +22,7 @@ class ProfilePermissionUpdate extends Component {
   public function mount() {
     $user = auth()->user();
     // Values
-    $this->profile_permission = profilePermission::where('id', $this->id)->where('client_id', $user->in_client)->first();
+    $this->profile_permission = ProfilePermission::where('id', $this->id)->where('client_id', $user->in_client)->first();
     if (!$this->profile_permission) {
       return redirect()->route('sys-sec-permissions');
     }
@@ -68,7 +68,7 @@ class ProfilePermissionUpdate extends Component {
   public function submit() {
     $this->validate();
 
-    $verifyUniqueScreen = profilePermission::where('sidebar_id', $this->screen)->where('profile_id', $this->profile)->where('id', '!=', $this->id)->first();
+    $verifyUniqueScreen = ProfilePermission::where('sidebar_id', $this->screen)->where('profile_id', $this->profile)->where('id', '!=', $this->id)->first();
     if ($verifyUniqueScreen) {
       return redirect()->route('sys-sec-permissions');
     }
@@ -83,7 +83,7 @@ class ProfilePermissionUpdate extends Component {
     $this->profile_permission->situation = $this->situation;
     $this->profile_permission->save();
 
-    $needRemove = profilePermission::where('affiliate_id', $this->module)->where('profile_id', $this->profile)->where('view', 1)->get();
+    $needRemove = ProfilePermission::where('affiliate_id', $this->module)->where('profile_id', $this->profile)->where('view', 1)->get();
     if (count($needRemove) === 1) {
       switch ($needRemove[0]->sidebar_id) {
         case $this->module:
@@ -92,7 +92,7 @@ class ProfilePermissionUpdate extends Component {
           break;
 
         default:
-          $needAdd = profilePermission::where('sidebar_id', $this->module)->where('profile_id', $this->profile)->get();
+          $needAdd = ProfilePermission::where('sidebar_id', $this->module)->where('profile_id', $this->profile)->get();
           $needAdd[0]->view = 1;
           $needAdd[0]->save();
           break;

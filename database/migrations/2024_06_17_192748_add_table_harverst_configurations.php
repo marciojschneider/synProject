@@ -18,13 +18,13 @@ return new class extends Migration {
   public function up(): void {
     Schema::create('harvest_configurations', function (Blueprint $table) {
       $table->id();
-      $table->foreignIdFor(Harvest::class)->constrained();
-      $table->foreignIdFor(Section::class)->constrained();
-      $table->foreignIdFor(Field::class)->constrained();
-      $table->foreignIdFor(Culture::class)->constrained();
-      $table->foreignIdFor(Variety::class)->constrained();
-      $table->foreignIdFor(PlantingMethod::class)->constrained();
-      $table->foreignIdFor(Organization::class)->constrained();
+      $table->foreignIdFor(Harvest::class)->constrained()->onDelete('cascade');
+      $table->foreignIdFor(Section::class)->constrained()->onDelete('cascade');
+      $table->foreignIdFor(Field::class)->constrained()->onDelete('cascade');
+      $table->foreignIdFor(Culture::class)->constrained()->onDelete('cascade');
+      $table->foreignIdFor(Variety::class)->constrained()->onDelete('cascade');
+      $table->foreignIdFor(PlantingMethod::class)->constrained()->onDelete('cascade');
+      $table->foreignIdFor(Organization::class)->constrained()->onDelete('cascade');
       $table->decimal('planting_area', 10, 2)->default(0);
       $table->integer('situation')->default(1);
       $table->integer('creation_user')->nullable();

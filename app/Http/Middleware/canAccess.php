@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Route;
 
 // Models
-use App\Models\profilePermission;
+use App\Models\ProfilePermission;
 use App\Models\UserProfile;
 
 class canAccess {
@@ -51,7 +51,7 @@ class canAccess {
     }
     // dd($stringRoute);
 
-    $sqlPermission = profilePermission::join('sidebars', 'sidebars.id', '=', 'profile_permissions.sidebar_id')
+    $sqlPermission = ProfilePermission::join('sidebars', 'sidebars.id', '=', 'profile_permissions.sidebar_id')
       ->where('profile_permissions.profile_id', $user->in_profile)
       ->where('sidebars.url', 'like', '%' . $stringRoute . '%')
       ->where('sidebars.client_id', 'REGEXP', '[[:<:]]' . $user->in_client . '[[:>:]]')

@@ -23,17 +23,17 @@ return new class extends Migration {
       $table->string('report');
       $table->integer('transaction_type');
       $table->date('transaction_dt')->nullable();
-      $table->foreignIdFor(Harvest::class)->constrained();
-      $table->foreignIdFor(Organization::class)->constrained();
-      $table->foreignIdFor(Section::class)->constrained();
-      $table->foreignIdFor(Field::class)->constrained();
-      $table->foreignIdFor(Culture::class)->constrained();
-      $table->foreignIdFor(Variety::class)->constrained();
-      $table->foreignIdFor(PlantingMethod::class)->constrained();
-      $table->foreignIdFor(Process::class)->constrained();
+      $table->foreignIdFor(Harvest::class)->constrained()->onDelete('cascade');
+      $table->foreignIdFor(Organization::class)->constrained()->onDelete('cascade');
+      $table->foreignIdFor(Section::class)->constrained()->onDelete('cascade');
+      $table->foreignIdFor(Field::class)->constrained()->onDelete('cascade');
+      $table->foreignIdFor(Culture::class)->constrained()->onDelete('cascade');
+      $table->foreignIdFor(Variety::class)->constrained()->onDelete('cascade');
+      $table->foreignIdFor(PlantingMethod::class)->constrained()->onDelete('cascade');
+      $table->foreignIdFor(Process::class)->constrained()->onDelete('cascade');
       $table->integer('equipament_id'); // Provisório
       $table->integer('implement_id')->nullable(); // Provisório
-      $table->foreignIdFor(User::class)->constrained(); // Pessoa|Operador
+      $table->foreignIdFor(User::class)->constrained()->onDelete('cascade'); // Pessoa|Operador
       $table->decimal('hourmeter_start', 10, 2);
       $table->decimal('hourmeter_end', 10, 2);
       $table->decimal('hourmeter_quantity', 10, 2);

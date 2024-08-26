@@ -13,7 +13,7 @@ return new class extends Migration {
     Schema::create('tasks', function (Blueprint $table) {
       $table->id();
       $table->string('title');
-      $table->foreignIdFor(Sidebar::class)->constrained();
+      $table->foreignIdFor(Sidebar::class)->constrained()->onDelete('cascade');
       $table->foreignIdFor(Client::class)->constrained()->onDelete('cascade');
       $table->timestamp('initial_dt')->nullable();
       $table->timestamp('expected_dt')->nullable();

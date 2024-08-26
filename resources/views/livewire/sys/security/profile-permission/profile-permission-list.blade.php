@@ -103,34 +103,40 @@
                 <td>{{ mb_strtoupper($row->sName, 'UTF-8') }} </td>
                 <td>{{ $row->pName }}</td>
                 {{-- <td>{{ $row->description }}</td> --}}
-                <td><span
-                    class="badge {{ $row->view == 1 ? 'bg-label-primary' : 'bg-label-danger' }} me-1">{{ $row->view == 1 ? 'Permitido' : 'Não permitido' }}</span>
+                <td>
+                  <span class="badge {{ $row->view == 1 ? 'bg-label-primary' : 'bg-label-danger' }} me-1">
+                    {{ $row->view == 1 ? 'Permitido' : 'Não permitido' }}
+                  </span>
                 </td>
-                <td><span
-                    class="badge {{ $row->create == 1 ? 'bg-label-primary' : 'bg-label-danger' }} me-1">{{ $row->create == 1 ? 'Permitido' : 'Não permitido' }}</span>
+                <td>
+                  <span class="badge {{ $row->create == 1 ? 'bg-label-primary' : 'bg-label-danger' }} me-1">
+                    {{ $row->create == 1 ? 'Permitido' : 'Não permitido' }}
+                  </span>
                 </td>
-                <td><span
-                    class="badge {{ $row->update == 1 ? 'bg-label-primary' : 'bg-label-danger' }} me-1">{{ $row->update == 1 ? 'Permitido' : 'Não permitido' }}</span>
+                <td>
+                  <span class="badge {{ $row->update == 1 ? 'bg-label-primary' : 'bg-label-danger' }} me-1">
+                    {{ $row->update == 1 ? 'Permitido' : 'Não permitido' }}
+                  </span>
                 </td>
-                <td><span
-                    class="badge {{ $row->delete == 1 ? 'bg-label-primary' : 'bg-label-danger' }} me-1">{{ $row->delete == 1 ? 'Permitido' : 'Não permitido' }}</span>
+                <td>
+                  <span class="badge {{ $row->delete == 1 ? 'bg-label-primary' : 'bg-label-danger' }} me-1">
+                    {{ $row->delete == 1 ? 'Permitido' : 'Não permitido' }}
+                  </span>
                 </td>
                 <td>
                   <div class="dropdown">
-                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i
-                        class="bx bx-dots-vertical-rounded"></i></button>
+                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                      <i class="bx bx-dots-vertical-rounded"></i>
+                    </button>
                     <div class="dropdown-menu">
-                      <a class="dropdown-item" href="{{ route('sys-sec-permission-update', $row->id) }}"><i
-                          class="bx bx-edit-alt me-1"></i> Editar</a>
+                      <a class="dropdown-item" href="{{ route('sys-sec-permission-update', $row->id) }}">
+                        <i class="bx bx-edit-alt me-1"></i> Editar
+                      </a>
 
-                      <form method="POST" action="{{ route('sys-sec-permission-delete', $row->id) }}"
-                        id="permissionDelete{{ $row->id }}" display="none">
-                        @csrf @method('DELETE')
-                      </form>
                       <button type="submit" class="dropdown-item"
-                        wire:click="removeRegister('/sys/p-permissions', {{ $row->id }})"><i
-                          class="bx bx-trash me-1"></i>
-                        Remover</button>
+                        wire:click="removeRegister('/sys/p-permissions', {{ $row->id }})">
+                        <i class="bx bx-trash me-1"></i> Remover
+                      </button>
                     </div>
                   </div>
                 </td>

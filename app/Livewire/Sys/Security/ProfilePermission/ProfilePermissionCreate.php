@@ -4,7 +4,7 @@ namespace App\Livewire\Sys\Security\ProfilePermission;
 
 use Livewire\Component;
 // Models
-use App\Models\profilePermission;
+use App\Models\ProfilePermission;
 use App\Models\Sidebar;
 use App\Models\Profile;
 
@@ -37,9 +37,9 @@ class ProfilePermissionCreate extends Component {
     $user = auth()->user();
     $this->validate();
 
-    $verifyUniqueModule = profilePermission::where('sidebar_id', $this->module)->where('profile_id', $this->profile)->first();
+    $verifyUniqueModule = ProfilePermission::where('sidebar_id', $this->module)->where('profile_id', $this->profile)->first();
     if (!$verifyUniqueModule) {
-      $moduleCreate = new profilePermission();
+      $moduleCreate = new ProfilePermission();
       $moduleCreate->profile_id = $this->profile;
       $moduleCreate->sidebar_id = $this->module;
       $moduleCreate->affiliate_id = $this->module;
@@ -49,12 +49,12 @@ class ProfilePermissionCreate extends Component {
       $moduleCreate->save();
     }
 
-    $verifyUniqueScreen = profilePermission::where('sidebar_id', $this->screen)->where('profile_id', $this->profile)->first();
+    $verifyUniqueScreen = ProfilePermission::where('sidebar_id', $this->screen)->where('profile_id', $this->profile)->first();
     if ($verifyUniqueScreen) {
       return redirect()->route('sys-sec-permissions');
     }
 
-    $profile_permission = new profilePermission();
+    $profile_permission = new ProfilePermission();
     $profile_permission->profile_id = $this->profile;
     $profile_permission->sidebar_id = $this->screen;
     $profile_permission->affiliate_id = $this->module;

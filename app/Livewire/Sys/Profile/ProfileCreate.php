@@ -2,11 +2,12 @@
 
 namespace App\Livewire\Sys\Profile;
 
-use App\Models\profilePermission;
 use Livewire\Component;
+
 // Models
 use App\Models\Profile;
 use App\Models\Client;
+use App\Models\ProfilePermission;
 
 class ProfileCreate extends Component {
   // Selects
@@ -35,7 +36,7 @@ class ProfileCreate extends Component {
     $profile->client_id = $user->in_client;
     $profile->save();
 
-    $profile_permission = new profilePermission();
+    $profile_permission = new ProfilePermission();
     $profile_permission->profile_id = $profile->id;
     $profile_permission->sidebar_id = 1;
     $profile_permission->client_id = $user->in_client;

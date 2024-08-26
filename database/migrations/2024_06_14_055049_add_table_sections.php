@@ -14,7 +14,7 @@ return new class extends Migration {
       $table->id();
       $table->string('code');
       $table->string('name');
-      $table->foreignIdFor(Organization::class)->constrained();
+      $table->foreignIdFor(Organization::class)->constrained()->onDelete('cascade');
       $table->integer('responsible');
       $table->integer('situation')->default(1);
       $table->integer('creation_user')->nullable();

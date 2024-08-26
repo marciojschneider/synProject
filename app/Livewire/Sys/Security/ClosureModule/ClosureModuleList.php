@@ -7,10 +7,11 @@ use Livewire\Component;
 // Livewire Adicionais
 use Livewire\WithPagination;
 use Livewire\Attributes\Session;
+use Livewire\Attributes\On;
 
 //Models
 use App\Models\ClosureModule;
-use App\Models\profilePermission;
+use App\Models\ProfilePermission;
 
 class ClosureModuleList extends Component {
   use WithPagination;
@@ -50,7 +51,7 @@ class ClosureModuleList extends Component {
   public function removeRegister(string $rName, int $id) {
     $user = auth()->user();
 
-    $sqlPermission = profilePermission::join('sidebars', 'sidebars.id', '=', 'profile_permissions.sidebar_id')
+    $sqlPermission = ProfilePermission::join('sidebars', 'sidebars.id', '=', 'profile_permissions.sidebar_id')
       ->where('profile_permissions.profile_id', $user->in_profile)
       ->where('sidebars.url', 'like', '%' . $rName . '%')
       ->where('sidebars.client_id', 'REGEXP', '[[:<:]]' . $user->in_client . '[[:>:]]')
@@ -69,5 +70,13 @@ class ClosureModuleList extends Component {
     $this->dispatch('swal', [
       'id' => $id
     ]);
+  }
+
+  #[On('removeAction')]
+  public function removeAction(int $id) {
+    $user = auth()->user();
+    closureModule::where('id', $id)->where('client_id', $user->in_client)->delete();
+
+    return redirect()->route('sys-sec-closures');
   }
 }

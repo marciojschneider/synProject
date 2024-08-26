@@ -7,11 +7,12 @@ use Livewire\Component;
 // Livewire adicionais
 use Livewire\WithPagination;
 use Livewire\Attributes\Session;
+use Livewire\Attributes\On;
 
 // Models
 use App\Models\UserProfile;
 use App\Models\Profile;
-use App\Models\profilePermission;
+use App\Models\ProfilePermission;
 
 class UserProfileList extends Component {
   use WithPagination;
@@ -80,7 +81,7 @@ class UserProfileList extends Component {
   public function removeRegister(string $rName, int $id) {
     $user = auth()->user();
 
-    $sqlPermission = profilePermission::join('sidebars', 'sidebars.id', '=', 'profile_permissions.sidebar_id')
+    $sqlPermission = ProfilePermission::join('sidebars', 'sidebars.id', '=', 'profile_permissions.sidebar_id')
       ->where('profile_permissions.profile_id', $user->in_profile)
       ->where('sidebars.url', 'like', '%' . $rName . '%')
       ->where('sidebars.client_id', 'REGEXP', '[[:<:]]' . $user->in_client . '[[:>:]]')
@@ -99,5 +100,13 @@ class UserProfileList extends Component {
     $this->dispatch('swal', [
       'id' => $id
     ]);
+  }
+
+  #[On('removeAction')]
+  public function removeAction(int $id) {
+    $user = auth()->user();
+    UserProfile::where('id', $id)->where('client_id', $user->in_client)->delete();
+
+    return redirect()->route('sys-sec-u-ps');
   }
 }

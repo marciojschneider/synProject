@@ -3,7 +3,7 @@
 namespace App\Livewire\Sys\Client;
 
 use App\Models\Profile;
-use App\Models\profilePermission;
+use App\Models\ProfilePermission;
 use App\Models\UserProfile;
 use Livewire\Component;
 // Models
@@ -53,7 +53,7 @@ class ClientCreate extends Component {
       switch ($arr_profile) {
         case 'ADMINISTRADOR':
           foreach ($arr_permissions as $arr_permission) {
-            $profile_permission = new profilePermission();
+            $profile_permission = new ProfilePermission();
             $profile_permission->profile_id = $profile->id;
             $profile_permission->sidebar_id = $arr_permission['screen'];
             $profile_permission->affiliate_id = $arr_permission['module'];
@@ -69,7 +69,7 @@ class ClientCreate extends Component {
           break;
 
         default:
-          $profile_permission = new profilePermission();
+          $profile_permission = new ProfilePermission();
           $profile_permission->profile_id = $profile->id;
           $profile_permission->sidebar_id = 1;
           $profile_permission->affiliate_id = 1;

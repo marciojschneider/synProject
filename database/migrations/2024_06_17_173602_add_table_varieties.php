@@ -15,8 +15,8 @@ return new class extends Migration {
       $table->id();
       $table->string('code');
       $table->string('name');
-      $table->foreignIdFor(Culture::class)->constrained();
-      $table->foreignIdFor(Group::class)->constrained();
+      $table->foreignIdFor(Culture::class)->constrained()->onDelete('cascade');
+      $table->foreignIdFor(Group::class)->constrained()->onDelete('cascade');
       $table->integer('situation')->default(1);
       $table->integer('creation_user')->nullable();
       $table->foreignIdFor(Client::class)->constrained()->onDelete('cascade');

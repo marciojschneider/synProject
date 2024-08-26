@@ -83,25 +83,25 @@
                 <td>{{ $row->code }}</td>
                 <td>{{ $row->name }}</td>
                 <td>{{ $row->cFarm }} - {{ $row->nFarm }}</td>
-                <td><span
-                    class="badge {{ $row->situation == 1 ? 'bg-label-primary' : 'bg-label-warning' }} me-1">{{ $row->situation == 1 ? 'ATIVO' : 'INATIVO' }}</span>
+                <td>
+                  <span class="badge {{ $row->situation == 1 ? 'bg-label-primary' : 'bg-label-warning' }} me-1">
+                    {{ $row->situation == 1 ? 'ATIVO' : 'INATIVO' }}
+                  </span>
                 </td>
                 <td>
                   <div class="dropdown">
-                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i
-                        class="bx bx-dots-vertical-rounded"></i></button>
+                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                      <i class="bx bx-dots-vertical-rounded"></i>
+                    </button>
                     <div class="dropdown-menu">
-                      <a class="dropdown-item" href="{{ route('structure-sector-update', $row->id) }}"><i
-                          class="bx bx-edit-alt me-1"></i> Editar</a>
+                      <a class="dropdown-item" href="{{ route('structure-sector-update', $row->id) }}">
+                        <i class="bx bx-edit-alt me-1"></i> Editar
+                      </a>
 
-                      <form method="POST" action="{{ route('structure-sector-delete', $row->id) }}"
-                        id="sectorDelete{{ $row->id }}" display="none">
-                        @csrf @method('DELETE')
-                      </form>
                       <button type="submit" class="dropdown-item"
-                        wire:click="removeRegister('/structure/sectors', {{ $row->id }})"><i
-                          class="bx bx-trash me-1"></i>
-                        Remover</button>
+                        wire:click="removeRegister('/structure/sectors', {{ $row->id }})">
+                        <i class="bx bx-trash me-1"></i> Remover
+                      </button>
                     </div>
                   </div>
                 </td>

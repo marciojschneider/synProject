@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\pages\Cultive;
 
 use App\Http\Controllers\Controller;
-// Models
-use App\Models\Variety;
 
 class VarietyController extends Controller {
   public function varieties() {
@@ -17,12 +15,5 @@ class VarietyController extends Controller {
 
   public function varietyUpdate(int $id) {
     return view('content.pages.cultive.variety.update', compact('id'));
-  }
-
-  public function varietyDelete(int $id) {
-    $user = auth()->user();
-    Variety::where('id', $id)->where('client_id', $user->in_client)->delete();
-
-    return redirect()->route('cultive-varieties');
   }
 }

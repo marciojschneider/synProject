@@ -14,8 +14,8 @@ return new class extends Migration {
     Schema::create("profile_permissions", function (Blueprint $table) {
       $table->id();
       $table->foreignIdFor(Profile::class)->constrained()->onDelete('cascade');
-      $table->foreignIdFor(Sidebar::class)->constrained();
-      $table->foreignIdFor(Client::class)->constrained()->onDelete('cascade'); // Verificar a possibilidade de ter dois onDelete('cascade')
+      $table->foreignIdFor(Sidebar::class)->constrained()->onDelete('cascade');
+      $table->foreignIdFor(Client::class)->constrained()->onDelete('cascade');
       $table->integer('affiliate_id');
       $table->integer('view')->default(1);
       $table->integer('create')->default(0);

@@ -14,7 +14,7 @@ return new class extends Migration {
       $table->id();
       $table->string('code');
       $table->string('name');
-      $table->foreignIdFor(Farm::class)->constrained();
+      $table->foreignIdFor(Farm::class)->constrained()->onDelete('cascade');
       $table->integer('situation')->default(1);
       $table->integer('creation_user')->nullable();
       $table->foreignIdFor(Client::class)->constrained()->onDelete('cascade');

@@ -156,46 +156,50 @@
           </tr>
         </thead>
         <tbody class="table-border-bottom-0">
-          @foreach ($rows as $row)
-            <tr>
-              <td>{{ $row->report }}</td>
-              <td>{{ $row->cOrganization }}</td>
-              <td>{{ $row->cHarvest }}</td>
-              <td>{{ $row->cSection }} - {{ $row->nSection }}</td>
-              <td>{{ $row->cField }}</td>
-              <td>{{ $row->cProcess }} - {{ $row->nProcess }}</td>
-              <td>{{ $row->equipament_id }}</td>
-              <td>{{ $row->implement_id }}</td>
-              <td>{{ date('d/m/Y', strtotime($row->transaction_dt)) }}</td>
-              <td>{{ number_format(floatval($row->hourmeter_start), 2, ',', '.') }}</td>
-              <td>{{ number_format(floatval($row->hourmeter_end), 2, ',', '.') }}</td>
-              <td>{{ number_format(floatval($row->hourmeter_quantity), 2, ',', '.') }}</td>
-              <td>{{ number_format(floatval($row->hourmeter_rotor_start), 2, ',', '.') }}</td>
-              <td>{{ number_format(floatval($row->hourmeter_rotor_end), 2, ',', '.') }}</td>
-              <td>{{ number_format(floatval($row->quantity_box), 2, ',', '.') }}</td>
-              <td>{{ number_format(floatval($row->quantity_diesel), 2, ',', '.') }}</td>
-              <td>{{ number_format(floatval($row->hourmeter_diesel), 2, ',', '.') }}</td>
-              <td>
-                <div class="dropdown">
-                  <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i
-                      class="bx bx-dots-vertical-rounded"></i></button>
-                  <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{{ route('cultive-machine-hour-update', $row->id) }}"><i
-                        class="bx bx-edit-alt me-1"></i> Editar</a>
+          @if (count($rows) > 0)
+            @foreach ($rows as $row)
+              <tr>
+                <td>{{ $row->report }}</td>
+                <td>{{ $row->cOrganization }}</td>
+                <td>{{ $row->cHarvest }}</td>
+                <td>{{ $row->cSection }} - {{ $row->nSection }}</td>
+                <td>{{ $row->cField }}</td>
+                <td>{{ $row->cProcess }} - {{ $row->nProcess }}</td>
+                <td>{{ $row->equipament_id }}</td>
+                <td>{{ $row->implement_id }}</td>
+                <td>{{ date('d/m/Y', strtotime($row->transaction_dt)) }}</td>
+                <td>{{ number_format(floatval($row->hourmeter_start), 2, ',', '.') }}</td>
+                <td>{{ number_format(floatval($row->hourmeter_end), 2, ',', '.') }}</td>
+                <td>{{ number_format(floatval($row->hourmeter_quantity), 2, ',', '.') }}</td>
+                <td>{{ number_format(floatval($row->hourmeter_rotor_start), 2, ',', '.') }}</td>
+                <td>{{ number_format(floatval($row->hourmeter_rotor_end), 2, ',', '.') }}</td>
+                <td>{{ number_format(floatval($row->quantity_box), 2, ',', '.') }}</td>
+                <td>{{ number_format(floatval($row->quantity_diesel), 2, ',', '.') }}</td>
+                <td>{{ number_format(floatval($row->hourmeter_diesel), 2, ',', '.') }}</td>
+                <td>
+                  <div class="dropdown">
+                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                      <i class="bx bx-dots-vertical-rounded"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="{{ route('cultive-machine-hour-update', $row->id) }}">
+                        <i class="bx bx-edit-alt me-1"></i> Editar
+                      </a>
 
-                    <form method="POST" action="{{ route('cultive-machine-hour-delete', $row->id) }}"
-                      id="machineHourDelete{{ $row->id }}" display="none">
-                      @csrf @method('DELETE')
-                    </form>
-                    <button type="submit" class="dropdown-item"
-                      wire:click="removeRegister('/cultive/machine-hours', {{ $row->id }})"><i
-                        class="bx bx-trash me-1"></i>
-                      Remover</button>
+                      <button type="submit" class="dropdown-item"
+                        wire:click="removeRegister('/cultive/machine-hours', {{ $row->id }})">
+                        <i class="bx bx-trash me-1"></i> Remover
+                      </button>
+                    </div>
                   </div>
-                </div>
-              </td>
+                </td>
+              </tr>
+            @endforeach
+          @else
+            <tr>
+              <td colspan="18">Não hà registros</td>
             </tr>
-          @endforeach
+          @endif
         </tbody>
       </table>
       <div class="mt-4"> {{ $rows->links() }} </div>

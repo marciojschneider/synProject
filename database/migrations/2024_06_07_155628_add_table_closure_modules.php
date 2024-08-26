@@ -12,7 +12,7 @@ return new class extends Migration {
   public function up(): void {
     Schema::create('closure_modules', function (Blueprint $table) {
       $table->id();
-      $table->foreignIdFor(Sidebar::class)->constrained();
+      $table->foreignIdFor(Sidebar::class)->constrained()->onDelete('cascade');
       $table->foreignIdFor(Client::class)->constrained()->onDelete('cascade');
       $table->date('dt_closure');
       $table->integer('situation')->default(1);
