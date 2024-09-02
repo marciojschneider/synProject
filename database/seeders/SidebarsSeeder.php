@@ -371,6 +371,18 @@ class SidebarsSeeder extends Seeder {
         "updated_at" => "2024-05-23 19:56:11",
         "visibility" => 0,
       ),
+      array(
+        "name" => "Módulos",
+        "icon" => NULL,
+        "slug" => "sidebar",
+        "affiliate_id" => 2,
+        "url" => "/sys/sidebars",
+        "client_id" => "1",
+        "order" => 4,
+        "created_at" => "2024-08-27 11:44:29",
+        "updated_at" => "2024-08-27 11:44:29",
+        "visibility" => 1,
+      ),
     );
 
     Sidebar::insert($sidebars);

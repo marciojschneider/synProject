@@ -9,6 +9,7 @@ use App\Http\Controllers\pages\HomePage;
 use App\Http\Controllers\pages\Sys\ClientController;
 use App\Http\Controllers\pages\Sys\ProfileController;
 use App\Http\Controllers\pages\Sys\UserController;
+use App\Http\Controllers\pages\Sys\SidebarController;
 //                → Security
 use App\Http\Controllers\pages\Sys\Security\UserProfileController;
 use App\Http\Controllers\pages\Sys\Security\ProfillePermissionController;
@@ -74,6 +75,10 @@ Route::middleware(['auth', 'canAccess'])->group(function () {
   Route::get('/sys/profiles', [ProfileController::class, 'profiles'])->name('sys-profiles');
   Route::get('/sys/profiles/create', [ProfileController::class, 'profileCreate'])->name('sys-profile-create');
   Route::get('/sys/profiles/update/{id}', [ProfileController::class, 'profileUpdate'])->name('sys-profile-update');
+  //       → Sidebars
+  Route::get('/sys/sidebars', [SidebarController::class, 'sidebars'])->name('sys-sidebars');
+  Route::get('/sys/sidebars/create', [SidebarController::class, 'sidebarCreate'])->name('sys-sidebar-create');
+  Route::get('/sys/sidebars/update/{id}', [SidebarController::class, 'sidebarUpdate'])->name('sys-sidebar-update');
   //       → Security
   //                  → Permissions
   Route::get('/sys/p-permissions', [ProfillePermissionController::class, 'ProfilePermissions'])->name('sys-sec-permissions');
