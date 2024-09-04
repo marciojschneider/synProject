@@ -39,6 +39,9 @@ use App\Http\Controllers\pages\Harvest\HarvestConfigurationController;
 use App\Http\Controllers\pages\Support\TaskController;
 use App\Http\Controllers\pages\Support\RoadmapController;
 
+//       → TESTANDO
+use App\Http\Controllers\pages\Boarding\BoardingController;
+
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'loginAction']);
 
@@ -171,4 +174,9 @@ Route::middleware(['auth', 'canAccess'])->group(function () {
   Route::post('/support/task-roadmap', [RoadmapController::class, 'roadmapAction']);
   Route::post('/support/task-roadmap/update', [RoadmapController::class, 'roadmapUpdate'])->name('sup-roadmap-update');
   Route::post('/support/task-roadmap/delete/{id}', [RoadmapController::class, 'roadmapDelete'])->name('sup-roadmap-delete');
+
+
+  // TESTANDO
+  //       → Boarding
+  Route::get('/boarding/boardings', [BoardingController::class, 'boardings'])->name('bor-bordings');
 });

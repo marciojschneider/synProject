@@ -13,7 +13,7 @@
             <label for="name" class="form-label">Nome</label>
             <input type="text" class="form-control" wire:model="name" required />
             @error('name')
-              <div class="invalid-feedback"> {{ $message }} </div>
+              <div class="error"> {{ $message }} </div>
             @enderror
           </div>
 
@@ -21,7 +21,7 @@
             <label for="email" class="form-label">Email</label>
             <input type="text" class="form-control" wire:model="email" required />
             @error('email')
-              <div class="invalid-feedback"> {{ $message }} </div>
+              <div class="error"> {{ $message }} </div>
             @enderror
           </div>
 

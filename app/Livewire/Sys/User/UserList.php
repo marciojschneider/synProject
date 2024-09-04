@@ -36,6 +36,7 @@ class UserList extends Component {
       ->join('user_profiles', 'user_profiles.user_id', '=', 'users.id')
       ->where('user_profiles.client_id', $user->in_client)
       ->groupBy('users.id', 'users.name', 'users.email', 'users.situation')
+      ->orderBy('users.id', 'desc')
       ->orderBy('situation', 'desc')
       ->get();
 

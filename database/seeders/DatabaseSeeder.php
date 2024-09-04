@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder {
     $this->call(ProfilePermissionsSeeder::class);
     $this->call(TasksSeeder::class);
     $this->call(TaskDetailsSeeder::class);
+    $this->call(ItemsSeeder::class);
     // $this->call(OrganizationsSeeder::class);
     // $this->call(CulturesSeeder::class);
     // $this->call(FarmsSeeder::class);

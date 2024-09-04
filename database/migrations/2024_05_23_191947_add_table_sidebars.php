@@ -15,7 +15,7 @@ return new class extends Migration {
       $table->string('icon')->nullable(true);
       $table->string('slug');
       $table->integer('affiliate_id');
-      $table->string('url');
+      $table->string('url')->nullable();
       $table->string('client_id')->default(0); // ?,?,?
       $table->integer('order');
       $table->integer('visibility')->default(1);
