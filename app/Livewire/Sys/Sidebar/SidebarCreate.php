@@ -20,7 +20,6 @@ class SidebarCreate extends Component {
 
     $this->modules = Sidebar::where('icon', '!=', null)
       ->where('name', '!=', 'Inicio')
-      ->where('client_id', 'REGEXP', '[[:<:]]' . $user->in_client . '[[:>:]]')
       ->get();
 
     $this->clients = Client::where('situation', 1)

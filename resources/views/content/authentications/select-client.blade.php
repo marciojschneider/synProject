@@ -1,6 +1,6 @@
 @extends('layouts/blankLayout')
 
-@section('title', 'Estabelecimento')
+@section('title', 'Organizações')
 
 @section('page-style')
   @vite(['resources/assets/vendor/scss/pages/page-auth.scss'])
@@ -27,7 +27,8 @@
               @csrf
               <div class="mb-4">
                 {{-- <label for="exampleFormControlSelect1" class="form-label">Estabelecimentos</label> --}}
-                <select class="form-select" name="client_id" id="client_id" aria-label="Estabelecimentos">
+                <select class="selectpicker col-sm-12" data-style="btn-default" name="client_id" id="client_id"
+                  aria-label="Estabelecimentos">
                   @foreach ($clients as $client)
                     <option value="{{ $client['idClient'] }}">{{ $client['nClient'] }}</option>
                   @endforeach

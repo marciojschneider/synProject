@@ -8,13 +8,17 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\Attributes\Session;
 use Livewire\Attributes\On;
-use Illuminate\Support\Facades\DB;
 
 // Models
 use App\Models\Boarding;
 use App\Models\StBoarding;
 use App\Models\User;
 use App\Models\UserProfile;
+use App\Models\BoardingItem;
+use App\Models\BoardingReading;
+use App\Models\ProfilePermission;
+use App\Models\StBoardingItem;
+use App\Models\StBoardingReading;
 
 class BoardingList extends Component {
   use WithPagination;
@@ -56,55 +60,41 @@ class BoardingList extends Component {
     $this->dispatch('loadDataSelect', ['separador' => $this->separador, 'situation' => $this->situation]);
     $user = auth()->user();
 
+    $query = Boarding::query();
+    $stQuery = StBoarding::query();
+
     if (is_array($this->situation)) {
       $this->situation = implode(',', $this->situation);
     }
-
     $this->situation = explode(',', $this->situation);
-
-    $query = Boarding::query();
-    $query->where('client_id', $user->in_client);
-
-    $stQuery = StBoarding::query();
-
-    if ($user->in_profile == 5) {
-      $query->where('separador', $user->id);
-    }
 
     if (is_array($this->situation) && $this->situation[0] != '') {
       foreach ($this->situation as $key => $value) {
         if ($key === 0) {
           $query->where('situation', $value);
           $stQuery->where('situation', $value);
+          $this->addWheres($query, $stQuery);
         } else {
           $query->orWhere('situation', $value);
           $stQuery->orWhere('situation', $value);
+          $this->addWheres($query, $stQuery);
         }
       }
     }
-
-    if ($this->separador) {
-      $query->where('separador', $this->separador);
-      $stQuery->where('separador', $this->separador);
-    }
-
-    $this->addAdvancedFilters($query, $stQuery);
 
     $stQuery->union($query)
       ->orderBy('date', 'desc')
       ->orderBy('number', 'desc')
       ->get();
 
-    $data['rows'] = $stQuery->paginate($this->pPage / 2);
+    $data['rows'] = $stQuery->paginate($this->pPage);
 
     foreach ($data['rows'] as $kBoarding => $vBoarding) {
-      $data['rows'][] = $vBoarding;
-
-      $data['rows'][$kBoarding]['id'] = $vBoarding->st_boarding_id ?: $vBoarding->boarding_id;
+      $data['rows'][$kBoarding]['id'] = $vBoarding->id;
 
       if ($vBoarding->separador) {
         $separador = User::where('id', $vBoarding->separador)->select('name')->first();
-        if ($separador !== null) {
+        if ($separador) {
           $data['rows'][$kBoarding]['uName'] = $separador->name;
         }
       }
@@ -140,6 +130,26 @@ class BoardingList extends Component {
     return view('livewire.boarding.boarding.boarding-list', $data);
   }
 
+  public function addWheres($query, $stQuery) {
+    $user = auth()->user();
+
+    $query->where('client_id', $user->in_client);
+    $stQuery->where('client_id', $user->in_client);
+
+    if ($user->in_profile == 5) {
+      $query->where('separador', $user->id);
+      $this->clean();
+      $this->situation = '2,3';
+    }
+
+    if ($this->separador) {
+      $query->where('separador', $this->separador);
+      $stQuery->where('separador', $this->separador);
+    }
+
+    $this->addAdvancedFilters($query, $stQuery);
+  }
+
   public function search() {
     $this->advanced_filters = true;
   }
@@ -165,5 +175,50 @@ class BoardingList extends Component {
         $stQuery->where('request_erp', 'like', '%' . $this->erp . '%');
       }
     }
+  }
+
+  public function removeRegister(string $rName, int $id) {
+    $user = auth()->user();
+
+    $sqlPermission = ProfilePermission::join('sidebars', 'sidebars.id', '=', 'profile_permissions.sidebar_id')
+      ->where('profile_permissions.profile_id', $user->in_profile)
+      ->where('sidebars.url', 'like', '%' . $rName . '%')
+      ->where('sidebars.client_id', 'REGEXP', '[[:<:]]' . $user->in_client . '[[:>:]]')
+      ->where('profile_permissions.delete', 1)
+      ->get();
+
+    if (!isset($sqlPermission[0]) || count($sqlPermission) === 0) {
+      $this->dispatch('swal', [
+        'title' => 'Sem Permissão',
+        'icon' => 'error',
+      ]);
+
+      return;
+    }
+
+    $this->dispatch('swal', [
+      'id' => $id
+    ]);
+  }
+
+  #[On('removeAction')]
+  public function removeAction(int $id) {
+    $user = auth()->user();
+
+    $boarding = Boarding::find($id);
+
+    if ($boarding) {
+      Boarding::where('id', $id)->where('client_id', $user->in_client)->delete();
+      BoardingItem::where('boarding_id', $id)->delete();
+      BoardingReading::where('boarding_id', $id)->delete();
+
+      return redirect()->route('boar-boardings');
+    }
+
+    StBoarding::where('id', $id)->where('client_id', $user->in_client)->delete();
+    StBoardingItem::where('boarding_id', $id)->delete();
+    StBoardingReading::where('boarding_id', $id)->delete();
+
+    return redirect()->route('boar-boardings');
   }
 }

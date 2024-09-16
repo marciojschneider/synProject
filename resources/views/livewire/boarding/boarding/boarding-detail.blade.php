@@ -7,7 +7,7 @@
       <div
         class="dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-end flex-md-row flex-column mb-3 mb-md-0">
         {{-- Select registros por página --}}
-        <div class="dataTables_length" style="margin-right: 5px;">
+        <div class="dataTables_length">
           <select wire:model.live.click="pPage" class="form-select">
             <option value="10">10</option>
             <option value="20">20</option>
@@ -17,12 +17,11 @@
 
         {{-- Botões --}}
         <div class="dt-buttons" bis_skin_checked="1" style="margin-left: 5px; margin-right: 5px; color:#fff">
-          @if (auth()->user()->in_profile != 5)
-            <a class="dt-button btn btn-success" data-bs-toggle="offcanvas" data-bs-target="#filters"><span>
-                <i class='bx bx-search-alt-2'></i> <span class="d-none d-sm-inline-block">Busca Avançada</span>
-              </span>
-            </a>
-          @endif
+          <a class="dt-button btn btn-success" data-bs-toggle="offcanvas" data-bs-target="#filters"><span>
+              <i class='bx bx-search-alt-2'></i> <span class="d-none d-sm-inline-block">Busca Avançada</span>
+            </span>
+          </a>
+          <a class="dt-button btn btn-secondary" href="{{ route('boar-boarding-update', $id) }}"> Voltar </a>
         </div>
       </div>
     </div>
@@ -37,41 +36,13 @@
     </div>
 
     <div class="offcanvas-body mx-0 flex-grow-0" style="height: 87%">
-      {{-- Pesquisa por Embarque --}}
-      <div id="boarding" class="dataTables_filter mb-4" bis_skin_checked="1">
-        <input wire:model="boarding" type="search" class="form-control col-sm-12" placeholder="Embarque">
-      </div>
-
-      {{-- Pesquisa por Pedido --}}
-      <div id="request" class="dataTables_filter mb-4" bis_skin_checked="1">
-        <input wire:model="request" type="search" class="form-control col-sm-12" placeholder="Pedido">
-      </div>
-
-      {{-- Pesquisa por ERP --}}
-      <div id="erp" class="dataTables_filter mb-4" bis_skin_checked="1">
-        <input wire:model="erp" type="search" class="form-control col-sm-12" placeholder="ERP">
-      </div>
-
       {{-- Busca por Separador --}}
-      <div id="separadorContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
-        <select wire:model="separador" id="separador" name="separador" class="selectpicker col-sm-12"
-          data-style="btn-default" data-live-search="true" placeholder="Separador" data-container="#separadorContainer">
-          @foreach ($separadores as $separador)
-            <option value="{{ $separador->user_id }}">{{ mb_strtoupper($separador->name, 'UTF-8') }}</option>
+      <div id="itemContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
+        <select wire:model="item" id="item" name="item" class="selectpicker col-sm-12" data-style="btn-default"
+          data-live-search="true" placeholder="Item" data-container="#itemContainer">
+          @foreach ($items as $item)
+            <option value="{{ $item->code }}">{{ $item->code }}</option>
           @endforeach
-        </select>
-      </div>
-
-      {{-- Busca por Perfil --}}
-      <div id="situationContainer" class="dataTables_filter mb-4" bis_skin_checked="1" wire:ignore>
-        <select wire:model="situation" id="situation" name="situation" class="selectpicker col-sm-12"
-          data-style="btn-default" data-live-search="true" placeholder="Situação" data-container="#situationContainer"
-          multiple>
-          <option value="1">SEM SEPARADOR</option>
-          <option value="2">SEM LEITURA</option>
-          <option value="3">COM LEITURA</option>
-          <option value="4">FINALIZADO</option>
-          <option value="5">EXPORTADO</option>
         </select>
       </div>
     </div>
@@ -90,13 +61,11 @@
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th>Embarque</th>
-            <th>Pedido</th>
-            <th>Pedido ERP</th>
-            <th>Cliente</th>
-            <th>Separador</th>
-            <th>Data</th>
-            <th>Situação</th>
+            <th>Item</th>
+            <th>Lote</th>
+            <th>Quantidade</th>
+            <th>Leitura</th>
+            <th>Externo</th>
             <th>Ações</th>
           </tr>
         </thead>
@@ -104,13 +73,11 @@
           @if (count($rows) > 0)
             @foreach ($rows as $row)
               <tr>
-                <td>{{ $row->number }}</td>
-                <td>{{ $row->request }}</td>
-                <td>{{ $row->request_erp }}</td>
-                <td>{{ $row->client }}</td>
-                <td>{{ $row->uName }}</td>
-                <td>{{ date('d/m/Y', strtotime($row->date)) }}</td>
-                <td> <span class="badge bg-{{ $row->cSituation }} me-1"> {{ $row->nSituation }} </span> </td>
+                <td>{{ $row->item_code }}</td>
+                <td>{{ $row->batch }}</td>
+                <td>{{ $row->amount }}</td>
+                <td>{{ $row->full_code }}</td>
+                <td>{{ $row->external_id }}</td>
                 <td>
                   <div class="dropdown">
                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
@@ -129,7 +96,7 @@
                             <i class="bx bx-edit-alt me-1"></i> Editar
                           </a>
                           <button type="submit" class="dropdown-item"
-                            wire:click="removeRegister('/boarding/boardings', {{ $row->id }})">
+                            wire:click="removeRegister('/boarding/boarding/detail', {{ $row->id }})">
                             <i class="bx bx-trash me-1"></i> Remover
                           </button>
                       @endswitch

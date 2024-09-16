@@ -66,6 +66,7 @@ class ProfilePermissionUpdate extends Component {
   ];
 
   public function submit() {
+    $user = auth()->user();
     $this->validate();
 
     $verifyUniqueScreen = ProfilePermission::where('sidebar_id', $this->screen)->where('profile_id', $this->profile)->where('id', '!=', $this->id)->first();
@@ -83,7 +84,36 @@ class ProfilePermissionUpdate extends Component {
     $this->profile_permission->situation = $this->situation;
     $this->profile_permission->save();
 
+    $verifyUniqueModule = ProfilePermission::where('sidebar_id', $this->module)->where('profile_id', $this->profile)->first();
+    if (!$verifyUniqueModule) {
+      $moduleCreate = new ProfilePermission();
+      $moduleCreate->profile_id = $this->profile;
+      $moduleCreate->sidebar_id = $this->module;
+      $moduleCreate->affiliate_id = $this->module;
+      $moduleCreate->view = 1;
+      $moduleCreate->creation_user = $user->id;
+      $moduleCreate->client_id = $user->in_client;
+      $moduleCreate->save();
+    }
+
     $needRemove = ProfilePermission::where('affiliate_id', $this->module)->where('profile_id', $this->profile)->where('view', 1)->get();
+    $removeYour = ProfilePermission::where('affiliate_id', $this->module)->where('profile_id', $user->in_profile)->where('view', 1)->get();
+
+    if (count($removeYour) === 1) {
+      switch ($removeYour[0]->sidebar_id) {
+        case $this->module:
+          $removeYour[0]->view = 0;
+          $removeYour[0]->save();
+          break;
+
+        default:
+          $addYour = ProfilePermission::where('sidebar_id', $this->module)->where('profile_id', $user->in_profile)->get();
+          $addYour[0]->view = 1;
+          $addYour[0]->save();
+          break;
+      }
+    }
+
     if (count($needRemove) === 1) {
       switch ($needRemove[0]->sidebar_id) {
         case $this->module:

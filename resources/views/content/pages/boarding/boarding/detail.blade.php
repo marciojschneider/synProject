@@ -4,7 +4,7 @@
 
 @extends('layouts/layoutMaster')
 
-@section('title', 'Embarque')
+@section('title', 'Detalhar Embarque')
 
 @section('vendor-style')
   @vite(['resources/assets/vendor/libs/animate-css/animate.scss', 'resources/assets/vendor/libs/sweetalert2/sweetalert2.scss'])
@@ -19,10 +19,23 @@
 @endsection
 
 @section('content')
-  <livewire:boarding.boarding.boarding-list />
+  <livewire:boarding.boarding.boarding-detail :id="$id" />
 @endsection
 
 <script>
+  window.addEventListener('loadDataSelect', event => {
+    $('select[name=organization]').val(event.detail[0].organization);
+    $('select[name=harvest]').val(event.detail[0].harvest);
+    $('select[name=section]').val(event.detail[0].section);
+    $('select[name=field]').val(event.detail[0].field);
+    $('select[name=process]').val(event.detail[0].process);
+    // $('select[name=equipament]').val(event.detail[0].equipament);
+    // $('select[name=implement]').val(event.detail[0].implement);
+  })
+
+  function cleanFilters() {
+    $('.selectpicker').selectpicker('val', null);
+  }
   window.addEventListener('swal', function(e) {
     if (e.detail[0].title === 'Sem Permissão') {
       Swal.fire({
@@ -62,19 +75,4 @@
       }
     });
   });
-
-  // Responsável por carregar os dados da busca salva.
-  window.addEventListener('loadDataSelect', event => {
-    $('select[name=separadores]').val(event.detail[0].separadores)
-    $('select[name=situation]').val(event.detail[0].situation)
-  })
-
-  // Necessário para a renderização correta do multiple
-  $('#situation').selectpicker('destroy')
-  $('#situation').selectpicker()
-
-  function cleanFilters() {
-    $('#separadores').selectpicker('val', null)
-    $('#situation').selectpicker('val', ['1', '2'])
-  }
 </script>

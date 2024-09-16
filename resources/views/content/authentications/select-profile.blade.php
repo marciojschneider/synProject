@@ -27,7 +27,8 @@
               @csrf
               <div class="mb-4">
                 {{-- <label for="exampleFormControlSelect1" class="form-label">Estabelecimentos</label> --}}
-                <select class="form-select" name="profile_id" id="profile_id" aria-label="Perfis">
+                <select class="selectpicker col-sm-12" data-style="btn-default" name="profile_id" id="profile_id"
+                  aria-label="Perfis">
                   @foreach ($profiles as $profile)
                     <option value="{{ $profile['idProfile'] }}">{{ $profile['nProfile'] }}</option>
                   @endforeach

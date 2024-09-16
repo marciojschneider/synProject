@@ -4,7 +4,7 @@
 
 @extends('layouts/layoutMaster')
 
-@section('title', 'Embarque')
+@section('title', 'Itens')
 
 @section('vendor-style')
   @vite(['resources/assets/vendor/libs/animate-css/animate.scss', 'resources/assets/vendor/libs/sweetalert2/sweetalert2.scss'])
@@ -19,7 +19,7 @@
 @endsection
 
 @section('content')
-  <livewire:boarding.boarding.boarding-list />
+  <livewire:sys.item.item-list />
 @endsection
 
 <script>
@@ -62,19 +62,4 @@
       }
     });
   });
-
-  // Responsável por carregar os dados da busca salva.
-  window.addEventListener('loadDataSelect', event => {
-    $('select[name=separadores]').val(event.detail[0].separadores)
-    $('select[name=situation]').val(event.detail[0].situation)
-  })
-
-  // Necessário para a renderização correta do multiple
-  $('#situation').selectpicker('destroy')
-  $('#situation').selectpicker()
-
-  function cleanFilters() {
-    $('#separadores').selectpicker('val', null)
-    $('#situation').selectpicker('val', ['1', '2'])
-  }
 </script>

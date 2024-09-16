@@ -147,7 +147,7 @@ Route::middleware(['auth', 'canAccess'])->group(function () {
   Route::get('/cultive/machine-hours/create', [MachineHourController::class, 'machineHourCreate'])->name('cultive-machine-hour-create');
   Route::get('/cultive/machine-hours/update/{id}', [MachineHourController::class, 'machineHourUpdate'])->name('cultive-machine-hour-update');
 
-  //Harvest
+  // Harvest
   //       → Harvest
   Route::get('/harvest/harvests', [HarvestController::class, 'harvests'])->name('harv-harvests');
   Route::get('/harvest/harvests/create', [HarvestController::class, 'harvestCreate'])->name('harv-harvest-create');
@@ -156,6 +156,15 @@ Route::middleware(['auth', 'canAccess'])->group(function () {
   Route::get('/harvest/harvest-configurations', [HarvestConfigurationController::class, 'harvestConfigurations'])->name('harv-configurations');
   Route::get('/harvest/harvest-configurations/create', [HarvestConfigurationController::class, 'harvestConfigurationCreate'])->name('harv-configuration-create');
   Route::get('/harvest/harvest-configurations/update/{id}', [HarvestConfigurationController::class, 'harvestConfigurationUpdate'])->name('harv-configuration-update');
+
+  // TESTANDO
+  //       → Boarding
+  Route::get('/boarding/boardings', [BoardingController::class, 'boardings'])->name('boar-boardings');
+  Route::get('/boarding/boarding/update/{id}', [BoardingController::class, 'boardingUpdate'])->name('boar-boarding-update');
+  Route::get('/boarding/boarding/read/{id}', [BoardingController::class, 'boardingRead'])->name('boar-boarding-read');
+  Route::get('/boarding/boarding/detail/{id}', [BoardingController::class, 'boardingDetail'])->name('boar-boarding-detail');
+  Route::get('/boarding/boarding/import', [BoardingController::class, 'boardingImport'])->name('boar-boarding-import');
+  Route::get('/boarding/boarding/export', [BoardingController::class, 'boardingExport'])->name('boar-boarding-export');
 
   // Support
   //       → Tasks
@@ -174,9 +183,4 @@ Route::middleware(['auth', 'canAccess'])->group(function () {
   Route::post('/support/task-roadmap', [RoadmapController::class, 'roadmapAction']);
   Route::post('/support/task-roadmap/update', [RoadmapController::class, 'roadmapUpdate'])->name('sup-roadmap-update');
   Route::post('/support/task-roadmap/delete/{id}', [RoadmapController::class, 'roadmapDelete'])->name('sup-roadmap-delete');
-
-
-  // TESTANDO
-  //       → Boarding
-  Route::get('/boarding/boardings', [BoardingController::class, 'boardings'])->name('bor-bordings');
 });

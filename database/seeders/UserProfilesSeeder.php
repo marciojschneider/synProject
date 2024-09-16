@@ -462,12 +462,12 @@ class UserProfilesSeeder extends Seeder {
       [
         'id' => 46,
         'user_id' => 42,
-        'profile_id' => 3,
+        'profile_id' => 5,
         'client_id' => 2,
         'situation' => 1,
         'creation_user' => 1,
         'created_at' => '2024-09-03 19:01:43',
-        'updated_at' => '2024-09-03 19:01:43',
+        'updated_at' => '2024-09-09 22:06:31',
       ],
     ];
 
