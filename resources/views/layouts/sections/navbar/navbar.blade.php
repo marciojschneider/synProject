@@ -129,7 +129,7 @@
           <div class="dropdown-divider"></div>
         </li>
         <li>
-          <a class="dropdown-item" href="{{ route('logout') }}">
+          <a class="dropdown-item" href="{{ route('exit') }}">
             <i class='bx bx-power-off me-2'></i>
             <span class="align-middle">Sair</span>
           </a>

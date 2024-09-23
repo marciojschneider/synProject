@@ -8,6 +8,7 @@ $boxicons-font-size-base: 16px;
   font-size: 1.15rem;
   line-height: 1;
 }
+
 // Override font path
 @font-face {
   font-family: 'boxicons';
@@ -16,8 +17,8 @@ $boxicons-font-size-base: 16px;
 
   src: url('../fonts/#{$boxicons-font-path}/boxicons.eot');
   src: url('../fonts/#{$boxicons-font-path}/boxicons.eot') format('embedded-opentype'),
-    url('../fonts/#{$boxicons-font-path}/boxicons.woff2') format('woff2'),
-    url('../fonts/#{$boxicons-font-path}/boxicons.woff') format('woff'),
-    url('../fonts/#{$boxicons-font-path}/boxicons.ttf') format('truetype'),
-    url('../fonts/#{$boxicons-font-path}/boxicons.svg?#boxicons') format('svg');
+  url('../fonts/#{$boxicons-font-path}/boxicons.woff2') format('woff2'),
+  url('../fonts/#{$boxicons-font-path}/boxicons.woff') format('woff'),
+  url('../fonts/#{$boxicons-font-path}/boxicons.ttf') format('truetype'),
+  url('../fonts/#{$boxicons-font-path}/boxicons.svg?#boxicons') format('svg');
 }

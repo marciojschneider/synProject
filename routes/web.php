@@ -1,4 +1,5 @@
 <?php
+use Livewire\Livewire;
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -42,6 +43,11 @@ use App\Http\Controllers\pages\Support\RoadmapController;
 //       → TESTANDO
 use App\Http\Controllers\pages\Boarding\BoardingController;
 
+// Livewire Adjusts
+Livewire::setUpdateRoute(function ($handle) {
+  return Route::post('/synProject/public/livewire/update', $handle);
+});
+
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'loginAction']);
 
@@ -56,9 +62,9 @@ Route::middleware(['auth'])->group(function () {
     return view('content.pages.errors.no-permission');
   })->name('no-permission');
 
-  route::get('/logout', function () {
+  route::get('/exit', function () {
     return redirect()->route('login');
-  })->name('logout');
+  })->name('exit');
 });
 
 Route::middleware(['auth', 'canAccess'])->group(function () {

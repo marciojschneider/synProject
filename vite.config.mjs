@@ -71,5 +71,9 @@ export default defineConfig({
     }),
     html(),
     libsWindowAssignment()
-  ]
+  ],
+  build: {
+    chunkSizeWarningLimit: 5000, // Em kB, ajuste conforme necessário
+  },
+  base: '/synProject/public/build'
 });
