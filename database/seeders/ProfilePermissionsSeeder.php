@@ -473,6 +473,22 @@ class ProfilePermissionsSeeder extends Seeder {
         'created_at' => '2024-09-11 11:34:32',
         'updated_at' => '2024-09-11 11:34:32',
       ],
+      [
+        'id' => 32,
+        'profile_id' => 4,
+        'sidebar_id' => 33,
+        'client_id' => 2,
+        'affiliate_id' => 32,
+        'view' => 1,
+        'create' => 0,
+        'update' => 0,
+        'delete' => 0,
+        'description' => '',
+        'creation_user' => 1,
+        'situation' => 1,
+        'created_at' => '2024-09-23 19:25:33',
+        'updated_at' => '2024-09-23 19:25:33',
+      ],
     ];
 
     ProfilePermission::insert($profile_permissions);
