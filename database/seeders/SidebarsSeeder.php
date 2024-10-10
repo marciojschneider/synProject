@@ -467,7 +467,7 @@ class SidebarsSeeder extends Seeder {
         'updated_at' => '2024-09-02 22:42:06',
       ],
       [
-        'id' => 37,
+        'id' => 36,
         'name' => 'Detalhamento',
         'icon' => null,
         'slug' => 'boar-boarding-detail',

@@ -62,7 +62,7 @@
                   <tr>
                     <td>{{ $row->item_code }}</td>
                     <td>{{ $row->item_desc }}</td>
-                    <td>{{ $row->box }}</td>
+                    <td>{{ round($row->box) }}</td>
                     <td>{{ $row->deposit }}</td>
                     <td>{{ $row->location }}</td>
                     <td>{{ $row->item_amount }}</td>

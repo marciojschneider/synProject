@@ -123,7 +123,10 @@ class BoardingDetail extends Component {
     BoardingReading::where('id', $id)->delete();
 
     $last = BoardingReading::where('boarding_id', $this->id)->first();
-    if (!$last) {
+    if ($last) {
+      $this->boarding->situation = 3;
+      $this->boarding->save();
+    } else {
       $this->boarding->situation = 2;
       $this->boarding->save();
     }

@@ -492,7 +492,7 @@ class ProfilePermissionsSeeder extends Seeder {
       [
         'id' => 33,
         'profile_id' => 4,
-        'sidebar_id' => 37,
+        'sidebar_id' => 36,
         'client_id' => 2,
         'affiliate_id' => 32,
         'view' => 1,
