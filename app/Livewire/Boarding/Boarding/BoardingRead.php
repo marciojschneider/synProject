@@ -79,7 +79,7 @@ class BoardingRead extends Component {
       $pallet = stristr($this->codeRead, 'P') ? true : false;
       $arr = str_contains($replaced, '-') ? explode("-", $replaced) : explode('P', $replaced);
 
-      if (!isset($arr[1])) {
+      if (!isset($arr[1]) || strlen($arr[1]) != 11) {
         $this->codeRead = '';
         $this->dispatch('error', ['msg' => 'Código inválido']);
         return;
@@ -94,8 +94,8 @@ class BoardingRead extends Component {
         $seqBox = "$cut[8]$cut[9]$cut[10]";
 
         // Pegar quantidade do item
-        $amount = Item::where('items.code', $arr[0])->select('amount as qtd')->get();
-        if (!$amount) {
+        $amount = Item::where('items.code', $arr[0])->join('boarding_items', 'items.code', '=', 'boarding_items.item_code')->select('boarding_items.boarding_id', $this->id)->select('amount as qtd')->get();
+        if (!isset($amount[0])) {
           $this->codeRead = '';
           $this->dispatch('error', ['msg' => 'Este item não foi cadastrado no embarque atual.']);
           return;
@@ -169,8 +169,8 @@ class BoardingRead extends Component {
         $seqBox = "$cut[7]$cut[8]$cut[9]$cut[10]";
 
         // Pegar quantidade do item
-        $amount = Item::where('items.code', $arr[0])->select('amount as qtd')->get();
-        if (!$amount) {
+        $amount = Item::where('items.code', $arr[0])->join('boarding_items', 'items.code', '=', 'boarding_items.item_code')->select('boarding_items.boarding_id', $this->id)->select('amount as qtd')->get();
+        if (!isset($amount[0])) {
           $this->codeRead = '';
           $this->dispatch('error', ['msg' => 'Este item não foi cadastrado no embarque atual.']);
           return;

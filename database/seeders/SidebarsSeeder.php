@@ -466,7 +466,21 @@ class SidebarsSeeder extends Seeder {
         'created_at' => '2024-08-31 20:22:31',
         'updated_at' => '2024-09-02 22:42:06',
       ],
+      [
+        'id' => 37,
+        'name' => 'Detalhamento',
+        'icon' => null,
+        'slug' => 'boar-boarding-detail',
+        'affiliate_id' => 32,
+        'url' => '/boarding/boarding/detail',
+        'client_id' => '2',
+        'order' => 4,
+        'visibility' => 2,
+        'created_at' => '2024-10-10 14:38:01',
+        'updated_at' => '2024-10-10 14:38:01',
+      ],
     ];
+
 
     Sidebar::insert($sidebars);
   }
